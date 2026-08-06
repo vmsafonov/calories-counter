@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#EFEEE9;font-family:'Golos Text',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#1F9E58}a:hover{color:#177F47}
+*{box-sizing:border-box}
+input,button{font-family:inherit}
+@keyframes scanline{0%{transform:translateY(-70px)}100%{transform:translateY(70px)}}
+@keyframes toastin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</helmet>
+
+<section class="dv-turn" id="t1" style="padding:44px 48px 40px;font-family:'Golos Text',system-ui,sans-serif">
+<div style="display:flex;align-items:baseline;gap:10px;margin:0 0 6px">
+<a href="#t1" style="font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1A1D1B;color:#fff;border-radius:4px;text-decoration:none">1</a>
+<span style="font:600 13px/1.2 'Golos Text',sans-serif;color:#1A1D1B">Трекер КБЖУ — рабочий прототип и варианты ключевых экранов</span>
+</div>
+<p style="margin:0 0 26px;max-width:760px;font:400 12.5px/1.65 'Golos Text',sans-serif;color:rgba(26,29,27,.55);text-wrap:pretty">Допущения: массовый пользователь на снижении веса, обе платформы (базовая раскладка iOS, размеры тапов ≥44px), русский интерфейс. Норма считается на онбординге по формуле Миффлина — Сан Жеора. Основная метафора прогресса — горизонтальные полосы Б/Ж/У, как вы выбрали; <a href="#1c" style="color:#1F9E58;text-decoration:none;font-weight:600">1c</a> держим как альтернативу — тарелку дня.</p>
+
+<div style="display:flex;flex-wrap:wrap;gap:34px;align-items:flex-start">
+
+<!-- 1a interactive prototype -->
+<div id="1a" data-screen-label="Прототип" style="flex:none;display:flex;flex-direction:column;gap:10px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.55)"><a href="#1a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(26,29,27,.08);color:#1A1D1B;border-radius:5px;text-decoration:none">1a</a>Интерактивный прототип, 15 экранов — можно кликать</div>
+<div style="display:flex;gap:20px;align-items:flex-start">
+
+<div style="display:flex;flex-direction:column;gap:5px;width:168px;padding-top:6px">
+<div style="font:600 9.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(26,29,27,.38);padding:0 0 6px 4px">Экраны</div>
+<sc-for list="{{ navItems }}" as="n" hint-placeholder-count="8">
+<button onClick="{{ n.go }}" style="display:flex;align-items:center;gap:9px;width:100%;padding:9px 11px;border:0;border-radius:11px;cursor:pointer;text-align:left;background:{{ n.bg }};color:{{ n.fg }};font:500 12.5px/1.2 'Golos Text',sans-serif;transition:background .15s">
+<span style="font:600 9.5px ui-monospace,monospace;opacity:.5;min-width:12px">{{ n.num }}</span>{{ n.label }}
+</button>
+</sc-for>
+<div style="margin-top:14px;padding:11px 12px;border-radius:12px;background:rgba(26,29,27,.045);font:400 11px/1.5 'Golos Text',sans-serif;color:rgba(26,29,27,.5)">Добавленная еда реально попадает в дневник и меняет полосы Б/Ж/У.</div>
+</div>
+
+<div style="position:relative;width:390px;height:844px;border-radius:46px;background:#fff;border:1px solid rgba(26,29,27,.12);box-shadow:0 22px 50px -18px rgba(26,29,27,.28),0 2px 6px rgba(26,29,27,.06);overflow:hidden;display:flex;flex-direction:column">
+
+<div style="flex:none;height:52px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 26px 8px;font:600 14px/1 'Golos Text',sans-serif;color:#1A1D1B">
+<span>9:41</span>
+<div style="display:flex;gap:5px;align-items:center"><span style="width:17px;height:11px;border-radius:2px;border:1.5px solid #1A1D1B;display:block"></span><span style="width:15px;height:10px;border-radius:2px;background:#1A1D1B;display:block"></span></div>
+</div>
+
+<!-- HOME -->
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1;overflow:hidden;display:flex;flex-direction:column">
+<div style="flex:1;overflow-y:auto;padding:8px 20px 108px">
+
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px">
+<button onClick="{{ openCal }}" style="display:flex;align-items:center;gap:9px;border:0;background:transparent;padding:2px 0;margin:0;cursor:pointer;text-align:left">
+<div>
+<div style="font:700 24px/1.2 'Golos Text',sans-serif;color:#1A1D1B;letter-spacing:-.01em">{{ dayTitle }}</div>
+<div style="font:400 13px/1.4 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-top:2px">{{ daySub }}</div>
+</div>
+<span style="width:26px;height:26px;border-radius:99px;background:rgba(26,29,27,.06);color:rgba(26,29,27,.55);font:400 11px/26px 'Golos Text',sans-serif;text-align:center;flex:none">▾</span>
+</button>
+<div style="flex:none;display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:99px;background:{{ streakBg }};font:600 12.5px/1 'Golos Text',sans-serif;color:{{ streakFg }}">{{ streakLabel }}</div>
+</div>
+
+<div style="display:flex;gap:5px;margin-bottom:20px">
+<sc-for list="{{ weekStrip }}" as="w" hint-placeholder-count="7">
+<button onClick="{{ w.go }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;padding:9px 0 9px;border:0;border-radius:15px;cursor:pointer;background:{{ w.bg }}">
+<span style="font:500 10.5px/1 'Golos Text',sans-serif;color:{{ w.sub }}">{{ w.dow }}</span>
+<span style="font:600 14.5px/1 'Golos Text',sans-serif;color:{{ w.fg }};font-variant-numeric:tabular-nums">{{ w.num }}</span>
+<span style="width:5px;height:5px;border-radius:99px;display:block;background:{{ w.dot }}"></span>
+</button>
+</sc-for>
+</div>
+
+<div style="border-radius:26px;background:#F4F6F3;padding:22px 22px 20px;margin-bottom:14px">
+<div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:18px">
+<div>
+<div style="font:500 12.5px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:8px">{{ kcalCaption }}</div>
+<div style="display:flex;align-items:baseline;gap:7px"><span style="font:800 46px/.9 'Golos Text',sans-serif;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:{{ kcalBigColor }}">{{ kcalBig }}</span><span style="font:500 15px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45)">ккал</span></div>
+</div>
+<div style="text-align:right;font:400 12px/1.5 'Golos Text',sans-serif;color:rgba(26,29,27,.45)">цель<br><span style="font-weight:600;color:#1A1D1B;font-variant-numeric:tabular-nums">{{ kcalGoal }}</span></div>
+</div>
+<div style="height:10px;border-radius:99px;background:rgba(26,29,27,.08);overflow:hidden">
+<div style="height:100%;border-radius:99px;width:{{ kcalBarW }};background:{{ kcalBarColor }};transition:width .5s cubic-bezier(.4,0,.2,1)"></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px;margin-top:22px">
+<sc-for list="{{ macros }}" as="mr" hint-placeholder-count="3">
+<div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:6px"><span style="font:600 12.5px/1 'Golos Text',sans-serif;color:#1A1D1B">{{ mr.name }}</span><span style="font:400 12px/1 'Golos Text',sans-serif;font-variant-numeric:tabular-nums;color:{{ mr.txt }}">{{ mr.val }}</span></div>
+<div style="height:7px;border-radius:99px;background:rgba(26,29,27,.08);overflow:hidden"><div style="height:100%;border-radius:99px;width:{{ mr.w }};background:{{ mr.color }};transition:width .5s cubic-bezier(.4,0,.2,1)"></div></div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<sc-if value="{{ showHint }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:20px;background:#E9F6EE;margin-bottom:22px">
+<span style="font:400 12.5px/1.45 'Golos Text',sans-serif;color:#177F47;text-wrap:pretty">{{ hintText }}</span>
+</div>
+</sc-if>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ meals }}" as="m" hint-placeholder-count="4">
+<div style="border:1px solid rgba(26,29,27,.09);border-radius:22px;padding:16px 18px">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:{{ m.gap }}">
+<div style="display:flex;align-items:baseline;gap:8px"><span style="font:600 15px/1 'Golos Text',sans-serif;color:#1A1D1B">{{ m.name }}</span><span style="font:400 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.38)">{{ m.time }}</span></div>
+<div style="text-align:right;flex:none">
+<div style="font:600 13.5px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.55);font-variant-numeric:tabular-nums">{{ m.kcalLabel }}</div>
+<sc-if value="{{ m.showMacros }}" hint-placeholder-val="{{ true }}">
+<div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.38);margin-top:5px;font-variant-numeric:tabular-nums">{{ m.macros }}</div>
+</sc-if>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:9px">
+<sc-for list="{{ m.items }}" as="it" hint-placeholder-count="2">
+<div style="position:relative;overflow:hidden;border-radius:12px;margin:0 -4px">
+<button onClick="{{ it.del }}" style="position:absolute;right:0;top:0;bottom:0;width:88px;border:0;border-radius:12px;background:#C9553A;color:#fff;font:600 12.5px/1 'Golos Text',sans-serif;cursor:pointer">Удалить</button>
+<div onPointerDown="{{ it.down }}" onPointerMove="{{ it.move }}" onPointerUp="{{ it.up }}" onPointerCancel="{{ it.up }}" onClick="{{ it.tap }}" style="position:relative;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:2px 4px;background:#fff;touch-action:pan-y;user-select:none;cursor:pointer;transform:{{ it.tx }};transition:{{ it.tr }}">
+<div style="min-width:0"><div style="font:500 13.5px/1.25 'Golos Text',sans-serif;color:#1A1D1B;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ it.name }}</div><div style="font:400 11.5px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.42);margin-top:2px">{{ it.sub }}</div></div>
+<span style="font:500 13px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.55);font-variant-numeric:tabular-nums;flex:none">{{ it.kcal }}</span>
+</div>
+</div>
+</sc-for>
+</div>
+<button onClick="{{ m.add }}" style="margin-top:12px;width:100%;height:44px;border:0;border-radius:14px;background:rgba(26,29,27,.045);color:#177F47;font:600 13.5px/1 'Golos Text',sans-serif;cursor:pointer">+ Добавить</button>
+</div>
+</sc-for>
+</div>
+
+<button onClick="{{ goRepeat }}" style="margin-top:14px;width:100%;height:52px;border:1px dashed rgba(26,29,27,.18);border-radius:18px;background:transparent;color:rgba(26,29,27,.6);font:500 13.5px/1 'Golos Text',sans-serif;cursor:pointer">Повторить вчерашний день</button>
+</div>
+</div>
+</sc-if>
+
+<!-- ADD / SEARCH -->
+<sc-if value="{{ isAdd }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1;overflow:hidden;display:flex;flex-direction:column;animation:fadein .22s ease">
+<div style="padding:6px 20px 12px">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+<button onClick="{{ goHome }}" style="width:44px;height:44px;margin-left:-10px;border:0;background:transparent;cursor:pointer;font:400 22px/1 'Golos Text',sans-serif;color:#1A1D1B">←</button>
+<div style="font:700 19px/1.2 'Golos Text',sans-serif;color:#1A1D1B">Добавить в «{{ targetMeal }}»</div>
+</div>
+<div style="display:flex;align-items:center;gap:10px;height:50px;padding:0 16px;border-radius:16px;background:#F4F6F3;margin-bottom:12px">
+<span style="width:15px;height:15px;border:2px solid rgba(26,29,27,.35);border-radius:99px;flex:none"></span>
+<input value="{{ query }}" onChange="{{ onQuery }}" placeholder="Продукт или блюдо" style="flex:1;border:0;background:transparent;outline:none;font:500 15px/1 'Golos Text',sans-serif;color:#1A1D1B">
+<button onClick="{{ goScan }}" style="flex:none;padding:8px 12px;border:0;border-radius:11px;background:#fff;color:#177F47;font:600 12.5px/1 'Golos Text',sans-serif;cursor:pointer">Скан</button>
+</div>
+<div style="display:flex;gap:8px">
+<sc-for list="{{ addTabs }}" as="t" hint-placeholder-count="3">
+<button onClick="{{ t.go }}" style="padding:9px 14px;border:0;border-radius:99px;cursor:pointer;background:{{ t.bg }};color:{{ t.fg }};font:600 12.5px/1 'Golos Text',sans-serif">{{ t.label }}</button>
+</sc-for>
+</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:4px 20px 110px">
+<sc-if value="{{ isMyTab }}" hint-placeholder-val="{{ true }}">
+<button onClick="{{ goCreate }}" style="display:flex;align-items:center;gap:12px;width:100%;padding:15px 16px;margin:10px 0 6px;border:1px dashed rgba(34,164,92,.45);border-radius:18px;background:#F3FAF5;cursor:pointer;text-align:left">
+<span style="flex:none;width:34px;height:34px;border-radius:99px;background:#22A45C;color:#fff;font:400 20px/34px 'Golos Text',sans-serif;text-align:center">+</span>
+<span><span style="display:block;font:600 14px/1.2 'Golos Text',sans-serif;color:#177F47">Создать своё блюдо</span><span style="display:block;font:400 11.5px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-top:3px">Например, «мамины котлетки»</span></span>
+</button>
+</sc-if>
+<div style="font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(26,29,27,.35);margin:14px 0 12px">{{ resultsCaption }}</div>
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{ results }}" as="r" hint-placeholder-count="6">
+<div style="border-bottom:1px solid rgba(26,29,27,.07);padding-bottom:4px">
+<div style="display:flex;align-items:center;gap:10px">
+<button onClick="{{ r.pick }}" style="flex:1;min-width:0;padding:13px 0;border:0;background:transparent;cursor:pointer;text-align:left">
+<div style="font:500 14.5px/1.25 'Golos Text',sans-serif;color:#1A1D1B">{{ r.name }}</div>
+<div style="font:400 12px/1.3 'Golos Text',sans-serif;margin-top:3px;color:{{ r.subColor }}">{{ r.sub }}</div>
+</button>
+<button onClick="{{ r.toggle }}" style="flex:none;width:44px;height:44px;border:0;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center">
+<span style="width:32px;height:32px;border-radius:99px;font:600 16px/32px 'Golos Text',sans-serif;text-align:center;background:{{ r.markBg }};color:{{ r.markFg }}">{{ r.mark }}</span>
+</button>
+</div>
+<sc-if value="{{ r.isSel }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;align-items:center;gap:10px;padding:4px 0 10px">
+<div style="display:flex;align-items:baseline;gap:5px;height:42px;padding:0 12px;border-radius:13px;background:#F4F6F3">
+<input value="{{ r.gValue }}" onChange="{{ r.onG }}" inputmode="numeric" style="width:52px;height:42px;border:0;background:transparent;outline:none;text-align:right;font:600 15px/42px 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums">
+<span style="font:500 13px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45)">г</span>
+</div>
+<span style="font:400 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.42);font-variant-numeric:tabular-nums">{{ r.unitNote }}</span>
+<span style="margin-left:auto;font:600 13px/1 'Golos Text',sans-serif;color:#177F47;font-variant-numeric:tabular-nums">{{ r.selKcalLabel }}</span>
+</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+<sc-if value="{{ hasSel }}" hint-placeholder-val="{{ true }}">
+<div style="position:absolute;left:0;right:0;bottom:0;display:flex;gap:8px;padding:14px 20px 30px;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-top:1px solid rgba(26,29,27,.08);animation:toastin .22s ease">
+<button onClick="{{ clearSel }}" style="flex:none;width:56px;height:56px;border:1px solid rgba(26,29,27,.14);border-radius:18px;background:transparent;color:rgba(26,29,27,.55);font:400 20px/1 'Golos Text',sans-serif;cursor:pointer">×</button>
+<button onClick="{{ addSelected }}" style="flex:1;height:56px;border:0;border-radius:18px;background:#22A45C;color:#fff;font:600 15.5px/1 'Golos Text',sans-serif;cursor:pointer;box-shadow:0 8px 18px -8px rgba(34,164,92,.8)">{{ selLabel }}</button>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<!-- PRODUCT -->
+<sc-if value="{{ isProduct }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1;overflow:hidden;display:flex;flex-direction:column;animation:fadein .22s ease">
+<div style="flex:1;overflow-y:auto;padding:6px 20px 24px">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+<button onClick="{{ backFromProduct }}" style="width:44px;height:44px;margin-left:-10px;border:0;background:transparent;cursor:pointer;font:400 22px/1 'Golos Text',sans-serif;color:#1A1D1B">←</button>
+<div style="font:600 14px/1.2 'Golos Text',sans-serif;color:rgba(26,29,27,.5)">{{ prodSource }}</div>
+</div>
+<div style="font:700 25px/1.2 'Golos Text',sans-serif;color:#1A1D1B;letter-spacing:-.01em;text-wrap:pretty">{{ prodName }}</div>
+<div style="font:400 13px/1.4 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-top:5px">{{ prodBrand }}</div>
+
+<div style="margin:22px 0 16px;border-radius:24px;background:#F4F6F3;padding:20px">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px">
+<span style="font:500 12.5px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5)">Сколько съели</span>
+<sc-if value="{{ hasUnit }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;gap:6px">
+<sc-for list="{{ unitChips }}" as="uc" hint-placeholder-count="2">
+<button onClick="{{ uc.set }}" style="padding:8px 11px;border:0;border-radius:10px;cursor:pointer;background:{{ uc.bg }};color:{{ uc.fg }};font:600 11.5px/1 'Golos Text',sans-serif">{{ uc.label }}</button>
+</sc-for>
+</div>
+</sc-if>
+</div>
+<sc-if value="{{ unitMode }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:14px">
+<button onClick="{{ decUnit }}" style="width:48px;height:48px;border:0;border-radius:16px;background:#fff;color:#1A1D1B;font:500 22px/1 'Golos Text',sans-serif;cursor:pointer">−</button>
+<div style="text-align:center">
+<div><span style="font:700 32px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums">{{ unitCount }}</span><span style="font:500 15px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45)"> {{ unitName }}</span></div>
+<div style="font:400 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.4);margin-top:8px;font-variant-numeric:tabular-nums">{{ unitSub }}</div>
+</div>
+<button onClick="{{ incUnit }}" style="width:48px;height:48px;border:0;border-radius:16px;background:#fff;color:#1A1D1B;font:500 22px/1 'Golos Text',sans-serif;cursor:pointer">+</button>
+</div>
+</sc-if>
+<sc-if value="{{ gramMode }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;align-items:center;gap:10px">
+<button onClick="{{ decGrams }}" style="flex:none;width:48px;height:48px;border:0;border-radius:16px;background:#fff;color:#1A1D1B;font:500 22px/1 'Golos Text',sans-serif;cursor:pointer">−</button>
+<div style="flex:1;display:flex;align-items:baseline;justify-content:center;gap:6px;height:48px;border-radius:16px;background:#fff;padding:0 10px">
+<input value="{{ gramsValue }}" onChange="{{ onGrams }}" inputmode="numeric" style="width:74px;border:0;background:transparent;outline:none;text-align:right;font:700 26px/48px 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums">
+<span style="font:500 14px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45)">г</span>
+</div>
+<button onClick="{{ incGrams }}" style="flex:none;width:48px;height:48px;border:0;border-radius:16px;background:#fff;color:#1A1D1B;font:500 22px/1 'Golos Text',sans-serif;cursor:pointer">+</button>
+</div>
+</sc-if>
+</div>
+
+<div style="display:flex;gap:8px;margin-bottom:18px">
+<div style="flex:1;border-radius:18px;background:#fff;border:1px solid rgba(26,29,27,.09);padding:14px 12px;text-align:center"><div style="font:700 20px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums">{{ prodKcal }}</div><div style="font:400 11.5px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-top:6px">ккал</div></div>
+<div style="flex:1;border-radius:18px;background:#E9F1FA;padding:14px 12px;text-align:center"><div style="font:700 20px/1 'Golos Text',sans-serif;color:#2E6FA8;font-variant-numeric:tabular-nums">{{ prodP }}</div><div style="font:400 11.5px/1 'Golos Text',sans-serif;color:rgba(46,111,168,.7);margin-top:6px">белки</div></div>
+<div style="flex:1;border-radius:18px;background:#FBF2DF;padding:14px 12px;text-align:center"><div style="font:700 20px/1 'Golos Text',sans-serif;color:#A9761A;font-variant-numeric:tabular-nums">{{ prodF }}</div><div style="font:400 11.5px/1 'Golos Text',sans-serif;color:rgba(169,118,26,.75);margin-top:6px">жиры</div></div>
+<div style="flex:1;border-radius:18px;background:#F3ECFB;padding:14px 12px;text-align:center"><div style="font:700 20px/1 'Golos Text',sans-serif;color:#7A4FB3;font-variant-numeric:tabular-nums">{{ prodC }}</div><div style="font:400 11.5px/1 'Golos Text',sans-serif;color:rgba(122,79,179,.75);margin-top:6px">углев.</div></div>
+</div>
+
+<div style="display:flex;align-items:center;gap:10px;padding:14px 16px;border-radius:16px;background:rgba(26,29,27,.04);font:500 13.5px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.6)">
+<span style="width:7px;height:7px;border-radius:99px;background:#22A45C;display:block"></span>{{ targetMealLabel }}
+</div>
+</div>
+<div style="flex:none;padding:12px 20px 30px;border-top:1px solid rgba(26,29,27,.07);background:#fff">
+<button onClick="{{ addProduct }}" style="width:100%;height:56px;border:0;border-radius:18px;background:#22A45C;color:#fff;font:600 16px/1 'Golos Text',sans-serif;cursor:pointer;box-shadow:0 8px 18px -8px rgba(34,164,92,.8)">{{ addLabel }}</button>
+</div>
+</div>
+</sc-if>
+
+<!-- SCAN -->
+<sc-if value="{{ isScan }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1;background:#141715;display:flex;flex-direction:column;animation:fadein .2s ease">
+<div style="flex:none;display:flex;align-items:center;justify-content:space-between;padding:6px 14px 0">
+<button onClick="{{ goAdd }}" style="width:44px;height:44px;border:0;background:transparent;cursor:pointer;font:400 22px/1 'Golos Text',sans-serif;color:#fff">←</button>
+<div style="font:600 14px/1 'Golos Text',sans-serif;color:rgba(255,255,255,.8)">Штрих-код</div>
+<div style="width:44px"></div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px">
+<div style="position:relative;width:270px;height:170px;border-radius:20px;background:rgba(255,255,255,.06);overflow:hidden">
+<div style="position:absolute;inset:0;border:2px solid rgba(255,255,255,.15);border-radius:20px"></div>
+<div style="position:absolute;left:0;right:0;top:50%;height:2px;background:#4ADE80;box-shadow:0 0 14px #4ADE80;animation:scanline 1.4s ease-in-out infinite alternate"></div>
+<div style="position:absolute;left:36px;right:36px;top:52px;height:66px;display:flex;gap:3px;align-items:stretch;opacity:.55">
+<sc-for list="{{ barcodeBars }}" as="b" hint-placeholder-count="18">
+<span style="display:block;background:#fff;flex:none;width:{{ b.w }}"></span>
+</sc-for>
+</div>
+</div>
+<div style="text-align:center"><div style="font:600 16px/1.3 'Golos Text',sans-serif;color:#fff">{{ scanStatus }}</div><div style="font:400 13px/1.4 'Golos Text',sans-serif;color:rgba(255,255,255,.5);margin-top:6px">Наведите камеру на упаковку</div></div>
+</div>
+<div style="flex:none;padding:0 24px 42px"><button onClick="{{ goAdd }}" style="width:100%;height:52px;border:1px solid rgba(255,255,255,.2);border-radius:16px;background:transparent;color:#fff;font:500 14.5px/1 'Golos Text',sans-serif;cursor:pointer">Ввести вручную</button></div>
+</div>
+</sc-if>
+
+<!-- REPEAT -->
+<sc-if value="{{ isRepeat }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1;overflow-y:auto;padding:6px 20px 108px;animation:fadein .22s ease">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+<button onClick="{{ goHome }}" style="width:44px;height:44px;margin-left:-10px;border:0;background:transparent;cursor:pointer;font:400 22px/1 'Golos Text',sans-serif;color:#1A1D1B">←</button>
+<div style="font:700 19px/1.2 'Golos Text',sans-serif;color:#1A1D1B">{{ yTitle }}</div>
+</div>
+<p style="margin:0 0 18px 34px;font:400 12.5px/1.5 'Golos Text',sans-serif;color:rgba(26,29,27,.45)">{{ ySummary }}</p>
+<button onClick="{{ repeatAll }}" style="width:100%;height:54px;border:0;border-radius:18px;background:#22A45C;color:#fff;font:600 15px/1 'Golos Text',sans-serif;cursor:pointer;margin-bottom:20px;box-shadow:0 8px 18px -8px rgba(34,164,92,.8)">Повторить весь день</button>
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ yesterday }}" as="y" hint-placeholder-count="5">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border:1px solid rgba(26,29,27,.09);border-radius:18px">
+<div style="min-width:0"><div style="font:500 14.5px/1.25 'Golos Text',sans-serif;color:#1A1D1B">{{ y.name }}</div><div style="font:400 12px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.42);margin-top:3px">{{ y.sub }}</div></div>
+<button onClick="{{ y.add }}" style="flex:none;width:40px;height:40px;border:0;border-radius:99px;background:#E9F6EE;color:#177F47;font:600 19px/1 'Golos Text',sans-serif;cursor:pointer">+</button>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<!-- STATS -->
+<sc-if value="{{ isStats }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1;overflow-y:auto;padding:6px 20px 108px;animation:fadein .22s ease">
+<div style="font:700 24px/1.2 'Golos Text',sans-serif;color:#1A1D1B;letter-spacing:-.01em;margin-bottom:4px">Неделя</div>
+<div style="font:400 13px/1.4 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-bottom:24px">31 июля — 6 августа</div>
+
+<div style="border-radius:26px;background:#F4F6F3;padding:22px 20px 18px;margin-bottom:14px">
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:8px;height:150px;margin-bottom:12px">
+<sc-for list="{{ week }}" as="d" hint-placeholder-count="7">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end">
+<span style="font:600 10.5px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45);font-variant-numeric:tabular-nums">{{ d.kcal }}</span>
+<div style="width:100%;border-radius:8px;background:{{ d.color }};height:{{ d.h }}"></div>
+<span style="font:500 11px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.4)">{{ d.day }}</span>
+</div>
+</sc-for>
+</div>
+<div style="display:flex;align-items:center;gap:14px;padding-top:12px;border-top:1px solid rgba(26,29,27,.08);font:400 11.5px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45)">
+<span style="display:flex;align-items:center;gap:6px"><span style="width:9px;height:9px;border-radius:3px;background:#22A45C;display:block"></span>в норме</span>
+<span style="display:flex;align-items:center;gap:6px"><span style="width:9px;height:9px;border-radius:3px;background:#DFA330;display:block"></span>превышение</span>
+</div>
+</div>
+
+<div style="display:flex;gap:10px;margin-bottom:10px">
+<div style="flex:1;border:1px solid rgba(26,29,27,.09);border-radius:20px;padding:16px"><div style="font:700 22px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums">{{ avgKcal }}</div><div style="font:400 11.5px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-top:7px">средние ккал в день</div></div>
+<div style="flex:1;border:1px solid rgba(26,29,27,.09);border-radius:20px;padding:16px"><div style="font:700 22px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums">{{ inNormLabel }}</div><div style="font:400 11.5px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-top:7px">дней в пределах нормы</div></div>
+</div>
+
+<div style="border:1px solid rgba(26,29,27,.09);border-radius:22px;padding:18px">
+<div style="font:600 14px/1 'Golos Text',sans-serif;color:#1A1D1B;margin-bottom:16px">Среднее по нутриентам</div>
+<div style="display:flex;flex-direction:column;gap:13px">
+<sc-for list="{{ weekMacros }}" as="wm" hint-placeholder-count="3">
+<div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><span style="font:500 12.5px/1 'Golos Text',sans-serif;color:#1A1D1B">{{ wm.name }}</span><span style="font:400 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45);font-variant-numeric:tabular-nums">{{ wm.val }}</span></div>
+<div style="height:7px;border-radius:99px;background:rgba(26,29,27,.08);overflow:hidden"><div style="height:100%;border-radius:99px;background:{{ wm.color }};width:{{ wm.w }}"></div></div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- PROFILE -->
+<sc-if value="{{ isProfile }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1;overflow-y:auto;padding:6px 20px 108px;animation:fadein .22s ease">
+<div style="font:700 24px/1.2 'Golos Text',sans-serif;color:#1A1D1B;letter-spacing:-.01em;margin-bottom:22px">Профиль</div>
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:22px">
+<div style="flex:none;width:58px;height:58px;border-radius:99px;background:#E9F6EE;color:#177F47;font:700 20px/58px 'Golos Text',sans-serif;text-align:center">{{ initials }}</div>
+<div style="flex:1;min-width:0">
+<input value="{{ userName }}" onChange="{{ onUserName }}" placeholder="Ваше имя" style="width:100%;height:34px;padding:0 8px;margin-left:-8px;border:0;border-radius:9px;background:transparent;outline:none;font:600 17px/1.2 'Golos Text',sans-serif;color:#1A1D1B" style-focus="background:#F4F6F3">
+<div style="font:400 12.5px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-top:1px">{{ profileGoalSub }}</div>
+</div>
+</div>
+<div style="border-radius:24px;background:#F4F6F3;padding:20px;margin-bottom:14px">
+<div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px"><span style="font:600 14px/1 'Golos Text',sans-serif;color:#1A1D1B">Дневная норма</span><button onClick="{{ goNorm }}" style="border:0;background:transparent;color:#177F47;font:600 12.5px/1 'Golos Text',sans-serif;cursor:pointer;padding:6px 0">Изменить</button></div>
+<div style="display:flex;gap:8px">
+<div style="flex:1.2;background:#fff;border-radius:16px;padding:13px 12px"><div style="font:700 18px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums">{{ kcalGoal }}</div><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-top:6px">ккал</div></div>
+<div style="flex:1;background:#fff;border-radius:16px;padding:13px 12px"><div style="font:700 18px/1 'Golos Text',sans-serif;color:#2E6FA8;font-variant-numeric:tabular-nums">{{ pGoal }}</div><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-top:6px">Б</div></div>
+<div style="flex:1;background:#fff;border-radius:16px;padding:13px 12px"><div style="font:700 18px/1 'Golos Text',sans-serif;color:#A9761A;font-variant-numeric:tabular-nums">{{ fGoal }}</div><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-top:6px">Ж</div></div>
+<div style="flex:1;background:#fff;border-radius:16px;padding:13px 12px"><div style="font:700 18px/1 'Golos Text',sans-serif;color:#7A4FB3;font-variant-numeric:tabular-nums">{{ cGoal }}</div><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-top:6px">У</div></div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{ profileRows }}" as="pr" hint-placeholder-count="4">
+<button onClick="{{ pr.go }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:52px;padding:8px 0;border:0;border-bottom:1px solid rgba(26,29,27,.07);background:transparent;cursor:pointer;text-align:left">
+<span style="font:500 14.5px/1.3 'Golos Text',sans-serif;color:#1A1D1B">{{ pr.label }}</span>
+<span style="display:flex;align-items:center;gap:8px;font:400 13.5px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.42)">{{ pr.value }}<span style="color:rgba(26,29,27,.3);font-size:16px">{{ pr.arrow }}</span></span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<!-- ONBOARDING -->
+<sc-if value="{{ isOnb }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1;display:flex;flex-direction:column;padding:6px 22px 34px;animation:fadein .22s ease">
+<div style="display:flex;gap:6px;margin:8px 0 26px">
+<div style="flex:1;height:4px;border-radius:99px;background:#22A45C"></div>
+<div style="flex:1;height:4px;border-radius:99px;background:{{ onb2Bg }}"></div>
+<div style="flex:1;height:4px;border-radius:99px;background:{{ onb3Bg }}"></div>
+</div>
+
+<sc-if value="{{ isOnb1 }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1;display:flex;flex-direction:column">
+<div style="font:700 27px/1.2 'Golos Text',sans-serif;color:#1A1D1B;letter-spacing:-.02em;text-wrap:pretty">Какая у вас цель?</div>
+<p style="margin:10px 0 26px;font:400 14px/1.5 'Golos Text',sans-serif;color:rgba(26,29,27,.5);text-wrap:pretty">От этого зависит дефицит калорий и распределение белков, жиров и углеводов.</p>
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ goalOptions }}" as="g" hint-placeholder-count="3">
+<button onClick="{{ g.set }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:18px 20px;border:1.5px solid {{ g.border }};border-radius:20px;background:{{ g.bg }};cursor:pointer;text-align:left">
+<div><div style="font:600 15.5px/1.2 'Golos Text',sans-serif;color:#1A1D1B">{{ g.label }}</div><div style="font:400 12.5px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-top:4px">{{ g.sub }}</div></div>
+<span style="flex:none;width:22px;height:22px;border-radius:99px;border:1.5px solid {{ g.dotBorder }};background:{{ g.dot }}"></span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isOnb2 }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1;display:flex;flex-direction:column">
+<div style="font:700 27px/1.2 'Golos Text',sans-serif;color:#1A1D1B;letter-spacing:-.02em;text-wrap:pretty">Немного о вас</div>
+<p style="margin:10px 0 24px;font:400 14px/1.5 'Golos Text',sans-serif;color:rgba(26,29,27,.5)">Нужно для расчёта нормы. Меняется в любой момент.</p>
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 12px 12px 18px;border-radius:18px;background:#F4F6F3">
+<span style="font:500 14.5px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.55)">Пол</span>
+<div style="display:flex;gap:6px">
+<sc-for list="{{ sexChips }}" as="sx" hint-placeholder-count="2">
+<button onClick="{{ sx.set }}" style="height:40px;padding:0 14px;border:0;border-radius:12px;cursor:pointer;background:{{ sx.bg }};color:{{ sx.fg }};font:600 13px/1 'Golos Text',sans-serif">{{ sx.label }}</button>
+</sc-for>
+</div>
+</div>
+<sc-for list="{{ numRows }}" as="nr" hint-placeholder-count="3">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 10px 10px 18px;border-radius:18px;background:#F4F6F3">
+<span style="font:500 14.5px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.55)">{{ nr.label }}</span>
+<div style="display:flex;align-items:center;gap:2px">
+<button onClick="{{ nr.dec }}" style="width:44px;height:44px;border:0;border-radius:13px;background:#fff;color:#1A1D1B;font:500 20px/1 'Golos Text',sans-serif;cursor:pointer">−</button>
+<span style="min-width:74px;text-align:center;font:600 15.5px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums">{{ nr.value }}</span>
+<button onClick="{{ nr.inc }}" style="width:44px;height:44px;border:0;border-radius:13px;background:#fff;color:#1A1D1B;font:500 20px/1 'Golos Text',sans-serif;cursor:pointer">+</button>
+</div>
+</div>
+</sc-for>
+<div style="padding:16px 18px 14px;border-radius:18px;background:#F4F6F3">
+<div style="font:500 14.5px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.55);margin-bottom:12px">Активность</div>
+<div style="display:flex;gap:6px">
+<sc-for list="{{ actChips }}" as="ac" hint-placeholder-count="3">
+<button onClick="{{ ac.set }}" style="flex:1;height:42px;border:0;border-radius:12px;cursor:pointer;background:{{ ac.bg }};color:{{ ac.fg }};font:600 13px/1 'Golos Text',sans-serif">{{ ac.label }}</button>
+</sc-for>
+</div>
+</div>
+</div>
+<div style="margin-top:18px;padding:14px 16px;border-radius:16px;background:#E9F6EE;font:400 12.5px/1.5 'Golos Text',sans-serif;color:#177F47;text-wrap:pretty">Расчёт по формуле Миффлина — Сан Жеора с поправкой на активность.</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isOnb3 }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1;display:flex;flex-direction:column">
+<div style="font:700 27px/1.2 'Golos Text',sans-serif;color:#1A1D1B;letter-spacing:-.02em;text-wrap:pretty">Ваша норма на день</div>
+<p style="margin:10px 0 22px;font:400 14px/1.5 'Golos Text',sans-serif;color:rgba(26,29,27,.5);text-wrap:pretty">{{ calcNote }}</p>
+<div style="border-radius:26px;background:#F4F6F3;padding:24px 22px">
+<div style="display:flex;align-items:baseline;gap:8px;margin-bottom:20px"><span style="font:800 44px/.9 'Golos Text',sans-serif;color:#1A1D1B;letter-spacing:-.03em;font-variant-numeric:tabular-nums">{{ calcK }}</span><span style="font:500 15px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45)">ккал</span></div>
+<div style="display:flex;gap:8px">
+<div style="flex:1;background:#E9F1FA;border-radius:16px;padding:14px 12px"><div style="font:700 19px/1 'Golos Text',sans-serif;color:#2E6FA8;font-variant-numeric:tabular-nums">{{ calcP }} г</div><div style="font:400 11.5px/1 'Golos Text',sans-serif;color:rgba(46,111,168,.7);margin-top:7px">белки</div></div>
+<div style="flex:1;background:#FBF2DF;border-radius:16px;padding:14px 12px"><div style="font:700 19px/1 'Golos Text',sans-serif;color:#A9761A;font-variant-numeric:tabular-nums">{{ calcF }} г</div><div style="font:400 11.5px/1 'Golos Text',sans-serif;color:rgba(169,118,26,.75);margin-top:7px">жиры</div></div>
+<div style="flex:1;background:#F3ECFB;border-radius:16px;padding:14px 12px"><div style="font:700 19px/1 'Golos Text',sans-serif;color:#7A4FB3;font-variant-numeric:tabular-nums">{{ calcC }} г</div><div style="font:400 11.5px/1 'Golos Text',sans-serif;color:rgba(122,79,179,.75);margin-top:7px">углев.</div></div>
+</div>
+</div>
+<button onClick="{{ goBackOnb }}" style="width:100%;height:46px;margin-top:12px;border:0;border-radius:14px;background:transparent;color:rgba(26,29,27,.55);font:500 13.5px/1 'Golos Text',sans-serif;cursor:pointer">← Изменить параметры</button>
+</div>
+</sc-if>
+
+<button onClick="{{ onbNext }}" style="flex:none;width:100%;height:56px;border:0;border-radius:18px;background:#22A45C;color:#fff;font:600 16px/1 'Golos Text',sans-serif;cursor:pointer;box-shadow:0 8px 18px -8px rgba(34,164,92,.8)">{{ onbCta }}</button>
+</div>
+</sc-if>
+
+<!-- FOODS -->
+<sc-if value="{{ isFoods }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1;overflow-y:auto;padding:6px 20px 108px;animation:fadein .22s ease">
+<div style="font:700 24px/1.2 'Golos Text',sans-serif;color:#1A1D1B;letter-spacing:-.01em;margin-bottom:4px">Продукты</div>
+<div style="font:400 13px/1.4 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-bottom:20px">Тап по продукту — исправить вес порции и КБЖУ</div>
+<button onClick="{{ goCreate }}" style="display:flex;align-items:center;gap:12px;width:100%;padding:15px 16px;margin-bottom:22px;border:1px dashed rgba(34,164,92,.45);border-radius:18px;background:#F3FAF5;cursor:pointer;text-align:left">
+<span style="flex:none;width:34px;height:34px;border-radius:99px;background:#22A45C;color:#fff;font:400 20px/34px 'Golos Text',sans-serif;text-align:center">+</span>
+<span style="font:600 14px/1.2 'Golos Text',sans-serif;color:#177F47">Создать своё блюдо</span>
+</button>
+<div style="font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(26,29,27,.35);margin-bottom:12px">Своя еда</div>
+<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:26px">
+<sc-for list="{{ foodsMy }}" as="fm" hint-placeholder-count="2">
+<button onClick="{{ fm.go }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:14px 16px;border:1px solid rgba(26,29,27,.09);border-radius:18px;background:#fff;cursor:pointer;text-align:left">
+<div style="min-width:0"><div style="font:500 14.5px/1.25 'Golos Text',sans-serif;color:#1A1D1B">{{ fm.name }}</div><div style="font:400 11.5px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.42);margin-top:4px">{{ fm.sub }}</div></div>
+<span style="flex:none;padding:5px 9px;border-radius:8px;font:600 10.5px/1 'Golos Text',sans-serif;background:{{ fm.tagBg }};color:{{ fm.tagFg }}">{{ fm.tag }}</span>
+</button>
+</sc-for>
+</div>
+<div style="font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(26,29,27,.35);margin-bottom:12px">База продуктов</div>
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{ foodsBase }}" as="fb" hint-placeholder-count="8">
+<button onClick="{{ fb.go }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:13px 0;border:0;border-bottom:1px solid rgba(26,29,27,.07);background:transparent;cursor:pointer;text-align:left">
+<div style="min-width:0"><div style="font:500 14.5px/1.25 'Golos Text',sans-serif;color:#1A1D1B">{{ fb.name }}</div><div style="font:400 11.5px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.42);margin-top:4px">{{ fb.sub }}</div></div>
+<sc-if value="{{ fb.showTag }}" hint-placeholder-val="{{ true }}">
+<span style="flex:none;padding:5px 9px;border-radius:8px;font:600 10.5px/1 'Golos Text',sans-serif;background:#FBF2DF;color:#A9761A">изменено</span>
+</sc-if>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<!-- BODY & GOAL -->
+<sc-if value="{{ isBody }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1;overflow:hidden;display:flex;flex-direction:column;animation:fadein .22s ease">
+<div style="flex:1;overflow-y:auto;padding:6px 20px 24px">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+<button onClick="{{ goProfile }}" style="width:44px;height:44px;margin-left:-10px;border:0;background:transparent;cursor:pointer;font:400 22px/1 'Golos Text',sans-serif;color:#1A1D1B">←</button>
+<div style="font:700 19px/1.2 'Golos Text',sans-serif;color:#1A1D1B">Параметры и цель</div>
+</div>
+<div style="font:500 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:10px">Цель</div>
+<div style="display:flex;gap:6px;margin-bottom:18px">
+<sc-for list="{{ goalChips }}" as="gc" hint-placeholder-count="3">
+<button onClick="{{ gc.set }}" style="flex:1;height:44px;border:0;border-radius:13px;cursor:pointer;background:{{ gc.bg }};color:{{ gc.fg }};font:600 12.5px/1 'Golos Text',sans-serif">{{ gc.label }}</button>
+</sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 12px 12px 18px;border-radius:18px;background:#F4F6F3">
+<span style="font:500 14.5px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.55)">Пол</span>
+<div style="display:flex;gap:6px">
+<sc-for list="{{ sexChips }}" as="sx2" hint-placeholder-count="2">
+<button onClick="{{ sx2.set }}" style="height:40px;padding:0 14px;border:0;border-radius:12px;cursor:pointer;background:{{ sx2.bg }};color:{{ sx2.fg }};font:600 13px/1 'Golos Text',sans-serif">{{ sx2.label }}</button>
+</sc-for>
+</div>
+</div>
+<sc-for list="{{ numRows }}" as="nr2" hint-placeholder-count="3">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 10px 10px 18px;border-radius:18px;background:#F4F6F3">
+<span style="font:500 14.5px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.55)">{{ nr2.label }}</span>
+<div style="display:flex;align-items:center;gap:2px">
+<button onClick="{{ nr2.dec }}" style="width:44px;height:44px;border:0;border-radius:13px;background:#fff;color:#1A1D1B;font:500 20px/1 'Golos Text',sans-serif;cursor:pointer">−</button>
+<span style="min-width:74px;text-align:center;font:600 15.5px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums">{{ nr2.value }}</span>
+<button onClick="{{ nr2.inc }}" style="width:44px;height:44px;border:0;border-radius:13px;background:#fff;color:#1A1D1B;font:500 20px/1 'Golos Text',sans-serif;cursor:pointer">+</button>
+</div>
+</div>
+</sc-for>
+<div style="padding:16px 18px 14px;border-radius:18px;background:#F4F6F3">
+<div style="font:500 14.5px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.55);margin-bottom:12px">Активность</div>
+<div style="display:flex;gap:6px">
+<sc-for list="{{ actChips }}" as="ac2" hint-placeholder-count="3">
+<button onClick="{{ ac2.set }}" style="flex:1;height:42px;border:0;border-radius:12px;cursor:pointer;background:{{ ac2.bg }};color:{{ ac2.fg }};font:600 13px/1 'Golos Text',sans-serif">{{ ac2.label }}</button>
+</sc-for>
+</div>
+</div>
+</div>
+<div style="margin-top:18px;padding:16px 18px;border-radius:18px;background:#E9F6EE">
+<div style="font:400 12.5px/1.5 'Golos Text',sans-serif;color:#177F47;margin-bottom:6px">Норма по этим данным</div>
+<div style="font:600 14.5px/1.3 'Golos Text',sans-serif;color:#177F47;font-variant-numeric:tabular-nums">{{ calcSummary }}</div>
+</div>
+</div>
+<div style="flex:none;display:flex;gap:8px;padding:12px 20px 30px;border-top:1px solid rgba(26,29,27,.07);background:#fff">
+<button onClick="{{ goProfile }}" style="flex:1;height:56px;border:1px solid rgba(26,29,27,.14);border-radius:18px;background:transparent;color:#1A1D1B;font:500 15px/1 'Golos Text',sans-serif;cursor:pointer">Готово</button>
+<button onClick="{{ applyCalc }}" style="flex:1.4;height:56px;border:0;border-radius:18px;background:#22A45C;color:#fff;font:600 15px/1 'Golos Text',sans-serif;cursor:pointer;box-shadow:0 8px 18px -8px rgba(34,164,92,.8)">Применить норму</button>
+</div>
+</div>
+</sc-if>
+
+<!-- DAILY NORM -->
+<sc-if value="{{ isNorm }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1;overflow:hidden;display:flex;flex-direction:column;animation:fadein .22s ease">
+<div style="flex:1;overflow-y:auto;padding:6px 20px 24px">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+<button onClick="{{ goProfile }}" style="width:44px;height:44px;margin-left:-10px;border:0;background:transparent;cursor:pointer;font:400 22px/1 'Golos Text',sans-serif;color:#1A1D1B">←</button>
+<div style="font:700 19px/1.2 'Golos Text',sans-serif;color:#1A1D1B">Дневная норма</div>
+</div>
+<p style="margin:0 0 22px;font:400 13px/1.5 'Golos Text',sans-serif;color:rgba(26,29,27,.48);text-wrap:pretty">Задайте значения вручную — или пересчитайте по параметрам тела.</p>
+<div style="font:500 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:8px">Калории в день</div>
+<input value="{{ nK }}" onChange="{{ onNK }}" inputmode="numeric" style="width:100%;height:56px;padding:0 16px;border:0;border-radius:16px;background:#F4F6F3;outline:none;font:700 20px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums;margin-bottom:18px">
+<div style="font:500 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:8px">Нутриенты, г в день</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px">
+<div style="border-radius:16px;background:#E9F1FA;padding:12px 14px"><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(46,111,168,.75);margin-bottom:8px">Белки</div><input value="{{ nP }}" onChange="{{ onNP }}" inputmode="numeric" style="width:100%;border:0;background:transparent;outline:none;font:700 19px/1 'Golos Text',sans-serif;color:#2E6FA8;font-variant-numeric:tabular-nums"></div>
+<div style="border-radius:16px;background:#FBF2DF;padding:12px 14px"><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(169,118,26,.8);margin-bottom:8px">Жиры</div><input value="{{ nF }}" onChange="{{ onNF }}" inputmode="numeric" style="width:100%;border:0;background:transparent;outline:none;font:700 19px/1 'Golos Text',sans-serif;color:#A9761A;font-variant-numeric:tabular-nums"></div>
+<div style="border-radius:16px;background:#F3ECFB;padding:12px 14px"><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(122,79,179,.8);margin-bottom:8px">Углеводы</div><input value="{{ nC }}" onChange="{{ onNC }}" inputmode="numeric" style="width:100%;border:0;background:transparent;outline:none;font:700 19px/1 'Golos Text',sans-serif;color:#7A4FB3;font-variant-numeric:tabular-nums"></div>
+</div>
+<div style="padding:14px 16px;border-radius:16px;background:rgba(26,29,27,.04);font:400 12.5px/1.5 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:12px;text-wrap:pretty">{{ normHint }}</div>
+<button onClick="{{ goOnb }}" style="width:100%;height:50px;border:1px solid rgba(26,29,27,.14);border-radius:16px;background:transparent;color:#1A1D1B;font:500 14px/1 'Golos Text',sans-serif;cursor:pointer">Пересчитать по параметрам</button>
+</div>
+<div style="flex:none;padding:12px 20px 30px;border-top:1px solid rgba(26,29,27,.07);background:#fff">
+<button onClick="{{ saveNorm }}" style="width:100%;height:56px;border:0;border-radius:18px;background:#22A45C;color:#fff;font:600 16px/1 'Golos Text',sans-serif;cursor:pointer;box-shadow:0 8px 18px -8px rgba(34,164,92,.8)">Сохранить норму</button>
+</div>
+</div>
+</sc-if>
+
+<!-- MEAL PICKER -->
+<sc-if value="{{ isMealPick }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1;overflow-y:auto;padding:6px 20px 40px;animation:fadein .2s ease">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+<button onClick="{{ goHome }}" style="width:44px;height:44px;margin-left:-10px;border:0;background:transparent;cursor:pointer;font:400 22px/1 'Golos Text',sans-serif;color:#1A1D1B">←</button>
+<div style="font:700 19px/1.2 'Golos Text',sans-serif;color:#1A1D1B">Куда добавить?</div>
+</div>
+<p style="margin:0 0 20px 34px;font:400 12.5px/1.5 'Golos Text',sans-serif;color:rgba(26,29,27,.45)">{{ daySub }}</p>
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ mealPick }}" as="mp" hint-placeholder-count="4">
+<button onClick="{{ mp.go }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:20px;border:1px solid rgba(26,29,27,.09);border-radius:20px;background:#fff;cursor:pointer;text-align:left">
+<div><div style="font:600 16px/1.2 'Golos Text',sans-serif;color:#1A1D1B">{{ mp.label }}</div><div style="font:400 12px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.42);margin-top:5px">{{ mp.sub }}</div></div>
+<span style="flex:none;font:400 20px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.3)">›</span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<!-- CREATE OWN FOOD -->
+<sc-if value="{{ isCreate }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1;overflow:hidden;display:flex;flex-direction:column;animation:fadein .22s ease">
+<div style="flex:1;overflow-y:auto;padding:6px 20px 24px">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+<button onClick="{{ backFromCreate }}" style="width:44px;height:44px;margin-left:-10px;border:0;background:transparent;cursor:pointer;font:400 22px/1 'Golos Text',sans-serif;color:#1A1D1B">←</button>
+<div style="font:700 19px/1.2 'Golos Text',sans-serif;color:#1A1D1B">{{ createTitle }}</div>
+</div>
+<p style="margin:0 0 22px;font:400 13px/1.5 'Golos Text',sans-serif;color:rgba(26,29,27,.48);text-wrap:pretty">{{ createSub }}</p>
+
+<div style="font:500 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:8px">Название</div>
+<input value="{{ dName }}" onChange="{{ onDName }}" placeholder="Мамины котлетки" style="width:100%;height:52px;padding:0 16px;border:0;border-radius:16px;background:#F4F6F3;outline:none;font:500 15px/1 'Golos Text',sans-serif;color:#1A1D1B;margin-bottom:18px">
+
+<div style="font:500 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:8px">Вес порции, г</div>
+<input value="{{ dG }}" onChange="{{ onDG }}" placeholder="120" inputmode="numeric" style="width:100%;height:52px;padding:0 16px;border:0;border-radius:16px;background:#F4F6F3;outline:none;font:600 15px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums;margin-bottom:18px">
+
+<div style="font:500 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:8px">На всю порцию</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
+<div style="border-radius:16px;background:#F4F6F3;padding:12px 14px"><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-bottom:8px">Калории</div><input value="{{ dK }}" onChange="{{ onDK }}" placeholder="254" inputmode="numeric" style="width:100%;border:0;background:transparent;outline:none;font:700 19px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums"></div>
+<div style="border-radius:16px;background:#E9F1FA;padding:12px 14px"><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(46,111,168,.75);margin-bottom:8px">Белки, г</div><input value="{{ dP }}" onChange="{{ onDP }}" placeholder="19" inputmode="numeric" style="width:100%;border:0;background:transparent;outline:none;font:700 19px/1 'Golos Text',sans-serif;color:#2E6FA8;font-variant-numeric:tabular-nums"></div>
+<div style="border-radius:16px;background:#FBF2DF;padding:12px 14px"><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(169,118,26,.8);margin-bottom:8px">Жиры, г</div><input value="{{ dF }}" onChange="{{ onDF }}" placeholder="17" inputmode="numeric" style="width:100%;border:0;background:transparent;outline:none;font:700 19px/1 'Golos Text',sans-serif;color:#A9761A;font-variant-numeric:tabular-nums"></div>
+<div style="border-radius:16px;background:#F3ECFB;padding:12px 14px"><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(122,79,179,.8);margin-bottom:8px">Углеводы, г</div><input value="{{ dC }}" onChange="{{ onDC }}" placeholder="7" inputmode="numeric" style="width:100%;border:0;background:transparent;outline:none;font:700 19px/1 'Golos Text',sans-serif;color:#7A4FB3;font-variant-numeric:tabular-nums"></div>
+</div>
+<div style="padding:14px 16px;border-radius:16px;background:rgba(26,29,27,.04);font:400 12.5px/1.5 'Golos Text',sans-serif;color:rgba(26,29,27,.5);text-wrap:pretty">{{ draftHint }}</div>
+</div>
+<div style="flex:none;padding:12px 20px 30px;border-top:1px solid rgba(26,29,27,.07);background:#fff">
+<button onClick="{{ saveDraft }}" style="width:100%;height:56px;border:0;border-radius:18px;background:#22A45C;color:#fff;font:600 16px/1 'Golos Text',sans-serif;cursor:pointer;box-shadow:0 8px 18px -8px rgba(34,164,92,.8)">{{ saveLabel }}</button>
+</div>
+</div>
+</sc-if>
+
+<!-- CALENDAR SHEET -->
+<sc-if value="{{ calOpen }}" hint-placeholder-val="{{ true }}">
+<div style="position:absolute;inset:0;z-index:9;display:flex;flex-direction:column;justify-content:flex-end;animation:fadein .18s ease">
+<button onClick="{{ closeCal }}" style="position:absolute;inset:0;border:0;padding:0;background:rgba(20,23,21,.4);cursor:pointer"></button>
+<div style="position:relative;background:#fff;border-radius:30px 30px 0 0;padding:14px 20px 30px">
+<div style="width:38px;height:4px;border-radius:99px;background:rgba(26,29,27,.15);margin:0 auto 18px"></div>
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+<button onClick="{{ prevMonth }}" style="width:44px;height:44px;border:0;border-radius:14px;background:rgba(26,29,27,.05);color:#1A1D1B;font:400 18px/1 'Golos Text',sans-serif;cursor:pointer">‹</button>
+<div style="font:600 16px/1 'Golos Text',sans-serif;color:#1A1D1B">{{ calTitle }}</div>
+<button onClick="{{ nextMonth }}" style="width:44px;height:44px;border:0;border-radius:14px;background:{{ nextBg }};color:{{ nextFg }};font:400 18px/1 'Golos Text',sans-serif;cursor:pointer">›</button>
+</div>
+<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:6px">
+<sc-for list="{{ calDows }}" as="cd" hint-placeholder-count="7">
+<div style="text-align:center;font:500 10.5px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.35);padding:6px 0">{{ cd.l }}</div>
+</sc-for>
+</div>
+<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px">
+<sc-for list="{{ calCells }}" as="c" hint-placeholder-count="35">
+<button onClick="{{ c.go }}" style="height:46px;border:0;border-radius:13px;cursor:{{ c.cursor }};background:{{ c.bg }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;opacity:{{ c.op }}">
+<span style="font:600 13.5px/1 'Golos Text',sans-serif;color:{{ c.fg }};font-variant-numeric:tabular-nums">{{ c.label }}</span>
+<span style="width:4px;height:4px;border-radius:99px;display:block;background:{{ c.dot }}"></span>
+</button>
+</sc-for>
+</div>
+<button onClick="{{ goToday }}" style="width:100%;height:50px;margin-top:18px;border:0;border-radius:16px;background:rgba(26,29,27,.05);color:#1A1D1B;font:600 14px/1 'Golos Text',sans-serif;cursor:pointer">Сегодня</button>
+</div>
+</div>
+</sc-if>
+
+<!-- TAB BAR -->
+<sc-if value="{{ showTabs }}" hint-placeholder-val="{{ true }}">
+<div style="position:absolute;left:0;right:0;bottom:0;height:92px;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-top:1px solid rgba(26,29,27,.08);display:flex;align-items:flex-start;padding:10px 26px 0">
+<sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="4">
+<button onClick="{{ tb.go }}" style="flex:1;height:56px;border:0;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px">
+<span style="width:20px;height:20px;border-radius:{{ tb.r }};background:{{ tb.fg }};display:block;opacity:{{ tb.op }}"></span>
+<span style="font:600 10.5px/1 'Golos Text',sans-serif;color:{{ tb.fg }};opacity:{{ tb.op }}">{{ tb.label }}</span>
+</button>
+</sc-for>
+<button onClick="{{ goPickMeal }}" style="position:absolute;left:50%;bottom:44px;transform:translateX(-50%);width:60px;height:60px;border:4px solid #fff;border-radius:99px;background:#22A45C;color:#fff;font:300 30px/1 'Golos Text',sans-serif;cursor:pointer;box-shadow:0 10px 22px -8px rgba(34,164,92,.9)">+</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ toast }}" hint-placeholder-val="{{ true }}">
+<div style="position:absolute;left:20px;right:20px;bottom:110px;padding:15px 18px;border-radius:18px;background:#1A1D1B;color:#fff;font:500 13.5px/1.3 'Golos Text',sans-serif;display:flex;align-items:center;justify-content:space-between;gap:12px;animation:toastin .25s ease;box-shadow:0 12px 28px -10px rgba(26,29,27,.6)">
+<span>{{ toast }}</span><span style="color:#7BE0A6;font:600 12.5px/1 'Golos Text',sans-serif">Готово</span>
+</div>
+</sc-if>
+
+</div>
+</div>
+</div>
+
+<!-- 1c plate -->
+<div id="1c" data-screen-label="Тарелка" style="flex:none;display:flex;flex-direction:column;gap:10px;scroll-margin-top:16px">
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.55)"><a href="#1c" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(26,29,27,.08);color:#1A1D1B;border-radius:5px;text-decoration:none">1c</a>Главный экран: тарелка дня</div>
+<div style="width:390px;border-radius:34px;background:#fff;border:1px solid rgba(26,29,27,.12);box-shadow:0 14px 34px -16px rgba(26,29,27,.24);overflow:hidden;padding:26px 22px 30px">
+<div style="font:700 22px/1.2 'Golos Text',sans-serif;color:#1A1D1B;margin-bottom:2px">Тарелка дня</div>
+<div style="font:400 12.5px/1.4 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-bottom:22px">Заполнена на 51%</div>
+<div style="display:flex;justify-content:center;margin-bottom:22px">
+<div style="position:relative;width:210px;height:210px;border-radius:99px;background:conic-gradient(#3F86C9 0deg 62deg,#DFA330 62deg 96deg,#9E6FD3 96deg 184deg,rgba(26,29,27,.07) 184deg 360deg);display:flex;align-items:center;justify-content:center">
+<div style="width:126px;height:126px;border-radius:99px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center">
+<div style="font:800 32px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums;letter-spacing:-.02em">900</div>
+<div style="font:400 11.5px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-top:6px">осталось</div>
+</div>
+</div>
+</div>
+<div style="display:flex;gap:8px;margin-bottom:16px">
+<div style="flex:1;border-radius:16px;background:#E9F1FA;padding:13px 12px;text-align:center"><div style="font:700 17px/1 'Golos Text',sans-serif;color:#2E6FA8;font-variant-numeric:tabular-nums">68 г</div><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(46,111,168,.7);margin-top:6px">белки</div></div>
+<div style="flex:1;border-radius:16px;background:#FBF2DF;padding:13px 12px;text-align:center"><div style="font:700 17px/1 'Golos Text',sans-serif;color:#A9761A;font-variant-numeric:tabular-nums">18 г</div><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(169,118,26,.75);margin-top:6px">жиры</div></div>
+<div style="flex:1;border-radius:16px;background:#F3ECFB;padding:13px 12px;text-align:center"><div style="font:700 17px/1 'Golos Text',sans-serif;color:#7A4FB3;font-variant-numeric:tabular-nums">127 г</div><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(122,79,179,.75);margin-top:6px">углев.</div></div>
+</div>
+<div style="padding:16px 18px;border-radius:20px;background:#F4F6F3;font:400 13px/1.5 'Golos Text',sans-serif;color:rgba(26,29,27,.6);text-wrap:pretty">Метафора понятная и приятная, но пропорции секторов легко спутать с «идеальной тарелкой» из диетологии. Подойдёт, если хотите менее цифровой тон.</div>
+</div>
+</div>
+
+</div>
+
+<p style="margin:26px 0 0;font:400 12px/1.6 'Golos Text',sans-serif;color:rgba(26,29,27,.5)">Дальше можно: «перенеси тарелку из <a href="#1c" style="color:#1F9E58;text-decoration:none;font-weight:600">1c</a> в прототип» · «покажи тёмную тему главного экрана» · «добавь экран записи веса»</p>
+</section>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showRemaining&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Главный экран&quot;},&quot;showCoachTip&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Главный экран&quot;}}">
+const DB = [
+  {name:'Овсяная каша на воде', brand:'Nordic', k:88, p:3, f:1.7, c:15, def:250, unit:'порция', pw:250},
+  {name:'Куриная грудка, запечённая', brand:'Домашнее', k:165, p:31, f:3.6, c:0, def:150},
+  {name:'Творог 5%', brand:'Простоквашино', k:121, p:17, f:5, c:3, def:180, unit:'пачка', pw:180},
+  {name:'Банан', brand:'Свежий', k:89, p:1.1, f:0.3, c:23, def:120, unit:'шт', pw:120},
+  {name:'Гречка отварная', brand:'Домашнее', k:110, p:4.2, f:1.1, c:21, def:200},
+  {name:'Латте на овсяном', brand:'Кофейня', k:52, p:1.6, f:2, c:6.6, def:300, unit:'стакан', pw:300},
+  {name:'Ролл с курицей и соусом цезарь', brand:'Фастфуд', k:214, p:11, f:9, c:22, def:210, unit:'шт', pw:210},
+  {name:'Яйцо варёное', brand:'', k:155, p:13, f:11, c:1.1, def:110, unit:'шт', pw:55},
+  {name:'Хлеб цельнозерновой', brand:'Рижский', k:230, p:9, f:3, c:41, def:60, unit:'ломтик', pw:30},
+  {name:'Лосось слабосолёный', brand:'', k:202, p:22, f:12, c:0, def:100},
+  {name:'Греческий йогурт 2%', brand:'Село Зелёное', k:66, p:9, f:2, c:3.6, def:150, unit:'баночка', pw:150},
+  {name:'Сырники творожные', brand:'Домашнее', k:184, p:12, f:8, c:16, def:160, unit:'шт', pw:80},
+  {name:'Салат овощной с маслом', brand:'', k:78, p:1.2, f:6, c:4.5, def:180}
+];
+const GREEN = '#22A45C', INK = '#1A1D1B';
+const f = DB.reduce((a, x) => (a[x.name] = x, a), {});
+
+const BASE = new Date(2026, 7, 6);
+const DOW = ['вс','пн','вт','ср','чт','пт','сб'];
+const DOWF = ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
+const MON = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+const MONN = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+const UNITS = {
+  'порция': ['порция','порции','порций'], 'пачка': ['пачка','пачки','пачек'],
+  'стакан': ['стакан','стакана','стаканов'], 'баночка': ['баночка','баночки','баночек'],
+  'ломтик': ['ломтик','ломтика','ломтиков'], 'шт': ['шт','шт','шт']
+};
+const UNIT_MODE = {'шт':'В штуках','порция':'Порциями','пачка':'Пачками','стакан':'Стаканами','баночка':'Баночками','ломтик':'Ломтиками'};
+const plu = (n, forms) => {
+  if (n % 1 !== 0) return forms[1];
+  const a = Math.abs(n) % 100, b = a % 10;
+  if (a > 10 && a < 20) return forms[2];
+  if (b === 1) return forms[0];
+  if (b > 1 && b < 5) return forms[1];
+  return forms[2];
+};
+const numRu = (n) => String(Math.round(n * 10) / 10).replace('.', ',');
+const unitForm = (n, unit) => plu(n, UNITS[unit] || [unit, unit, unit]);
+const dateOf = (off) => { const d = new Date(BASE.getTime()); d.setDate(d.getDate() + off); return d; };
+const offOf = (d) => Math.round((d - BASE) / 86400000);
+let UID = 1;
+const e_ = (meal, name, g, d) => ({meal, name, g, d, id: UID++});
+
+const PAST = [
+  e_('Завтрак','Овсяная каша на воде',250,-1), e_('Завтрак','Латте на овсяном',300,-1), e_('Завтрак','Сырники творожные',160,-1),
+  e_('Обед','Лосось слабосолёный',100,-1), e_('Обед','Гречка отварная',200,-1), e_('Обед','Салат овощной с маслом',180,-1),
+  e_('Ужин','Творог 5%',180,-1), e_('Ужин','Хлеб цельнозерновой',60,-1), e_('Перекус','Банан',120,-1),
+  e_('Завтрак','Овсяная каша на воде',250,-2), e_('Завтрак','Латте на овсяном',300,-2),
+  e_('Обед','Куриная грудка, запечённая',150,-2), e_('Обед','Гречка отварная',200,-2), e_('Обед','Хлеб цельнозерновой',60,-2),
+  e_('Ужин','Творог 5%',180,-2), e_('Ужин','Салат овощной с маслом',180,-2), e_('Перекус','Банан',120,-2), e_('Перекус','Яйцо варёное',110,-2),
+  e_('Завтрак','Сырники творожные',200,-3), e_('Завтрак','Латте на овсяном',300,-3),
+  e_('Обед','Ролл с курицей и соусом цезарь',210,-3), e_('Обед','Куриная грудка, запечённая',200,-3), e_('Обед','Гречка отварная',250,-3),
+  e_('Ужин','Салат овощной с маслом',180,-3), e_('Ужин','Хлеб цельнозерновой',60,-3), e_('Перекус','Греческий йогурт 2%',150,-3), e_('Перекус','Банан',120,-3),
+  e_('Завтрак','Овсяная каша на воде',250,-4), e_('Завтрак','Яйцо варёное',110,-4), e_('Завтрак','Хлеб цельнозерновой',60,-4), e_('Завтрак','Латте на овсяном',300,-4),
+  e_('Обед','Гречка отварная',200,-4), e_('Обед','Куриная грудка, запечённая',150,-4), e_('Обед','Салат овощной с маслом',180,-4),
+  e_('Ужин','Творог 5%',180,-4), e_('Перекус','Сырники творожные',160,-4),
+  e_('Завтрак','Овсяная каша на воде',250,-5), e_('Завтрак','Греческий йогурт 2%',150,-5), e_('Завтрак','Латте на овсяном',300,-5),
+  e_('Обед','Лосось слабосолёный',100,-5), e_('Обед','Гречка отварная',200,-5), e_('Обед','Хлеб цельнозерновой',60,-5), e_('Обед','Салат овощной с маслом',180,-5),
+  e_('Ужин','Куриная грудка, запечённая',150,-5), e_('Перекус','Банан',120,-5), e_('Перекус','Яйцо варёное',110,-5),
+  e_('Завтрак','Овсяная каша на воде',250,-6), e_('Завтрак','Латте на овсяном',300,-6),
+  e_('Обед','Куриная грудка, запечённая',150,-6), e_('Обед','Гречка отварная',200,-6), e_('Обед','Салат овощной с маслом',180,-6),
+  e_('Ужин','Творог 5%',180,-6), e_('Ужин','Хлеб цельнозерновой',60,-6), e_('Перекус','Яйцо варёное',110,-6), e_('Перекус','Банан',120,-6)
+];
+
+class Component extends DCLogic {
+  state = {
+    screen: 'home', onb: 1, goal: 'lose', day: 0, calOpen: false, calMonth: 7,
+    goals: {k: 1850, p: 120, f: 60, c: 200},
+    body: {sex: 'f', age: 29, height: 168, weight: 64, act: 'mid'},
+    userName: 'Анна',
+    normDraft: {k: '1850', p: '120', f: '60', c: '200'},
+    edits: {}, editName: null,
+    swiped: null, dragId: null, dragX: 0, sel: [],
+    query: '', tab: 'search', targetMeal: 'Обед',
+    prod: null, grams: 100, prodSource: 'Поиск',
+    scanStatus: 'Ищем код…', toast: '',
+    myFoods: [
+      {name:'Мамины котлетки', brand:'Своё блюдо', k:212, p:16, f:14, c:6, def:120, unit:'шт', pw:60, own:true},
+      {name:'Смузи банан-шпинат', brand:'Своё блюдо', k:64, p:2, f:0.6, c:13, def:350, unit:'стакан', pw:350, own:true}
+    ],
+    draft: {name:'', g:'', k:'', p:'', f:'', c:''},
+    log: PAST.concat([
+      e_('Завтрак','Овсяная каша на воде',250,0),
+      e_('Завтрак','Латте на овсяном',300,0),
+      e_('Обед','Куриная грудка, запечённая',150,0),
+      e_('Обед','Гречка отварная',200,0),
+      e_('Перекус','Банан',120,0)
+    ])
+  };
+
+  keyOf(e) {
+    if (!this._keys) { this._keys = new WeakMap(); this._kc = 0; }
+    if (!this._keys.has(e)) this._keys.set(e, 'k' + (++this._kc));
+    return this._keys.get(e);
+  }
+
+  foodBy(n) {
+    const base = f[n] || this.state.myFoods.filter(x => x.name === n)[0] || null;
+    if (!base) return null;
+    const ed = this.state.edits[n];
+    return ed ? Object.assign({}, base, ed, {edited: true}) : base;
+  }
+  kcalOf(off) { return Math.round(this.state.log.filter(x => x.d === off).reduce((a, x) => { const d = this.foodBy(x.name); return d ? a + d.k * x.g / 100 : a; }, 0)); }
+
+  go = (s) => this.setState({screen: s, swiped: null, dragId: null, dragX: 0, sel: []});
+
+  swipeDown = (id) => (ev) => {
+    this._sx = ev.clientX; this._sid = id; this._moved = false;
+    this._base = this.state.swiped === id ? -88 : 0;
+    if (ev.currentTarget.setPointerCapture) { try { ev.currentTarget.setPointerCapture(ev.pointerId); } catch (e) {} }
+  };
+  swipeMove = (id) => (ev) => {
+    if (this._sid !== id) return;
+    if (Math.abs(ev.clientX - this._sx) > 5) this._moved = true;
+    const x = Math.max(-88, Math.min(0, this._base + (ev.clientX - this._sx)));
+    if (x !== this.state.dragX || this.state.dragId !== id) this.setState({dragId: id, dragX: x});
+  };
+  swipeUp = (id) => () => {
+    if (this._sid !== id) return;
+    const x = this.state.dragId === id ? this.state.dragX : this._base;
+    this._sid = null;
+    this.setState({dragId: null, dragX: 0, swiped: x < -44 ? id : null});
+  };
+  flash = (t) => { this.setState({toast: t}); clearTimeout(this._t); this._t = setTimeout(() => this.setState({toast: ''}), 2200); };
+  componentWillUnmount(){ clearTimeout(this._t); clearTimeout(this._s); }
+
+  totals(off) {
+    return this.state.log.filter(e => e.d === off).reduce((a, e) => {
+      const d = this.foodBy(e.name); if (!d) return a;
+      const m = e.g / 100;
+      a.k += d.k * m; a.p += d.p * m; a.ff += d.f * m; a.c += d.c * m; return a;
+    }, {k:0, p:0, ff:0, c:0});
+  }
+
+  pick = (d, source) => this.setState({prod: d, grams: d.def, portionMode: d.unit ? 'unit' : 'gram', prodSource: source || 'Поиск', editEntry: null, screen: 'product'});
+
+  pickEntry = (e) => {
+    const d = this.foodBy(e.name);
+    this.setState({prod: d, grams: e.g, portionMode: d.unit ? 'unit' : 'gram', prodSource: 'Запись в дневнике', editEntry: e, screen: 'product'});
+  };
+
+  addProduct = () => {
+    const en = this.state.editEntry;
+    if (en) {
+      this.setState(x => ({log: x.log.map(y => y === en ? Object.assign({}, y, {g: x.grams}) : y), editEntry: null, screen: 'home'}));
+      this.flash('Порция обновлена');
+      return;
+    }
+    const d = this.state.prod;
+    this.setState(s => ({log: s.log.concat([e_(s.targetMeal, d.name, s.grams, s.day)]), screen:'home'}));
+    this.flash('«' + d.name + '» в дневнике');
+  };
+
+  quickAdd = (name, g, meal) => {
+    this.setState(s => ({log: s.log.concat([e_(meal, name, g, s.day)])}));
+    this.flash('«' + name + '» добавлено');
+  };
+
+  saveDraft = () => {
+    const s0 = this.state, dr = s0.draft;
+    const g = Math.max(1, parseFloat(dr.g) || 100);
+    const n = (dr.name || '').trim() || 'Моё блюдо';
+    const per = (v) => Math.round(((parseFloat(v) || 0) / g * 100) * 10) / 10;
+    const vals = {k: per(dr.k), p: per(dr.p), f: per(dr.f), c: per(dr.c)};
+    if (s0.editName) {
+      const old = s0.editName;
+      this.setState(s => {
+        const ed = Object.assign({}, s.edits);
+        ed[old] = Object.assign({}, vals, {def: Math.round(g)});
+        const my = s.myFoods.map(x => x.name === old ? Object.assign({}, x, vals, {def: Math.round(g), pw: x.unit === 'порция' ? Math.round(g) : x.pw}) : x);
+        return {edits: ed, myFoods: my, editName: null, draft: {name:'', g:'', k:'', p:'', f:'', c:''}, screen: 'foods'};
+      });
+      this.flash('«' + n + '» обновлено');
+      return;
+    }
+    const item = {name: n, brand: 'Своё блюдо', k: vals.k, p: vals.p, f: vals.f, c: vals.c, def: Math.round(g), unit: 'порция', pw: Math.round(g), own: true};
+    this.setState(s => ({myFoods: s.myFoods.concat([item]), draft: {name:'', g:'', k:'', p:'', f:'', c:''}, screen:'add', tab:'my'}));
+    this.flash('«' + n + '» в вашей еде');
+  };
+
+  startEdit = (item) => {
+    const g = item.def || item.pw || 100, m = g / 100, rr = (v) => String(Math.round(v * 10) / 10);
+    this.setState({editName: item.name, screen: 'create',
+      draft: {name: item.name, g: String(g), k: rr(item.k * m), p: rr(item.p * m), f: rr(item.f * m), c: rr(item.c * m)}});
+  };
+
+  setNorm = (k) => (ev) => { const v = ev.target.value; this.setState(s => { const d = Object.assign({}, s.normDraft); d[k] = v; return {normDraft: d}; }); };
+
+  saveNorm = () => {
+    const d = this.state.normDraft, num = (v, fb) => { const x = parseInt(String(v).replace(/[^0-9]/g, ''), 10); return isNaN(x) || x <= 0 ? fb : x; };
+    this.setState(s => ({goals: {k: num(d.k, 1850), p: num(d.p, 120), f: num(d.f, 60), c: num(d.c, 200)}, screen: 'profile'}));
+    this.flash('Дневная норма обновлена');
+  };
+
+  setDraft = (k) => (ev) => { const v = ev.target.value; this.setState(s => { const d = Object.assign({}, s.draft); d[k] = v; return {draft: d}; }); };
+
+  goScan = () => {
+    this.setState({screen:'scan', scanStatus:'Ищем код…'});
+    clearTimeout(this._s);
+    this._s = setTimeout(() => {
+      this.setState({scanStatus:'Найдено: Творог 5%'});
+      this._s = setTimeout(() => this.pick(f['Творог 5%'], 'Штрих-код 4600682'), 700);
+    }, 1500);
+  };
+
+  renderVals() {
+    const s = this.state, t = this.totals(s.day);
+    const goalK = s.goals.k, goalP = s.goals.p, goalF = s.goals.f, goalC = s.goals.c;
+    const r = Math.round;
+    const pct = (a, b) => Math.min(100, a / b * 100).toFixed(1) + '%';
+    const eaten = r(t.k), left = Math.max(0, goalK - eaten), over = Math.max(0, eaten - goalK);
+    const macroRow = (name, val, goal, color) => {
+      const v = r(val), ov = Math.max(0, v - goal);
+      return {name, val: ov ? v + ' / ' + goal + ' г · +' + ov + ' сверх нормы' : v + ' / ' + goal + ' г',
+        txt: ov ? '#C0761B' : 'rgba(26,29,27,.5)', color: ov ? '#DFA330' : color, w: pct(val, goal)};
+    };
+    const showRem = this.props.showRemaining !== false;
+
+    const mealNames = ['Завтрак','Обед','Ужин','Перекус'];
+    const times = {'Завтрак':'09:10','Обед':'13:40','Ужин':'—','Перекус':'16:20'};
+    const dayLog = s.log.filter(e => e.d === s.day);
+    const meals = mealNames.map(mn => {
+      const items = dayLog.filter(e => e.meal === mn).map((e) => {
+        const d = this.foodBy(e.name), m = e.g / 100;
+        const eid = this.keyOf(e);
+        const open = s.dragId === eid ? s.dragX : (s.swiped === eid ? -88 : 0);
+        return {name: e.name, sub: e.g + ' г · Б ' + r(d.p*m) + ' Ж ' + r(d.f*m) + ' У ' + r(d.c*m), kcal: r(d.k*m) + ' ккал',
+          tx: 'translateX(' + open + 'px)',
+          tr: s.dragId === eid ? 'none' : 'transform .24s cubic-bezier(.4,0,.2,1)',
+          down: this.swipeDown(eid), move: this.swipeMove(eid), up: this.swipeUp(eid),
+          tap: () => { if (this._moved) return; if (s.swiped === eid) { this.setState({swiped: null}); return; } this.pickEntry(e); },
+          del: () => { this.setState(x => ({log: x.log.filter(y => y !== e), swiped: null, dragId: null, dragX: 0})); this.flash('«' + e.name + '» удалено'); }};
+      });
+      const mt = dayLog.filter(e => e.meal === mn).reduce((a, e) => { const d0 = this.foodBy(e.name), m0 = e.g / 100; a.k += d0.k*m0; a.p += d0.p*m0; a.ff += d0.f*m0; a.c += d0.c*m0; return a; }, {k:0,p:0,ff:0,c:0});
+      const kc = mt.k;
+      return {name: mn, time: times[mn], items, gap: items.length ? '14px' : '2px',
+        macros: kc ? 'Б ' + r(mt.p) + ' · Ж ' + r(mt.ff) + ' · У ' + r(mt.c) : '',
+        showMacros: !!kc,
+        kcalLabel: kc ? r(kc) + ' ккал' : 'пусто',
+        add: () => this.setState({screen:'add', targetMeal: mn, query:'', tab:'search'})};
+    });
+
+    const q = s.query.trim().toLowerCase();
+    const isMyTab = s.tab === 'my';
+    const pool = isMyTab ? s.myFoods : (s.tab === 'recent' ? DB.slice(0, 6) : DB);
+    const list = q ? pool.filter(d => d.name.toLowerCase().indexOf(q) >= 0) : pool;
+    const results = list.map(d => {
+      const si = s.sel.filter(x => x.name === d.name)[0], on = !!si;
+      const setG = (v) => this.setState(x => ({sel: x.sel.map(y => y.name === d.name ? {name: y.name, g: v} : y)}));
+      return {
+        name: d.name,
+        sub: (d.brand ? d.brand + ' · ' : '') + r(d.k) + ' ккал / 100 г · Б ' + d.p + ' Ж ' + d.f + ' У ' + d.c,
+        subColor: 'rgba(26,29,27,.42)',
+        isSel: on,
+        gValue: on ? si.g : '',
+        unitNote: on && d.unit ? '≈ ' + numRu(si.g / (d.pw || 1)) + ' ' + unitForm(Math.round(si.g / (d.pw || 1) * 10) / 10, d.unit) : '',
+        selKcalLabel: on ? r(d.k * si.g / 100) + ' ккал' : '',
+        onG: (ev) => { const v = parseInt(String(ev.target.value).replace(/[^0-9]/g, ''), 10); setG(isNaN(v) ? 0 : Math.min(5000, v)); },
+        markBg: on ? GREEN : '#E9F6EE', markFg: on ? '#fff' : '#177F47', mark: on ? '✓' : '+',
+        pick: () => this.pick(d, d.own ? 'Своя еда' : 'Поиск'),
+        toggle: () => this.setState(x => ({sel: on ? x.sel.filter(y => y.name !== d.name) : x.sel.concat([{name: d.name, g: d.def || 100}])}))
+      };
+    });
+    const selItems = s.sel.map(x => ({food: this.foodBy(x.name), g: x.g})).filter(x => x.food);
+    const selKcal = r(selItems.reduce((a, x) => a + x.food.k * x.g / 100, 0));
+    const plural = (n) => n % 10 === 1 && n % 100 !== 11 ? 'позицию' : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 'позиции' : 'позиций');
+
+    const chip = (on) => on ? {bg: GREEN, fg: '#fff'} : {bg: 'rgba(26,29,27,.05)', fg: 'rgba(26,29,27,.62)'};
+    const addTabs = [['search','Поиск'],['my','Своя еда'],['recent','Недавние']].map(([id, label]) => {
+      const c = chip(s.tab === id);
+      return {label, bg: c.bg, fg: c.fg, go: () => this.setState({tab: id})};
+    });
+
+    const d = s.prod || DB[0], mm = s.grams / 100;
+    const hasUnit = !!d.unit, pw = d.pw || d.def || 100;
+    const unitMode = hasUnit && s.portionMode !== 'gram';
+    const nUnits = Math.round(s.grams / pw * 10) / 10;
+    const unitChips = [['unit', d.unit ? (UNIT_MODE[d.unit] || 'Порциями') : ''], ['gram', 'В граммах']].map(([id, label]) => {
+      const c = chip(id === 'unit' ? unitMode : !unitMode);
+      return {label, bg: c.bg, fg: c.fg, set: () => this.setState({portionMode: id, grams: id === 'unit' ? Math.max(pw, Math.round(s.grams / pw) * pw) : s.grams})};
+    });
+    const stepUnit = (k) => () => this.setState(x => ({grams: Math.max(pw / 2, Math.round((x.grams + k * pw) / (pw / 2)) * (pw / 2))}));
+    const mealTimes = {'Завтрак':'09:10','Обед':'13:40','Ужин':'—','Перекус':'16:20'};
+    const mealPick = mealNames.map(mn => {
+      const kc = dayLog.filter(e => e.meal === mn).reduce((a, e) => a + this.foodBy(e.name).k * e.g / 100, 0);
+      return {label: mn, time: mealTimes[mn], sub: kc ? r(kc) + ' ккал уже записано' : 'пока пусто',
+        go: () => this.setState({screen:'add', targetMeal: mn, query:'', tab:'search'})};
+    });
+
+    const navDefs = [['home','Главный'],['cal','Календарь дня'],['mealpick','Куда добавить'],['add','Добавить еду'],['my','Своя еда'],['foods','Продукты'],['create','Создать блюдо'],['product','Карточка продукта'],['scan','Скан штрих-кода'],['repeat','Вчерашние блюда'],['stats','Статистика'],['profile','Профиль'],['body','Параметры и цель'],['norm','Дневная норма'],['onb','Онбординг']];
+    const navGo = {
+      cal: () => this.setState({screen:'home', calOpen:true, calMonth:7}),
+      my: () => this.setState({screen:'add', tab:'my', query:''}),
+      create: () => this.setState({screen:'create', editName:null, draft:{name:'', g:'', k:'', p:'', f:'', c:''}}),
+      norm: () => this.setState({screen:'norm', normDraft:{k:String(s.goals.k), p:String(s.goals.p), f:String(s.goals.f), c:String(s.goals.c)}}),
+      product: () => this.pick(f['Творог 5%'], 'Поиск'),
+      scan: () => this.goScan(),
+      onb: () => this.setState({screen:'onb', onb:1})
+    };
+    const navOn = {cal: s.calOpen, my: s.screen === 'add' && isMyTab, create: s.screen === 'create', add: s.screen === 'add' && !isMyTab, home: s.screen === 'home' && !s.calOpen};
+    const navItems = navDefs.map(([id, label], i) => {
+      const on = id in navOn ? navOn[id] : s.screen === id;
+      return {num: (i+1), label, bg: on ? '#E9F6EE' : 'transparent', fg: on ? '#177F47' : 'rgba(26,29,27,.62)',
+        go: navGo[id] || (() => this.go(id))};
+    });
+
+    const tabDefs = [['home','Дневник','8px'],['stats','Статистика','4px'],['foods','Продукты','6px'],['profile','Профиль','99px']];
+    const tabs = tabDefs.map(([id, label, rad]) => {
+      const on = s.screen === id;
+      return {label, r: rad, fg: on ? GREEN : INK, op: on ? 1 : .35, go: () => this.go(id)};
+    });
+
+    const yList = s.log.filter(e => e.d === s.day - 1);
+    const yesterday = yList.map(e => ({
+      name: e.name, sub: e.meal + ' · ' + e.g + ' г · ' + r(this.foodBy(e.name).k * e.g / 100) + ' ккал',
+      add: () => this.quickAdd(e.name, e.g, e.meal)
+    }));
+    const yTot = this.totals(s.day - 1);
+
+    const week = [-6,-5,-4,-3,-2,-1,0].map(off => {
+      const k = this.kcalOf(off), dt = dateOf(off);
+      return {day: DOW[dt.getDay()], kcal: k > 999 ? String(k).slice(0,-3) + ' ' + String(k).slice(-3) : k,
+        h: Math.max(6, Math.round(k / 2200 * 108)) + 'px', color: k > goalK ? '#DFA330' : '#22A45C'};
+    });
+
+    const selDt = dateOf(s.day), monday = s.day - ((selDt.getDay() + 6) % 7);
+    const weekStrip = [0,1,2,3,4,5,6].map(i => {
+      const off = monday + i, dt = dateOf(off), on = off === s.day, future = off > 0, k = future ? 0 : this.kcalOf(off);
+      return {dow: DOW[dt.getDay()], num: dt.getDate(), bg: on ? '#1A1D1B' : 'transparent',
+        fg: on ? '#fff' : (future ? 'rgba(26,29,27,.28)' : INK),
+        sub: on ? 'rgba(255,255,255,.55)' : (future ? 'rgba(26,29,27,.22)' : 'rgba(26,29,27,.38)'),
+        dot: !k ? 'transparent' : (on ? '#7BE0A6' : (k > goalK ? '#DFA330' : GREEN)),
+        go: future ? (() => {}) : (() => this.setState({day: off}))};
+    });
+
+    const cm = s.calMonth, first = new Date(2026, cm, 1), dim = new Date(2026, cm + 1, 0).getDate();
+    const lead = (first.getDay() + 6) % 7;
+    const calCells = [];
+    for (let i = 0; i < lead; i++) calCells.push({label:'', dot:'transparent', bg:'transparent', fg:'transparent', op:1, cursor:'default', go: () => {}});
+    for (let dnum = 1; dnum <= dim; dnum++) {
+      const off = offOf(new Date(2026, cm, dnum)), k = off <= 0 ? this.kcalOf(off) : 0;
+      const on = off === s.day, future = off > 0;
+      calCells.push({label: dnum, bg: on ? '#1A1D1B' : (k ? 'rgba(26,29,27,.04)' : 'transparent'),
+        fg: on ? '#fff' : INK, op: future ? .28 : 1, cursor: future ? 'default' : 'pointer',
+        dot: !k ? 'transparent' : (on ? '#7BE0A6' : (k > goalK ? '#DFA330' : GREEN)),
+        go: future ? (() => {}) : (() => this.setState({day: off, calOpen: false}))});
+    }
+
+    const offs = [-6,-5,-4,-3,-2,-1,0];
+    const wsum = offs.map(o => this.totals(o)).reduce((a, x) => ({k:a.k+x.k, p:a.p+x.p, ff:a.ff+x.ff, c:a.c+x.c}), {k:0,p:0,ff:0,c:0});
+    const avg = {k: wsum.k/7, p: wsum.p/7, ff: wsum.ff/7, c: wsum.c/7};
+    const inNorm = offs.filter(o => { const k = this.kcalOf(o); return k > 0 && k <= goalK; }).length;
+    const weekMacros = [
+      {name:'Белки', val: r(avg.p) + ' / ' + goalP + ' г', w: pct(avg.p, goalP), color:'#3F86C9'},
+      {name:'Жиры', val: r(avg.ff) + ' / ' + goalF + ' г', w: pct(avg.ff, goalF), color:'#DFA330'},
+      {name:'Углеводы', val: r(avg.c) + ' / ' + goalC + ' г', w: pct(avg.c, goalC), color:'#9E6FD3'}
+    ];
+    const foodsMy = s.myFoods.map(x => this.foodBy(x.name)).map(x => ({
+      name: x.name, sub: r(x.k) + ' ккал / 100 г · Б ' + x.p + ' Ж ' + x.f + ' У ' + x.c,
+      tag: x.edited ? 'изменено' : 'своё', tagBg: x.edited ? '#FBF2DF' : '#E9F6EE', tagFg: x.edited ? '#A9761A' : '#177F47',
+      go: () => this.startEdit(x)
+    }));
+    const foodsBase = DB.map(x => this.foodBy(x.name)).map(x => ({
+      name: x.name, sub: r(x.k) + ' ккал / 100 г · Б ' + x.p + ' Ж ' + x.f + ' У ' + x.c,
+      tag: x.edited ? 'изменено' : '', tagBg: '#FBF2DF', tagFg: '#A9761A', showTag: !!x.edited,
+      go: () => this.startEdit(x)
+    }));
+
+    const goalOptions = [
+      ['lose','Похудеть','Дефицит 15%, больше белка'],
+      ['keep','Поддерживать вес','Норма по расходу'],
+      ['gain','Набрать массу','Профицит 10%']
+    ].map(([id, label, sub]) => {
+      const on = s.goal === id;
+      return {label, sub, border: on ? GREEN : 'rgba(26,29,27,.1)', bg: on ? '#E9F6EE' : '#fff',
+        dot: on ? GREEN : 'transparent', dotBorder: on ? GREEN : 'rgba(26,29,27,.18)',
+        set: () => this.setState({goal: id})};
+    });
+
+    const b = s.body, ACT = {low: 1.2, mid: 1.375, high: 1.55};
+    const bmr = 10 * b.weight + 6.25 * b.height - 5 * b.age + (b.sex === 'm' ? 5 : -161);
+    const tdee = bmr * ACT[b.act];
+    const kFactor = s.goal === 'lose' ? .85 : (s.goal === 'gain' ? 1.1 : 1);
+    const calc = {k: Math.round(tdee * kFactor / 10) * 10};
+    calc.p = Math.round(b.weight * (s.goal === 'lose' ? 1.8 : 1.6));
+    calc.f = Math.round(b.weight * .9);
+    calc.c = Math.max(60, Math.round((calc.k - calc.p * 4 - calc.f * 9) / 4));
+
+    const setBody = (key, v, min, max) => () => this.setState(x => {
+      const nb = Object.assign({}, x.body); nb[key] = Math.min(max, Math.max(min, v)); return {body: nb};
+    });
+    const sexChips = [['f','Женский'],['m','Мужской']].map(([id, label]) => {
+      const c0 = chip(b.sex === id);
+      return {label, bg: c0.bg, fg: c0.fg, set: () => this.setState(x => ({body: Object.assign({}, x.body, {sex: id})}))};
+    });
+    const actChips = [['low','Низкая'],['mid','Средняя'],['high','Высокая']].map(([id, label]) => {
+      const c0 = chip(b.act === id);
+      return {label, bg: c0.bg, fg: c0.fg, set: () => this.setState(x => ({body: Object.assign({}, x.body, {act: id})}))};
+    });
+    const numRows = [
+      {label: 'Возраст', value: b.age + ' лет', dec: setBody('age', b.age - 1, 14, 99), inc: setBody('age', b.age + 1, 14, 99)},
+      {label: 'Рост', value: b.height + ' см', dec: setBody('height', b.height - 1, 130, 220), inc: setBody('height', b.height + 1, 130, 220)},
+      {label: 'Вес сейчас', value: b.weight + ' кг', dec: setBody('weight', b.weight - 1, 35, 250), inc: setBody('weight', b.weight + 1, 35, 250)}
+    ];
+
+    const onbNext = () => s.onb < 3
+      ? this.setState({onb: s.onb + 1})
+      : this.setState({screen:'home', onb:1, goals: {k: calc.k, p: calc.p, f: calc.f, c: calc.c},
+          normDraft: {k: String(calc.k), p: String(calc.p), f: String(calc.f), c: String(calc.c)}});
+
+    return {
+      isHome: s.screen === 'home', isAdd: s.screen === 'add', isProduct: s.screen === 'product',
+      isScan: s.screen === 'scan', isRepeat: s.screen === 'repeat', isStats: s.screen === 'stats',
+      isProfile: s.screen === 'profile', isOnb: s.screen === 'onb',
+      showTabs: ['home','stats','foods','profile'].indexOf(s.screen) >= 0,
+      isFoods: s.screen === 'foods', isNorm: s.screen === 'norm',
+      navItems, tabs, meals, results, addTabs, unitChips, mealPick, yesterday, week, weekMacros, goalOptions,
+      isMealPick: s.screen === 'mealpick',
+      goPickMeal: () => this.setState({screen: 'mealpick'}),
+      hasUnit, unitMode, gramMode: !unitMode,
+      unitCount: numRu(nUnits), unitName: d.unit ? unitForm(nUnits, d.unit) : '',
+      unitSub: '≈ ' + r(s.grams) + ' г',
+      incUnit: stepUnit(1), decUnit: stepUnit(-1),
+      gramsValue: s.grams,
+      onGrams: (ev) => { const v = parseInt(String(ev.target.value).replace(/[^0-9]/g, ''), 10); this.setState({grams: isNaN(v) ? 0 : Math.min(5000, v)}); },
+      targetMealLabel: s.editEntry ? 'В приёме «' + s.editEntry.meal + '»' : 'Добавится в «' + s.targetMeal + '»',
+
+      kcalCaption: over > 0 ? 'Превышение нормы' : (s.day === 0 ? (showRem ? 'Осталось на сегодня' : 'Съедено сегодня') : (showRem ? 'Осталось в этот день' : 'Съедено в этот день')),
+      kcalBig: over > 0 ? '+' + over.toLocaleString('ru-RU') : (showRem ? left : eaten).toLocaleString('ru-RU'),
+      kcalBigColor: over > 0 ? '#C0761B' : INK,
+      kcalGoal: goalK.toLocaleString('ru-RU'),
+      kcalBarW: pct(t.k, goalK),
+      kcalBarColor: over > 0 ? '#DFA330' : GREEN,
+      macros: [
+        macroRow('Белки', t.p, goalP, '#3F86C9'),
+        macroRow('Жиры', t.ff, goalF, '#DFA330'),
+        macroRow('Углеводы', t.c, goalC, '#9E6FD3')
+      ],
+      pGoal: goalP, fGoal: goalF, cGoal: goalC,
+      showHint: this.props.showCoachTip !== false && s.day === 0,
+      hintText: t.p / goalP < t.k / goalK ? 'Белка сегодня меньше нормы — добавьте творог или рыбу к ужину.' : 'Белок в норме. Так держать.',
+
+      query: s.query, onQuery: (e) => this.setState({query: e.target.value}),
+      isMyTab,
+      hasSel: s.sel.length > 0,
+      selLabel: 'Добавить ' + s.sel.length + ' ' + plural(s.sel.length) + ' · ' + selKcal + ' ккал',
+      clearSel: () => this.setState({sel: []}),
+      addSelected: () => {
+        this.setState(x => ({log: x.log.concat(selItems.map(it => e_(x.targetMeal, it.food.name, it.g, x.day))), sel: [], screen: 'home'}));
+        this.flash('Добавлено ' + selItems.length + ' ' + plural(selItems.length));
+      },
+      resultsCaption: q ? 'Найдено · ' + results.length : (isMyTab ? 'Ваши блюда · ' + s.myFoods.length : (s.tab === 'recent' ? 'Недавние' : 'Популярное')),
+      targetMeal: s.targetMeal,
+
+      prodName: d.name, prodBrand: (d.brand || 'Без бренда') + ' · ' + d.k + ' ккал в 100 г',
+      prodSource: s.prodSource, grams: s.grams,
+      prodKcal: r(d.k * mm), prodP: r(d.p * mm) + ' г', prodF: r(d.f * mm) + ' г', prodC: r(d.c * mm) + ' г',
+      incGrams: () => this.setState(x => ({grams: x.grams + 10})),
+      decGrams: () => this.setState(x => ({grams: Math.max(10, x.grams - 10)})),
+      addProduct: this.addProduct,
+      isEditEntry: !!s.editEntry,
+      addLabel: s.editEntry ? 'Сохранить порцию' : 'Добавить ' + r(d.k * mm) + ' ккал',
+      backFromProduct: () => this.setState({screen: s.editEntry ? 'home' : 'add', editEntry: null}),
+
+      scanStatus: s.scanStatus,
+      barcodeBars: [3,1,2,1,4,1,2,3,1,1,2,4,1,3,1,2,1,4,2,1].map(w => ({w: w + 'px'})),
+
+      repeatAll: () => { this.setState(x => ({log: x.log.concat(yList.map(e => e_(e.meal, e.name, e.g, x.day))), screen:'home'})); this.flash('День скопирован в дневник'); },
+      ySummary: yList.length ? r(yTot.k) + ' ккал · Б ' + r(yTot.p) + ' · Ж ' + r(yTot.ff) + ' · У ' + r(yTot.c) : 'В этот день записей не было',
+      yTitle: s.day === 0 ? 'Вчерашний день' : 'Предыдущий день',
+
+      profileRows: [
+        {label:'Цель', value: {lose:'Похудеть', keep:'Поддерживать вес', gain:'Набрать массу'}[s.goal], go: () => this.go('body'), arrow: '›'},
+        {label:'Параметры', value: (b.sex === 'f' ? 'Ж' : 'М') + ' · ' + b.age + ' лет · ' + b.height + ' см · ' + b.weight + ' кг', go: () => this.go('body'), arrow: '›'},
+        {label:'Активность', value: {low:'Низкая', mid:'Средняя', high:'Высокая'}[b.act], go: () => this.go('body'), arrow: '›'},
+        {label:'Единицы', value:'Граммы, ккал', go: () => {}, arrow: ''}
+      ],
+      isBody: s.screen === 'body',
+      goalChips: [['lose','Похудеть'],['keep','Поддерживать'],['gain','Набрать массу']].map(([id, label]) => {
+        const c0 = chip(s.goal === id);
+        return {label, bg: c0.bg, fg: c0.fg, set: () => this.setState({goal: id})};
+      }),
+      calcSummary: calc.k.toLocaleString('ru-RU') + ' ккал · Б ' + calc.p + ' · Ж ' + calc.f + ' · У ' + calc.c,
+      applyCalc: () => { this.setState({goals: {k: calc.k, p: calc.p, f: calc.f, c: calc.c}, normDraft: {k: String(calc.k), p: String(calc.p), f: String(calc.f), c: String(calc.c)}, screen: 'profile'}); this.flash('Норма пересчитана'); },
+      profileGoalSub: {lose:'Цель: похудеть', keep:'Цель: поддерживать вес', gain:'Цель: набрать массу'}[s.goal],
+      foodsMy, foodsBase,
+      avgKcal: r(avg.k).toLocaleString('ru-RU'),
+      inNormLabel: inNorm + ' из 7',
+      goFoods: () => this.go('foods'),
+      goNorm: () => this.setState({screen:'norm', normDraft:{k:String(goalK), p:String(goalP), f:String(goalF), c:String(goalC)}}),
+      nK: s.normDraft.k, nP: s.normDraft.p, nF: s.normDraft.f, nC: s.normDraft.c,
+      onNK: this.setNorm('k'), onNP: this.setNorm('p'), onNF: this.setNorm('f'), onNC: this.setNorm('c'),
+      saveNorm: this.saveNorm,
+      normHint: 'Сейчас в норме ' + Math.round((parseInt(s.normDraft.p, 10) || 0) * 4 / Math.max(1, parseInt(s.normDraft.k, 10) || 1) * 100) + '% калорий приходится на белок.',
+      isEditing: !!s.editName,
+      createTitle: s.editName ? 'Редактировать продукт' : 'Своё блюдо',
+      createSub: s.editName ? 'Исправьте вес порции и КБЖУ — значения сохранятся и будут применяться дальше.' : 'Видно только вам — в разделе «Своя еда». В общий поиск не попадёт.',
+      saveLabel: s.editName ? 'Сохранить изменения' : 'Сохранить блюдо',
+      backFromCreate: () => this.setState({screen: s.editName ? 'foods' : 'add', editName: null}),
+      sexChips, actChips, numRows,
+      userName: s.userName,
+      onUserName: (ev) => this.setState({userName: ev.target.value}),
+      initials: (s.userName.trim() || 'Я').split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase(),
+      calcK: calc.k.toLocaleString('ru-RU'), calcP: calc.p, calcF: calc.f, calcC: calc.c,
+      calcNote: s.goal === 'lose' ? 'Дефицит 15% — это примерно 0,5 кг в неделю. Безопасный темп.'
+        : (s.goal === 'gain' ? 'Профицит 10% — примерно +0,3 кг в неделю.' : 'Норма на поддержание веса, без дефицита.'),
+
+      isOnb1: s.onb === 1, isOnb2: s.onb === 2, isOnb3: s.onb === 3,
+      onb2Bg: s.onb >= 2 ? GREEN : 'rgba(26,29,27,.1)',
+      onb3Bg: s.onb >= 3 ? GREEN : 'rgba(26,29,27,.1)',
+      onbCta: s.onb === 3 ? 'Начать вести дневник' : 'Далее',
+      onbNext,
+      goBackOnb: () => this.setState({onb: 2}),
+      goOnb: () => this.setState({screen:'onb', onb:1}),
+      goHome: () => this.go('home'), goAdd: () => this.go('add'), goProfile: () => this.go('profile'),
+      goRepeat: () => this.go('repeat'), goScan: this.goScan,
+      goAddQuick: () => this.setState({screen:'add', targetMeal:'Ужин', query:'', tab:'search'}),
+
+      dayTitle: s.day === 0 ? 'Сегодня' : (s.day === -1 ? 'Вчера' : dateOf(s.day).getDate() + ' ' + MON[dateOf(s.day).getMonth()]),
+      daySub: DOWF[dateOf(s.day).getDay()] + ', ' + dateOf(s.day).getDate() + ' ' + MON[dateOf(s.day).getMonth()],
+      streakLabel: s.day === 0 ? '12 дней подряд' : (!this.kcalOf(s.day) ? 'Нет записей' : (this.kcalOf(s.day) > goalK ? 'Превышение' : 'В норме')),
+      streakBg: s.day === 0 || (this.kcalOf(s.day) && this.kcalOf(s.day) <= goalK) ? '#E9F6EE' : (this.kcalOf(s.day) > goalK ? '#FBF2DF' : 'rgba(26,29,27,.05)'),
+      streakFg: s.day === 0 || (this.kcalOf(s.day) && this.kcalOf(s.day) <= goalK) ? '#177F47' : (this.kcalOf(s.day) > goalK ? '#A9761A' : 'rgba(26,29,27,.45)'),
+      weekStrip, calCells,
+      calDows: ['пн','вт','ср','чт','пт','сб','вс'].map(l => ({l})),
+      calOpen: s.calOpen,
+      calTitle: MONN[cm] + ' 2026',
+      openCal: () => this.setState({calOpen: true, calMonth: dateOf(s.day).getMonth()}),
+      closeCal: () => this.setState({calOpen: false}),
+      prevMonth: () => this.setState({calMonth: Math.max(0, cm - 1)}),
+      nextMonth: () => cm < 7 ? this.setState({calMonth: cm + 1}) : null,
+      nextBg: cm < 7 ? 'rgba(26,29,27,.05)' : 'rgba(26,29,27,.02)',
+      nextFg: cm < 7 ? INK : 'rgba(26,29,27,.25)',
+      goToday: () => this.setState({day: 0, calOpen: false, calMonth: 7}),
+
+      isCreate: s.screen === 'create',
+      goCreate: () => this.setState({screen: 'create', editName: null, draft: {name:'', g:'', k:'', p:'', f:'', c:''}}),
+      goMyFood: () => this.setState({screen: 'add', tab: 'my'}),
+      dName: s.draft.name, dG: s.draft.g, dK: s.draft.k, dP: s.draft.p, dF: s.draft.f, dC: s.draft.c,
+      onDName: this.setDraft('name'), onDG: this.setDraft('g'), onDK: this.setDraft('k'),
+      onDP: this.setDraft('p'), onDF: this.setDraft('f'), onDC: this.setDraft('c'),
+      draftHint: s.draft.k && s.draft.g ? 'Это ' + Math.round((parseFloat(s.draft.k) || 0) / Math.max(1, parseFloat(s.draft.g) || 1) * 100) + ' ккал на 100 г. Порцию можно менять при добавлении.' : 'Укажите вес и калорийность порции — приложение само пересчитает на 100 г.',
+      saveDraft: this.saveDraft,
+      toast: s.toast
+    };
+  }
+}
+
+</script>
+</body>
+</html>
