@@ -10,11 +10,10 @@ struct AppData: Codable {
     var userName: String = ""
     /// Onboarding is shown until the user finishes it once.
     var didOnboard: Bool = false
-    /// Guards the one-time demo diary import (see `SeedData.demoEntries`).
-    var didSeedDemoDiary: Bool = false
     /// «Осталось» vs «Съедено» for the big number on the diary.
     var showRemaining: Bool = true
 
+    /// A fresh install: an empty diary, no own dishes, only the stock product base.
     static var initial: AppData {
         var data = AppData()
         data.foods = SeedData.foods

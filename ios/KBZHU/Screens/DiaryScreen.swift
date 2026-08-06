@@ -45,22 +45,25 @@ struct DiaryScreen: View {
                     }
                 }
 
-                Button {
-                    nav.go(.repeatDay)
-                } label: {
-                    Text("Повторить вчерашний день")
-                        .golos(500, 13.5)
-                        .foregroundStyle(Theme.ink(0.6))
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 52)
-                        .background(
-                            RoundedRectangle(cornerRadius: 18, style: .continuous)
-                                .stroke(style: StrokeStyle(lineWidth: 1, dash: [5, 4]))
-                                .foregroundStyle(Theme.ink(0.18))
-                        )
+                // Only offered when the previous day actually has something to copy.
+                if store.hasEntries(on: Cal.adding(days: -1, to: day)) {
+                    Button {
+                        nav.go(.repeatDay)
+                    } label: {
+                        Text("Повторить вчерашний день")
+                            .golos(500, 13.5)
+                            .foregroundStyle(Theme.ink(0.6))
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 52)
+                            .background(
+                                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                                    .stroke(style: StrokeStyle(lineWidth: 1, dash: [5, 4]))
+                                    .foregroundStyle(Theme.ink(0.18))
+                            )
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.top, 14)
                 }
-                .buttonStyle(.plain)
-                .padding(.top, 14)
             }
             .padding(.horizontal, 20)
             .padding(.top, 8)
@@ -117,6 +120,9 @@ struct DiaryScreen: View {
     private var badge: (title: String, background: Color, foreground: Color) {
         if isToday {
             let streak = store.streakDays
+            guard streak > 0 else {
+                return ("Нет записей", Theme.ink(0.05), Theme.ink(0.45))
+            }
             return ("\(streak) \(Ru.days(streak)) подряд", Theme.greenTint, Theme.greenDark)
         }
         let kcal = store.kcal(on: day)
@@ -241,6 +247,9 @@ struct DiaryScreen: View {
 
     private var hintText: String {
         guard isToday else { return "" }
+        guard eaten > 0 else {
+            return "Добавьте первый приём пищи — норма на день уже рассчитана."
+        }
         guard goals.protein > 0, goals.kcal > 0 else { return "" }
         let proteinShare = totals.protein / Double(goals.protein)
         let kcalShare = totals.kcal / Double(goals.kcal)

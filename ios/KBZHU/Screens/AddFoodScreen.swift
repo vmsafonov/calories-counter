@@ -91,6 +91,17 @@ struct AddFoodScreen: View {
         }
     }
 
+    private var emptyStateText: String {
+        if !nav.query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return "Ничего не нашлось. Попробуйте другое название или создайте своё блюдо."
+        }
+        switch nav.addTab {
+        case .own: return "Здесь появятся ваши блюда — создайте первое."
+        case .recent: return "Здесь появится то, что вы уже добавляли в дневник."
+        case .search: return "База продуктов пуста."
+        }
+    }
+
     private var list: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
@@ -105,11 +116,10 @@ struct AddFoodScreen: View {
                     .padding(.bottom, 12)
 
                 if results.isEmpty {
-                    Text(nav.addTab == .own
-                         ? "Здесь появятся ваши блюда — создайте первое."
-                         : "Ничего не нашлось. Попробуйте другое название или создайте своё блюдо.")
+                    Text(emptyStateText)
                         .golos(400, 13, lineHeight: 1.5)
                         .foregroundStyle(Theme.ink(0.45))
+                        .fixedSize(horizontal: false, vertical: true)
                         .padding(.vertical, 8)
                 }
 

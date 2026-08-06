@@ -20,12 +20,6 @@ final class AppStore: ObservableObject {
         let url = fileURL ?? AppStore.defaultFileURL()
         self.fileURL = url
         self.data = AppStore.load(from: url)
-
-        // First launch: install the demo diary once. Afterwards it is ordinary user data.
-        if !data.didSeedDemoDiary {
-            data.didSeedDemoDiary = true
-            data.entries.append(contentsOf: SeedData.demoEntries(foods: data.foods))
-        }
     }
 
     private static func defaultFileURL() -> URL {
