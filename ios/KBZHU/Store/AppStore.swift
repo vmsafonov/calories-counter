@@ -178,38 +178,88 @@ final class AppStore: ObservableObject {
 
     // MARK: - Food mutations
 
-    /// Creates a user dish from per-portion values; macros are stored per 100 g.
+    /// Values as typed in the food form: either per 100 g, or per one portion of `portionGrams`.
+    struct FoodValues {
+        var name: String
+        /// Производитель. Показывается в списке продуктов; для своих блюд не используется.
+        var manufacturer: String = ""
+        var mode: FoodEntryMode
+        /// Weight of one portion; ignored in `.grams` mode.
+        var portionGrams: Double
+        var kcal: Double
+        var protein: Double
+        var fat: Double
+        var carbs: Double
+        /// Unit to keep for portion products (`шт`, `стакан`…); defaults to `порция`.
+        var unit: FoodUnit?
+
+        /// Converts whatever was typed into per-100-g values.
+        var per100: (kcal: Double, protein: Double, fat: Double, carbs: Double) {
+            switch mode {
+            case .grams:
+                let round = { (v: Double) in (v * 10).rounded() / 10 }
+                return (round(kcal), round(protein), round(fat), round(carbs))
+            case .portion:
+                let grams = max(1, portionGrams)
+                let convert = { (v: Double) in (((v / grams) * 100) * 10).rounded() / 10 }
+                return (convert(kcal), convert(protein), convert(fat), convert(carbs))
+            }
+        }
+    }
+
+    /// Creates a product. `isOwn` decides whether it lands in «Своя еда» or in the shared base.
     @discardableResult
-    func createOwnFood(name: String, portionGrams: Double,
-                       kcal: Double, protein: Double, fat: Double, carbs: Double) -> Food {
-        let grams = max(1, portionGrams)
-        let per100: (Double) -> Double = { ((($0 / grams) * 100) * 10).rounded() / 10 }
-        let food = Food(name: name.isEmpty ? "Моё блюдо" : name,
-                        brand: "Своё блюдо",
-                        kcal: per100(kcal), protein: per100(protein),
-                        fat: per100(fat), carbs: per100(carbs),
-                        defaultGrams: grams.rounded(),
-                        unit: .portion, unitWeight: grams.rounded(),
-                        isOwn: true)
+    func createFood(_ values: FoodValues, isOwn: Bool, barcode: String? = nil) -> Food {
+        let per100 = values.per100
+        let name = values.name.isEmpty ? (isOwn ? "Моё блюдо" : "Новый продукт") : values.name
+        let grams = max(1, values.portionGrams)
+        let isPortion = values.mode == .portion
+        // В списке продуктов под названием показывается производитель. Штрих-код там не нужен —
+        // он хранится в самом продукте, чтобы сканер узнал упаковку в следующий раз.
+        let manufacturer = values.manufacturer.trimmingCharacters(in: .whitespacesAndNewlines)
+        let brand = isOwn ? "Своё блюдо" : (manufacturer.isEmpty ? "Добавлено вами" : manufacturer)
+        let food = Food(name: name,
+                        brand: brand,
+                        kcal: per100.kcal, protein: per100.protein,
+                        fat: per100.fat, carbs: per100.carbs,
+                        defaultGrams: isPortion ? grams.rounded() : 100,
+                        unit: isPortion ? (values.unit ?? .portion) : nil,
+                        unitWeight: isPortion ? grams.rounded() : nil,
+                        isOwn: isOwn,
+                        barcode: barcode)
         data.foods.append(food)
         return food
     }
 
     /// Corrects an existing product. Stock products get the «изменено» badge; the new values
     /// apply to every future entry, exactly as the design describes.
-    func updateFood(id: UUID, name: String, portionGrams: Double,
-                    kcal: Double, protein: Double, fat: Double, carbs: Double) {
+    func updateFood(id: UUID, values: FoodValues) {
         guard let index = data.foods.firstIndex(where: { $0.id == id }) else { return }
-        let grams = max(1, portionGrams)
-        let per100: (Double) -> Double = { ((($0 / grams) * 100) * 10).rounded() / 10 }
+        let per100 = values.per100
         var food = data.foods[index]
-        food.name = name.isEmpty ? food.name : name
-        food.kcal = per100(kcal)
-        food.protein = per100(protein)
-        food.fat = per100(fat)
-        food.carbs = per100(carbs)
-        food.defaultGrams = grams.rounded()
-        if food.unit == .portion { food.unitWeight = grams.rounded() }
+        food.name = values.name.isEmpty ? food.name : values.name
+        if !food.isOwn {
+            // Пустое поле — просто убирает производителя, а не подставляет заглушку.
+            food.brand = values.manufacturer.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        food.kcal = per100.kcal
+        food.protein = per100.protein
+        food.fat = per100.fat
+        food.carbs = per100.carbs
+
+        switch values.mode {
+        case .portion:
+            let grams = max(1, values.portionGrams).rounded()
+            // Единица берётся из формы — её выбирают чипами «порция / шт / стакан…».
+            food.unit = values.unit ?? .portion
+            food.unitWeight = grams
+            food.defaultGrams = grams
+        case .grams:
+            food.unit = nil
+            food.unitWeight = nil
+            if food.defaultGrams <= 0 { food.defaultGrams = 100 }
+        }
+
         food.isEdited = true
         data.foods[index] = food
     }

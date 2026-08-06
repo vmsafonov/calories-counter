@@ -51,28 +51,69 @@ struct SelectedItem: Identifiable, Hashable {
     var grams: Double
 }
 
-/// Fields of the «Своё блюдо» / «Редактировать продукт» form. Kept as strings so the
-/// text fields behave while half-typed.
+/// What the numbers in the food form are measured in.
+enum FoodEntryMode: Hashable {
+    /// КБЖУ вводятся на 100 г, продукт считается в граммах.
+    case grams
+    /// КБЖУ вводятся на порцию, у порции есть вес в граммах.
+    case portion
+}
+
+/// What the food form is doing right now.
+enum FoodFormKind: Hashable {
+    /// «Своё блюдо» — видно только пользователю, в общий поиск не попадает.
+    case ownDish
+    /// Новый продукт в общую базу; штрих-код известен, если пришли со скана.
+    case baseProduct(barcode: String?)
+    /// Правка существующего продукта.
+    case edit(UUID)
+}
+
+/// Fields of the food form. Kept as strings so the text fields behave while half-typed.
 struct FoodDraft: Hashable {
     var name = ""
+    /// Производитель — показывается в списке продуктов. Для своих блюд не спрашивается.
+    var manufacturer = ""
+    /// Вес одной порции, только в режиме `.portion`.
     var grams = ""
     var kcal = ""
     var protein = ""
     var fat = ""
     var carbs = ""
+    var mode: FoodEntryMode = .portion
+    /// Единица уже существующего продукта — чтобы правка не превращала «шт» в «порцию».
+    var unit: FoodUnit? = .portion
 
     static let empty = FoodDraft()
 
-    /// Pre-fills the form with a product's per-portion values.
+    /// Служебные подписи — их не показываем как «производителя».
+    private static let placeholderBrands: Set<String> = ["Своё блюдо", "Добавлено вами"]
+
+    /// Pre-fills the form with a product's values, in the mode that product uses.
     static func editing(_ food: Food) -> FoodDraft {
-        let grams = food.defaultGrams > 0 ? food.defaultGrams : (food.unitWeight ?? 100)
+        let brand = placeholderBrands.contains(food.brand) ? "" : food.brand
+        guard let unit = food.unit else {
+            return FoodDraft(name: food.name,
+                             manufacturer: brand,
+                             grams: "",
+                             kcal: Ru.number(food.kcal),
+                             protein: Ru.number(food.protein),
+                             fat: Ru.number(food.fat),
+                             carbs: Ru.number(food.carbs),
+                             mode: .grams,
+                             unit: nil)
+        }
+        let grams = food.unitWeight ?? (food.defaultGrams > 0 ? food.defaultGrams : 100)
         let m = grams / 100
         return FoodDraft(name: food.name,
+                         manufacturer: brand,
                          grams: Ru.number(grams),
                          kcal: Ru.number(food.kcal * m),
                          protein: Ru.number(food.protein * m),
                          fat: Ru.number(food.fat * m),
-                         carbs: Ru.number(food.carbs * m))
+                         carbs: Ru.number(food.carbs * m),
+                         mode: .portion,
+                         unit: unit)
     }
 }
 
@@ -92,7 +133,7 @@ final class Nav: ObservableObject {
     @Published var selection: [SelectedItem] = []
 
     @Published var product: ProductContext?
-    @Published var editingFoodID: UUID?
+    @Published var foodForm: FoodFormKind = .ownDish
     @Published var draft: FoodDraft = .empty
 
     @Published var onboardingStep = 1
@@ -138,6 +179,27 @@ final class Nav: ObservableObject {
                                  returnTo: .diary)
         openSwipeEntryID = nil
         screen = .product
+    }
+
+    /// «Создать своё блюдо» — по умолчанию порциями, как готовое домашнее блюдо.
+    func openOwnDishForm() {
+        foodForm = .ownDish
+        draft = FoodDraft(mode: .portion, unit: .portion)
+        screen = .createFood
+    }
+
+    /// Новый продукт в общую базу. Со скана приходит штрих-код, и значения обычно
+    /// написаны на упаковке на 100 г — поэтому режим по умолчанию граммовый.
+    func openNewProductForm(barcode: String?) {
+        foodForm = .baseProduct(barcode: barcode)
+        draft = FoodDraft(mode: .grams, unit: nil)
+        screen = .createFood
+    }
+
+    func openEditForm(_ food: Food) {
+        foodForm = .edit(food.id)
+        draft = .editing(food)
+        screen = .createFood
     }
 
     func flash(_ message: String) {
