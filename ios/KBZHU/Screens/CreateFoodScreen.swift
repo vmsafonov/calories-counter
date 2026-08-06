@@ -1,33 +1,34 @@
 import SwiftUI
 
-/// «Своё блюдо» when creating, «Редактировать продукт» when correcting an existing one.
-/// Values are entered per portion; the app converts them to per 100 g.
+/// Единая форма продукта. Тремя способами:
+/// — «Своё блюдо» (видно только вам),
+/// — «Новый продукт» в общую базу (сюда приводит ненайденный штрих-код),
+/// — правка уже существующего продукта.
+///
+/// Значения можно вводить на 100 г либо на порцию — во втором случае указывается,
+/// сколько граммов эта порция весит.
 struct CreateFoodScreen: View {
     @EnvironmentObject private var store: AppStore
     @EnvironmentObject private var nav: Nav
 
-    private var isEditing: Bool { nav.editingFoodID != nil }
+    private var kind: FoodFormKind { nav.foodForm }
+    private var isPortionMode: Bool { nav.draft.mode == .portion }
 
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
-                    NavBar(title: isEditing ? "Редактировать продукт" : "Своё блюдо") {
-                        nav.screen = isEditing ? .foods : .add
-                        nav.editingFoodID = nil
-                    }
-                    .padding(.bottom, 16)
+                    NavBar(title: title) { goBack() }
+                        .padding(.bottom, 16)
 
-                    Text(isEditing
-                         ? "Исправьте вес порции и КБЖУ — значения сохранятся и будут применяться дальше."
-                         : "Видно только вам — в разделе «Своя еда». В общий поиск не попадёт.")
+                    Text(subtitle)
                         .golos(400, 13, lineHeight: 1.5)
                         .foregroundStyle(Theme.ink(0.48))
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.bottom, 22)
 
                     fieldLabel("Название")
-                    TextField("Мамины котлетки", text: $nav.draft.name)
+                    TextField(namePlaceholder, text: $nav.draft.name)
                         .golos(500, 15)
                         .foregroundStyle(Theme.ink)
                         .textFieldStyle(.plain)
@@ -36,15 +37,30 @@ struct CreateFoodScreen: View {
                         .background(Theme.softCard, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
                         .padding(.bottom, 18)
 
-                    fieldLabel("Вес порции, г")
-                    NumericField(text: $nav.draft.grams, placeholder: "120",
-                                 weight: 600, size: 15, allowsDecimal: true)
-                        .padding(.horizontal, 16)
-                        .frame(height: 52)
-                        .background(Theme.softCard, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
-                        .padding(.bottom, 18)
+                    fieldLabel("Как считаем продукт")
+                    HStack(spacing: 6) {
+                        Chip(title: "Граммы", isOn: !isPortionMode, height: 44,
+                             horizontalPadding: 8, cornerRadius: 13, fillsWidth: true) {
+                            nav.draft.mode = .grams
+                        }
+                        Chip(title: portionChipTitle, isOn: isPortionMode, height: 44,
+                             horizontalPadding: 8, cornerRadius: 13, fillsWidth: true) {
+                            nav.draft.mode = .portion
+                        }
+                    }
+                    .padding(.bottom, 18)
 
-                    fieldLabel("На всю порцию")
+                    if isPortionMode {
+                        fieldLabel(weightFieldLabel)
+                        NumericField(text: $nav.draft.grams, placeholder: "120",
+                                     weight: 600, size: 15, allowsDecimal: true)
+                            .padding(.horizontal, 16)
+                            .frame(height: 52)
+                            .background(Theme.softCard, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                            .padding(.bottom, 18)
+                    }
+
+                    fieldLabel(macrosSectionLabel)
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 10),
                                         GridItem(.flexible(), spacing: 10)], spacing: 10) {
                         macroField(caption: "Калории", placeholder: "254", text: $nav.draft.kcal,
@@ -77,7 +93,7 @@ struct CreateFoodScreen: View {
             }
             .scrollDismissesKeyboard(.interactively)
 
-            PrimaryButton(title: isEditing ? "Сохранить изменения" : "Сохранить блюдо") { save() }
+            PrimaryButton(title: saveTitle) { save() }
                 .padding(.horizontal, 20)
                 .padding(.top, 12)
                 .padding(.bottom, 30)
@@ -89,13 +105,83 @@ struct CreateFoodScreen: View {
         }
     }
 
+    // MARK: - Тексты
+
+    private var title: String {
+        switch kind {
+        case .ownDish: return "Своё блюдо"
+        case .baseProduct: return "Новый продукт"
+        case .edit: return "Редактировать продукт"
+        }
+    }
+
+    private var subtitle: String {
+        switch kind {
+        case .ownDish:
+            return "Видно только вам — в разделе «Своя еда». В общий поиск не попадёт."
+        case .baseProduct(let barcode):
+            if let barcode {
+                return "Штрих-код \(barcode) не нашёлся. Заполните карточку — продукт попадёт в общий список, и в следующий раз сканер его узнает."
+            }
+            return "Продукт попадёт в общий список — его будет видно в поиске, а не только в «Своей еде»."
+        case .edit:
+            return "Исправьте значения — они сохранятся и будут применяться дальше."
+        }
+    }
+
+    private var namePlaceholder: String {
+        if case .ownDish = kind { return "Мамины котлетки" }
+        return "Например, «Творог 5%»"
+    }
+
+    /// Для продукта, который уже считается в штуках или стаканах, вторая вкладка
+    /// называется по его единице, а не «Порция».
+    private var portionChipTitle: String {
+        switch nav.draft.unit {
+        case .piece: return "Штуки"
+        case .glass: return "Стаканы"
+        case .pack: return "Пачки"
+        case .jar: return "Баночки"
+        case .slice: return "Ломтики"
+        case .portion, .none: return "Порция"
+        }
+    }
+
+    private var weightFieldLabel: String {
+        switch nav.draft.unit {
+        case .piece: return "Вес 1 шт, г"
+        case .glass: return "Объём 1 стакана, г"
+        case .pack: return "Вес 1 пачки, г"
+        case .jar: return "Вес 1 баночки, г"
+        case .slice: return "Вес 1 ломтика, г"
+        case .portion, .none: return "Вес порции, г"
+        }
+    }
+
+    private var macrosSectionLabel: String {
+        isPortionMode ? "На всю порцию" : "На 100 г"
+    }
+
+    private var saveTitle: String {
+        switch kind {
+        case .ownDish: return "Сохранить блюдо"
+        case .baseProduct: return "Сохранить продукт"
+        case .edit: return "Сохранить изменения"
+        }
+    }
+
     private var hint: String {
+        guard isPortionMode else {
+            return "Значения на 100 г — как на упаковке. Сколько съели, укажете при добавлении."
+        }
         if let kcal = nav.draft.kcal.ruDouble, let grams = nav.draft.grams.ruDouble, grams > 0 {
             let per100 = Int((kcal / grams * 100).rounded())
             return "Это \(per100) ккал на 100 г. Порцию можно менять при добавлении."
         }
         return "Укажите вес и калорийность порции — приложение само пересчитает на 100 г."
     }
+
+    // MARK: - Вёрстка полей
 
     private func fieldLabel(_ text: String) -> some View {
         Text(text)
@@ -118,29 +204,55 @@ struct CreateFoodScreen: View {
         .background(background, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 
-    private func save() {
-        let draft = nav.draft
-        let grams = max(1, draft.grams.ruDouble ?? 100)
-        let name = draft.name.trimmingCharacters(in: .whitespacesAndNewlines)
-        let kcal = draft.kcal.ruDouble ?? 0
-        let protein = draft.protein.ruDouble ?? 0
-        let fat = draft.fat.ruDouble ?? 0
-        let carbs = draft.carbs.ruDouble ?? 0
+    // MARK: - Действия
 
-        if let id = nav.editingFoodID {
-            store.updateFood(id: id, name: name, portionGrams: grams,
-                             kcal: kcal, protein: protein, fat: fat, carbs: carbs)
-            nav.editingFoodID = nil
+    private func goBack() {
+        switch kind {
+        case .edit: nav.screen = .foods
+        // Со скана возвращаемся в поиск, а не обратно в камеру.
+        case .ownDish, .baseProduct: nav.screen = .add
+        }
+    }
+
+    private func values() -> AppStore.FoodValues {
+        let draft = nav.draft
+        return AppStore.FoodValues(
+            name: draft.name.trimmingCharacters(in: .whitespacesAndNewlines),
+            mode: draft.mode,
+            portionGrams: draft.grams.ruDouble ?? 100,
+            kcal: draft.kcal.ruDouble ?? 0,
+            protein: draft.protein.ruDouble ?? 0,
+            fat: draft.fat.ruDouble ?? 0,
+            carbs: draft.carbs.ruDouble ?? 0,
+            unit: draft.unit
+        )
+    }
+
+    private func save() {
+        let payload = values()
+
+        switch kind {
+        case .edit(let id):
+            store.updateFood(id: id, values: payload)
             nav.draft = .empty
             nav.screen = .foods
-            nav.flash("«\(name.isEmpty ? "Продукт" : name)» обновлено")
-        } else {
-            let created = store.createOwnFood(name: name, portionGrams: grams,
-                                              kcal: kcal, protein: protein, fat: fat, carbs: carbs)
+            nav.flash("«\(payload.name.isEmpty ? "Продукт" : payload.name)» обновлено")
+
+        case .ownDish:
+            let created = store.createFood(payload, isOwn: true)
             nav.draft = .empty
             nav.addTab = .own
             nav.screen = .add
             nav.flash("«\(created.name)» в вашей еде")
+
+        case .baseProduct(let barcode):
+            let created = store.createFood(payload, isOwn: false, barcode: barcode)
+            nav.draft = .empty
+            // Сразу открываем карточку — обычно продукт заводят, чтобы тут же его съесть.
+            nav.openProduct(created,
+                            source: barcode.map { "Штрих-код \($0)" } ?? "Новый продукт",
+                            returnTo: .add)
+            nav.flash("«\(created.name)» добавлен в базу")
         }
     }
 }

@@ -133,8 +133,13 @@ struct ScanScreen: View {
 
     private func handle(code: String) {
         guard let food = store.food(withBarcode: code) else {
-            status = "Код \(code) не найден — введите продукт вручную"
-            scanner.clearCode()
+            // Неизвестный код — сразу предлагаем завести продукт в общую базу,
+            // штрих-код сохранится вместе с ним.
+            status = "Код \(code) не найден — заполните карточку продукта"
+            scanner.stop()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                nav.openNewProductForm(barcode: code)
+            }
             return
         }
         status = "Найдено: \(food.name)"
