@@ -72,6 +72,8 @@ enum FoodFormKind: Hashable {
 /// Fields of the food form. Kept as strings so the text fields behave while half-typed.
 struct FoodDraft: Hashable {
     var name = ""
+    /// Производитель — показывается в списке продуктов. Для своих блюд не спрашивается.
+    var manufacturer = ""
     /// Вес одной порции, только в режиме `.portion`.
     var grams = ""
     var kcal = ""
@@ -84,10 +86,15 @@ struct FoodDraft: Hashable {
 
     static let empty = FoodDraft()
 
+    /// Служебные подписи — их не показываем как «производителя».
+    private static let placeholderBrands: Set<String> = ["Своё блюдо", "Добавлено вами"]
+
     /// Pre-fills the form with a product's values, in the mode that product uses.
     static func editing(_ food: Food) -> FoodDraft {
+        let brand = placeholderBrands.contains(food.brand) ? "" : food.brand
         guard let unit = food.unit else {
             return FoodDraft(name: food.name,
+                             manufacturer: brand,
                              grams: "",
                              kcal: Ru.number(food.kcal),
                              protein: Ru.number(food.protein),
@@ -99,6 +106,7 @@ struct FoodDraft: Hashable {
         let grams = food.unitWeight ?? (food.defaultGrams > 0 ? food.defaultGrams : 100)
         let m = grams / 100
         return FoodDraft(name: food.name,
+                         manufacturer: brand,
                          grams: Ru.number(grams),
                          kcal: Ru.number(food.kcal * m),
                          protein: Ru.number(food.protein * m),
