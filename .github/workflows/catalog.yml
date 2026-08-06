@@ -1,0 +1,84 @@
+name: Каталог продуктов
+
+# Правите catalog/catalog.csv (или .xlsx) → пуш в main → JSON пересобирается,
+# коммитится обратно в репозиторий и публикуется на GitHub Pages.
+# Приложения подхватят его при следующем запуске.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "catalog/**"
+      - "tools/build_catalog.py"
+      - ".github/workflows/catalog.yml"
+  pull_request:
+    paths:
+      - "catalog/**"
+      - "tools/build_catalog.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: catalog
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Поддержка xlsx
+        run: pip install --quiet openpyxl
+
+      # В пулл-реквесте только проверяем таблицу, ничего не публикуем.
+      - name: Проверить таблицу
+        if: github.event_name == 'pull_request'
+        run: python3 tools/build_catalog.py --check
+
+      - name: Собрать каталог
+        if: github.event_name != 'pull_request'
+        run: python3 tools/build_catalog.py
+
+      - name: Закоммитить снимок для бандла
+        if: github.event_name != 'pull_request'
+        run: |
+          if [ -n "$(git status --porcelain ios/KBZHU/Resources/catalog.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add ios/KBZHU/Resources/catalog.json
+            git commit -m "Каталог: пересобран из таблицы"
+            git push
+          else
+            echo "Снимок не изменился"
+          fi
+
+      - name: Подготовить публикацию
+        if: github.event_name != 'pull_request'
+        run: |
+          mkdir -p public
+          cp ios/KBZHU/Resources/catalog.json public/catalog.json
+
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
+        with:
+          path: public
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

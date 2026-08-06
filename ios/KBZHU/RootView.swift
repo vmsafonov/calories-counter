@@ -45,11 +45,15 @@ struct RootView: View {
         .animation(.easeOut(duration: 0.25), value: nav.toast)
         .environmentObject(store)
         .environmentObject(nav)
+        .task {
+            await CatalogService.refreshIfNeeded(store: store)
+        }
         .onChange(of: scenePhase) { _, phase in
             switch phase {
             case .active:
                 // A day may have passed while the app was in the background.
                 if Cal.dayOffset(nav.day) > 0 { nav.day = Cal.today }
+                Task { await CatalogService.refreshIfNeeded(store: store) }
             case .background, .inactive:
                 store.saveNow()
             @unknown default:
