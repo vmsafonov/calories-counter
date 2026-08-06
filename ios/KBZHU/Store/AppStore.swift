@@ -212,14 +212,9 @@ final class AppStore: ObservableObject {
         let name = values.name.isEmpty ? (isOwn ? "Моё блюдо" : "Новый продукт") : values.name
         let grams = max(1, values.portionGrams)
         let isPortion = values.mode == .portion
-        let brand: String
-        if isOwn {
-            brand = "Своё блюдо"
-        } else if let barcode, !barcode.isEmpty {
-            brand = "Штрих-код \(barcode)"
-        } else {
-            brand = "Добавлено вами"
-        }
+        // Штрих-код хранится в продукте, чтобы сканер узнал его в следующий раз,
+        // но в списках не показывается — там он только мусорит.
+        let brand = isOwn ? "Своё блюдо" : "Добавлено вами"
         let food = Food(name: name,
                         brand: brand,
                         kcal: per100.kcal, protein: per100.protein,
