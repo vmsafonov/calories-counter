@@ -1,0 +1,158 @@
+{
+  "revision": "72f392ff8c01",
+  "generatedAt": "2026-08-06T19:52:23+00:00",
+  "products": [
+    {
+      "id": "ovsyanaya-kasha-na-vode-nordic",
+      "name": "Овсяная каша на воде",
+      "manufacturer": "Nordic",
+      "kcal": 88.0,
+      "protein": 3.0,
+      "fat": 1.7,
+      "carbs": 15.0,
+      "defaultGrams": 250.0,
+      "unit": "порция",
+      "unitGrams": 250.0
+    },
+    {
+      "id": "kurinaya-grudka-zapechennaya-domashnee",
+      "name": "Куриная грудка, запечённая",
+      "manufacturer": "Домашнее",
+      "kcal": 165.0,
+      "protein": 31.0,
+      "fat": 3.6,
+      "carbs": 0.0,
+      "defaultGrams": 150.0
+    },
+    {
+      "id": "tvorog-5-prostokvashino",
+      "name": "Творог 5%",
+      "manufacturer": "Простоквашино",
+      "kcal": 121.0,
+      "protein": 17.0,
+      "fat": 5.0,
+      "carbs": 3.0,
+      "defaultGrams": 180.0,
+      "unit": "пачка",
+      "unitGrams": 180.0,
+      "barcode": "4600682032045"
+    },
+    {
+      "id": "banan-svezhiy",
+      "name": "Банан",
+      "manufacturer": "Свежий",
+      "kcal": 89.0,
+      "protein": 1.1,
+      "fat": 0.3,
+      "carbs": 23.0,
+      "defaultGrams": 120.0,
+      "unit": "шт",
+      "unitGrams": 120.0
+    },
+    {
+      "id": "grechka-otvarnaya-domashnee",
+      "name": "Гречка отварная",
+      "manufacturer": "Домашнее",
+      "kcal": 110.0,
+      "protein": 4.2,
+      "fat": 1.1,
+      "carbs": 21.0,
+      "defaultGrams": 200.0
+    },
+    {
+      "id": "latte-na-ovsyanom-kofeynya",
+      "name": "Латте на овсяном",
+      "manufacturer": "Кофейня",
+      "kcal": 52.0,
+      "protein": 1.6,
+      "fat": 2.0,
+      "carbs": 6.6,
+      "defaultGrams": 300.0,
+      "unit": "стакан",
+      "unitGrams": 300.0
+    },
+    {
+      "id": "roll-s-kuricey-i-sousom-cezar-fastfud",
+      "name": "Ролл с курицей и соусом цезарь",
+      "manufacturer": "Фастфуд",
+      "kcal": 214.0,
+      "protein": 11.0,
+      "fat": 9.0,
+      "carbs": 22.0,
+      "defaultGrams": 210.0,
+      "unit": "шт",
+      "unitGrams": 210.0,
+      "barcode": "4680123456789"
+    },
+    {
+      "id": "yayco-varenoe",
+      "name": "Яйцо варёное",
+      "manufacturer": "",
+      "kcal": 155.0,
+      "protein": 13.0,
+      "fat": 11.0,
+      "carbs": 1.1,
+      "defaultGrams": 110.0,
+      "unit": "шт",
+      "unitGrams": 55.0
+    },
+    {
+      "id": "hleb-celnozernovoy-rizhskiy",
+      "name": "Хлеб цельнозерновой",
+      "manufacturer": "Рижский",
+      "kcal": 230.0,
+      "protein": 9.0,
+      "fat": 3.0,
+      "carbs": 41.0,
+      "defaultGrams": 60.0,
+      "unit": "ломтик",
+      "unitGrams": 30.0,
+      "barcode": "4607091380019"
+    },
+    {
+      "id": "losos-slabosolenyy",
+      "name": "Лосось слабосолёный",
+      "manufacturer": "",
+      "kcal": 202.0,
+      "protein": 22.0,
+      "fat": 12.0,
+      "carbs": 0.0,
+      "defaultGrams": 100.0
+    },
+    {
+      "id": "grecheskiy-yogurt-2-selo-zelenoe",
+      "name": "Греческий йогурт 2%",
+      "manufacturer": "Село Зелёное",
+      "kcal": 66.0,
+      "protein": 9.0,
+      "fat": 2.0,
+      "carbs": 3.6,
+      "defaultGrams": 150.0,
+      "unit": "баночка",
+      "unitGrams": 150.0,
+      "barcode": "4620013532016"
+    },
+    {
+      "id": "syrniki-tvorozhnye-domashnee",
+      "name": "Сырники творожные",
+      "manufacturer": "Домашнее",
+      "kcal": 184.0,
+      "protein": 12.0,
+      "fat": 8.0,
+      "carbs": 16.0,
+      "defaultGrams": 160.0,
+      "unit": "шт",
+      "unitGrams": 80.0
+    },
+    {
+      "id": "salat-ovoschnoy-s-maslom",
+      "name": "Салат овощной с маслом",
+      "manufacturer": "",
+      "kcal": 78.0,
+      "protein": 1.2,
+      "fat": 6.0,
+      "carbs": 4.5,
+      "defaultGrams": 180.0
+    }
+  ]
+}

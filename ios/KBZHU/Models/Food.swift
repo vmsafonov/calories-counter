@@ -52,11 +52,59 @@ struct Food: Codable, Identifiable, Hashable {
     var unitWeight: Double?
     /// User-created dish — lives in «Своя еда», never shown in the shared search.
     var isOwn: Bool = false
-    /// The user corrected the nutrition values of a stock product.
+    /// Пользователь исправил значения продукта. С этого момента обновления общего
+    /// каталога его не трогают — на устройстве остаётся то, что он записал сам.
     var isEdited: Bool = false
     var barcode: String?
+    /// Идентификатор в общем каталоге. `nil` — продукт заведён на устройстве.
+    var catalogID: String?
+    /// Продукт пропал из каталога: в списках не показывается, но старые записи
+    /// дневника продолжают на него ссылаться.
+    var isRetired: Bool = false
 
     var gramsPerUnit: Double { unitWeight ?? defaultGrams }
+
+    /// Читается и старая запись без `catalogID`/`isRetired` — иначе обновление приложения
+    /// сделало бы сохранённый файл нечитаемым.
+    init(from decoder: Decoder) throws {
+        let box = try decoder.container(keyedBy: CodingKeys.self)
+        id = try box.decodeIfPresent(UUID.self, forKey: .id) ?? UUID()
+        name = try box.decode(String.self, forKey: .name)
+        brand = try box.decodeIfPresent(String.self, forKey: .brand) ?? ""
+        kcal = try box.decodeIfPresent(Double.self, forKey: .kcal) ?? 0
+        protein = try box.decodeIfPresent(Double.self, forKey: .protein) ?? 0
+        fat = try box.decodeIfPresent(Double.self, forKey: .fat) ?? 0
+        carbs = try box.decodeIfPresent(Double.self, forKey: .carbs) ?? 0
+        defaultGrams = try box.decodeIfPresent(Double.self, forKey: .defaultGrams) ?? 100
+        unit = try box.decodeIfPresent(FoodUnit.self, forKey: .unit)
+        unitWeight = try box.decodeIfPresent(Double.self, forKey: .unitWeight)
+        isOwn = try box.decodeIfPresent(Bool.self, forKey: .isOwn) ?? false
+        isEdited = try box.decodeIfPresent(Bool.self, forKey: .isEdited) ?? false
+        barcode = try box.decodeIfPresent(String.self, forKey: .barcode)
+        catalogID = try box.decodeIfPresent(String.self, forKey: .catalogID)
+        isRetired = try box.decodeIfPresent(Bool.self, forKey: .isRetired) ?? false
+    }
+
+    init(id: UUID = UUID(), name: String, brand: String, kcal: Double, protein: Double,
+         fat: Double, carbs: Double, defaultGrams: Double, unit: FoodUnit? = nil,
+         unitWeight: Double? = nil, isOwn: Bool = false, isEdited: Bool = false,
+         barcode: String? = nil, catalogID: String? = nil, isRetired: Bool = false) {
+        self.id = id
+        self.name = name
+        self.brand = brand
+        self.kcal = kcal
+        self.protein = protein
+        self.fat = fat
+        self.carbs = carbs
+        self.defaultGrams = defaultGrams
+        self.unit = unit
+        self.unitWeight = unitWeight
+        self.isOwn = isOwn
+        self.isEdited = isEdited
+        self.barcode = barcode
+        self.catalogID = catalogID
+        self.isRetired = isRetired
+    }
 
     /// «Nordic · 88 ккал / 100 г · Б 3 Ж 1.7 У 15»
     var listSubtitle: String {
