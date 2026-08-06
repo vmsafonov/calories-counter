@@ -40,6 +40,18 @@ struct CreateFoodScreen: View {
                         .background(Theme.softCard, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
                         .padding(.bottom, 18)
 
+                    if showsManufacturer {
+                        fieldLabel("Производитель")
+                        TextField("Например, Простоквашино", text: $nav.draft.manufacturer)
+                            .golos(500, 15)
+                            .foregroundStyle(Theme.ink)
+                            .textFieldStyle(.plain)
+                            .padding(.horizontal, 16)
+                            .frame(height: 52)
+                            .background(Theme.softCard, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                            .padding(.bottom, 18)
+                    }
+
                     fieldLabel("Как вводите данные")
                     HStack(spacing: 6) {
                         Chip(title: "На порцию", isOn: isPortionMode, height: 44,
@@ -156,6 +168,15 @@ struct CreateFoodScreen: View {
         }
     }
 
+    /// У своего блюда производителя нет — там это «мамины котлетки».
+    private var showsManufacturer: Bool {
+        switch kind {
+        case .ownDish: return false
+        case .baseProduct: return true
+        case .edit(let id): return !(store.food(id)?.isOwn ?? true)
+        }
+    }
+
     private var namePlaceholder: String {
         switch kind {
         case .ownDish: return "Мамины котлетки"
@@ -227,6 +248,7 @@ struct CreateFoodScreen: View {
         let draft = nav.draft
         return AppStore.FoodValues(
             name: draft.name.trimmingCharacters(in: .whitespacesAndNewlines),
+            manufacturer: draft.manufacturer,
             mode: draft.mode,
             portionGrams: draft.grams.ruDouble ?? 100,
             kcal: draft.kcal.ruDouble ?? 0,

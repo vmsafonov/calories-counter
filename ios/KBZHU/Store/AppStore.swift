@@ -181,6 +181,8 @@ final class AppStore: ObservableObject {
     /// Values as typed in the food form: either per 100 g, or per one portion of `portionGrams`.
     struct FoodValues {
         var name: String
+        /// Производитель. Показывается в списке продуктов; для своих блюд не используется.
+        var manufacturer: String = ""
         var mode: FoodEntryMode
         /// Weight of one portion; ignored in `.grams` mode.
         var portionGrams: Double
@@ -212,9 +214,10 @@ final class AppStore: ObservableObject {
         let name = values.name.isEmpty ? (isOwn ? "Моё блюдо" : "Новый продукт") : values.name
         let grams = max(1, values.portionGrams)
         let isPortion = values.mode == .portion
-        // Штрих-код хранится в продукте, чтобы сканер узнал его в следующий раз,
-        // но в списках не показывается — там он только мусорит.
-        let brand = isOwn ? "Своё блюдо" : "Добавлено вами"
+        // В списке продуктов под названием показывается производитель. Штрих-код там не нужен —
+        // он хранится в самом продукте, чтобы сканер узнал упаковку в следующий раз.
+        let manufacturer = values.manufacturer.trimmingCharacters(in: .whitespacesAndNewlines)
+        let brand = isOwn ? "Своё блюдо" : (manufacturer.isEmpty ? "Добавлено вами" : manufacturer)
         let food = Food(name: name,
                         brand: brand,
                         kcal: per100.kcal, protein: per100.protein,
@@ -235,6 +238,10 @@ final class AppStore: ObservableObject {
         let per100 = values.per100
         var food = data.foods[index]
         food.name = values.name.isEmpty ? food.name : values.name
+        if !food.isOwn {
+            // Пустое поле — просто убирает производителя, а не подставляет заглушку.
+            food.brand = values.manufacturer.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
         food.kcal = per100.kcal
         food.protein = per100.protein
         food.fat = per100.fat
