@@ -47,6 +47,8 @@ enum Theme {
     // Scanner
     static let scanBackdrop = Color(hex: 0x141715)
     static let scanLine = Color(hex: 0x4ADE80)
+    /// Статус «код не найден».
+    static let scanWarning = Color(hex: 0xF0B45C)
 
     /// Ink at a given alpha — the prototype's `rgba(26,29,27,.xx)`.
     static func ink(_ opacity: Double) -> Color { Color(hex: 0x1A1D1B, opacity: opacity) }

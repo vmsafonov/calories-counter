@@ -19,9 +19,7 @@ struct FoodsScreen: View {
                     .padding(.bottom, 20)
 
                 Button {
-                    nav.editingFoodID = nil
-                    nav.draft = .empty
-                    nav.screen = .createFood
+                    nav.openOwnDishForm()
                 } label: {
                     HStack(spacing: 12) {
                         Text("+")
@@ -79,9 +77,7 @@ struct FoodsScreen: View {
     }
 
     private func startEditing(_ food: Food) {
-        nav.editingFoodID = food.id
-        nav.draft = .editing(food)
-        nav.screen = .createFood
+        nav.openEditForm(food)
     }
 
     private func ownRow(_ food: Food) -> some View {

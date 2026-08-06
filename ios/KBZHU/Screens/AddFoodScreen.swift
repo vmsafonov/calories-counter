@@ -136,9 +136,7 @@ struct AddFoodScreen: View {
 
     private var createOwnCard: some View {
         Button {
-            nav.editingFoodID = nil
-            nav.draft = .empty
-            nav.screen = .createFood
+            nav.openOwnDishForm()
         } label: {
             HStack(spacing: 12) {
                 Text("+")
