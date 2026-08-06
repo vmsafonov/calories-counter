@@ -212,8 +212,16 @@ final class AppStore: ObservableObject {
         let name = values.name.isEmpty ? (isOwn ? "Моё блюдо" : "Новый продукт") : values.name
         let grams = max(1, values.portionGrams)
         let isPortion = values.mode == .portion
+        let brand: String
+        if isOwn {
+            brand = "Своё блюдо"
+        } else if let barcode, !barcode.isEmpty {
+            brand = "Штрих-код \(barcode)"
+        } else {
+            brand = "Добавлено вами"
+        }
         let food = Food(name: name,
-                        brand: isOwn ? "Своё блюдо" : "",
+                        brand: brand,
                         kcal: per100.kcal, protein: per100.protein,
                         fat: per100.fat, carbs: per100.carbs,
                         defaultGrams: isPortion ? grams.rounded() : 100,
@@ -240,8 +248,8 @@ final class AppStore: ObservableObject {
         switch values.mode {
         case .portion:
             let grams = max(1, values.portionGrams).rounded()
-            // Keep «шт» / «стакан» if the product already had one.
-            food.unit = food.unit ?? values.unit ?? .portion
+            // Единица берётся из формы — её выбирают чипами «порция / шт / стакан…».
+            food.unit = values.unit ?? .portion
             food.unitWeight = grams
             food.defaultGrams = grams
         case .grams:

@@ -9,6 +9,7 @@ struct ScanScreen: View {
     @EnvironmentObject private var nav: Nav
     @StateObject private var scanner = BarcodeScanner()
     @State private var status: String?
+    @State private var isMiss = false
     @State private var linePhase: CGFloat = -70
 
     private var statusText: String {
@@ -55,7 +56,7 @@ struct ScanScreen: View {
                     VStack(spacing: 6) {
                         Text(statusText)
                             .golos(600, 16)
-                            .foregroundStyle(.white)
+                            .foregroundStyle(isMiss ? Theme.scanWarning : Color.white)
                             .multilineTextAlignment(.center)
                         Text("Наведите камеру на упаковку")
                             .golos(400, 13)
@@ -67,9 +68,11 @@ struct ScanScreen: View {
                 Spacer()
 
                 Button {
-                    close()
+                    // Не «просто назад»: сразу открываем форму нового продукта, без кода.
+                    scanner.stop()
+                    nav.openNewProductForm(barcode: nil)
                 } label: {
-                    Text("Ввести вручную")
+                    Text("Добавить продукт вручную")
                         .golos(500, 14.5)
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
@@ -135,9 +138,10 @@ struct ScanScreen: View {
         guard let food = store.food(withBarcode: code) else {
             // Неизвестный код — сразу предлагаем завести продукт в общую базу,
             // штрих-код сохранится вместе с ним.
-            status = "Код \(code) не найден — заполните карточку продукта"
+            status = "Код не найден в базе"
+            isMiss = true
             scanner.stop()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.1) {
                 nav.openNewProductForm(barcode: code)
             }
             return

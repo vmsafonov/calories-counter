@@ -34,7 +34,7 @@ input,button{font-family:inherit}
 
 <!-- 1a interactive prototype -->
 <div id="1a" data-screen-label="Прототип" style="flex:none;display:flex;flex-direction:column;gap:10px;scroll-margin-top:16px">
-<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.55)"><a href="#1a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(26,29,27,.08);color:#1A1D1B;border-radius:5px;text-decoration:none">1a</a>Интерактивный прототип, 15 экранов — можно кликать</div>
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.55)"><a href="#1a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(26,29,27,.08);color:#1A1D1B;border-radius:5px;text-decoration:none">1a</a>Интерактивный прототип, 16 экранов — можно кликать</div>
 <div style="display:flex;gap:20px;align-items:flex-start">
 
 <div style="display:flex;flex-direction:column;gap:5px;width:168px;padding-top:6px">
@@ -281,9 +281,9 @@ input,button{font-family:inherit}
 </sc-for>
 </div>
 </div>
-<div style="text-align:center"><div style="font:600 16px/1.3 'Golos Text',sans-serif;color:#fff">{{ scanStatus }}</div><div style="font:400 13px/1.4 'Golos Text',sans-serif;color:rgba(255,255,255,.5);margin-top:6px">Наведите камеру на упаковку</div></div>
+<div style="text-align:center"><div style="font:600 16px/1.3 'Golos Text',sans-serif;color:{{ scanStatusColor }}">{{ scanStatus }}</div><div style="font:400 13px/1.4 'Golos Text',sans-serif;color:rgba(255,255,255,.5);margin-top:6px">Наведите камеру на упаковку</div></div>
 </div>
-<div style="flex:none;padding:0 24px 42px"><button onClick="{{ goAdd }}" style="width:100%;height:52px;border:1px solid rgba(255,255,255,.2);border-radius:16px;background:transparent;color:#fff;font:500 14.5px/1 'Golos Text',sans-serif;cursor:pointer">Ввести вручную</button></div>
+<div style="flex:none;padding:0 24px 42px"><button onClick="{{ manualFromScan }}" style="width:100%;height:52px;border:1px solid rgba(255,255,255,.2);border-radius:16px;background:transparent;color:#fff;font:500 14.5px/1 'Golos Text',sans-serif;cursor:pointer">Добавить продукт вручную</button></div>
 </div>
 </sc-if>
 
@@ -601,12 +601,29 @@ input,button{font-family:inherit}
 <p style="margin:0 0 22px;font:400 13px/1.5 'Golos Text',sans-serif;color:rgba(26,29,27,.48);text-wrap:pretty">{{ createSub }}</p>
 
 <div style="font:500 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:8px">Название</div>
-<input value="{{ dName }}" onChange="{{ onDName }}" placeholder="Мамины котлетки" style="width:100%;height:52px;padding:0 16px;border:0;border-radius:16px;background:#F4F6F3;outline:none;font:500 15px/1 'Golos Text',sans-serif;color:#1A1D1B;margin-bottom:18px">
+<input value="{{ dName }}" onChange="{{ onDName }}" placeholder="{{ namePlaceholder }}" style="width:100%;height:52px;padding:0 16px;border:0;border-radius:16px;background:#F4F6F3;outline:none;font:500 15px/1 'Golos Text',sans-serif;color:#1A1D1B;margin-bottom:18px">
 
-<div style="font:500 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:8px">Вес порции, г</div>
-<input value="{{ dG }}" onChange="{{ onDG }}" placeholder="120" inputmode="numeric" style="width:100%;height:52px;padding:0 16px;border:0;border-radius:16px;background:#F4F6F3;outline:none;font:600 15px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums;margin-bottom:18px">
+<div style="font:500 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:8px">Как вводите данные</div>
+<div style="display:flex;gap:6px;margin-bottom:18px">
+<sc-for list="{{ measureChips }}" as="mch" hint-placeholder-count="2">
+<button onClick="{{ mch.set }}" style="flex:1;height:44px;border:0;border-radius:13px;cursor:pointer;background:{{ mch.bg }};color:{{ mch.fg }};font:600 13px/1 'Golos Text',sans-serif">{{ mch.label }}</button>
+</sc-for>
+</div>
 
-<div style="font:500 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:8px">На всю порцию</div>
+<sc-if value="{{ isPortionDraft }}" hint-placeholder-val="{{ true }}">
+<div style="padding:16px 18px;border-radius:18px;background:#F4F6F3;margin-bottom:18px">
+<div style="font:500 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:10px">Порция называется</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">
+<sc-for list="{{ unitNameChips }}" as="un" hint-placeholder-count="5">
+<button onClick="{{ un.set }}" style="height:38px;padding:0 13px;border:0;border-radius:11px;cursor:pointer;background:{{ un.bg }};color:{{ un.fg }};font:600 12.5px/1 'Golos Text',sans-serif">{{ un.label }}</button>
+</sc-for>
+</div>
+<div style="font:500 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:8px">Сколько весит одна порция, г</div>
+<input value="{{ dG }}" onChange="{{ onDG }}" placeholder="120" inputmode="numeric" style="width:100%;height:52px;padding:0 16px;border:0;border-radius:16px;background:#fff;outline:none;font:600 15px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums">
+</div>
+</sc-if>
+
+<div style="font:500 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:8px">{{ valuesCaption }}</div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
 <div style="border-radius:16px;background:#F4F6F3;padding:12px 14px"><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-bottom:8px">Калории</div><input value="{{ dK }}" onChange="{{ onDK }}" placeholder="254" inputmode="numeric" style="width:100%;border:0;background:transparent;outline:none;font:700 19px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums"></div>
 <div style="border-radius:16px;background:#E9F1FA;padding:12px 14px"><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(46,111,168,.75);margin-bottom:8px">Белки, г</div><input value="{{ dP }}" onChange="{{ onDP }}" placeholder="19" inputmode="numeric" style="width:100%;border:0;background:transparent;outline:none;font:700 19px/1 'Golos Text',sans-serif;color:#2E6FA8;font-variant-numeric:tabular-nums"></div>
@@ -784,7 +801,8 @@ class Component extends DCLogic {
       {name:'Мамины котлетки', brand:'Своё блюдо', k:212, p:16, f:14, c:6, def:120, unit:'шт', pw:60, own:true},
       {name:'Смузи банан-шпинат', brand:'Своё блюдо', k:64, p:2, f:0.6, c:13, def:350, unit:'стакан', pw:350, own:true}
     ],
-    draft: {name:'', g:'', k:'', p:'', f:'', c:''},
+    draft: {name:'', measure:'portion', unit:'порция', g:'', k:'', p:'', f:'', c:''},
+    dbExtra: [], draftTarget: 'my', barcode: '',
     log: PAST.concat([
       e_('Завтрак','Овсяная каша на воде',250,0),
       e_('Завтрак','Латте на овсяном',300,0),
@@ -801,7 +819,7 @@ class Component extends DCLogic {
   }
 
   foodBy(n) {
-    const base = f[n] || this.state.myFoods.filter(x => x.name === n)[0] || null;
+    const base = f[n] || this.state.dbExtra.filter(x => x.name === n)[0] || this.state.myFoods.filter(x => x.name === n)[0] || null;
     if (!base) return null;
     const ed = this.state.edits[n];
     return ed ? Object.assign({}, base, ed, {edited: true}) : base;
@@ -862,33 +880,51 @@ class Component extends DCLogic {
     this.flash('«' + name + '» добавлено');
   };
 
+  blankDraft = () => ({name:'', measure:'portion', unit:'порция', g:'', k:'', p:'', f:'', c:''});
+
   saveDraft = () => {
     const s0 = this.state, dr = s0.draft;
-    const g = Math.max(1, parseFloat(dr.g) || 100);
-    const n = (dr.name || '').trim() || 'Моё блюдо';
+    const portion = (dr.measure || 'portion') === 'portion';
+    const g = portion ? Math.max(1, parseFloat(dr.g) || 100) : 100;
+    const n = (dr.name || '').trim() || (s0.draftTarget === 'base' ? 'Новый продукт' : 'Моё блюдо');
     const per = (v) => Math.round(((parseFloat(v) || 0) / g * 100) * 10) / 10;
     const vals = {k: per(dr.k), p: per(dr.p), f: per(dr.f), c: per(dr.c)};
+    const shape = portion
+      ? {def: Math.round(g), unit: dr.unit || 'порция', pw: Math.round(g)}
+      : {def: 100, unit: null, pw: null};
+
     if (s0.editName) {
       const old = s0.editName;
       this.setState(s => {
         const ed = Object.assign({}, s.edits);
-        ed[old] = Object.assign({}, vals, {def: Math.round(g)});
-        const my = s.myFoods.map(x => x.name === old ? Object.assign({}, x, vals, {def: Math.round(g), pw: x.unit === 'порция' ? Math.round(g) : x.pw}) : x);
-        return {edits: ed, myFoods: my, editName: null, draft: {name:'', g:'', k:'', p:'', f:'', c:''}, screen: 'foods'};
+        ed[old] = Object.assign({}, vals, shape);
+        const upd = (x) => x.name === old ? Object.assign({}, x, vals, shape) : x;
+        return {edits: ed, myFoods: s.myFoods.map(upd), dbExtra: s.dbExtra.map(upd), editName: null, draft: this.blankDraft(), screen: 'foods'};
       });
       this.flash('«' + n + '» обновлено');
       return;
     }
-    const item = {name: n, brand: 'Своё блюдо', k: vals.k, p: vals.p, f: vals.f, c: vals.c, def: Math.round(g), unit: 'порция', pw: Math.round(g), own: true};
-    this.setState(s => ({myFoods: s.myFoods.concat([item]), draft: {name:'', g:'', k:'', p:'', f:'', c:''}, screen:'add', tab:'my'}));
+    if (s0.draftTarget === 'base') {
+      const item = Object.assign({name: n, brand: s0.barcode ? 'Штрих-код ' + s0.barcode : 'Добавлено вами'}, vals, shape);
+      this.setState(s => ({dbExtra: s.dbExtra.concat([item]), draft: this.blankDraft(), draftTarget: 'my', barcode: '', query: '', tab: 'search'}));
+      this.flash('«' + n + '» добавлен в базу');
+      this.pick(item, 'Новый продукт');
+      return;
+    }
+    const item = Object.assign({name: n, brand: 'Своё блюдо', own: true}, vals, shape);
+    this.setState(s => ({myFoods: s.myFoods.concat([item]), draft: this.blankDraft(), screen:'add', tab:'my', query: ''}));
     this.flash('«' + n + '» в вашей еде');
   };
 
   startEdit = (item) => {
-    const g = item.def || item.pw || 100, m = g / 100, rr = (v) => String(Math.round(v * 10) / 10);
-    this.setState({editName: item.name, screen: 'create',
-      draft: {name: item.name, g: String(g), k: rr(item.k * m), p: rr(item.p * m), f: rr(item.f * m), c: rr(item.c * m)}});
+    const portion = !!item.unit, base = portion ? (item.pw || item.def || 100) : 100;
+    const m = base / 100, rr = (v) => String(Math.round(v * 10) / 10);
+    this.setState({editName: item.name, screen: 'create', draftTarget: item.own ? 'my' : 'base', barcode: '',
+      draft: {name: item.name, measure: portion ? 'portion' : 'gram', unit: item.unit || 'порция', g: String(base),
+        k: rr(item.k * m), p: rr(item.p * m), f: rr(item.f * m), c: rr(item.c * m)}});
   };
+
+  newFromScan = (code) => this.setState({screen: 'create', editName: null, draftTarget: 'base', barcode: code, draft: this.blankDraft()});
 
   setNorm = (k) => (ev) => { const v = ev.target.value; this.setState(s => { const d = Object.assign({}, s.normDraft); d[k] = v; return {normDraft: d}; }); };
 
@@ -900,12 +936,13 @@ class Component extends DCLogic {
 
   setDraft = (k) => (ev) => { const v = ev.target.value; this.setState(s => { const d = Object.assign({}, s.draft); d[k] = v; return {draft: d}; }); };
 
-  goScan = () => {
-    this.setState({screen:'scan', scanStatus:'Ищем код…'});
+  goScan = (fail) => {
+    const miss = fail === true ? true : ((this._scanN = (this._scanN || 0) + 1) % 2 === 0);
+    this.setState({screen:'scan', scanStatus:'Ищем код…', scanMiss: false});
     clearTimeout(this._s);
     this._s = setTimeout(() => {
-      this.setState({scanStatus:'Найдено: Творог 5%'});
-      this._s = setTimeout(() => this.pick(f['Творог 5%'], 'Штрих-код 4600682'), 700);
+      this.setState({scanStatus: miss ? 'Код не найден в базе' : 'Найдено: Творог 5%', scanMiss: miss});
+      this._s = setTimeout(() => miss ? this.newFromScan('4680019 872341') : this.pick(f['Творог 5%'], 'Штрих-код 4600682'), miss ? 1100 : 700);
     }, 1500);
   };
 
@@ -948,14 +985,15 @@ class Component extends DCLogic {
 
     const q = s.query.trim().toLowerCase();
     const isMyTab = s.tab === 'my';
-    const pool = isMyTab ? s.myFoods : (s.tab === 'recent' ? DB.slice(0, 6) : DB);
+    const allBase = DB.concat(s.dbExtra);
+    const pool = isMyTab ? s.myFoods : (s.tab === 'recent' ? allBase.slice(0, 6) : allBase);
     const list = q ? pool.filter(d => d.name.toLowerCase().indexOf(q) >= 0) : pool;
     const results = list.map(d => {
       const si = s.sel.filter(x => x.name === d.name)[0], on = !!si;
       const setG = (v) => this.setState(x => ({sel: x.sel.map(y => y.name === d.name ? {name: y.name, g: v} : y)}));
       return {
         name: d.name,
-        sub: (d.brand ? d.brand + ' · ' : '') + r(d.k) + ' ккал / 100 г · Б ' + d.p + ' Ж ' + d.f + ' У ' + d.c,
+        sub: (d.brand ? d.brand + ' · ' : '') + r(d.k) + ' ккал / 100 г · Б ' + numRu(d.p) + ' Ж ' + numRu(d.f) + ' У ' + numRu(d.c),
         subColor: 'rgba(26,29,27,.42)',
         isSel: on,
         gValue: on ? si.g : '',
@@ -993,11 +1031,12 @@ class Component extends DCLogic {
         go: () => this.setState({screen:'add', targetMeal: mn, query:'', tab:'search'})};
     });
 
-    const navDefs = [['home','Главный'],['cal','Календарь дня'],['mealpick','Куда добавить'],['add','Добавить еду'],['my','Своя еда'],['foods','Продукты'],['create','Создать блюдо'],['product','Карточка продукта'],['scan','Скан штрих-кода'],['repeat','Вчерашние блюда'],['stats','Статистика'],['profile','Профиль'],['body','Параметры и цель'],['norm','Дневная норма'],['onb','Онбординг']];
+    const navDefs = [['home','Главный'],['cal','Календарь дня'],['mealpick','Куда добавить'],['add','Добавить еду'],['my','Своя еда'],['foods','Продукты'],['create','Создать блюдо'],['product','Карточка продукта'],['scan','Скан штрих-кода'],['scanfail','Код не найден'],['repeat','Вчерашние блюда'],['stats','Статистика'],['profile','Профиль'],['body','Параметры и цель'],['norm','Дневная норма'],['onb','Онбординг']];
     const navGo = {
       cal: () => this.setState({screen:'home', calOpen:true, calMonth:7}),
       my: () => this.setState({screen:'add', tab:'my', query:''}),
-      create: () => this.setState({screen:'create', editName:null, draft:{name:'', g:'', k:'', p:'', f:'', c:''}}),
+      create: () => this.setState({screen:'create', editName:null, draftTarget:'my', barcode:'', draft: this.blankDraft()}),
+      scanfail: () => this.goScan(true),
       norm: () => this.setState({screen:'norm', normDraft:{k:String(s.goals.k), p:String(s.goals.p), f:String(s.goals.f), c:String(s.goals.c)}}),
       product: () => this.pick(f['Творог 5%'], 'Поиск'),
       scan: () => this.goScan(),
@@ -1062,12 +1101,12 @@ class Component extends DCLogic {
       {name:'Углеводы', val: r(avg.c) + ' / ' + goalC + ' г', w: pct(avg.c, goalC), color:'#9E6FD3'}
     ];
     const foodsMy = s.myFoods.map(x => this.foodBy(x.name)).map(x => ({
-      name: x.name, sub: r(x.k) + ' ккал / 100 г · Б ' + x.p + ' Ж ' + x.f + ' У ' + x.c,
+      name: x.name, sub: r(x.k) + ' ккал / 100 г · Б ' + numRu(x.p) + ' Ж ' + numRu(x.f) + ' У ' + numRu(x.c),
       tag: x.edited ? 'изменено' : 'своё', tagBg: x.edited ? '#FBF2DF' : '#E9F6EE', tagFg: x.edited ? '#A9761A' : '#177F47',
       go: () => this.startEdit(x)
     }));
-    const foodsBase = DB.map(x => this.foodBy(x.name)).map(x => ({
-      name: x.name, sub: r(x.k) + ' ккал / 100 г · Б ' + x.p + ' Ж ' + x.f + ' У ' + x.c,
+    const foodsBase = allBase.map(x => this.foodBy(x.name)).map(x => ({
+      name: x.name, sub: r(x.k) + ' ккал / 100 г · Б ' + numRu(x.p) + ' Ж ' + numRu(x.f) + ' У ' + numRu(x.c),
       tag: x.edited ? 'изменено' : '', tagBg: '#FBF2DF', tagFg: '#A9761A', showTag: !!x.edited,
       go: () => this.startEdit(x)
     }));
@@ -1158,7 +1197,7 @@ class Component extends DCLogic {
       resultsCaption: q ? 'Найдено · ' + results.length : (isMyTab ? 'Ваши блюда · ' + s.myFoods.length : (s.tab === 'recent' ? 'Недавние' : 'Популярное')),
       targetMeal: s.targetMeal,
 
-      prodName: d.name, prodBrand: (d.brand || 'Без бренда') + ' · ' + d.k + ' ккал в 100 г',
+      prodName: d.name, prodBrand: (d.brand || 'Без бренда') + ' · ' + numRu(d.k) + ' ккал в 100 г',
       prodSource: s.prodSource, grams: s.grams,
       prodKcal: r(d.k * mm), prodP: r(d.p * mm) + ' г', prodF: r(d.f * mm) + ' г', prodC: r(d.c * mm) + ' г',
       incGrams: () => this.setState(x => ({grams: x.grams + 10})),
@@ -1199,10 +1238,27 @@ class Component extends DCLogic {
       saveNorm: this.saveNorm,
       normHint: 'Сейчас в норме ' + Math.round((parseInt(s.normDraft.p, 10) || 0) * 4 / Math.max(1, parseInt(s.normDraft.k, 10) || 1) * 100) + '% калорий приходится на белок.',
       isEditing: !!s.editName,
-      createTitle: s.editName ? 'Редактировать продукт' : 'Своё блюдо',
-      createSub: s.editName ? 'Исправьте вес порции и КБЖУ — значения сохранятся и будут применяться дальше.' : 'Видно только вам — в разделе «Своя еда». В общий поиск не попадёт.',
-      saveLabel: s.editName ? 'Сохранить изменения' : 'Сохранить блюдо',
-      backFromCreate: () => this.setState({screen: s.editName ? 'foods' : 'add', editName: null}),
+      createTitle: s.editName ? 'Редактировать продукт' : (s.draftTarget === 'base' ? 'Новый продукт' : 'Своё блюдо'),
+      createSub: s.editName
+        ? 'Исправьте порцию и КБЖУ — значения сохранятся и будут применяться дальше.'
+        : (s.draftTarget === 'base'
+          ? (s.barcode ? 'Штрих-код ' + s.barcode + ' не нашёлся. Заполните карточку — продукт попадёт в общий список.' : 'Продукт попадёт в общий список поиска.')
+          : 'Видно только вам — в разделе «Своя еда». В общий поиск не попадёт.'),
+      saveLabel: s.editName ? 'Сохранить изменения' : (s.draftTarget === 'base' ? 'Добавить в базу' : 'Сохранить блюдо'),
+      backFromCreate: () => this.setState({screen: s.editName ? 'foods' : (s.draftTarget === 'base' ? 'scan' : 'add'), editName: null}),
+      measureChips: [['portion','На порцию'],['gram','На 100 г']].map(([id, label]) => {
+        const c0 = chip((s.draft.measure || 'portion') === id);
+        return {label, bg: c0.bg, fg: c0.fg, set: () => this.setState(x => ({draft: Object.assign({}, x.draft, {measure: id})}))};
+      }),
+      isPortionDraft: (s.draft.measure || 'portion') === 'portion',
+      namePlaceholder: s.draftTarget === 'base' ? 'Например, творожный сырок' : 'Мамины котлетки',
+      unitNameChips: ['порция','шт','стакан','пачка','ломтик'].map(u => {
+        const c0 = chip((s.draft.unit || 'порция') === u);
+        return {label: u, bg: c0.bg, fg: c0.fg, set: () => this.setState(x => ({draft: Object.assign({}, x.draft, {unit: u})}))};
+      }),
+      valuesCaption: (s.draft.measure || 'portion') === 'portion' ? 'КБЖУ на одну порцию' : 'КБЖУ на 100 г',
+      scanMiss: !!s.scanMiss,
+      scanStatusColor: s.scanMiss ? '#F0B45C' : '#fff',
       sexChips, actChips, numRows,
       userName: s.userName,
       onUserName: (ev) => this.setState({userName: ev.target.value}),
@@ -1240,12 +1296,17 @@ class Component extends DCLogic {
       goToday: () => this.setState({day: 0, calOpen: false, calMonth: 7}),
 
       isCreate: s.screen === 'create',
-      goCreate: () => this.setState({screen: 'create', editName: null, draft: {name:'', g:'', k:'', p:'', f:'', c:''}}),
+      goCreate: () => this.setState({screen: 'create', editName: null, draftTarget: 'my', barcode: '', draft: this.blankDraft()}),
+      manualFromScan: () => this.newFromScan(''),
       goMyFood: () => this.setState({screen: 'add', tab: 'my'}),
       dName: s.draft.name, dG: s.draft.g, dK: s.draft.k, dP: s.draft.p, dF: s.draft.f, dC: s.draft.c,
       onDName: this.setDraft('name'), onDG: this.setDraft('g'), onDK: this.setDraft('k'),
       onDP: this.setDraft('p'), onDF: this.setDraft('f'), onDC: this.setDraft('c'),
-      draftHint: s.draft.k && s.draft.g ? 'Это ' + Math.round((parseFloat(s.draft.k) || 0) / Math.max(1, parseFloat(s.draft.g) || 1) * 100) + ' ккал на 100 г. Порцию можно менять при добавлении.' : 'Укажите вес и калорийность порции — приложение само пересчитает на 100 г.',
+      draftHint: (s.draft.measure || 'portion') !== 'portion'
+        ? 'Значения на 100 г. Порцию можно будет указать при добавлении в дневник.'
+        : (s.draft.k && s.draft.g
+          ? 'Это ' + Math.round((parseFloat(s.draft.k) || 0) / Math.max(1, parseFloat(s.draft.g) || 1) * 100) + ' ккал на 100 г. Порцию можно менять при добавлении.'
+          : 'Укажите вес порции и её КБЖУ — приложение само пересчитает на 100 г.'),
       saveDraft: this.saveDraft,
       toast: s.toast
     };

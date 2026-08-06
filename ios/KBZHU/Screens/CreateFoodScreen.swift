@@ -1,15 +1,18 @@
 import SwiftUI
 
-/// Единая форма продукта. Тремя способами:
+/// Единая форма продукта в трёх режимах:
 /// — «Своё блюдо» (видно только вам),
 /// — «Новый продукт» в общую базу (сюда приводит ненайденный штрих-код),
 /// — правка уже существующего продукта.
 ///
-/// Значения можно вводить на 100 г либо на порцию — во втором случае указывается,
-/// сколько граммов эта порция весит.
+/// Данные вводятся либо на порцию (тогда указывается, как порция называется и сколько весит),
+/// либо на 100 г.
 struct CreateFoodScreen: View {
     @EnvironmentObject private var store: AppStore
     @EnvironmentObject private var nav: Nav
+
+    /// Единицы, предлагаемые в форме.
+    private static let unitOptions: [FoodUnit] = [.portion, .piece, .glass, .pack, .slice]
 
     private var kind: FoodFormKind { nav.foodForm }
     private var isPortionMode: Bool { nav.draft.mode == .portion }
@@ -37,30 +40,22 @@ struct CreateFoodScreen: View {
                         .background(Theme.softCard, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
                         .padding(.bottom, 18)
 
-                    fieldLabel("Как считаем продукт")
+                    fieldLabel("Как вводите данные")
                     HStack(spacing: 6) {
-                        Chip(title: "Граммы", isOn: !isPortionMode, height: 44,
-                             horizontalPadding: 8, cornerRadius: 13, fillsWidth: true) {
-                            nav.draft.mode = .grams
-                        }
-                        Chip(title: portionChipTitle, isOn: isPortionMode, height: 44,
-                             horizontalPadding: 8, cornerRadius: 13, fillsWidth: true) {
+                        Chip(title: "На порцию", isOn: isPortionMode, height: 44,
+                             horizontalPadding: 8, cornerRadius: 13, fontSize: 13, fillsWidth: true) {
                             nav.draft.mode = .portion
+                        }
+                        Chip(title: "На 100 г", isOn: !isPortionMode, height: 44,
+                             horizontalPadding: 8, cornerRadius: 13, fontSize: 13, fillsWidth: true) {
+                            nav.draft.mode = .grams
                         }
                     }
                     .padding(.bottom, 18)
 
-                    if isPortionMode {
-                        fieldLabel(weightFieldLabel)
-                        NumericField(text: $nav.draft.grams, placeholder: "120",
-                                     weight: 600, size: 15, allowsDecimal: true)
-                            .padding(.horizontal, 16)
-                            .frame(height: 52)
-                            .background(Theme.softCard, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
-                            .padding(.bottom, 18)
-                    }
+                    if isPortionMode { portionCard.padding(.bottom, 18) }
 
-                    fieldLabel(macrosSectionLabel)
+                    fieldLabel(valuesCaption)
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 10),
                                         GridItem(.flexible(), spacing: 10)], spacing: 10) {
                         macroField(caption: "Калории", placeholder: "254", text: $nav.draft.kcal,
@@ -105,6 +100,38 @@ struct CreateFoodScreen: View {
         }
     }
 
+    // MARK: - Порция
+
+    private var portionCard: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            fieldLabel("Порция называется")
+                .padding(.bottom, 2)
+
+            // Перенос по строкам, как flex-wrap в макете.
+            FlowRow(spacing: 6) {
+                ForEach(Self.unitOptions, id: \.self) { unit in
+                    Chip(title: unit.rawValue, isOn: nav.draft.unit == unit,
+                         height: 38, horizontalPadding: 13, cornerRadius: 11, fontSize: 12.5) {
+                        nav.draft.unit = unit
+                    }
+                }
+            }
+            .padding(.bottom, 16)
+
+            fieldLabel("Сколько весит одна порция, г")
+
+            NumericField(text: $nav.draft.grams, placeholder: "120",
+                         weight: 600, size: 15, allowsDecimal: true)
+                .padding(.horizontal, 16)
+                .frame(height: 52)
+                .background(Color.white, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 18)
+        .padding(.vertical, 16)
+        .background(Theme.softCard, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+    }
+
     // MARK: - Тексты
 
     private var title: String {
@@ -120,65 +147,46 @@ struct CreateFoodScreen: View {
         case .ownDish:
             return "Видно только вам — в разделе «Своя еда». В общий поиск не попадёт."
         case .baseProduct(let barcode):
-            if let barcode {
-                return "Штрих-код \(barcode) не нашёлся. Заполните карточку — продукт попадёт в общий список, и в следующий раз сканер его узнает."
+            if let barcode, !barcode.isEmpty {
+                return "Штрих-код \(barcode) не нашёлся. Заполните карточку — продукт попадёт в общий список."
             }
-            return "Продукт попадёт в общий список — его будет видно в поиске, а не только в «Своей еде»."
+            return "Продукт попадёт в общий список поиска."
         case .edit:
-            return "Исправьте значения — они сохранятся и будут применяться дальше."
+            return "Исправьте порцию и КБЖУ — значения сохранятся и будут применяться дальше."
         }
     }
 
     private var namePlaceholder: String {
-        if case .ownDish = kind { return "Мамины котлетки" }
-        return "Например, «Творог 5%»"
-    }
-
-    /// Для продукта, который уже считается в штуках или стаканах, вторая вкладка
-    /// называется по его единице, а не «Порция».
-    private var portionChipTitle: String {
-        switch nav.draft.unit {
-        case .piece: return "Штуки"
-        case .glass: return "Стаканы"
-        case .pack: return "Пачки"
-        case .jar: return "Баночки"
-        case .slice: return "Ломтики"
-        case .portion, .none: return "Порция"
+        switch kind {
+        case .ownDish: return "Мамины котлетки"
+        case .baseProduct: return "Например, творожный сырок"
+        case .edit(let id): return (store.food(id)?.isOwn ?? true)
+            ? "Мамины котлетки"
+            : "Например, творожный сырок"
         }
     }
 
-    private var weightFieldLabel: String {
-        switch nav.draft.unit {
-        case .piece: return "Вес 1 шт, г"
-        case .glass: return "Объём 1 стакана, г"
-        case .pack: return "Вес 1 пачки, г"
-        case .jar: return "Вес 1 баночки, г"
-        case .slice: return "Вес 1 ломтика, г"
-        case .portion, .none: return "Вес порции, г"
-        }
-    }
-
-    private var macrosSectionLabel: String {
-        isPortionMode ? "На всю порцию" : "На 100 г"
+    private var valuesCaption: String {
+        isPortionMode ? "КБЖУ на одну порцию" : "КБЖУ на 100 г"
     }
 
     private var saveTitle: String {
         switch kind {
         case .ownDish: return "Сохранить блюдо"
-        case .baseProduct: return "Сохранить продукт"
+        case .baseProduct: return "Добавить в базу"
         case .edit: return "Сохранить изменения"
         }
     }
 
     private var hint: String {
         guard isPortionMode else {
-            return "Значения на 100 г — как на упаковке. Сколько съели, укажете при добавлении."
+            return "Значения на 100 г. Порцию можно будет указать при добавлении в дневник."
         }
         if let kcal = nav.draft.kcal.ruDouble, let grams = nav.draft.grams.ruDouble, grams > 0 {
             let per100 = Int((kcal / grams * 100).rounded())
             return "Это \(per100) ккал на 100 г. Порцию можно менять при добавлении."
         }
-        return "Укажите вес и калорийность порции — приложение само пересчитает на 100 г."
+        return "Укажите вес порции и её КБЖУ — приложение само пересчитает на 100 г."
     }
 
     // MARK: - Вёрстка полей
@@ -209,8 +217,9 @@ struct CreateFoodScreen: View {
     private func goBack() {
         switch kind {
         case .edit: nav.screen = .foods
-        // Со скана возвращаемся в поиск, а не обратно в камеру.
-        case .ownDish, .baseProduct: nav.screen = .add
+        case .ownDish: nav.screen = .add
+        // Пришли со скана — туда же и возвращаемся.
+        case .baseProduct: nav.screen = .scan
         }
     }
 
@@ -241,6 +250,7 @@ struct CreateFoodScreen: View {
         case .ownDish:
             let created = store.createFood(payload, isOwn: true)
             nav.draft = .empty
+            nav.query = ""
             nav.addTab = .own
             nav.screen = .add
             nav.flash("«\(created.name)» в вашей еде")
@@ -248,11 +258,58 @@ struct CreateFoodScreen: View {
         case .baseProduct(let barcode):
             let created = store.createFood(payload, isOwn: false, barcode: barcode)
             nav.draft = .empty
-            // Сразу открываем карточку — обычно продукт заводят, чтобы тут же его съесть.
-            nav.openProduct(created,
-                            source: barcode.map { "Штрих-код \($0)" } ?? "Новый продукт",
-                            returnTo: .add)
+            nav.query = ""
+            nav.addTab = .search
+            // Сразу открываем карточку — продукт заводят, чтобы тут же его съесть.
+            nav.openProduct(created, source: "Новый продукт", returnTo: .add)
             nav.flash("«\(created.name)» добавлен в базу")
+        }
+    }
+}
+
+/// Ряд с переносом по строкам — `flex-wrap` из макета.
+struct FlowRow: Layout {
+    var spacing: CGFloat = 6
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        let maxWidth = proposal.width ?? .infinity
+        var rowWidth: CGFloat = 0
+        var rowHeight: CGFloat = 0
+        var total = CGSize(width: 0, height: 0)
+
+        for subview in subviews {
+            let size = subview.sizeThatFits(.unspecified)
+            if rowWidth > 0, rowWidth + spacing + size.width > maxWidth {
+                total.width = max(total.width, rowWidth)
+                total.height += rowHeight + spacing
+                rowWidth = size.width
+                rowHeight = size.height
+            } else {
+                rowWidth += (rowWidth > 0 ? spacing : 0) + size.width
+                rowHeight = max(rowHeight, size.height)
+            }
+        }
+        total.width = max(total.width, rowWidth)
+        total.height += rowHeight
+        return total
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize,
+                       subviews: Subviews, cache: inout ()) {
+        var x = bounds.minX
+        var y = bounds.minY
+        var rowHeight: CGFloat = 0
+
+        for subview in subviews {
+            let size = subview.sizeThatFits(.unspecified)
+            if x > bounds.minX, x + size.width > bounds.maxX {
+                x = bounds.minX
+                y += rowHeight + spacing
+                rowHeight = 0
+            }
+            subview.place(at: CGPoint(x: x, y: y), proposal: ProposedViewSize(size))
+            x += size.width + spacing
+            rowHeight = max(rowHeight, size.height)
         }
     }
 }
