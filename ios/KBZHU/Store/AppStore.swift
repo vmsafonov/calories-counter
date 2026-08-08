@@ -428,8 +428,12 @@ final class AppStore: ObservableObject {
     func setGoal(_ goal: GoalKind) { data.goal = goal }
     func setUserName(_ name: String) { data.userName = name }
     func setShowRemaining(_ value: Bool) { data.showRemaining = value }
+    /// Норма с онбординга действует с самого начала: пользователь только завёл дневник,
+    /// прошлого у него нет. Раньше здесь писалась только `data.goals`, история оставалась
+    /// с дефолтом — и дневник показывал 1850 вместо посчитанной нормы.
     func finishOnboarding(goals: Goals) {
         data.goals = goals
+        data.goalsHistory = [GoalsPeriod(effectiveFrom: .distantPast, goals: goals)]
         data.didOnboard = true
     }
 

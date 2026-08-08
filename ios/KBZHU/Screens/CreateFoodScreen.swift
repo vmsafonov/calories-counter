@@ -478,7 +478,7 @@ struct CreateFoodScreen: View {
 
     private func goBack() {
         switch kind {
-        case .edit: nav.screen = .foods
+        case .edit: nav.screen = nav.foodFormReturn
         case .ownDish: nav.screen = .add
         // Пришли со скана — туда же и возвращаемся.
         case .baseProduct: nav.screen = .scan
@@ -526,7 +526,7 @@ struct CreateFoodScreen: View {
         case .edit(let id):
             store.updateFood(id: id, values: payload)
             nav.resetFoodForm()
-            nav.screen = .foods
+            nav.screen = nav.foodFormReturn
             nav.flash("«\(payload.name.isEmpty ? "Продукт" : payload.name)» обновлено")
 
         case .ownDish:
