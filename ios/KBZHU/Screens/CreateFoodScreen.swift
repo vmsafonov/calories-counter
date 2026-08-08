@@ -14,6 +14,9 @@ struct CreateFoodScreen: View {
     /// Единицы, предлагаемые в форме.
     private static let unitOptions: [FoodUnit] = [.portion, .piece, .glass, .pack, .slice]
 
+    /// Пока правят число, нижняя кнопка убирается: на неё легко промахнуться пальцем.
+    @State private var isTyping = false
+
     private var kind: FoodFormKind { nav.foodForm }
     private var isPortionMode: Bool { nav.draft.mode == .portion }
     private var isCompose: Bool { nav.draftMode == .compose }
@@ -74,16 +77,20 @@ struct CreateFoodScreen: View {
             }
             .scrollDismissesKeyboard(.interactively)
 
-            PrimaryButton(title: saveTitle) { save() }
-                .padding(.horizontal, 20)
-                .padding(.top, 12)
-                .padding(.bottom, 30)
-                .background(
-                    Color.white
-                        .overlay(alignment: .top) { Rectangle().fill(Theme.hairline).frame(height: 1) }
-                        .ignoresSafeArea(edges: .bottom)
-                )
+            if !isTyping {
+                PrimaryButton(title: saveTitle) { save() }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 12)
+                    .padding(.bottom, 30)
+                    .background(
+                        Color.white
+                            .overlay(alignment: .top) { Rectangle().fill(Theme.hairline).frame(height: 1) }
+                            .ignoresSafeArea(edges: .bottom)
+                    )
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
         }
+        .animation(.easeOut(duration: 0.18), value: isTyping)
     }
 
     // MARK: - Состав
@@ -161,8 +168,57 @@ struct CreateFoodScreen: View {
                 .padding(.horizontal, 20)
                 .padding(.vertical, 18)
                 .background(Theme.softCard, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .padding(.bottom, 16)
+
+                composePortionCard(totals)
             }
         }
+    }
+
+    /// Порция составного блюда: можно съесть не всю кастрюлю, а тарелку из неё.
+    /// Пусто — порцией считается вся масса состава.
+    private func composePortionCard(_ totals: (grams: Double, nutrition: Nutrition)) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            fieldLabel("Порция называется")
+                .padding(.bottom, 2)
+
+            FlowRow(spacing: 6) {
+                ForEach(Self.unitOptions, id: \.self) { unit in
+                    Chip(title: unit.rawValue, isOn: nav.draft.unit == unit,
+                         height: 38, horizontalPadding: 13, cornerRadius: 11, fontSize: 12.5) {
+                        nav.draft.unit = unit
+                    }
+                }
+            }
+            .padding(.bottom, 16)
+
+            fieldLabel("Сколько весит одна порция, г")
+
+            NumericField(text: $nav.draft.grams,
+                         placeholder: totals.grams > 0 ? String(Int(totals.grams.rounded())) : "100",
+                         weight: 600, size: 15, allowsDecimal: true,
+                         onFocusChange: { isTyping = $0 })
+                .padding(.horizontal, 16)
+                .frame(height: 52)
+                .background(Color.white, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+
+            Text(portionNote(totals))
+                .golos(400, 12, lineHeight: 1.4)
+                .tabularNumbers()
+                .foregroundStyle(Theme.ink(0.45))
+                .padding(.top, 10)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 18)
+        .padding(.vertical, 16)
+        .background(Theme.softCard, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+    }
+
+    private func portionNote(_ totals: (grams: Double, nutrition: Nutrition)) -> String {
+        guard let portion = nav.draft.grams.ruDouble, portion > 0, totals.grams > 0 else {
+            return "по умолчанию — вся масса"
+        }
+        return "\(Int((totals.nutrition.kcal / totals.grams * portion).rounded())) ккал в порции"
     }
 
     private func per100Line(_ totals: (grams: Double, nutrition: Nutrition)) -> String {
@@ -207,7 +263,8 @@ struct CreateFoodScreen: View {
                                 }
                             }
                         ),
-                        weight: 600, size: 14, alignment: .trailing
+                        weight: 600, size: 14, alignment: .trailing,
+                        onFocusChange: { isTyping = $0 }
                     )
                     .frame(width: 48)
                     Text("г")
@@ -305,7 +362,8 @@ struct CreateFoodScreen: View {
             fieldLabel("Сколько весит одна порция, г")
 
             NumericField(text: $nav.draft.grams, placeholder: "120",
-                         weight: 600, size: 15, allowsDecimal: true)
+                         weight: 600, size: 15, allowsDecimal: true,
+                         onFocusChange: { isTyping = $0 })
                 .padding(.horizontal, 16)
                 .frame(height: 52)
                 .background(Color.white, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
@@ -408,7 +466,8 @@ struct CreateFoodScreen: View {
                 .golos(400, 11)
                 .foregroundStyle(captionColor)
             NumericField(text: text, placeholder: placeholder,
-                         weight: 700, size: 19, color: valueColor, allowsDecimal: true)
+                         weight: 700, size: 19, color: valueColor, allowsDecimal: true,
+                         onFocusChange: { isTyping = $0 })
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 12)
@@ -433,30 +492,28 @@ struct CreateFoodScreen: View {
         if isCompose {
             let totals = composeTotals
             guard totals.grams > 0 else { return nil }
-            return AppStore.FoodValues(
-                name: name,
-                manufacturer: draft.manufacturer,
-                mode: .portion,
-                portionGrams: totals.grams,
-                kcal: totals.nutrition.kcal,
-                protein: totals.nutrition.protein,
-                fat: totals.nutrition.fat,
-                carbs: totals.nutrition.carbs,
-                unit: .portion
-            )
+            let parts = nav.draftIngredients.compactMap { item -> FoodPart? in
+                guard let food = store.food(item.foodID), item.grams > 0 else { return nil }
+                return FoodPart(foodID: food.id, name: food.name, grams: item.grams)
+            }
+            return .composed(name: name,
+                             manufacturer: draft.manufacturer,
+                             totalGrams: totals.grams,
+                             total: totals.nutrition,
+                             portionGrams: draft.grams.ruDouble,
+                             unit: draft.unit ?? .portion,
+                             parts: parts)
         }
 
-        return AppStore.FoodValues(
-            name: name,
-            manufacturer: draft.manufacturer,
-            mode: draft.mode,
-            portionGrams: draft.grams.ruDouble ?? 100,
-            kcal: draft.kcal.ruDouble ?? 0,
-            protein: draft.protein.ruDouble ?? 0,
-            fat: draft.fat.ruDouble ?? 0,
-            carbs: draft.carbs.ruDouble ?? 0,
-            unit: draft.unit
-        )
+        return .typed(name: name,
+                      manufacturer: draft.manufacturer,
+                      mode: draft.mode,
+                      portionGrams: draft.grams.ruDouble ?? 100,
+                      kcal: draft.kcal.ruDouble ?? 0,
+                      protein: draft.protein.ruDouble ?? 0,
+                      fat: draft.fat.ruDouble ?? 0,
+                      carbs: draft.carbs.ruDouble ?? 0,
+                      unit: draft.unit)
     }
 
     private func save() {

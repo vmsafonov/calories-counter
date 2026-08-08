@@ -18,6 +18,11 @@ enum Screen: Hashable {
     case onboarding
 }
 
+/// Период, за который смотрят статистику.
+enum StatsRange: Hashable {
+    case week, month
+}
+
 /// Откуда берутся КБЖУ блюда.
 enum DraftMode: Hashable {
     /// Вводятся руками.
@@ -154,6 +159,8 @@ final class Nav: ObservableObject {
     @Published var draftMode: DraftMode = .manual
     @Published var draftIngredients: [DraftIngredient] = []
 
+    @Published var statsRange: StatsRange = .week
+
     @Published var onboardingStep = 1
 
     @Published var toast: String?
@@ -221,11 +228,32 @@ final class Nav: ObservableObject {
     func openEditForm(_ food: Food) {
         foodForm = .edit(food.id)
         draft = .editing(food)
-        // Правка существующего продукта всегда идёт значениями, а не составом:
-        // из чего блюдо собрали, приложение не помнит.
-        draftMode = .manual
-        draftIngredients = []
+        loadComposition(of: food)
         screen = .createFood
+    }
+
+    /// Копия блюда: заводится как новое, состав и значения переносятся, чтобы
+    /// оставалось поменять один ингредиент.
+    func openCopyForm(of food: Food) {
+        foodForm = .ownDish
+        var copy = FoodDraft.editing(food)
+        copy.name = food.name + " (копия)"
+        draft = copy
+        loadComposition(of: food)
+        screen = .createFood
+    }
+
+    /// Блюдо, собранное из продуктов, открывается сразу в режиме состава.
+    private func loadComposition(of food: Food) {
+        if food.isComposed {
+            draftMode = .compose
+            draftIngredients = food.parts.map {
+                DraftIngredient(foodID: $0.foodID, grams: $0.grams)
+            }
+        } else {
+            draftMode = .manual
+            draftIngredients = []
+        }
     }
 
     func resetFoodForm() {

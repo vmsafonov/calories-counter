@@ -6,32 +6,71 @@ struct StatsScreen: View {
     @EnvironmentObject private var store: AppStore
     @EnvironmentObject private var nav: Nav
 
+    private var isMonth: Bool { nav.statsRange == .month }
     private var monday: Date { Cal.startOfWeek(nav.day) }
-    private var weekDays: [Date] { (0..<7).map { Cal.adding(days: $0, to: monday) } }
-    /// Дни недели, в которые что-то записано: по ним считаются средние.
-    private var loggedDays: [Date] { weekDays.filter { store.kcal(on: $0) > 0 } }
-    private var nextWeekAvailable: Bool { Cal.dayOffset(Cal.adding(days: 7, to: monday)) <= 0 }
+
+    /// Дни выбранного периода: неделя Пн–Вс либо календарный месяц.
+    private var periodDays: [Date] {
+        guard isMonth else { return (0..<7).map { Cal.adding(days: $0, to: monday) } }
+        let first = Cal.firstOfMonth(year: Cal.year(nav.day), month: Cal.month(nav.day))
+        let count = Cal.daysInMonth(year: Cal.year(nav.day), month: Cal.month(nav.day))
+        return (0..<count).map { Cal.adding(days: $0, to: first) }
+    }
+
+    /// Дни периода, в которые что-то записано: по ним считаются средние.
+    private var loggedDays: [Date] { periodDays.filter { store.kcal(on: $0) > 0 } }
+
+    private var nextPeriodStart: Date {
+        isMonth
+            ? Cal.firstOfMonth(year: Cal.year(Cal.adding(days: 32, to: periodDays[0])),
+                               month: Cal.month(Cal.adding(days: 32, to: periodDays[0])))
+            : Cal.adding(days: 7, to: monday)
+    }
+
+    private var previousPeriodStart: Date {
+        isMonth
+            ? Cal.firstOfMonth(year: Cal.year(Cal.adding(days: -1, to: periodDays[0])),
+                               month: Cal.month(Cal.adding(days: -1, to: periodDays[0])))
+            : Cal.adding(days: -7, to: monday)
+    }
+
+    private var nextPeriodAvailable: Bool { Cal.dayOffset(nextPeriodStart) <= 0 }
 
     var body: some View {
-        let goals = store.goals
         let logged = loggedDays
         let divisor = Double(max(1, logged.count))
         let sum = logged.map { store.totals(on: $0) }.reduce(Nutrition.zero) { $0 + $1 }
         let average = Nutrition(kcal: sum.kcal / divisor, protein: sum.protein / divisor,
                                 fat: sum.fat / divisor, carbs: sum.carbs / divisor)
-        let inNorm = logged.filter { DayStatus(kcal: store.kcal(on: $0), goal: goals.kcal) == .onTarget }.count
+        // Каждый день сравнивается со своей нормой — той, что действовала тогда.
+        let inNorm = logged.filter {
+            DayStatus(kcal: store.kcal(on: $0), goal: store.goals(on: $0).kcal) == .onTarget
+        }.count
+        let goals = store.goals(on: nav.day)
 
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 header
                     .padding(.bottom, 24)
 
-                chartCard(goalKcal: goals.kcal)
+                HStack(spacing: 6) {
+                    Chip(title: "Неделя", isOn: !isMonth, height: 42,
+                         horizontalPadding: 8, cornerRadius: 13, fontSize: 13, fillsWidth: true) {
+                        nav.statsRange = .week
+                    }
+                    Chip(title: "Месяц", isOn: isMonth, height: 42,
+                         horizontalPadding: 8, cornerRadius: 13, fontSize: 13, fillsWidth: true) {
+                        nav.statsRange = .month
+                    }
+                }
+                .padding(.bottom, 16)
+
+                chartCard
                     .padding(.bottom, 14)
 
                 HStack(spacing: 10) {
                     statTile(value: logged.isEmpty ? "—" : Ru.grouped(Int(average.kcal.rounded())),
-                             caption: "средние ккал в день")
+                             caption: isMonth ? "средние ккал за месяц" : "средние ккал в день")
                     statTile(value: "\(inNorm) из \(logged.count)",
                              caption: "дней в пределах нормы")
                 }
@@ -69,26 +108,33 @@ struct StatsScreen: View {
     private var header: some View {
         HStack(spacing: 10) {
             VStack(alignment: .leading, spacing: 4) {
-                Text("Неделя")
+                Text(isMonth ? "Месяц" : "Неделя")
                     .golos(700, 24)
                     .kerning(-0.24)
                     .foregroundStyle(Theme.ink)
-                Text("\(Cal.dayMonth(monday)) — \(Cal.dayMonth(Cal.adding(days: 6, to: monday)))")
+                Text(rangeTitle)
                     .golos(400, 13)
                     .foregroundStyle(Theme.ink(0.45))
             }
             Spacer(minLength: 0)
             HStack(spacing: 6) {
                 weekButton(symbol: "chevron.left", enabled: true) {
-                    nav.day = Cal.adding(days: -7, to: monday)
+                    nav.day = previousPeriodStart
                 }
-                weekButton(symbol: "chevron.right", enabled: nextWeekAvailable) {
-                    guard nextWeekAvailable else { return }
-                    let next = Cal.adding(days: 7, to: monday)
+                weekButton(symbol: "chevron.right", enabled: nextPeriodAvailable) {
+                    guard nextPeriodAvailable else { return }
+                    let next = nextPeriodStart
                     nav.day = Cal.dayOffset(next) > 0 ? Cal.today : next
                 }
             }
         }
+    }
+
+    private var rangeTitle: String {
+        guard !isMonth else {
+            return "\(Ru.monthsNominative[Cal.month(nav.day)]) \(String(Cal.year(nav.day)))"
+        }
+        return "\(Cal.dayMonth(monday)) — \(Cal.dayMonth(Cal.adding(days: 6, to: monday)))"
     }
 
     private func weekButton(symbol: String, enabled: Bool, action: @escaping () -> Void) -> some View {
@@ -106,25 +152,30 @@ struct StatsScreen: View {
 
     // MARK: - График
 
-    private func chartCard(goalKcal: Int) -> some View {
+    private var chartCard: some View {
         VStack(spacing: 0) {
-            HStack(alignment: .bottom, spacing: 8) {
-                ForEach(weekDays, id: \.self) { day in
+            HStack(alignment: .bottom, spacing: isMonth ? 2 : 8) {
+                ForEach(periodDays, id: \.self) { day in
                     let isFuture = Cal.dayOffset(day) > 0
                     let kcal = isFuture ? 0 : store.kcal(on: day)
+                    let number = Cal.day(day)
                     VStack(spacing: 8) {
-                        Text(kcal > 0 ? Ru.grouped(kcal) : " ")
+                        Text(isMonth || kcal == 0 ? " " : Ru.grouped(kcal))
                             .golos(600, 10.5)
                             .tabularNumbers()
                             .foregroundStyle(Theme.ink(0.45))
                             .lineLimit(1)
                             .minimumScaleFactor(0.7)
-                        RoundedRectangle(cornerRadius: 8, style: .continuous)
-                            .fill(DayStatus(kcal: kcal, goal: goalKcal).markColor)
+                        RoundedRectangle(cornerRadius: isMonth ? 4 : 8, style: .continuous)
+                            .fill(DayStatus(kcal: kcal, goal: store.goals(on: day).kcal).markColor)
                             .frame(height: barHeight(kcal))
-                        Text(Ru.shortWeekdays[Cal.weekdayIndex(day)])
-                            .golos(500, 11)
+                        // В месяце подписываем не каждый день, иначе не читается.
+                        Text(isMonth
+                             ? (number == 1 || number % 5 == 0 ? String(number) : " ")
+                             : Ru.shortWeekdays[Cal.weekdayIndex(day)])
+                            .golos(500, isMonth ? 9.5 : 11)
                             .foregroundStyle(Theme.ink(0.4))
+                            .lineLimit(1)
                     }
                     .frame(maxWidth: .infinity)
                     .opacity(isFuture ? 0.4 : 1)

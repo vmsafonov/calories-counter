@@ -120,6 +120,17 @@ final class AppStore: ObservableObject {
     // MARK: - Reading
 
     var goals: Goals { data.goals }
+
+    /// Норма, действовавшая в этот день. Прошлое не переписывается сегодняшними
+    /// настройками: если норму меняли, старые дни считаются по старой.
+    func goals(on day: Date) -> Goals {
+        let key = Cal.startOfDay(day)
+        var result = data.goalsHistory.first?.goals ?? data.goals
+        for period in data.goalsHistory where period.effectiveFrom <= key {
+            result = period.goals
+        }
+        return result
+    }
     var bodyProfile: BodyProfile { data.bodyProfile }
     var goal: GoalKind { data.goal }
     var userName: String { data.userName }
@@ -235,55 +246,74 @@ final class AppStore: ObservableObject {
 
     // MARK: - Food mutations
 
-    /// Values as typed in the food form: either per 100 g, or per one portion of `portionGrams`.
+    /// Что сохраняем в продукт. КБЖУ здесь уже пересчитаны на 100 г — экран знает,
+    /// пришли они из полей или из состава.
     struct FoodValues {
         var name: String
         /// Производитель. Показывается в списке продуктов; для своих блюд не используется.
         var manufacturer: String = ""
-        var mode: FoodEntryMode
-        /// Weight of one portion; ignored in `.grams` mode.
-        var portionGrams: Double
-        var kcal: Double
-        var protein: Double
-        var fat: Double
-        var carbs: Double
-        /// Unit to keep for portion products (`шт`, `стакан`…); defaults to `порция`.
+        /// КБЖУ на 100 г.
+        var per100: Nutrition
+        /// Единица порции; `nil` — продукт считается только в граммах.
         var unit: FoodUnit?
+        /// Вес одной порции. Учитывается, только если задана единица.
+        var portionGrams: Double = 100
+        /// Из чего собрано блюдо; пусто — значения вводили руками.
+        var parts: [FoodPart] = []
 
-        /// Converts whatever was typed into per-100-g values.
-        var per100: (kcal: Double, protein: Double, fat: Double, carbs: Double) {
-            switch mode {
-            case .grams:
-                let round = { (v: Double) in (v * 10).rounded() / 10 }
-                return (round(kcal), round(protein), round(fat), round(carbs))
-            case .portion:
-                let grams = max(1, portionGrams)
-                let convert = { (v: Double) in (((v / grams) * 100) * 10).rounded() / 10 }
-                return (convert(kcal), convert(protein), convert(fat), convert(carbs))
-            }
+        /// Значения, введённые руками: на порцию либо на 100 г.
+        static func typed(name: String, manufacturer: String, mode: FoodEntryMode,
+                          portionGrams: Double, kcal: Double, protein: Double,
+                          fat: Double, carbs: Double, unit: FoodUnit?) -> FoodValues {
+            let grams = max(1, portionGrams)
+            let factor = mode == .portion ? 100 / grams : 1
+            let round = { (v: Double) in (v * factor * 10).rounded() / 10 }
+            return FoodValues(name: name,
+                              manufacturer: manufacturer,
+                              per100: Nutrition(kcal: round(kcal), protein: round(protein),
+                                                fat: round(fat), carbs: round(carbs)),
+                              unit: mode == .portion ? (unit ?? .portion) : nil,
+                              portionGrams: grams)
+        }
+
+        /// Значения из состава: КБЖУ суммируются по ингредиентам, вес порции задаётся
+        /// отдельно — порция может быть меньше всей массы.
+        static func composed(name: String, manufacturer: String, totalGrams: Double,
+                             total: Nutrition, portionGrams: Double?,
+                             unit: FoodUnit?, parts: [FoodPart]) -> FoodValues {
+            let mass = max(1, totalGrams)
+            let round = { (v: Double) in (v / mass * 1000).rounded() / 10 }
+            return FoodValues(name: name,
+                              manufacturer: manufacturer,
+                              per100: Nutrition(kcal: round(total.kcal), protein: round(total.protein),
+                                                fat: round(total.fat), carbs: round(total.carbs)),
+                              unit: unit ?? .portion,
+                              portionGrams: max(1, portionGrams ?? mass),
+                              parts: parts)
         }
     }
 
     /// Creates a product. `isOwn` decides whether it lands in «Своя еда» or in the shared base.
     @discardableResult
     func createFood(_ values: FoodValues, isOwn: Bool, barcode: String? = nil) -> Food {
-        let per100 = values.per100
-        let name = values.name.isEmpty ? (isOwn ? "Моё блюдо" : "Новый продукт") : values.name
-        let grams = max(1, values.portionGrams)
-        let isPortion = values.mode == .portion
-        // В списке продуктов под названием показывается производитель. Штрих-код там не нужен —
+        // В списке под названием показывается производитель. Штрих-код там не нужен —
         // он хранится в самом продукте, чтобы сканер узнал упаковку в следующий раз.
         let manufacturer = values.manufacturer.trimmingCharacters(in: .whitespacesAndNewlines)
         let brand = isOwn ? "Своё блюдо" : (manufacturer.isEmpty ? "Добавлено вами" : manufacturer)
+        let name = values.name.isEmpty ? (isOwn ? "Моё блюдо" : "Новый продукт") : values.name
+        let grams = max(1, values.portionGrams).rounded()
+        let isPortion = values.unit != nil
+
         let food = Food(name: name,
                         brand: brand,
-                        kcal: per100.kcal, protein: per100.protein,
-                        fat: per100.fat, carbs: per100.carbs,
-                        defaultGrams: isPortion ? grams.rounded() : 100,
-                        unit: isPortion ? (values.unit ?? .portion) : nil,
-                        unitWeight: isPortion ? grams.rounded() : nil,
+                        kcal: values.per100.kcal, protein: values.per100.protein,
+                        fat: values.per100.fat, carbs: values.per100.carbs,
+                        defaultGrams: isPortion ? grams : 100,
+                        unit: values.unit,
+                        unitWeight: isPortion ? grams : nil,
                         isOwn: isOwn,
-                        barcode: barcode)
+                        barcode: barcode,
+                        parts: values.parts)
         data.foods.append(food)
         return food
     }
@@ -292,26 +322,24 @@ final class AppStore: ObservableObject {
     /// apply to every future entry, exactly as the design describes.
     func updateFood(id: UUID, values: FoodValues) {
         guard let index = data.foods.firstIndex(where: { $0.id == id }) else { return }
-        let per100 = values.per100
         var food = data.foods[index]
         food.name = values.name.isEmpty ? food.name : values.name
         if !food.isOwn {
             // Пустое поле — просто убирает производителя, а не подставляет заглушку.
             food.brand = values.manufacturer.trimmingCharacters(in: .whitespacesAndNewlines)
         }
-        food.kcal = per100.kcal
-        food.protein = per100.protein
-        food.fat = per100.fat
-        food.carbs = per100.carbs
+        food.kcal = values.per100.kcal
+        food.protein = values.per100.protein
+        food.fat = values.per100.fat
+        food.carbs = values.per100.carbs
+        food.parts = values.parts
 
-        switch values.mode {
-        case .portion:
+        if let unit = values.unit {
             let grams = max(1, values.portionGrams).rounded()
-            // Единица берётся из формы — её выбирают чипами «порция / шт / стакан…».
-            food.unit = values.unit ?? .portion
+            food.unit = unit
             food.unitWeight = grams
             food.defaultGrams = grams
-        case .grams:
+        } else {
             food.unit = nil
             food.unitWeight = nil
             if food.defaultGrams <= 0 { food.defaultGrams = 100 }
@@ -384,7 +412,18 @@ final class AppStore: ObservableObject {
 
     // MARK: - Profile mutations
 
-    func setGoals(_ goals: Goals) { data.goals = goals }
+    /// Новая норма действует с сегодняшнего дня; прошлые дни остаются в своей.
+    func setGoals(_ goals: Goals) {
+        data.goals = goals
+        let today = Cal.today
+        var history = data.goalsHistory
+        if let last = history.last, Cal.isSameDay(last.effectiveFrom, today) {
+            history[history.count - 1] = GoalsPeriod(effectiveFrom: today, goals: goals)
+        } else {
+            history.append(GoalsPeriod(effectiveFrom: today, goals: goals))
+        }
+        data.goalsHistory = history
+    }
     func setBody(_ value: BodyProfile) { data.bodyProfile = value }
     func setGoal(_ goal: GoalKind) { data.goal = goal }
     func setUserName(_ name: String) { data.userName = name }
