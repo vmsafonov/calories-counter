@@ -30,8 +30,12 @@ struct ProductScreen: View {
         return VStack(spacing: 0) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
+                    // «Изменить» правит сам продукт: КБЖУ, вес порции, состав.
+                    // Не путать с порцией ниже — та относится только к этой записи.
                     NavBar(title: context.source, titleSize: 14, titleWeight: 600,
-                           titleColor: Theme.ink(0.5)) {
+                           titleColor: Theme.ink(0.5),
+                           trailingTitle: "Изменить",
+                           onTrailing: { nav.openEditForm(food, returnTo: .product) }) {
                         nav.product = nil
                         nav.screen = context.returnTo
                     }

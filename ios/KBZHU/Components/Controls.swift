@@ -136,6 +136,9 @@ struct NavBar: View {
     var titleWeight: Int = 700
     var titleColor: Color = Theme.ink
     var tint: Color = Theme.ink
+    /// Необязательная кнопка справа — например, «Изменить» на карточке продукта.
+    var trailingTitle: String? = nil
+    var onTrailing: (() -> Void)? = nil
     let onBack: () -> Void
 
     var body: some View {
@@ -153,6 +156,18 @@ struct NavBar: View {
                 .golos(titleWeight, titleSize)
                 .foregroundStyle(titleColor)
             Spacer(minLength: 0)
+
+            if let trailingTitle, let onTrailing {
+                Button(action: onTrailing) {
+                    Text(trailingTitle)
+                        .golos(600, 13)
+                        .foregroundStyle(Theme.greenDark)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 9)
+                        .background(Theme.greenTint, in: Capsule())
+                }
+                .buttonStyle(.plain)
+            }
         }
     }
 }

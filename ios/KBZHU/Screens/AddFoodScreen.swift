@@ -187,6 +187,14 @@ struct AddFoodScreen: View {
                             .golos(400, 12)
                             .foregroundStyle(Theme.ink(0.42))
                             .multilineTextAlignment(.leading)
+                        // Своё блюдо — сразу видно, из чего оно собрано.
+                        if food.isComposed {
+                            Text(food.partsLine)
+                                .golos(400, 11.5, lineHeight: 1.35)
+                                .foregroundStyle(Theme.ink(0.35))
+                                .multilineTextAlignment(.leading)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.vertical, 13)

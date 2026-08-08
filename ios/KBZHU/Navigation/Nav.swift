@@ -158,6 +158,8 @@ final class Nav: ObservableObject {
     @Published var draft: FoodDraft = .empty
     @Published var draftMode: DraftMode = .manual
     @Published var draftIngredients: [DraftIngredient] = []
+    /// Куда возвращаться из формы правки продукта.
+    @Published var foodFormReturn: Screen = .foods
 
     @Published var statsRange: StatsRange = .week
 
@@ -225,8 +227,9 @@ final class Nav: ObservableObject {
         screen = .createFood
     }
 
-    func openEditForm(_ food: Food) {
+    func openEditForm(_ food: Food, returnTo: Screen = .foods) {
         foodForm = .edit(food.id)
+        foodFormReturn = returnTo
         draft = .editing(food)
         loadComposition(of: food)
         screen = .createFood
