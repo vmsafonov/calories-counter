@@ -34,18 +34,18 @@ struct SwipeToDeleteRow<Content: View>: View {
 
     var body: some View {
         ZStack(alignment: .trailing) {
+            // Фон с подписью — только картинка: тапы ловит отдельный слой поверх,
+            // иначе попадание зависит от того, как SwiftUI считает hit-test
+            // смещённой строки, и кнопка молча не срабатывает.
             Theme.danger
                 .overlay(alignment: .trailing) {
-                    Button(action: onDelete) {
-                        Text("Удалить")
-                            .golos(600, 12.5)
-                            .foregroundStyle(.white)
-                            .frame(width: revealWidth)
-                            .frame(maxHeight: .infinity)
-                            .contentShape(Rectangle())
-                    }
-                    .buttonStyle(.plain)
+                    Text("Удалить")
+                        .golos(600, 12.5)
+                        .foregroundStyle(.white)
+                        .frame(width: revealWidth)
+                        .frame(maxHeight: .infinity)
                 }
+                .allowsHitTesting(false)
 
             content()
                 .padding(.horizontal, 4)
@@ -79,9 +79,19 @@ struct SwipeToDeleteRow<Content: View>: View {
                             if x < -revealWidth / 2 { onOpen() } else { onClose() }
                         }
                 )
+
+            // Зона удаления: поверх всего и ровно тогда, когда строка открыта.
+            if isOpen {
+                Color.clear
+                    .frame(width: revealWidth)
+                    .frame(maxHeight: .infinity)
+                    .contentShape(Rectangle())
+                    .onTapGesture { onDelete() }
+                    .accessibilityLabel("Удалить")
+                    .accessibilityAddTraits(.isButton)
+            }
         }
         .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
         .animation(.spring(response: 0.28, dampingFraction: 0.92), value: isOpen)
-        .animation(.easeOut(duration: 0.12), value: drag)
     }
 }

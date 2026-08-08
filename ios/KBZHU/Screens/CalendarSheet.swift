@@ -151,7 +151,7 @@ struct CalendarSheet: View {
                     Circle()
                         .fill(kcal == 0 ? Color.clear
                               : (isSelected ? Theme.toastAccent
-                                 : (kcal > store.goals.kcal ? Theme.fatBar : Theme.green)))
+                                 : DayStatus(kcal: kcal, goal: store.goals.kcal).markColor))
                         .frame(width: 4, height: 4)
                 }
                 .frame(maxWidth: .infinity)

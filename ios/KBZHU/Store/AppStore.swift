@@ -7,12 +7,29 @@ import SwiftUI
 final class AppStore: ObservableObject {
 
     @Published private(set) var data: AppData {
-        didSet { scheduleSave() }
+        didSet {
+            rebuildIndexes()
+            scheduleSave()
+        }
     }
 
     private let fileURL: URL
     private let ioQueue = DispatchQueue(label: "kbzhu.store.io", qos: .utility)
     private var saveWorkItem: DispatchWorkItem?
+
+    // MARK: - Индексы
+    //
+    // Экраны дёргают «записи за день» и «итоги дня» десятки раз за отрисовку: лента недели,
+    // бейдж, каждый приём пищи, график. Без индекса каждый такой вызов фильтровал и сортировал
+    // весь дневник, и на первом кадре экран заметно подтормаживал. Здесь всё разложено по дням
+    // один раз на изменение данных.
+
+    private var entriesByDay: [Date: [Entry]] = [:]
+    private var foodsByID: [UUID: Food] = [:]
+    /// Итоги считаются лениво и живут до следующего изменения данных.
+    private var totalsCache: [Date: Nutrition] = [:]
+    /// Дни с записями, по возрастанию — для стрика.
+    private var daysWithEntries: [Date] = []
 
     // MARK: - Lifecycle
 
@@ -20,6 +37,27 @@ final class AppStore: ObservableObject {
         let url = fileURL ?? AppStore.defaultFileURL()
         self.fileURL = url
         self.data = AppStore.load(from: url)
+        rebuildIndexes()
+    }
+
+    private func rebuildIndexes() {
+        var byDay: [Date: [Entry]] = [:]
+        byDay.reserveCapacity(max(8, data.entries.count / 4))
+        for entry in data.entries {
+            byDay[Cal.startOfDay(entry.day), default: []].append(entry)
+        }
+        for key in byDay.keys {
+            byDay[key]?.sort { $0.createdAt < $1.createdAt }
+        }
+        entriesByDay = byDay
+        daysWithEntries = byDay.keys.sorted()
+
+        var byID: [UUID: Food] = [:]
+        byID.reserveCapacity(data.foods.count)
+        for food in data.foods { byID[food.id] = food }
+        foodsByID = byID
+
+        totalsCache = [:]
     }
 
     private static func defaultFileURL() -> URL {
@@ -95,13 +133,22 @@ final class AppStore: ObservableObject {
     var catalogCheckedAt: Date? { data.catalogCheckedAt }
     var catalogRevision: String? { data.catalogRevision }
 
-    func food(_ id: UUID) -> Food? { data.foods.first { $0.id == id } }
+    func food(_ id: UUID) -> Food? { foodsByID[id] }
     func food(named name: String) -> Food? { data.foods.first { $0.name == name } }
 
+    /// Поиск сразу по всей еде — и по общей базе, и по своим блюдам.
+    /// Пустой запрос отдаёт всё, что доступно для добавления.
+    func searchAllFoods(_ query: String) -> [Food] {
+        let needle = query.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        let pool = data.foods.filter { !$0.isRetired }
+        guard !needle.isEmpty else { return pool }
+        return pool.filter {
+            $0.name.lowercased().contains(needle) || $0.brand.lowercased().contains(needle)
+        }
+    }
+
     func entries(on day: Date) -> [Entry] {
-        data.entries
-            .filter { Cal.isSameDay($0.day, day) }
-            .sorted { $0.createdAt < $1.createdAt }
+        entriesByDay[Cal.startOfDay(day)] ?? []
     }
 
     func entries(on day: Date, meal: MealKind) -> [Entry] {
@@ -109,11 +156,15 @@ final class AppStore: ObservableObject {
     }
 
     func nutrition(of entry: Entry) -> Nutrition {
-        food(entry.foodID)?.nutrition(grams: entry.grams) ?? .zero
+        foodsByID[entry.foodID]?.nutrition(grams: entry.grams) ?? .zero
     }
 
     func totals(on day: Date) -> Nutrition {
-        entries(on: day).reduce(Nutrition.zero) { $0 + nutrition(of: $1) }
+        let key = Cal.startOfDay(day)
+        if let cached = totalsCache[key] { return cached }
+        let value = (entriesByDay[key] ?? []).reduce(Nutrition.zero) { $0 + nutrition(of: $1) }
+        totalsCache[key] = value
+        return value
     }
 
     func totals(on day: Date, meal: MealKind) -> Nutrition {
@@ -123,18 +174,19 @@ final class AppStore: ObservableObject {
     func kcal(on day: Date) -> Int { Int(totals(on: day).kcal.rounded()) }
 
     func hasEntries(on day: Date) -> Bool {
-        data.entries.contains { Cal.isSameDay($0.day, day) }
+        entriesByDay[Cal.startOfDay(day)] != nil
     }
 
     /// Consecutive days with at least one entry, ending today (or yesterday if today is empty).
     var streakDays: Int {
+        guard var cursor = daysWithEntries.last else { return 0 }
+        let today = Cal.today
+        // Стрик жив, пока последняя запись — сегодня или вчера.
+        guard Cal.dayOffset(cursor, from: today) >= -1 else { return 0 }
+
         var count = 0
-        var cursor = Cal.today
-        if !hasEntries(on: cursor) {
-            cursor = Cal.adding(days: -1, to: cursor)
-            guard hasEntries(on: cursor) else { return 0 }
-        }
-        while hasEntries(on: cursor) {
+        let days = Set(daysWithEntries)
+        while days.contains(cursor) {
             count += 1
             cursor = Cal.adding(days: -1, to: cursor)
         }
@@ -146,7 +198,8 @@ final class AppStore: ObservableObject {
         var seen = Set<UUID>()
         var result: [Food] = []
         for entry in data.entries.sorted(by: { $0.createdAt > $1.createdAt }) {
-            guard !seen.contains(entry.foodID), let food = food(entry.foodID) else { continue }
+            guard !seen.contains(entry.foodID), let food = foodsByID[entry.foodID],
+                  !food.isRetired else { continue }
             seen.insert(entry.foodID)
             result.append(food)
             if result.count >= limit { break }

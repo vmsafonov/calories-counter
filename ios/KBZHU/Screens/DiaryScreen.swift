@@ -26,18 +26,7 @@ struct DiaryScreen: View {
                 calorieCard
                     .padding(.bottom, 14)
 
-                if !hintText.isEmpty {
-                    HStack(spacing: 12) {
-                        Text(hintText)
-                            .golos(400, 12.5, lineHeight: 1.45)
-                            .foregroundStyle(Theme.greenDark)
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 14)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Theme.greenTint, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
-                    .padding(.bottom, 22)
-                }
+                Color.clear.frame(height: 22)
 
                 VStack(spacing: 10) {
                     ForEach(MealKind.ordered) { meal in
@@ -125,58 +114,89 @@ struct DiaryScreen: View {
             }
             return ("\(streak) \(Ru.days(streak)) подряд", Theme.greenTint, Theme.greenDark)
         }
-        let kcal = store.kcal(on: day)
-        if kcal == 0 { return ("Нет записей", Theme.ink(0.05), Theme.ink(0.45)) }
-        if kcal > goals.kcal { return ("Превышение", Theme.fatTint, Theme.fatText) }
-        return ("В норме", Theme.greenTint, Theme.greenDark)
+        let status = DayStatus(kcal: store.kcal(on: day), goal: goals.kcal)
+        return (status.title, status.badgeBackground, status.badgeForeground)
     }
 
     // MARK: - Week strip (Mon…Sun of the selected week)
 
     private var weekStrip: some View {
         let monday = Cal.startOfWeek(day)
-        return HStack(spacing: 5) {
-            ForEach(0..<7, id: \.self) { index in
-                let date = Cal.adding(days: index, to: monday)
-                let isSelected = Cal.isSameDay(date, day)
-                let isFuture = Cal.dayOffset(date) > 0
-                let kcal = isFuture ? 0 : store.kcal(on: date)
+        let nextWeekAvailable = Cal.dayOffset(Cal.adding(days: 7, to: monday)) <= 0
 
-                Button {
-                    guard !isFuture else { return }
-                    nav.day = Cal.startOfDay(date)
-                    nav.openSwipeEntryID = nil
-                } label: {
-                    VStack(spacing: 7) {
-                        Text(Ru.shortWeekdays[Cal.weekdayIndex(date)])
-                            .golos(500, 10.5)
-                            .foregroundStyle(isSelected ? Color.white.opacity(0.55)
-                                             : (isFuture ? Theme.ink(0.22) : Theme.ink(0.38)))
-                        Text("\(Cal.day(date))")
-                            .golos(600, 14.5)
-                            .tabularNumbers()
-                            .foregroundStyle(isSelected ? Color.white
-                                             : (isFuture ? Theme.ink(0.28) : Theme.ink))
-                        Circle()
-                            .fill(dotColour(kcal: kcal, isSelected: isSelected))
-                            .frame(width: 5, height: 5)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 9)
-                    .background(isSelected ? Theme.ink : Color.clear,
-                                in: RoundedRectangle(cornerRadius: 15, style: .continuous))
-                    .contentShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+        return HStack(spacing: 2) {
+            weekArrow(symbol: "chevron.left", enabled: true) {
+                nav.day = Cal.adding(days: -7, to: monday)
+                nav.openSwipeEntryID = nil
+            }
+
+            HStack(spacing: 4) {
+                ForEach(0..<7, id: \.self) { index in
+                    let date = Cal.adding(days: index, to: monday)
+                    dayCell(date)
                 }
-                .buttonStyle(.plain)
-                .disabled(isFuture)
+            }
+            .frame(maxWidth: .infinity)
+
+            weekArrow(symbol: "chevron.right", enabled: nextWeekAvailable) {
+                guard nextWeekAvailable else { return }
+                let next = Cal.adding(days: 7, to: monday)
+                nav.day = Cal.dayOffset(next) > 0 ? Cal.today : next
+                nav.openSwipeEntryID = nil
             }
         }
+    }
+
+    private func weekArrow(symbol: String, enabled: Bool, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: symbol)
+                .font(.system(size: 13, weight: .regular))
+                .foregroundStyle(enabled ? Theme.ink(0.4) : Theme.ink(0.16))
+                .frame(width: 26, height: 52)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .disabled(!enabled)
+    }
+
+    private func dayCell(_ date: Date) -> some View {
+        let isSelected = Cal.isSameDay(date, day)
+        let isFuture = Cal.dayOffset(date) > 0
+        let kcal = isFuture ? 0 : store.kcal(on: date)
+
+        return Button {
+            guard !isFuture else { return }
+            nav.day = Cal.startOfDay(date)
+            nav.openSwipeEntryID = nil
+        } label: {
+            VStack(spacing: 7) {
+                Text(Ru.shortWeekdays[Cal.weekdayIndex(date)])
+                    .golos(500, 10.5)
+                    .foregroundStyle(isSelected ? Color.white.opacity(0.55)
+                                     : (isFuture ? Theme.ink(0.22) : Theme.ink(0.38)))
+                Text("\(Cal.day(date))")
+                    .golos(600, 14.5)
+                    .tabularNumbers()
+                    .foregroundStyle(isSelected ? Color.white
+                                     : (isFuture ? Theme.ink(0.28) : Theme.ink))
+                Circle()
+                    .fill(dotColour(kcal: kcal, isSelected: isSelected))
+                    .frame(width: 5, height: 5)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 9)
+            .background(isSelected ? Theme.ink : Color.clear,
+                        in: RoundedRectangle(cornerRadius: 15, style: .continuous))
+            .contentShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+        }
+        .buttonStyle(.plain)
+        .disabled(isFuture)
     }
 
     private func dotColour(kcal: Int, isSelected: Bool) -> Color {
         guard kcal > 0 else { return .clear }
         if isSelected { return Theme.toastAccent }
-        return kcal > goals.kcal ? Theme.fatBar : Theme.green
+        return DayStatus(kcal: kcal, goal: goals.kcal).markColor
     }
 
     // MARK: - Calories + macros
@@ -243,19 +263,6 @@ struct DiaryScreen: View {
     private var kcalBig: String {
         if over > 0 { return "+" + Ru.grouped(over) }
         return Ru.grouped(store.showRemaining ? left : eaten)
-    }
-
-    private var hintText: String {
-        guard isToday else { return "" }
-        guard eaten > 0 else {
-            return "Добавьте первый приём пищи — норма на день уже рассчитана."
-        }
-        guard goals.protein > 0, goals.kcal > 0 else { return "" }
-        let proteinShare = totals.protein / Double(goals.protein)
-        let kcalShare = totals.kcal / Double(goals.kcal)
-        return proteinShare < kcalShare
-            ? "Белка сегодня меньше нормы — добавьте творог или рыбу к ужину."
-            : "Белок в норме. Так держать."
     }
 
     // MARK: - Meals

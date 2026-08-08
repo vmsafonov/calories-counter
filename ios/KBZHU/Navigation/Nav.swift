@@ -13,8 +13,24 @@ enum Screen: Hashable {
     case bodyGoal
     case norm
     case createFood
-    case mealPick
+    /// Выбор продукта в состав блюда.
+    case ingredientPicker
     case onboarding
+}
+
+/// Откуда берутся КБЖУ блюда.
+enum DraftMode: Hashable {
+    /// Вводятся руками.
+    case manual
+    /// Считаются из состава — продуктов с граммовками.
+    case compose
+}
+
+/// Продукт в составе собираемого блюда.
+struct DraftIngredient: Identifiable, Hashable {
+    var id = UUID()
+    var foodID: UUID
+    var grams: Double
 }
 
 enum AddTab: String, CaseIterable, Hashable {
@@ -135,6 +151,8 @@ final class Nav: ObservableObject {
     @Published var product: ProductContext?
     @Published var foodForm: FoodFormKind = .ownDish
     @Published var draft: FoodDraft = .empty
+    @Published var draftMode: DraftMode = .manual
+    @Published var draftIngredients: [DraftIngredient] = []
 
     @Published var onboardingStep = 1
 
@@ -185,6 +203,8 @@ final class Nav: ObservableObject {
     func openOwnDishForm() {
         foodForm = .ownDish
         draft = FoodDraft(mode: .portion, unit: .portion)
+        draftMode = .manual
+        draftIngredients = []
         screen = .createFood
     }
 
@@ -193,13 +213,25 @@ final class Nav: ObservableObject {
     func openNewProductForm(barcode: String?) {
         foodForm = .baseProduct(barcode: barcode)
         draft = FoodDraft(mode: .grams, unit: nil)
+        draftMode = .manual
+        draftIngredients = []
         screen = .createFood
     }
 
     func openEditForm(_ food: Food) {
         foodForm = .edit(food.id)
         draft = .editing(food)
+        // Правка существующего продукта всегда идёт значениями, а не составом:
+        // из чего блюдо собрали, приложение не помнит.
+        draftMode = .manual
+        draftIngredients = []
         screen = .createFood
+    }
+
+    func resetFoodForm() {
+        draft = .empty
+        draftMode = .manual
+        draftIngredients = []
     }
 
     func flash(_ message: String) {

@@ -112,11 +112,6 @@ struct Food: Codable, Identifiable, Hashable {
         return prefix + "\(Int(kcal.rounded())) ккал / 100 г · Б \(Ru.number(protein)) Ж \(Ru.number(fat)) У \(Ru.number(carbs))"
     }
 
-    /// Same line without the brand — used on the «Продукты» screen.
-    var nutritionSubtitle: String {
-        "\(Int(kcal.rounded())) ккал / 100 г · Б \(Ru.number(protein)) Ж \(Ru.number(fat)) У \(Ru.number(carbs))"
-    }
-
     func nutrition(grams: Double) -> Nutrition {
         let m = grams / 100
         return Nutrition(kcal: kcal * m, protein: protein * m, fat: fat * m, carbs: carbs * m)
