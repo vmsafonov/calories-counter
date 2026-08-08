@@ -46,6 +46,15 @@ struct ProductScreen: View {
                         .foregroundStyle(Theme.ink(0.45))
                         .padding(.top, 5)
 
+                    // Из чего собрано блюдо — чтобы было видно, что именно добавляете.
+                    if food.isComposed {
+                        Text(food.partsLine)
+                            .golos(400, 12, lineHeight: 1.45)
+                            .foregroundStyle(Theme.ink(0.42))
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.top, 8)
+                    }
+
                     portionCard(context: context, food: food,
                                 isUnitMode: isUnitMode,
                                 unitWeight: unitWeight,

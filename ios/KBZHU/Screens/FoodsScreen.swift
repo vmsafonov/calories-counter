@@ -81,36 +81,70 @@ struct FoodsScreen: View {
     }
 
     private func ownRow(_ food: Food) -> some View {
-        Button {
-            startEditing(food)
-        } label: {
-            HStack(spacing: 12) {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(food.name)
-                        .golos(500, 14.5)
-                        .foregroundStyle(Theme.ink)
-                        .multilineTextAlignment(.leading)
-                    Text(food.listSubtitle)
-                        .golos(400, 11.5)
-                        .foregroundStyle(Theme.ink(0.42))
-                        .multilineTextAlignment(.leading)
+        VStack(alignment: .leading, spacing: 0) {
+            Button {
+                startEditing(food)
+            } label: {
+                HStack(alignment: .top, spacing: 12) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(food.name)
+                            .golos(500, 14.5)
+                            .foregroundStyle(Theme.ink)
+                            .multilineTextAlignment(.leading)
+                        Text(food.portionSubtitle)
+                            .golos(400, 11.5)
+                            .foregroundStyle(Theme.ink(0.42))
+                            .multilineTextAlignment(.leading)
+                    }
+                    Spacer(minLength: 0)
+                    Text(food.isEdited ? "изменено" : "своё")
+                        .golos(600, 10.5)
+                        .foregroundStyle(food.isEdited ? Theme.fatText : Theme.greenDark)
+                        .padding(.horizontal, 9)
+                        .padding(.vertical, 5)
+                        .background(food.isEdited ? Theme.fatTint : Theme.greenTint,
+                                    in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                 }
-                Spacer(minLength: 0)
-                Text(food.isEdited ? "изменено" : "своё")
-                    .golos(600, 10.5)
-                    .foregroundStyle(food.isEdited ? Theme.fatText : Theme.greenDark)
-                    .padding(.horizontal, 9)
-                    .padding(.vertical, 5)
-                    .background(food.isEdited ? Theme.fatTint : Theme.greenTint,
-                                in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                .contentShape(Rectangle())
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 14)
-            .background(Color.white, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
-            .overlay(
-                RoundedRectangle(cornerRadius: 18, style: .continuous)
-                    .stroke(Theme.hairlineStrong, lineWidth: 1)
-            )
+            .buttonStyle(.plain)
+
+            // Состав блюда виден прямо в списке — из чего оно и сколько чего.
+            if food.isComposed {
+                Text(food.partsLine)
+                    .golos(400, 11.5, lineHeight: 1.5)
+                    .foregroundStyle(Theme.ink(0.5))
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.top, 10)
+                    .overlay(alignment: .top) {
+                        Rectangle().fill(Theme.hairline).frame(height: 1).offset(y: -5)
+                    }
+            }
+
+            HStack(spacing: 8) {
+                smallButton(title: "Изменить", color: Theme.ink) { startEditing(food) }
+                smallButton(title: "Копировать", color: Theme.greenDark) {
+                    nav.openCopyForm(of: food)
+                }
+            }
+            .padding(.top, 10)
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
+        .overlay(
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .stroke(Theme.hairlineStrong, lineWidth: 1)
+        )
+    }
+
+    private func smallButton(title: String, color: Color, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Text(title)
+                .golos(600, 12.5)
+                .foregroundStyle(color)
+                .frame(maxWidth: .infinity)
+                .frame(height: 40)
+                .background(Theme.fill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
         .buttonStyle(.plain)
     }

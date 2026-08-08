@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 // MARK: - Buttons
 
@@ -255,29 +256,95 @@ struct StepperButton: View {
     }
 }
 
-/// Digits-only text field. Keeps a string binding so partially typed values survive.
-struct NumericField: View {
+/// Поле для цифр.
+///
+/// Обёртка над UITextField, а не SwiftUI TextField, ради двух вещей:
+/// — тап выделяет значение целиком, чтобы ввести новое, а не стирать старое посимвольно;
+/// — поле сообщает о фокусе, и экран может убрать кнопку сохранения из-под пальца.
+struct NumericField: UIViewRepresentable {
     @Binding var text: String
     var placeholder: String = ""
     var weight: Int = 700
     var size: CGFloat = 19
     var color: Color = Theme.ink
     var alignment: TextAlignment = .leading
-    /// Allows a decimal separator — used by the «своё блюдо» form.
+    /// Разрешает десятичный разделитель — нужен форме своего блюда.
     var allowsDecimal: Bool = false
+    /// Вызывается при получении и потере фокуса.
+    var onFocusChange: ((Bool) -> Void)? = nil
 
-    var body: some View {
-        TextField(placeholder, text: $text)
-            .keyboardType(allowsDecimal ? .decimalPad : .numberPad)
-            .golos(weight, size)
-            .tabularNumbers()
-            .foregroundStyle(color)
-            .multilineTextAlignment(alignment)
-            .textFieldStyle(.plain)
-            .onChange(of: text) { _, newValue in
-                let filtered = NumericField.sanitize(newValue, allowsDecimal: allowsDecimal)
-                if filtered != newValue { text = filtered }
+    func makeUIView(context: Context) -> UITextField {
+        let field = UITextField()
+        field.delegate = context.coordinator
+        field.keyboardType = allowsDecimal ? .decimalPad : .numberPad
+        field.borderStyle = .none
+        field.backgroundColor = .clear
+        field.addTarget(context.coordinator,
+                        action: #selector(Coordinator.editingChanged(_:)),
+                        for: .editingChanged)
+        field.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        field.setContentCompressionResistancePriority(.required, for: .vertical)
+
+        // У цифровой клавиатуры нет «Return», поэтому даём явное «Готово».
+        let bar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 44))
+        bar.items = [
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: "Готово", style: .done, target: context.coordinator,
+                            action: #selector(Coordinator.dismissKeyboard))
+        ]
+        bar.sizeToFit()
+        field.inputAccessoryView = bar
+        return field
+    }
+
+    func updateUIView(_ field: UITextField, context: Context) {
+        context.coordinator.parent = self
+        if field.text != text { field.text = text }
+        field.font = Golos.uiFont(weight, size)
+        field.textColor = UIColor(color)
+        field.textAlignment = context.coordinator.textAlignment
+        field.attributedPlaceholder = NSAttributedString(
+            string: placeholder,
+            attributes: [.font: Golos.uiFont(weight, size),
+                         .foregroundColor: UIColor(Theme.ink(0.3))]
+        )
+    }
+
+    func makeCoordinator() -> Coordinator { Coordinator(parent: self) }
+
+    final class Coordinator: NSObject, UITextFieldDelegate {
+        var parent: NumericField
+
+        init(parent: NumericField) { self.parent = parent }
+
+        var textAlignment: NSTextAlignment {
+            switch parent.alignment {
+            case .trailing: return .right
+            case .center: return .center
+            default: return .left
             }
+        }
+
+        @objc func editingChanged(_ field: UITextField) {
+            let cleaned = NumericField.sanitize(field.text ?? "", allowsDecimal: parent.allowsDecimal)
+            if field.text != cleaned { field.text = cleaned }
+            parent.text = cleaned
+        }
+
+        @objc func dismissKeyboard() {
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
+                                            to: nil, from: nil, for: nil)
+        }
+
+        func textFieldDidBeginEditing(_ field: UITextField) {
+            parent.onFocusChange?(true)
+            // Выделяем всё: следующий символ заменит значение целиком.
+            DispatchQueue.main.async { field.selectAll(nil) }
+        }
+
+        func textFieldDidEndEditing(_ field: UITextField) {
+            parent.onFocusChange?(false)
+        }
     }
 
     static func sanitize(_ value: String, allowsDecimal: Bool) -> String {

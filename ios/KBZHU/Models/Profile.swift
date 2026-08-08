@@ -91,6 +91,14 @@ struct BodyProfile: Codable, Hashable {
     }
 }
 
+/// Норма, действующая с определённой даты. Прошедшие дни считаются по той норме,
+/// которая была в силе тогда, а не по сегодняшней.
+struct GoalsPeriod: Codable, Hashable {
+    /// Начало дня, с которого норма действует.
+    var effectiveFrom: Date
+    var goals: Goals
+}
+
 struct Goals: Codable, Hashable {
     var kcal: Int = 1850
     var protein: Int = 120

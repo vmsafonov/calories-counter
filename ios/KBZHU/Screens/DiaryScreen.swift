@@ -8,7 +8,8 @@ struct DiaryScreen: View {
     private var day: Date { nav.day }
     private var isToday: Bool { Cal.isSameDay(day, Cal.today) }
     private var totals: Nutrition { store.totals(on: day) }
-    private var goals: Goals { store.goals }
+    /// Норма именно этого дня: прошлые дни считаются по норме тех дат.
+    private var goals: Goals { store.goals(on: day) }
 
     private var eaten: Int { Int(totals.kcal.rounded()) }
     private var left: Int { max(0, goals.kcal - eaten) }
@@ -163,6 +164,7 @@ struct DiaryScreen: View {
         let isSelected = Cal.isSameDay(date, day)
         let isFuture = Cal.dayOffset(date) > 0
         let kcal = isFuture ? 0 : store.kcal(on: date)
+        let dayGoal = store.goals(on: date).kcal
 
         return Button {
             guard !isFuture else { return }
@@ -180,7 +182,7 @@ struct DiaryScreen: View {
                     .foregroundStyle(isSelected ? Color.white
                                      : (isFuture ? Theme.ink(0.28) : Theme.ink))
                 Circle()
-                    .fill(dotColour(kcal: kcal, isSelected: isSelected))
+                    .fill(dotColour(kcal: kcal, goal: dayGoal, isSelected: isSelected))
                     .frame(width: 5, height: 5)
             }
             .frame(maxWidth: .infinity)
@@ -193,10 +195,10 @@ struct DiaryScreen: View {
         .disabled(isFuture)
     }
 
-    private func dotColour(kcal: Int, isSelected: Bool) -> Color {
+    private func dotColour(kcal: Int, goal: Int, isSelected: Bool) -> Color {
         guard kcal > 0 else { return .clear }
         if isSelected { return Theme.toastAccent }
-        return DayStatus(kcal: kcal, goal: goals.kcal).markColor
+        return DayStatus(kcal: kcal, goal: goal).markColor
     }
 
     // MARK: - Calories + macros

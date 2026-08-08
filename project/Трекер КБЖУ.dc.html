@@ -312,7 +312,7 @@ input,button{font-family:inherit}
 <div style="flex:1;overflow-y:auto;padding:6px 20px 108px;animation:fadein .22s ease">
 <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:24px">
 <div>
-<div style="font:700 24px/1.2 'Golos Text',sans-serif;color:#1A1D1B;letter-spacing:-.01em;margin-bottom:4px">Неделя</div>
+<div style="font:700 24px/1.2 'Golos Text',sans-serif;color:#1A1D1B;letter-spacing:-.01em;margin-bottom:4px">{{ statTitle }}</div>
 <div style="font:400 13px/1.4 'Golos Text',sans-serif;color:rgba(26,29,27,.45)">{{ weekRange }}</div>
 </div>
 <div style="flex:none;display:flex;gap:6px">
@@ -321,8 +321,13 @@ input,button{font-family:inherit}
 </div>
 </div>
 
+<div style="display:flex;gap:6px;margin-bottom:16px">
+<sc-for list="{{ rangeChips }}" as="rc" hint-placeholder-count="2">
+<button onClick="{{ rc.set }}" style="flex:1;height:42px;border:0;border-radius:13px;cursor:pointer;background:{{ rc.bg }};color:{{ rc.fg }};font:600 13px/1 'Golos Text',sans-serif">{{ rc.label }}</button>
+</sc-for>
+</div>
 <div style="border-radius:26px;background:#F4F6F3;padding:22px 20px 18px;margin-bottom:14px">
-<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:8px;height:150px;margin-bottom:12px">
+<div style="display:flex;align-items:flex-end;justify-content:space-between;height:150px;margin-bottom:12px;gap:{{ chartGap }}">
 <sc-for list="{{ week }}" as="d" hint-placeholder-count="7">
 <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end">
 <span style="font:600 10.5px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45);font-variant-numeric:tabular-nums">{{ d.kcal }}</span>
@@ -339,7 +344,7 @@ input,button{font-family:inherit}
 </div>
 
 <div style="display:flex;gap:10px;margin-bottom:10px">
-<div style="flex:1;border:1px solid rgba(26,29,27,.09);border-radius:20px;padding:16px"><div style="font:700 22px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums">{{ avgKcal }}</div><div style="font:400 11.5px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-top:7px">средние ккал в день</div></div>
+<div style="flex:1;border:1px solid rgba(26,29,27,.09);border-radius:20px;padding:16px"><div style="font:700 22px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums">{{ avgKcal }}</div><div style="font:400 11.5px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-top:7px">{{ avgCaption }}</div></div>
 <div style="flex:1;border:1px solid rgba(26,29,27,.09);border-radius:20px;padding:16px"><div style="font:700 22px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums">{{ inNormLabel }}</div><div style="font:400 11.5px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-top:7px">дней в пределах нормы</div></div>
 </div>
 
@@ -480,10 +485,19 @@ input,button{font-family:inherit}
 <div style="font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(26,29,27,.35);margin-bottom:12px">Своя еда</div>
 <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:26px">
 <sc-for list="{{ foodsMy }}" as="fm" hint-placeholder-count="2">
-<button onClick="{{ fm.go }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:14px 16px;border:1px solid rgba(26,29,27,.09);border-radius:18px;background:#fff;cursor:pointer;text-align:left">
+<div style="padding:14px 16px;border:1px solid rgba(26,29,27,.09);border-radius:18px">
+<button onClick="{{ fm.go }}" style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;width:100%;border:0;padding:0;background:transparent;cursor:pointer;text-align:left">
 <div style="min-width:0"><div style="font:500 14.5px/1.25 'Golos Text',sans-serif;color:#1A1D1B">{{ fm.name }}</div><div style="font:400 11.5px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.42);margin-top:4px">{{ fm.sub }}</div></div>
 <span style="flex:none;padding:5px 9px;border-radius:8px;font:600 10.5px/1 'Golos Text',sans-serif;background:{{ fm.tagBg }};color:{{ fm.tagFg }}">{{ fm.tag }}</span>
 </button>
+<sc-if value="{{ fm.hasParts }}" hint-placeholder-val="{{ true }}">
+<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(26,29,27,.07);font:400 11.5px/1.5 'Golos Text',sans-serif;color:rgba(26,29,27,.5);text-wrap:pretty">{{ fm.parts }}</div>
+</sc-if>
+<div style="display:flex;gap:8px;margin-top:10px">
+<button onClick="{{ fm.go }}" style="flex:1;height:40px;border:0;border-radius:12px;background:rgba(26,29,27,.045);color:#1A1D1B;font:600 12.5px/1 'Golos Text',sans-serif;cursor:pointer">Изменить</button>
+<button onClick="{{ fm.copy }}" style="flex:1;height:40px;border:0;border-radius:12px;background:rgba(26,29,27,.045);color:#177F47;font:600 12.5px/1 'Golos Text',sans-serif;cursor:pointer">Копировать</button>
+</div>
+</div>
 </sc-for>
 </div>
 <div style="font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(26,29,27,.35);margin-bottom:12px">База продуктов</div>
@@ -634,7 +648,7 @@ input,button{font-family:inherit}
 </div>
 <div style="display:flex;align-items:center;gap:10px">
 <div style="display:flex;align-items:baseline;gap:5px;height:40px;padding:0 12px;border-radius:12px;background:#F4F6F3">
-<input value="{{ di.gValue }}" onChange="{{ di.onG }}" inputmode="numeric" style="width:48px;height:40px;border:0;background:transparent;outline:none;text-align:right;font:600 14px/40px 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums">
+<input value="{{ di.gValue }}" onChange="{{ di.onG }}" onFocus="{{ onFocusIn }}" onBlur="{{ onFocusOut }}" inputmode="numeric" style="width:48px;height:40px;border:0;background:transparent;outline:none;text-align:right;font:600 14px/40px 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums">
 <span style="font:500 12.5px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45)">г</span>
 </div>
 <span style="font:400 11.5px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.42)">{{ di.macros }}</span>
@@ -656,6 +670,17 @@ input,button{font-family:inherit}
 <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px"><span style="font:700 28px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums">{{ composeK }}</span><span style="font:500 13px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45)">ккал</span></div>
 <div style="font:400 12.5px/1.4 'Golos Text',sans-serif;color:rgba(26,29,27,.5);font-variant-numeric:tabular-nums">{{ composeMacros }} · {{ composePer100 }}</div>
 </div>
+<div style="padding:16px 18px;border-radius:18px;background:#F4F6F3;margin-bottom:16px">
+<div style="font:500 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:10px">Порция называется</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">
+<sc-for list="{{ unitNameChips }}" as="un2" hint-placeholder-count="5">
+<button onClick="{{ un2.set }}" style="height:38px;padding:0 13px;border:0;border-radius:11px;cursor:pointer;background:{{ un2.bg }};color:{{ un2.fg }};font:600 12.5px/1 'Golos Text',sans-serif">{{ un2.label }}</button>
+</sc-for>
+</div>
+<div style="font:500 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:8px">Сколько весит одна порция, г</div>
+<input value="{{ dG }}" onChange="{{ onDG }}" onFocus="{{ onFocusIn }}" onBlur="{{ onFocusOut }}" placeholder="{{ portionPlaceholder }}" inputmode="numeric" style="width:100%;height:52px;padding:0 16px;border:0;border-radius:16px;background:#fff;outline:none;font:600 15px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums">
+<div style="font:400 12px/1.4 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-top:10px;font-variant-numeric:tabular-nums">{{ portionKcalNote }}</div>
+</div>
 </sc-if>
 </sc-if>
 
@@ -676,23 +701,25 @@ input,button{font-family:inherit}
 </sc-for>
 </div>
 <div style="font:500 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:8px">Сколько весит одна порция, г</div>
-<input value="{{ dG }}" onChange="{{ onDG }}" placeholder="120" inputmode="numeric" style="width:100%;height:52px;padding:0 16px;border:0;border-radius:16px;background:#fff;outline:none;font:600 15px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums">
+<input value="{{ dG }}" onChange="{{ onDG }}" onFocus="{{ onFocusIn }}" onBlur="{{ onFocusOut }}" placeholder="120" inputmode="numeric" style="width:100%;height:52px;padding:0 16px;border:0;border-radius:16px;background:#fff;outline:none;font:600 15px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums">
 </div>
 </sc-if>
 
 <div style="font:500 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:8px">{{ valuesCaption }}</div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
-<div style="border-radius:16px;background:#F4F6F3;padding:12px 14px"><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-bottom:8px">Калории</div><input value="{{ dK }}" onChange="{{ onDK }}" placeholder="254" inputmode="numeric" style="width:100%;border:0;background:transparent;outline:none;font:700 19px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums"></div>
-<div style="border-radius:16px;background:#E9F1FA;padding:12px 14px"><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(46,111,168,.75);margin-bottom:8px">Белки, г</div><input value="{{ dP }}" onChange="{{ onDP }}" placeholder="19" inputmode="numeric" style="width:100%;border:0;background:transparent;outline:none;font:700 19px/1 'Golos Text',sans-serif;color:#2E6FA8;font-variant-numeric:tabular-nums"></div>
-<div style="border-radius:16px;background:#FBF2DF;padding:12px 14px"><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(169,118,26,.8);margin-bottom:8px">Жиры, г</div><input value="{{ dF }}" onChange="{{ onDF }}" placeholder="17" inputmode="numeric" style="width:100%;border:0;background:transparent;outline:none;font:700 19px/1 'Golos Text',sans-serif;color:#A9761A;font-variant-numeric:tabular-nums"></div>
-<div style="border-radius:16px;background:#F3ECFB;padding:12px 14px"><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(122,79,179,.8);margin-bottom:8px">Углеводы, г</div><input value="{{ dC }}" onChange="{{ onDC }}" placeholder="7" inputmode="numeric" style="width:100%;border:0;background:transparent;outline:none;font:700 19px/1 'Golos Text',sans-serif;color:#7A4FB3;font-variant-numeric:tabular-nums"></div>
+<div style="border-radius:16px;background:#F4F6F3;padding:12px 14px"><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-bottom:8px">Калории</div><input value="{{ dK }}" onChange="{{ onDK }}" onFocus="{{ onFocusIn }}" onBlur="{{ onFocusOut }}" placeholder="254" inputmode="numeric" style="width:100%;border:0;background:transparent;outline:none;font:700 19px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums"></div>
+<div style="border-radius:16px;background:#E9F1FA;padding:12px 14px"><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(46,111,168,.75);margin-bottom:8px">Белки, г</div><input value="{{ dP }}" onChange="{{ onDP }}" onFocus="{{ onFocusIn }}" onBlur="{{ onFocusOut }}" placeholder="19" inputmode="numeric" style="width:100%;border:0;background:transparent;outline:none;font:700 19px/1 'Golos Text',sans-serif;color:#2E6FA8;font-variant-numeric:tabular-nums"></div>
+<div style="border-radius:16px;background:#FBF2DF;padding:12px 14px"><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(169,118,26,.8);margin-bottom:8px">Жиры, г</div><input value="{{ dF }}" onChange="{{ onDF }}" onFocus="{{ onFocusIn }}" onBlur="{{ onFocusOut }}" placeholder="17" inputmode="numeric" style="width:100%;border:0;background:transparent;outline:none;font:700 19px/1 'Golos Text',sans-serif;color:#A9761A;font-variant-numeric:tabular-nums"></div>
+<div style="border-radius:16px;background:#F3ECFB;padding:12px 14px"><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(122,79,179,.8);margin-bottom:8px">Углеводы, г</div><input value="{{ dC }}" onChange="{{ onDC }}" onFocus="{{ onFocusIn }}" onBlur="{{ onFocusOut }}" placeholder="7" inputmode="numeric" style="width:100%;border:0;background:transparent;outline:none;font:700 19px/1 'Golos Text',sans-serif;color:#7A4FB3;font-variant-numeric:tabular-nums"></div>
 </div>
 <div style="padding:14px 16px;border-radius:16px;background:rgba(26,29,27,.04);font:400 12.5px/1.5 'Golos Text',sans-serif;color:rgba(26,29,27,.5);text-wrap:pretty">{{ draftHint }}</div>
 </sc-if>
 </div>
+<sc-if value="{{ notTyping }}" hint-placeholder-val="{{ true }}">
 <div style="flex:none;padding:12px 20px 30px;border-top:1px solid rgba(26,29,27,.07);background:#fff">
 <button onClick="{{ saveDraft }}" style="width:100%;height:56px;border:0;border-radius:18px;background:#22A45C;color:#fff;font:600 16px/1 'Golos Text',sans-serif;cursor:pointer;box-shadow:0 8px 18px -8px rgba(34,164,92,.8)">{{ saveLabel }}</button>
 </div>
+</sc-if>
 </div>
 </sc-if>
 
@@ -862,7 +889,7 @@ class Component extends DCLogic {
     ],
     draft: {name:'', measure:'portion', unit:'порция', g:'', k:'', p:'', f:'', c:''},
     dbExtra: [], draftTarget: 'my', barcode: '',
-    weekStart: 0, draftMode: 'manual', draftItems: [],
+    weekStart: 0, draftMode: 'manual', draftItems: [], typing: false, statRange: 'week',
     log: PAST.concat([
       e_('Завтрак','Овсяная каша на воде',250,0),
       e_('Завтрак','Латте на овсяном',300,0),
@@ -969,9 +996,11 @@ class Component extends DCLogic {
       ? {k: Math.round(ct.k / g * 1000) / 10, p: Math.round(ct.p / g * 1000) / 10, f: Math.round(ct.f / g * 1000) / 10, c: Math.round(ct.c / g * 1000) / 10}
       : {k: per(dr.k), p: per(dr.p), f: per(dr.f), c: per(dr.c)};
     const brand = (dr.brand || '').trim();
+    const portionG = compose ? Math.max(1, Math.round(parseFloat(dr.g) || ct.g)) : Math.round(g);
     const shape = portion
-      ? {def: Math.round(g), unit: dr.unit || 'порция', pw: Math.round(g)}
+      ? {def: portionG, unit: dr.unit || 'порция', pw: portionG}
       : {def: 100, unit: null, pw: null};
+    if (compose) shape.items = s0.draftItems.map(x => ({name: x.name, g: parseFloat(x.g) || 0}));
     if (brand) shape.brand = brand;
 
     if (s0.editName) {
@@ -997,11 +1026,15 @@ class Component extends DCLogic {
     this.flash('«' + n + '» в вашей еде');
   };
 
-  startEdit = (item) => {
+  startEdit = (item, copy) => {
     const portion = !!item.unit, base = portion ? (item.pw || item.def || 100) : 100;
     const m = base / 100, rr = (v) => String(Math.round(v * 10) / 10);
-    this.setState({editName: item.name, screen: 'create', draftTarget: item.own ? 'my' : 'base', barcode: '', draftMode: 'manual', draftItems: [],
-      draft: {name: item.name, brand: item.brand === 'Своё блюдо' ? '' : (item.brand || ''), measure: portion ? 'portion' : 'gram', unit: item.unit || 'порция', g: String(base),
+    const composed = !!(item.items && item.items.length);
+    this.setState({editName: copy ? null : item.name, screen: 'create', draftTarget: item.own ? 'my' : 'base', barcode: '',
+      draftMode: composed ? 'compose' : 'manual',
+      draftItems: composed ? item.items.map(x => ({name: x.name, g: x.g})) : [],
+      draft: {name: copy ? item.name + ' (копия)' : item.name, brand: item.brand === 'Своё блюдо' ? '' : (item.brand || ''),
+        measure: portion ? 'portion' : 'gram', unit: item.unit || 'порция', g: String(base),
         k: rr(item.k * m), p: rr(item.p * m), f: rr(item.f * m), c: rr(item.c * m)}});
   };
 
@@ -1150,9 +1183,16 @@ class Component extends DCLogic {
     const wkEnd = wStart + 6;
     const weekRange = dateOf(wStart).getDate() + ' ' + MON[dateOf(wStart).getMonth()] + ' — ' + dateOf(wkEnd).getDate() + ' ' + MON[dateOf(wkEnd).getMonth()];
 
-    const week = weekOffs.map(off => {
+    const isMonth = s.statRange === 'month';
+    const selD = dateOf(s.day), mFirst = offOf(new Date(selD.getFullYear(), selD.getMonth(), 1));
+    const mDays = new Date(selD.getFullYear(), selD.getMonth() + 1, 0).getDate();
+    const statOffs = isMonth ? Array.apply(null, {length: mDays}).map((_, i) => mFirst + i) : weekOffs;
+
+    const week = statOffs.map((off, i) => {
       const future = off > 0, k = future ? 0 : this.kcalOf(off), dt = dateOf(off);
-      return {day: DOW[dt.getDay()], kcal: future || !k ? '' : (k > 999 ? String(k).slice(0,-3) + ' ' + String(k).slice(-3) : k),
+      const n = dt.getDate();
+      return {day: isMonth ? (n === 1 || n % 5 === 0 ? String(n) : '') : DOW[dt.getDay()],
+        kcal: isMonth || future || !k ? '' : (k > 999 ? String(k).slice(0,-3) + ' ' + String(k).slice(-3) : k),
         h: Math.max(6, Math.round(k / 2200 * 108)) + 'px', color: this.statusOf(k, goalK).color};
     });
 
@@ -1180,7 +1220,7 @@ class Component extends DCLogic {
         go: future ? (() => {}) : (() => this.setState({day: off, calOpen: false}))});
     }
 
-    const offs = weekOffs.filter(o => o <= 0 && this.kcalOf(o) > 0);
+    const offs = statOffs.filter(o => o <= 0 && this.kcalOf(o) > 0);
     const nDays = Math.max(1, offs.length);
     const wsum = offs.map(o => this.totals(o)).reduce((a, x) => ({k:a.k+x.k, p:a.p+x.p, ff:a.ff+x.ff, c:a.c+x.c}), {k:0,p:0,ff:0,c:0});
     const avg = {k: wsum.k/nDays, p: wsum.p/nDays, ff: wsum.ff/nDays, c: wsum.c/nDays};
@@ -1191,9 +1231,13 @@ class Component extends DCLogic {
       {name:'Углеводы', val: r(avg.c) + ' / ' + goalC + ' г', w: pct(avg.c, goalC), color:'#9E6FD3'}
     ];
     const foodsMy = s.myFoods.map(x => this.foodBy(x.name)).map(x => ({
-      name: x.name, sub: (x.brand ? x.brand + ' · ' : '') + r(x.k) + ' ккал / 100 г · Б ' + numRu(x.p) + ' Ж ' + numRu(x.f) + ' У ' + numRu(x.c),
+      name: x.name,
+      sub: (x.pw ? x.pw + ' г / ' + (x.unit || 'порция') + ' · ' : '') + r(x.k) + ' ккал / 100 г · Б ' + numRu(x.p) + ' Ж ' + numRu(x.f) + ' У ' + numRu(x.c),
+      parts: x.items && x.items.length ? x.items.map(i => i.name + ' ' + i.g + ' г').join(' · ') : '',
+      hasParts: !!(x.items && x.items.length),
       tag: x.edited ? 'изменено' : 'своё', tagBg: x.edited ? '#FBF2DF' : '#E9F6EE', tagFg: x.edited ? '#A9761A' : '#177F47',
-      go: () => this.startEdit(x)
+      go: () => this.startEdit(x),
+      copy: () => this.startEdit(x, true)
     }));
     const foodsBase = allBase.map(x => this.foodBy(x.name)).map(x => ({
       name: x.name, sub: (x.brand ? x.brand + ' · ' : '') + r(x.k) + ' ккал / 100 г · Б ' + numRu(x.p) + ' Ж ' + numRu(x.f) + ' У ' + numRu(x.c),
@@ -1363,6 +1407,11 @@ class Component extends DCLogic {
       composeG: r(ctot.g), composeK: r(ctot.k),
       composeMacros: 'Б ' + r(ctot.p) + ' · Ж ' + r(ctot.f) + ' · У ' + r(ctot.c),
       composePer100: ctot.g ? r(ctot.k / ctot.g * 100) + ' ккал на 100 г' : 'добавьте ингредиенты',
+      portionPlaceholder: ctot.g ? String(r(ctot.g)) : '100',
+      portionKcalNote: (parseFloat(s.draft.g) && ctot.g) ? r(ctot.k / ctot.g * parseFloat(s.draft.g)) + ' ккал в порции' : 'по умолчанию — вся масса',
+      typing: s.typing, notTyping: !s.typing,
+      onFocusIn: () => this.setState({typing: true}),
+      onFocusOut: () => this.setState({typing: false}),
       goIngredients: () => this.setState({screen: 'ingredient', query: ''}),
       isIngredient: s.screen === 'ingredient',
       ingredients: (q ? allBase.concat(s.myFoods).filter(x => x.name.toLowerCase().indexOf(q) >= 0) : allBase.concat(s.myFoods))
@@ -1397,12 +1446,24 @@ class Component extends DCLogic {
       streakLabel: s.day === 0 ? '12 дней подряд' : this.statusOf(this.kcalOf(s.day), goalK).label,
       streakBg: s.day === 0 ? '#E9F6EE' : this.statusOf(this.kcalOf(s.day), goalK).bg,
       streakFg: s.day === 0 ? '#177F47' : this.statusOf(this.kcalOf(s.day), goalK).fg,
-      weekStrip, calCells, weekRange,
+      weekStrip, calCells,
+      weekRange: isMonth ? MONN[selD.getMonth()] + ' ' + selD.getFullYear() : weekRange,
+      statTitle: isMonth ? 'Месяц' : 'Неделя',
+      chartGap: isMonth ? '2px' : '8px',
+      rangeChips: [['week','Неделя'],['month','Месяц']].map(([id, label]) => {
+        const c0 = chip(s.statRange === id);
+        return {label, bg: c0.bg, fg: c0.fg, set: () => this.setState({statRange: id})};
+      }),
+      avgCaption: isMonth ? 'средние ккал за месяц' : 'средние ккал в день',
       inNormCount: inNorm, weekDaysCount: offs.length,
-      prevWeek: () => this.setState({day: wStart - 7}),
-      nextWeek: () => wStart + 7 <= 0 ? this.setState({day: Math.min(0, wStart + 7)}) : null,
-      nextWeekBg: wStart + 7 <= 0 ? 'rgba(26,29,27,.05)' : 'rgba(26,29,27,.02)',
-      nextWeekFg: wStart + 7 <= 0 ? INK : 'rgba(26,29,27,.25)',
+      prevWeek: () => isMonth
+        ? this.setState({day: offOf(new Date(selD.getFullYear(), selD.getMonth() - 1, 1))})
+        : this.setState({day: wStart - 7}),
+      nextWeek: () => isMonth
+        ? (offOf(new Date(selD.getFullYear(), selD.getMonth() + 1, 1)) <= 0 ? this.setState({day: Math.min(0, offOf(new Date(selD.getFullYear(), selD.getMonth() + 1, 1)))}) : null)
+        : (wStart + 7 <= 0 ? this.setState({day: Math.min(0, wStart + 7)}) : null),
+      nextWeekBg: (isMonth ? offOf(new Date(selD.getFullYear(), selD.getMonth() + 1, 1)) <= 0 : wStart + 7 <= 0) ? 'rgba(26,29,27,.05)' : 'rgba(26,29,27,.02)',
+      nextWeekFg: (isMonth ? offOf(new Date(selD.getFullYear(), selD.getMonth() + 1, 1)) <= 0 : wStart + 7 <= 0) ? INK : 'rgba(26,29,27,.25)',
       calDows: ['пн','вт','ср','чт','пт','сб','вс'].map(l => ({l})),
       calOpen: s.calOpen,
       calTitle: MONN[cm] + ' 2026',

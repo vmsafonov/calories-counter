@@ -36,6 +36,15 @@ enum FoodUnit: String, Codable, CaseIterable, Hashable {
     func form(_ count: Double) -> String { Ru.plural(count, forms) }
 }
 
+/// Продукт в составе блюда. Название хранится рядом с id, чтобы состав читался,
+/// даже если сам продукт из базы потом исчез.
+struct FoodPart: Codable, Hashable, Identifiable {
+    var id = UUID()
+    var foodID: UUID
+    var name: String
+    var grams: Double
+}
+
 /// A product or dish. Macros are always stored per 100 g, as in the prototype's `DB`.
 struct Food: Codable, Identifiable, Hashable {
     var id: UUID = UUID()
@@ -61,6 +70,15 @@ struct Food: Codable, Identifiable, Hashable {
     /// Продукт пропал из каталога: в списках не показывается, но старые записи
     /// дневника продолжают на него ссылаться.
     var isRetired: Bool = false
+    /// Из чего собрано блюдо. Пусто — КБЖУ задавали руками.
+    var parts: [FoodPart] = []
+
+    var isComposed: Bool { !parts.isEmpty }
+
+    /// «Гречка 200 г · Куриная грудка 150 г»
+    var partsLine: String {
+        parts.map { "\($0.name) \(Ru.number($0.grams)) г" }.joined(separator: " · ")
+    }
 
     var gramsPerUnit: Double { unitWeight ?? defaultGrams }
 
@@ -83,12 +101,14 @@ struct Food: Codable, Identifiable, Hashable {
         barcode = try box.decodeIfPresent(String.self, forKey: .barcode)
         catalogID = try box.decodeIfPresent(String.self, forKey: .catalogID)
         isRetired = try box.decodeIfPresent(Bool.self, forKey: .isRetired) ?? false
+        parts = try box.decodeIfPresent([FoodPart].self, forKey: .parts) ?? []
     }
 
     init(id: UUID = UUID(), name: String, brand: String, kcal: Double, protein: Double,
          fat: Double, carbs: Double, defaultGrams: Double, unit: FoodUnit? = nil,
          unitWeight: Double? = nil, isOwn: Bool = false, isEdited: Bool = false,
-         barcode: String? = nil, catalogID: String? = nil, isRetired: Bool = false) {
+         barcode: String? = nil, catalogID: String? = nil, isRetired: Bool = false,
+         parts: [FoodPart] = []) {
         self.id = id
         self.name = name
         self.brand = brand
@@ -104,6 +124,14 @@ struct Food: Codable, Identifiable, Hashable {
         self.barcode = barcode
         self.catalogID = catalogID
         self.isRetired = isRetired
+        self.parts = parts
+    }
+
+    /// «180 г / порция · 212 ккал / 100 г · Б 16 Ж 14 У 6» — для своей еды,
+    /// где важнее вес порции, чем бренд.
+    var portionSubtitle: String {
+        let prefix = unit.map { "\(Ru.number(gramsPerUnit)) г / \($0.rawValue) · " } ?? ""
+        return prefix + "\(Int(kcal.rounded())) ккал / 100 г · Б \(Ru.number(protein)) Ж \(Ru.number(fat)) У \(Ru.number(carbs))"
     }
 
     /// «Nordic · 88 ккал / 100 г · Б 3 Ж 1.7 У 15»

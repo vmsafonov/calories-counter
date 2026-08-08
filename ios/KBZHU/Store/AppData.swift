@@ -4,7 +4,10 @@ import Foundation
 struct AppData: Codable {
     var foods: [Food] = []
     var entries: [Entry] = []
+    /// Текущая норма. Историю держит `goalsHistory`; здесь всегда последняя.
     var goals = Goals()
+    /// История нормы по датам, по возрастанию. Первый период открыт «с начала времён».
+    var goalsHistory: [GoalsPeriod] = []
     var bodyProfile = BodyProfile()
     var goal: GoalKind = .lose
     var userName: String = ""
@@ -27,6 +30,7 @@ struct AppData: Codable {
         var data = AppData()
         data.foods = SeedData.foods
         data.catalogRevision = SeedData.bundledRevision
+        data.goalsHistory = [GoalsPeriod(effectiveFrom: .distantPast, goals: data.goals)]
         return data
     }
 
@@ -39,6 +43,11 @@ struct AppData: Codable {
         foods = try box.decodeIfPresent([Food].self, forKey: .foods) ?? []
         entries = try box.decodeIfPresent([Entry].self, forKey: .entries) ?? []
         goals = try box.decodeIfPresent(Goals.self, forKey: .goals) ?? Goals()
+        goalsHistory = try box.decodeIfPresent([GoalsPeriod].self, forKey: .goalsHistory) ?? []
+        if goalsHistory.isEmpty {
+            // Файл из версии без истории: считаем, что нынешняя норма действовала всегда.
+            goalsHistory = [GoalsPeriod(effectiveFrom: .distantPast, goals: goals)]
+        }
         bodyProfile = try box.decodeIfPresent(BodyProfile.self, forKey: .bodyProfile) ?? BodyProfile()
         goal = try box.decodeIfPresent(GoalKind.self, forKey: .goal) ?? .lose
         userName = try box.decodeIfPresent(String.self, forKey: .userName) ?? ""
