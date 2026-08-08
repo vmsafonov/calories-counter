@@ -1,44 +1,39 @@
 import SwiftUI
 
-/// Rolling seven days: calories per day, averages, macro averages.
+/// Неделя Пн–Вс: калории по дням, средние и средние нутриенты.
+/// Неделя та же, что выбрана в дневнике, — переключается стрелками здесь или там.
 struct StatsScreen: View {
     @EnvironmentObject private var store: AppStore
+    @EnvironmentObject private var nav: Nav
 
-    private var days: [Date] {
-        (-6...0).map { Cal.adding(days: $0, to: Cal.today) }
-    }
+    private var monday: Date { Cal.startOfWeek(nav.day) }
+    private var weekDays: [Date] { (0..<7).map { Cal.adding(days: $0, to: monday) } }
+    /// Дни недели, в которые что-то записано: по ним считаются средние.
+    private var loggedDays: [Date] { weekDays.filter { store.kcal(on: $0) > 0 } }
+    private var nextWeekAvailable: Bool { Cal.dayOffset(Cal.adding(days: 7, to: monday)) <= 0 }
 
     var body: some View {
         let goals = store.goals
-        let weekTotal = days
-            .map { store.totals(on: $0) }
-            .reduce(Nutrition.zero) { $0 + $1 }
-        let average = Nutrition(kcal: weekTotal.kcal / 7, protein: weekTotal.protein / 7,
-                                fat: weekTotal.fat / 7, carbs: weekTotal.carbs / 7)
-        let inNorm = days.filter { day in
-            let kcal = store.kcal(on: day)
-            return kcal > 0 && kcal <= goals.kcal
-        }.count
+        let logged = loggedDays
+        let divisor = Double(max(1, logged.count))
+        let sum = logged.map { store.totals(on: $0) }.reduce(Nutrition.zero) { $0 + $1 }
+        let average = Nutrition(kcal: sum.kcal / divisor, protein: sum.protein / divisor,
+                                fat: sum.fat / divisor, carbs: sum.carbs / divisor)
+        let inNorm = logged.filter { DayStatus(kcal: store.kcal(on: $0), goal: goals.kcal) == .onTarget }.count
 
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                Text("Неделя")
-                    .golos(700, 24)
-                    .kerning(-0.24)
-                    .foregroundStyle(Theme.ink)
-                    .padding(.bottom, 4)
-                Text("\(Cal.dayMonth(days[0])) — \(Cal.dayMonth(days[6]))")
-                    .golos(400, 13)
-                    .foregroundStyle(Theme.ink(0.45))
+                header
                     .padding(.bottom, 24)
 
                 chartCard(goalKcal: goals.kcal)
                     .padding(.bottom, 14)
 
                 HStack(spacing: 10) {
-                    statTile(value: Ru.grouped(Int(average.kcal.rounded())),
+                    statTile(value: logged.isEmpty ? "—" : Ru.grouped(Int(average.kcal.rounded())),
                              caption: "средние ккал в день")
-                    statTile(value: "\(inNorm) из 7", caption: "дней в пределах нормы")
+                    statTile(value: "\(inNorm) из \(logged.count)",
+                             caption: "дней в пределах нормы")
                 }
                 .padding(.bottom, 10)
 
@@ -69,26 +64,70 @@ struct StatsScreen: View {
         }
     }
 
+    // MARK: - Шапка с переключением недель
+
+    private var header: some View {
+        HStack(spacing: 10) {
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Неделя")
+                    .golos(700, 24)
+                    .kerning(-0.24)
+                    .foregroundStyle(Theme.ink)
+                Text("\(Cal.dayMonth(monday)) — \(Cal.dayMonth(Cal.adding(days: 6, to: monday)))")
+                    .golos(400, 13)
+                    .foregroundStyle(Theme.ink(0.45))
+            }
+            Spacer(minLength: 0)
+            HStack(spacing: 6) {
+                weekButton(symbol: "chevron.left", enabled: true) {
+                    nav.day = Cal.adding(days: -7, to: monday)
+                }
+                weekButton(symbol: "chevron.right", enabled: nextWeekAvailable) {
+                    guard nextWeekAvailable else { return }
+                    let next = Cal.adding(days: 7, to: monday)
+                    nav.day = Cal.dayOffset(next) > 0 ? Cal.today : next
+                }
+            }
+        }
+    }
+
+    private func weekButton(symbol: String, enabled: Bool, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: symbol)
+                .font(.system(size: 14, weight: .regular))
+                .foregroundStyle(enabled ? Theme.ink : Theme.ink(0.25))
+                .frame(width: 40, height: 40)
+                .background(Theme.ink(enabled ? 0.05 : 0.02),
+                            in: RoundedRectangle(cornerRadius: 13, style: .continuous))
+        }
+        .buttonStyle(.plain)
+        .disabled(!enabled)
+    }
+
+    // MARK: - График
+
     private func chartCard(goalKcal: Int) -> some View {
         VStack(spacing: 0) {
             HStack(alignment: .bottom, spacing: 8) {
-                ForEach(days, id: \.self) { day in
-                    let kcal = store.kcal(on: day)
+                ForEach(weekDays, id: \.self) { day in
+                    let isFuture = Cal.dayOffset(day) > 0
+                    let kcal = isFuture ? 0 : store.kcal(on: day)
                     VStack(spacing: 8) {
-                        Text(kcal > 0 ? Ru.grouped(kcal) : "—")
+                        Text(kcal > 0 ? Ru.grouped(kcal) : " ")
                             .golos(600, 10.5)
                             .tabularNumbers()
                             .foregroundStyle(Theme.ink(0.45))
                             .lineLimit(1)
                             .minimumScaleFactor(0.7)
                         RoundedRectangle(cornerRadius: 8, style: .continuous)
-                            .fill(kcal > goalKcal ? Theme.fatBar : Theme.green)
+                            .fill(DayStatus(kcal: kcal, goal: goalKcal).markColor)
                             .frame(height: barHeight(kcal))
                         Text(Ru.shortWeekdays[Cal.weekdayIndex(day)])
                             .golos(500, 11)
                             .foregroundStyle(Theme.ink(0.4))
                     }
                     .frame(maxWidth: .infinity)
+                    .opacity(isFuture ? 0.4 : 1)
                 }
             }
             .frame(height: 150, alignment: .bottom)
@@ -96,6 +135,7 @@ struct StatsScreen: View {
 
             HStack(spacing: 14) {
                 legend(color: Theme.green, title: "в норме")
+                legend(color: Theme.proteinBar, title: "ниже нормы")
                 legend(color: Theme.fatBar, title: "превышение")
                 Spacer(minLength: 0)
             }
@@ -110,7 +150,7 @@ struct StatsScreen: View {
         .background(Theme.softCard, in: RoundedRectangle(cornerRadius: 26, style: .continuous))
     }
 
-    /// Same scale as the prototype: full height at 2200 kcal, never thinner than 6 pt.
+    /// Та же шкала, что в прототипе: полная высота на 2200 ккал, тоньше 6 pt не бывает.
     private func barHeight(_ kcal: Int) -> CGFloat {
         max(6, min(108, CGFloat(kcal) / 2200 * 108))
     }

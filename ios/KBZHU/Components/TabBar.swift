@@ -1,10 +1,10 @@
 import SwiftUI
 
-/// Custom bottom bar with the floating «+» — the design's four tabs plus a centred action.
+/// Нижняя панель с четырьмя вкладками. Добавление еды идёт из «+ Добавить»
+/// в приёме пищи, отдельной круглой кнопки нет.
 struct TabBar: View {
     let current: Screen
     let onSelect: (Screen) -> Void
-    let onAdd: () -> Void
 
     private struct Item {
         let screen: Screen
@@ -20,7 +20,7 @@ struct TabBar: View {
     ]
 
     var body: some View {
-        ZStack(alignment: .top) {
+        VStack(spacing: 0) {
             HStack(spacing: 0) {
                 ForEach(items, id: \.screen) { item in
                     let isOn = item.screen == current
@@ -55,17 +55,6 @@ struct TabBar: View {
                     .ignoresSafeArea(edges: .bottom)
             )
 
-            Button(action: onAdd) {
-                Image(systemName: "plus")
-                    .font(.system(size: 24, weight: .light))
-                    .foregroundStyle(.white)
-                    .frame(width: 60, height: 60)
-                    .background(Theme.green, in: Circle())
-                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                    .shadow(color: Theme.green.opacity(0.6), radius: 11, x: 0, y: 10)
-            }
-            .buttonStyle(.plain)
-            .offset(y: -12)
         }
         .frame(height: 92, alignment: .top)
     }

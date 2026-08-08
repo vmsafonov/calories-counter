@@ -21,11 +21,7 @@ struct RootView: View {
                     .transition(.opacity)
 
                 if tabbedScreens.contains(nav.screen) {
-                    TabBar(
-                        current: nav.screen,
-                        onSelect: { nav.go($0) },
-                        onAdd: { nav.go(.mealPick) }
-                    )
+                    TabBar(current: nav.screen, onSelect: { nav.go($0) })
                 }
             }
 
@@ -46,6 +42,9 @@ struct RootView: View {
         .environmentObject(store)
         .environmentObject(nav)
         .task {
+            // Не мешаем первому кадру: каталог подтягиваем, когда экран уже показан
+            // и пользователь может скроллить.
+            try? await Task.sleep(nanoseconds: 600_000_000)
             await CatalogService.refreshIfNeeded(store: store)
         }
         .onChange(of: scenePhase) { _, phase in
@@ -76,7 +75,7 @@ struct RootView: View {
         case .bodyGoal: BodyGoalScreen()
         case .norm: NormScreen()
         case .createFood: CreateFoodScreen()
-        case .mealPick: MealPickScreen()
+        case .ingredientPicker: IngredientPickerScreen()
         case .onboarding: OnboardingScreen()
         }
     }

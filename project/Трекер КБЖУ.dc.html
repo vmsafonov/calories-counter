@@ -28,13 +28,13 @@ input,button{font-family:inherit}
 <a href="#t1" style="font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1A1D1B;color:#fff;border-radius:4px;text-decoration:none">1</a>
 <span style="font:600 13px/1.2 'Golos Text',sans-serif;color:#1A1D1B">Трекер КБЖУ — рабочий прототип и варианты ключевых экранов</span>
 </div>
-<p style="margin:0 0 26px;max-width:760px;font:400 12.5px/1.65 'Golos Text',sans-serif;color:rgba(26,29,27,.55);text-wrap:pretty">Допущения: массовый пользователь на снижении веса, обе платформы (базовая раскладка iOS, размеры тапов ≥44px), русский интерфейс. Норма считается на онбординге по формуле Миффлина — Сан Жеора. Основная метафора прогресса — горизонтальные полосы Б/Ж/У, как вы выбрали; <a href="#1c" style="color:#1F9E58;text-decoration:none;font-weight:600">1c</a> держим как альтернативу — тарелку дня.</p>
+<p style="margin:0 0 26px;max-width:760px;font:400 12.5px/1.65 'Golos Text',sans-serif;color:rgba(26,29,27,.55);text-wrap:pretty">Допущения: массовый пользователь на снижении веса, обе платформы (базовая раскладка iOS, размеры тапов ≥44px), русский интерфейс. Норма считается на онбординге по формуле Миффлина — Сан Жеора. Основная метафора прогресса — горизонтальные полосы Б/Ж/У, как вы выбрали.</p>
 
 <div style="display:flex;flex-wrap:wrap;gap:34px;align-items:flex-start">
 
 <!-- 1a interactive prototype -->
 <div id="1a" data-screen-label="Прототип" style="flex:none;display:flex;flex-direction:column;gap:10px;scroll-margin-top:16px">
-<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.55)"><a href="#1a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(26,29,27,.08);color:#1A1D1B;border-radius:5px;text-decoration:none">1a</a>Интерактивный прототип, 16 экранов — можно кликать</div>
+<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.55)"><a href="#1a" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(26,29,27,.08);color:#1A1D1B;border-radius:5px;text-decoration:none">1a</a>Интерактивный прототип, 17 экранов</div>
 <div style="display:flex;gap:20px;align-items:flex-start">
 
 <div style="display:flex;flex-direction:column;gap:5px;width:168px;padding-top:6px">
@@ -70,14 +70,18 @@ input,button{font-family:inherit}
 <div style="flex:none;display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:99px;background:{{ streakBg }};font:600 12.5px/1 'Golos Text',sans-serif;color:{{ streakFg }}">{{ streakLabel }}</div>
 </div>
 
-<div style="display:flex;gap:5px;margin-bottom:20px">
+<div style="display:flex;align-items:center;gap:2px;margin-bottom:20px">
+<button onClick="{{ prevWeek }}" style="flex:none;width:26px;height:52px;border:0;border-radius:9px;background:transparent;color:rgba(26,29,27,.4);font:400 16px/1 'Golos Text',sans-serif;cursor:pointer">‹</button>
+<div style="flex:1;display:flex;gap:4px">
 <sc-for list="{{ weekStrip }}" as="w" hint-placeholder-count="7">
-<button onClick="{{ w.go }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;padding:9px 0 9px;border:0;border-radius:15px;cursor:pointer;background:{{ w.bg }}">
+<button onClick="{{ w.go }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;padding:9px 0 9px;border:0;border-radius:15px;background:{{ w.bg }};opacity:{{ w.op }};cursor:{{ w.cursor }}">
 <span style="font:500 10.5px/1 'Golos Text',sans-serif;color:{{ w.sub }}">{{ w.dow }}</span>
 <span style="font:600 14.5px/1 'Golos Text',sans-serif;color:{{ w.fg }};font-variant-numeric:tabular-nums">{{ w.num }}</span>
 <span style="width:5px;height:5px;border-radius:99px;display:block;background:{{ w.dot }}"></span>
 </button>
 </sc-for>
+</div>
+<button onClick="{{ nextWeek }}" style="flex:none;width:26px;height:52px;border:0;border-radius:9px;background:transparent;color:{{ nextWeekFg }};font:400 16px/1 'Golos Text',sans-serif;cursor:pointer">›</button>
 </div>
 
 <div style="border-radius:26px;background:#F4F6F3;padding:22px 22px 20px;margin-bottom:14px">
@@ -101,11 +105,7 @@ input,button{font-family:inherit}
 </div>
 </div>
 
-<sc-if value="{{ showHint }}" hint-placeholder-val="{{ true }}">
-<div style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:20px;background:#E9F6EE;margin-bottom:22px">
-<span style="font:400 12.5px/1.45 'Golos Text',sans-serif;color:#177F47;text-wrap:pretty">{{ hintText }}</span>
-</div>
-</sc-if>
+<div style="height:22px"></div>
 
 <div style="display:flex;flex-direction:column;gap:10px">
 <sc-for list="{{ meals }}" as="m" hint-placeholder-count="4">
@@ -310,8 +310,16 @@ input,button{font-family:inherit}
 <!-- STATS -->
 <sc-if value="{{ isStats }}" hint-placeholder-val="{{ true }}">
 <div style="flex:1;overflow-y:auto;padding:6px 20px 108px;animation:fadein .22s ease">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:24px">
+<div>
 <div style="font:700 24px/1.2 'Golos Text',sans-serif;color:#1A1D1B;letter-spacing:-.01em;margin-bottom:4px">Неделя</div>
-<div style="font:400 13px/1.4 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-bottom:24px">31 июля — 6 августа</div>
+<div style="font:400 13px/1.4 'Golos Text',sans-serif;color:rgba(26,29,27,.45)">{{ weekRange }}</div>
+</div>
+<div style="flex:none;display:flex;gap:6px">
+<button onClick="{{ prevWeek }}" style="width:40px;height:40px;border:0;border-radius:13px;background:rgba(26,29,27,.05);color:#1A1D1B;font:400 17px/1 'Golos Text',sans-serif;cursor:pointer">‹</button>
+<button onClick="{{ nextWeek }}" style="width:40px;height:40px;border:0;border-radius:13px;background:{{ nextWeekBg }};color:{{ nextWeekFg }};font:400 17px/1 'Golos Text',sans-serif;cursor:pointer">›</button>
+</div>
+</div>
 
 <div style="border-radius:26px;background:#F4F6F3;padding:22px 20px 18px;margin-bottom:14px">
 <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:8px;height:150px;margin-bottom:12px">
@@ -325,6 +333,7 @@ input,button{font-family:inherit}
 </div>
 <div style="display:flex;align-items:center;gap:14px;padding-top:12px;border-top:1px solid rgba(26,29,27,.08);font:400 11.5px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45)">
 <span style="display:flex;align-items:center;gap:6px"><span style="width:9px;height:9px;border-radius:3px;background:#22A45C;display:block"></span>в норме</span>
+<span style="display:flex;align-items:center;gap:6px"><span style="width:9px;height:9px;border-radius:3px;background:#3F86C9;display:block"></span>ниже нормы</span>
 <span style="display:flex;align-items:center;gap:6px"><span style="width:9px;height:9px;border-radius:3px;background:#DFA330;display:block"></span>превышение</span>
 </div>
 </div>
@@ -603,6 +612,54 @@ input,button{font-family:inherit}
 <div style="font:500 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:8px">Название</div>
 <input value="{{ dName }}" onChange="{{ onDName }}" placeholder="{{ namePlaceholder }}" style="width:100%;height:52px;padding:0 16px;border:0;border-radius:16px;background:#F4F6F3;outline:none;font:500 15px/1 'Golos Text',sans-serif;color:#1A1D1B;margin-bottom:18px">
 
+<sc-if value="{{ showBrandField }}" hint-placeholder-val="{{ true }}">
+<div style="font:500 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:8px">Производитель</div>
+<input value="{{ dBrand }}" onChange="{{ onDBrand }}" placeholder="{{ brandPlaceholder }}" style="width:100%;height:52px;padding:0 16px;border:0;border-radius:16px;background:#F4F6F3;outline:none;font:500 15px/1 'Golos Text',sans-serif;color:#1A1D1B;margin-bottom:18px">
+</sc-if>
+
+<div style="font:500 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:8px">Откуда взять КБЖУ</div>
+<div style="display:flex;gap:6px;margin-bottom:18px">
+<sc-for list="{{ modeChips }}" as="mo" hint-placeholder-count="2">
+<button onClick="{{ mo.set }}" style="flex:1;height:44px;border:0;border-radius:13px;cursor:pointer;background:{{ mo.bg }};color:{{ mo.fg }};font:600 12.5px/1 'Golos Text',sans-serif">{{ mo.label }}</button>
+</sc-for>
+</div>
+
+<sc-if value="{{ isCompose }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
+<sc-for list="{{ draftItems }}" as="di" hint-placeholder-count="2">
+<div style="padding:14px 16px;border:1px solid rgba(26,29,27,.09);border-radius:18px">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px">
+<span style="font:500 14px/1.25 'Golos Text',sans-serif;color:#1A1D1B;min-width:0">{{ di.name }}</span>
+<button onClick="{{ di.del }}" style="flex:none;width:32px;height:32px;margin:-6px -6px -6px 0;border:0;border-radius:10px;background:transparent;color:rgba(26,29,27,.3);font:400 17px/1 'Golos Text',sans-serif;cursor:pointer">×</button>
+</div>
+<div style="display:flex;align-items:center;gap:10px">
+<div style="display:flex;align-items:baseline;gap:5px;height:40px;padding:0 12px;border-radius:12px;background:#F4F6F3">
+<input value="{{ di.gValue }}" onChange="{{ di.onG }}" inputmode="numeric" style="width:48px;height:40px;border:0;background:transparent;outline:none;text-align:right;font:600 14px/40px 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums">
+<span style="font:500 12.5px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45)">г</span>
+</div>
+<span style="font:400 11.5px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.42)">{{ di.macros }}</span>
+<span style="margin-left:auto;font:600 13px/1 'Golos Text',sans-serif;color:#177F47;font-variant-numeric:tabular-nums">{{ di.kcal }}</span>
+</div>
+</div>
+</sc-for>
+</div>
+<button onClick="{{ goIngredients }}" style="display:flex;align-items:center;gap:12px;width:100%;padding:15px 16px;margin-bottom:16px;border:1px dashed rgba(34,164,92,.45);border-radius:18px;background:#F3FAF5;cursor:pointer;text-align:left">
+<span style="flex:none;width:32px;height:32px;border-radius:99px;background:#22A45C;color:#fff;font:400 19px/32px 'Golos Text',sans-serif;text-align:center">+</span>
+<span style="font:600 13.5px/1.2 'Golos Text',sans-serif;color:#177F47">Добавить продукт</span>
+</button>
+<sc-if value="{{ hasDraftItems }}" hint-placeholder-val="{{ true }}">
+<div style="padding:18px 20px;border-radius:20px;background:#F4F6F3;margin-bottom:16px">
+<div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:8px">
+<span style="font:500 12.5px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5)">Порция целиком</span>
+<span style="font:600 13px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums">{{ composeG }} г</span>
+</div>
+<div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px"><span style="font:700 28px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums">{{ composeK }}</span><span style="font:500 13px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45)">ккал</span></div>
+<div style="font:400 12.5px/1.4 'Golos Text',sans-serif;color:rgba(26,29,27,.5);font-variant-numeric:tabular-nums">{{ composeMacros }} · {{ composePer100 }}</div>
+</div>
+</sc-if>
+</sc-if>
+
+<sc-if value="{{ isManualDraft }}" hint-placeholder-val="{{ true }}">
 <div style="font:500 12px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.5);margin-bottom:8px">Как вводите данные</div>
 <div style="display:flex;gap:6px;margin-bottom:18px">
 <sc-for list="{{ measureChips }}" as="mch" hint-placeholder-count="2">
@@ -631,9 +688,34 @@ input,button{font-family:inherit}
 <div style="border-radius:16px;background:#F3ECFB;padding:12px 14px"><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(122,79,179,.8);margin-bottom:8px">Углеводы, г</div><input value="{{ dC }}" onChange="{{ onDC }}" placeholder="7" inputmode="numeric" style="width:100%;border:0;background:transparent;outline:none;font:700 19px/1 'Golos Text',sans-serif;color:#7A4FB3;font-variant-numeric:tabular-nums"></div>
 </div>
 <div style="padding:14px 16px;border-radius:16px;background:rgba(26,29,27,.04);font:400 12.5px/1.5 'Golos Text',sans-serif;color:rgba(26,29,27,.5);text-wrap:pretty">{{ draftHint }}</div>
+</sc-if>
 </div>
 <div style="flex:none;padding:12px 20px 30px;border-top:1px solid rgba(26,29,27,.07);background:#fff">
 <button onClick="{{ saveDraft }}" style="width:100%;height:56px;border:0;border-radius:18px;background:#22A45C;color:#fff;font:600 16px/1 'Golos Text',sans-serif;cursor:pointer;box-shadow:0 8px 18px -8px rgba(34,164,92,.8)">{{ saveLabel }}</button>
+</div>
+</div>
+</sc-if>
+
+<!-- INGREDIENT PICKER -->
+<sc-if value="{{ isIngredient }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1;overflow:hidden;display:flex;flex-direction:column;animation:fadein .2s ease">
+<div style="padding:6px 20px 12px">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+<button onClick="{{ backFromIngredient }}" style="width:44px;height:44px;margin-left:-10px;border:0;background:transparent;cursor:pointer;font:400 22px/1 'Golos Text',sans-serif;color:#1A1D1B">←</button>
+<div style="font:700 19px/1.2 'Golos Text',sans-serif;color:#1A1D1B">Продукт в состав</div>
+</div>
+<div style="display:flex;align-items:center;gap:10px;height:50px;padding:0 16px;border-radius:16px;background:#F4F6F3">
+<span style="width:15px;height:15px;border:2px solid rgba(26,29,27,.35);border-radius:99px;flex:none"></span>
+<input value="{{ query }}" onChange="{{ onQuery }}" placeholder="Продукт или блюдо" style="flex:1;border:0;background:transparent;outline:none;font:500 15px/1 'Golos Text',sans-serif;color:#1A1D1B">
+</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:4px 20px 40px">
+<sc-for list="{{ ingredients }}" as="ing" hint-placeholder-count="8">
+<button onClick="{{ ing.add }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:13px 0;border:0;border-bottom:1px solid rgba(26,29,27,.07);background:transparent;cursor:pointer;text-align:left">
+<div style="min-width:0"><div style="font:500 14.5px/1.25 'Golos Text',sans-serif;color:#1A1D1B">{{ ing.name }}</div><div style="font:400 12px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.42);margin-top:3px">{{ ing.sub }}</div></div>
+<span style="flex:none;width:32px;height:32px;border-radius:99px;background:#E9F6EE;color:#177F47;font:600 17px/32px 'Golos Text',sans-serif;text-align:center">+</span>
+</button>
+</sc-for>
 </div>
 </div>
 </sc-if>
@@ -676,7 +758,6 @@ input,button{font-family:inherit}
 <span style="font:600 10.5px/1 'Golos Text',sans-serif;color:{{ tb.fg }};opacity:{{ tb.op }}">{{ tb.label }}</span>
 </button>
 </sc-for>
-<button onClick="{{ goPickMeal }}" style="position:absolute;left:50%;bottom:44px;transform:translateX(-50%);width:60px;height:60px;border:4px solid #fff;border-radius:99px;background:#22A45C;color:#fff;font:300 30px/1 'Golos Text',sans-serif;cursor:pointer;box-shadow:0 10px 22px -8px rgba(34,164,92,.9)">+</button>
 </div>
 </sc-if>
 
@@ -690,36 +771,13 @@ input,button{font-family:inherit}
 </div>
 </div>
 
-<!-- 1c plate -->
-<div id="1c" data-screen-label="Тарелка" style="flex:none;display:flex;flex-direction:column;gap:10px;scroll-margin-top:16px">
-<div style="display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 'Golos Text',sans-serif;color:rgba(26,29,27,.55)"><a href="#1c" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(26,29,27,.08);color:#1A1D1B;border-radius:5px;text-decoration:none">1c</a>Главный экран: тарелка дня</div>
-<div style="width:390px;border-radius:34px;background:#fff;border:1px solid rgba(26,29,27,.12);box-shadow:0 14px 34px -16px rgba(26,29,27,.24);overflow:hidden;padding:26px 22px 30px">
-<div style="font:700 22px/1.2 'Golos Text',sans-serif;color:#1A1D1B;margin-bottom:2px">Тарелка дня</div>
-<div style="font:400 12.5px/1.4 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-bottom:22px">Заполнена на 51%</div>
-<div style="display:flex;justify-content:center;margin-bottom:22px">
-<div style="position:relative;width:210px;height:210px;border-radius:99px;background:conic-gradient(#3F86C9 0deg 62deg,#DFA330 62deg 96deg,#9E6FD3 96deg 184deg,rgba(26,29,27,.07) 184deg 360deg);display:flex;align-items:center;justify-content:center">
-<div style="width:126px;height:126px;border-radius:99px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center">
-<div style="font:800 32px/1 'Golos Text',sans-serif;color:#1A1D1B;font-variant-numeric:tabular-nums;letter-spacing:-.02em">900</div>
-<div style="font:400 11.5px/1 'Golos Text',sans-serif;color:rgba(26,29,27,.45);margin-top:6px">осталось</div>
-</div>
-</div>
-</div>
-<div style="display:flex;gap:8px;margin-bottom:16px">
-<div style="flex:1;border-radius:16px;background:#E9F1FA;padding:13px 12px;text-align:center"><div style="font:700 17px/1 'Golos Text',sans-serif;color:#2E6FA8;font-variant-numeric:tabular-nums">68 г</div><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(46,111,168,.7);margin-top:6px">белки</div></div>
-<div style="flex:1;border-radius:16px;background:#FBF2DF;padding:13px 12px;text-align:center"><div style="font:700 17px/1 'Golos Text',sans-serif;color:#A9761A;font-variant-numeric:tabular-nums">18 г</div><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(169,118,26,.75);margin-top:6px">жиры</div></div>
-<div style="flex:1;border-radius:16px;background:#F3ECFB;padding:13px 12px;text-align:center"><div style="font:700 17px/1 'Golos Text',sans-serif;color:#7A4FB3;font-variant-numeric:tabular-nums">127 г</div><div style="font:400 11px/1 'Golos Text',sans-serif;color:rgba(122,79,179,.75);margin-top:6px">углев.</div></div>
-</div>
-<div style="padding:16px 18px;border-radius:20px;background:#F4F6F3;font:400 13px/1.5 'Golos Text',sans-serif;color:rgba(26,29,27,.6);text-wrap:pretty">Метафора понятная и приятная, но пропорции секторов легко спутать с «идеальной тарелкой» из диетологии. Подойдёт, если хотите менее цифровой тон.</div>
-</div>
 </div>
 
-</div>
-
-<p style="margin:26px 0 0;font:400 12px/1.6 'Golos Text',sans-serif;color:rgba(26,29,27,.5)">Дальше можно: «перенеси тарелку из <a href="#1c" style="color:#1F9E58;text-decoration:none;font-weight:600">1c</a> в прототип» · «покажи тёмную тему главного экрана» · «добавь экран записи веса»</p>
+<p style="margin:26px 0 0;font:400 12px/1.6 'Golos Text',sans-serif;color:rgba(26,29,27,.5)">Дальше можно: «покажи тёмную тему главного экрана» · «добавь экран записи веса» · «собери онбординг для нового пользователя целиком»</p>
 </section>
 
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;showRemaining&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Главный экран&quot;},&quot;showCoachTip&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Главный экран&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;showRemaining&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Главный экран&quot;}}">
 const DB = [
   {name:'Овсяная каша на воде', brand:'Nordic', k:88, p:3, f:1.7, c:15, def:250, unit:'порция', pw:250},
   {name:'Куриная грудка, запечённая', brand:'Домашнее', k:165, p:31, f:3.6, c:0, def:150},
@@ -759,6 +817,7 @@ const plu = (n, forms) => {
 };
 const numRu = (n) => String(Math.round(n * 10) / 10).replace('.', ',');
 const unitForm = (n, unit) => plu(n, UNITS[unit] || [unit, unit, unit]);
+const mondayOff = (off) => off - ((dateOf(off).getDay() + 6) % 7);
 const dateOf = (off) => { const d = new Date(BASE.getTime()); d.setDate(d.getDate() + off); return d; };
 const offOf = (d) => Math.round((d - BASE) / 86400000);
 let UID = 1;
@@ -803,6 +862,7 @@ class Component extends DCLogic {
     ],
     draft: {name:'', measure:'portion', unit:'порция', g:'', k:'', p:'', f:'', c:''},
     dbExtra: [], draftTarget: 'my', barcode: '',
+    weekStart: 0, draftMode: 'manual', draftItems: [],
     log: PAST.concat([
       e_('Завтрак','Овсяная каша на воде',250,0),
       e_('Завтрак','Латте на овсяном',300,0),
@@ -811,6 +871,13 @@ class Component extends DCLogic {
       e_('Перекус','Банан',120,0)
     ])
   };
+
+  statusOf(k, goal) {
+    if (!k) return {label:'Нет записей', color:'rgba(26,29,27,.16)', bg:'rgba(26,29,27,.05)', fg:'rgba(26,29,27,.45)'};
+    if (k > goal) return {label:'Превышение', color:'#DFA330', bg:'#FBF2DF', fg:'#A9761A'};
+    if (k < goal * .8) return {label:'Ниже нормы', color:'#3F86C9', bg:'#E9F1FA', fg:'#2E6FA8'};
+    return {label:'В норме', color:'#22A45C', bg:'#E9F6EE', fg:'#177F47'};
+  }
 
   keyOf(e) {
     if (!this._keys) { this._keys = new WeakMap(); this._kc = 0; }
@@ -880,18 +947,32 @@ class Component extends DCLogic {
     this.flash('«' + name + '» добавлено');
   };
 
-  blankDraft = () => ({name:'', measure:'portion', unit:'порция', g:'', k:'', p:'', f:'', c:''});
+  blankDraft = () => ({name:'', brand:'', measure:'portion', unit:'порция', g:'', k:'', p:'', f:'', c:''});
+
+  composeTotals() {
+    return this.state.draftItems.reduce((a, it) => {
+      const d = this.foodBy(it.name); if (!d) return a;
+      const m = (parseFloat(it.g) || 0) / 100;
+      a.g += parseFloat(it.g) || 0; a.k += d.k*m; a.p += d.p*m; a.f += d.f*m; a.c += d.c*m; return a;
+    }, {g:0, k:0, p:0, f:0, c:0});
+  }
 
   saveDraft = () => {
     const s0 = this.state, dr = s0.draft;
-    const portion = (dr.measure || 'portion') === 'portion';
-    const g = portion ? Math.max(1, parseFloat(dr.g) || 100) : 100;
+    const compose = s0.draftMode === 'compose';
+    const ct = this.composeTotals();
+    const portion = compose ? true : (dr.measure || 'portion') === 'portion';
+    const g = compose ? Math.max(1, ct.g) : (portion ? Math.max(1, parseFloat(dr.g) || 100) : 100);
     const n = (dr.name || '').trim() || (s0.draftTarget === 'base' ? 'Новый продукт' : 'Моё блюдо');
     const per = (v) => Math.round(((parseFloat(v) || 0) / g * 100) * 10) / 10;
-    const vals = {k: per(dr.k), p: per(dr.p), f: per(dr.f), c: per(dr.c)};
+    const vals = compose
+      ? {k: Math.round(ct.k / g * 1000) / 10, p: Math.round(ct.p / g * 1000) / 10, f: Math.round(ct.f / g * 1000) / 10, c: Math.round(ct.c / g * 1000) / 10}
+      : {k: per(dr.k), p: per(dr.p), f: per(dr.f), c: per(dr.c)};
+    const brand = (dr.brand || '').trim();
     const shape = portion
       ? {def: Math.round(g), unit: dr.unit || 'порция', pw: Math.round(g)}
       : {def: 100, unit: null, pw: null};
+    if (brand) shape.brand = brand;
 
     if (s0.editName) {
       const old = s0.editName;
@@ -899,28 +980,28 @@ class Component extends DCLogic {
         const ed = Object.assign({}, s.edits);
         ed[old] = Object.assign({}, vals, shape);
         const upd = (x) => x.name === old ? Object.assign({}, x, vals, shape) : x;
-        return {edits: ed, myFoods: s.myFoods.map(upd), dbExtra: s.dbExtra.map(upd), editName: null, draft: this.blankDraft(), screen: 'foods'};
+        return {edits: ed, myFoods: s.myFoods.map(upd), dbExtra: s.dbExtra.map(upd), editName: null, draft: this.blankDraft(), draftMode: 'manual', draftItems: [], screen: 'foods'};
       });
       this.flash('«' + n + '» обновлено');
       return;
     }
     if (s0.draftTarget === 'base') {
-      const item = Object.assign({name: n, brand: s0.barcode ? 'Штрих-код ' + s0.barcode : 'Добавлено вами'}, vals, shape);
-      this.setState(s => ({dbExtra: s.dbExtra.concat([item]), draft: this.blankDraft(), draftTarget: 'my', barcode: '', query: '', tab: 'search'}));
+      const item = Object.assign({name: n, brand: brand || (s0.barcode ? 'Штрих-код ' + s0.barcode : 'Добавлено вами')}, vals, shape);
+      this.setState(s => ({dbExtra: s.dbExtra.concat([item]), draft: this.blankDraft(), draftMode: 'manual', draftItems: [], draftTarget: 'my', barcode: '', query: '', tab: 'search'}));
       this.flash('«' + n + '» добавлен в базу');
       this.pick(item, 'Новый продукт');
       return;
     }
-    const item = Object.assign({name: n, brand: 'Своё блюдо', own: true}, vals, shape);
-    this.setState(s => ({myFoods: s.myFoods.concat([item]), draft: this.blankDraft(), screen:'add', tab:'my', query: ''}));
+    const item = Object.assign({name: n, brand: brand || 'Своё блюдо', own: true}, vals, shape);
+    this.setState(s => ({myFoods: s.myFoods.concat([item]), draft: this.blankDraft(), draftMode: 'manual', draftItems: [], screen:'add', tab:'my', query: ''}));
     this.flash('«' + n + '» в вашей еде');
   };
 
   startEdit = (item) => {
     const portion = !!item.unit, base = portion ? (item.pw || item.def || 100) : 100;
     const m = base / 100, rr = (v) => String(Math.round(v * 10) / 10);
-    this.setState({editName: item.name, screen: 'create', draftTarget: item.own ? 'my' : 'base', barcode: '',
-      draft: {name: item.name, measure: portion ? 'portion' : 'gram', unit: item.unit || 'порция', g: String(base),
+    this.setState({editName: item.name, screen: 'create', draftTarget: item.own ? 'my' : 'base', barcode: '', draftMode: 'manual', draftItems: [],
+      draft: {name: item.name, brand: item.brand === 'Своё блюдо' ? '' : (item.brand || ''), measure: portion ? 'portion' : 'gram', unit: item.unit || 'порция', g: String(base),
         k: rr(item.k * m), p: rr(item.p * m), f: rr(item.f * m), c: rr(item.c * m)}});
   };
 
@@ -985,6 +1066,7 @@ class Component extends DCLogic {
 
     const q = s.query.trim().toLowerCase();
     const isMyTab = s.tab === 'my';
+    const ctot = this.composeTotals();
     const allBase = DB.concat(s.dbExtra);
     const pool = isMyTab ? s.myFoods : (s.tab === 'recent' ? allBase.slice(0, 6) : allBase);
     const list = q ? pool.filter(d => d.name.toLowerCase().indexOf(q) >= 0) : pool;
@@ -1031,12 +1113,13 @@ class Component extends DCLogic {
         go: () => this.setState({screen:'add', targetMeal: mn, query:'', tab:'search'})};
     });
 
-    const navDefs = [['home','Главный'],['cal','Календарь дня'],['mealpick','Куда добавить'],['add','Добавить еду'],['my','Своя еда'],['foods','Продукты'],['create','Создать блюдо'],['product','Карточка продукта'],['scan','Скан штрих-кода'],['scanfail','Код не найден'],['repeat','Вчерашние блюда'],['stats','Статистика'],['profile','Профиль'],['body','Параметры и цель'],['norm','Дневная норма'],['onb','Онбординг']];
+    const navDefs = [['home','Главный'],['cal','Календарь дня'],['mealpick','Куда добавить'],['add','Добавить еду'],['my','Своя еда'],['foods','Продукты'],['create','Создать блюдо'],['ingredient','Состав блюда'],['product','Карточка продукта'],['scan','Скан штрих-кода'],['scanfail','Код не найден'],['repeat','Вчерашние блюда'],['stats','Статистика'],['profile','Профиль'],['body','Параметры и цель'],['norm','Дневная норма'],['onb','Онбординг']];
     const navGo = {
       cal: () => this.setState({screen:'home', calOpen:true, calMonth:7}),
       my: () => this.setState({screen:'add', tab:'my', query:''}),
       create: () => this.setState({screen:'create', editName:null, draftTarget:'my', barcode:'', draft: this.blankDraft()}),
       scanfail: () => this.goScan(true),
+      ingredient: () => this.setState({screen:'create', draftMode:'compose', editName:null, draftTarget:'my'}),
       norm: () => this.setState({screen:'norm', normDraft:{k:String(s.goals.k), p:String(s.goals.p), f:String(s.goals.f), c:String(s.goals.c)}}),
       product: () => this.pick(f['Творог 5%'], 'Поиск'),
       scan: () => this.goScan(),
@@ -1062,19 +1145,25 @@ class Component extends DCLogic {
     }));
     const yTot = this.totals(s.day - 1);
 
-    const week = [-6,-5,-4,-3,-2,-1,0].map(off => {
-      const k = this.kcalOf(off), dt = dateOf(off);
-      return {day: DOW[dt.getDay()], kcal: k > 999 ? String(k).slice(0,-3) + ' ' + String(k).slice(-3) : k,
-        h: Math.max(6, Math.round(k / 2200 * 108)) + 'px', color: k > goalK ? '#DFA330' : '#22A45C'};
+    const wStart = mondayOff(s.day);
+    const weekOffs = [0,1,2,3,4,5,6].map(i => wStart + i);
+    const wkEnd = wStart + 6;
+    const weekRange = dateOf(wStart).getDate() + ' ' + MON[dateOf(wStart).getMonth()] + ' — ' + dateOf(wkEnd).getDate() + ' ' + MON[dateOf(wkEnd).getMonth()];
+
+    const week = weekOffs.map(off => {
+      const future = off > 0, k = future ? 0 : this.kcalOf(off), dt = dateOf(off);
+      return {day: DOW[dt.getDay()], kcal: future || !k ? '' : (k > 999 ? String(k).slice(0,-3) + ' ' + String(k).slice(-3) : k),
+        h: Math.max(6, Math.round(k / 2200 * 108)) + 'px', color: this.statusOf(k, goalK).color};
     });
 
-    const selDt = dateOf(s.day), monday = s.day - ((selDt.getDay() + 6) % 7);
+    const stripStart = wStart;
     const weekStrip = [0,1,2,3,4,5,6].map(i => {
-      const off = monday + i, dt = dateOf(off), on = off === s.day, future = off > 0, k = future ? 0 : this.kcalOf(off);
+      const off = stripStart + i, dt = dateOf(off), on = off === s.day, future = off > 0, k = future ? 0 : this.kcalOf(off);
       return {dow: DOW[dt.getDay()], num: dt.getDate(), bg: on ? '#1A1D1B' : 'transparent',
         fg: on ? '#fff' : (future ? 'rgba(26,29,27,.28)' : INK),
         sub: on ? 'rgba(255,255,255,.55)' : (future ? 'rgba(26,29,27,.22)' : 'rgba(26,29,27,.38)'),
-        dot: !k ? 'transparent' : (on ? '#7BE0A6' : (k > goalK ? '#DFA330' : GREEN)),
+        op: 1, cursor: future ? 'default' : 'pointer',
+        dot: !k ? 'transparent' : (on ? '#7BE0A6' : this.statusOf(k, goalK).color),
         go: future ? (() => {}) : (() => this.setState({day: off}))};
     });
 
@@ -1091,22 +1180,23 @@ class Component extends DCLogic {
         go: future ? (() => {}) : (() => this.setState({day: off, calOpen: false}))});
     }
 
-    const offs = [-6,-5,-4,-3,-2,-1,0];
+    const offs = weekOffs.filter(o => o <= 0 && this.kcalOf(o) > 0);
+    const nDays = Math.max(1, offs.length);
     const wsum = offs.map(o => this.totals(o)).reduce((a, x) => ({k:a.k+x.k, p:a.p+x.p, ff:a.ff+x.ff, c:a.c+x.c}), {k:0,p:0,ff:0,c:0});
-    const avg = {k: wsum.k/7, p: wsum.p/7, ff: wsum.ff/7, c: wsum.c/7};
-    const inNorm = offs.filter(o => { const k = this.kcalOf(o); return k > 0 && k <= goalK; }).length;
+    const avg = {k: wsum.k/nDays, p: wsum.p/nDays, ff: wsum.ff/nDays, c: wsum.c/nDays};
+    const inNorm = offs.filter(o => { const k = this.kcalOf(o); return k >= goalK * .8 && k <= goalK; }).length;
     const weekMacros = [
       {name:'Белки', val: r(avg.p) + ' / ' + goalP + ' г', w: pct(avg.p, goalP), color:'#3F86C9'},
       {name:'Жиры', val: r(avg.ff) + ' / ' + goalF + ' г', w: pct(avg.ff, goalF), color:'#DFA330'},
       {name:'Углеводы', val: r(avg.c) + ' / ' + goalC + ' г', w: pct(avg.c, goalC), color:'#9E6FD3'}
     ];
     const foodsMy = s.myFoods.map(x => this.foodBy(x.name)).map(x => ({
-      name: x.name, sub: r(x.k) + ' ккал / 100 г · Б ' + numRu(x.p) + ' Ж ' + numRu(x.f) + ' У ' + numRu(x.c),
+      name: x.name, sub: (x.brand ? x.brand + ' · ' : '') + r(x.k) + ' ккал / 100 г · Б ' + numRu(x.p) + ' Ж ' + numRu(x.f) + ' У ' + numRu(x.c),
       tag: x.edited ? 'изменено' : 'своё', tagBg: x.edited ? '#FBF2DF' : '#E9F6EE', tagFg: x.edited ? '#A9761A' : '#177F47',
       go: () => this.startEdit(x)
     }));
     const foodsBase = allBase.map(x => this.foodBy(x.name)).map(x => ({
-      name: x.name, sub: r(x.k) + ' ккал / 100 г · Б ' + numRu(x.p) + ' Ж ' + numRu(x.f) + ' У ' + numRu(x.c),
+      name: x.name, sub: (x.brand ? x.brand + ' · ' : '') + r(x.k) + ' ккал / 100 г · Б ' + numRu(x.p) + ' Ж ' + numRu(x.f) + ' У ' + numRu(x.c),
       tag: x.edited ? 'изменено' : '', tagBg: '#FBF2DF', tagFg: '#A9761A', showTag: !!x.edited,
       go: () => this.startEdit(x)
     }));
@@ -1182,8 +1272,6 @@ class Component extends DCLogic {
         macroRow('Углеводы', t.c, goalC, '#9E6FD3')
       ],
       pGoal: goalP, fGoal: goalF, cGoal: goalC,
-      showHint: this.props.showCoachTip !== false && s.day === 0,
-      hintText: t.p / goalP < t.k / goalK ? 'Белка сегодня меньше нормы — добавьте творог или рыбу к ужину.' : 'Белок в норме. Так держать.',
 
       query: s.query, onQuery: (e) => this.setState({query: e.target.value}),
       isMyTab,
@@ -1230,7 +1318,7 @@ class Component extends DCLogic {
       profileGoalSub: {lose:'Цель: похудеть', keep:'Цель: поддерживать вес', gain:'Цель: набрать массу'}[s.goal],
       foodsMy, foodsBase,
       avgKcal: r(avg.k).toLocaleString('ru-RU'),
-      inNormLabel: inNorm + ' из 7',
+      inNormLabel: inNorm + ' из ' + offs.length,
       goFoods: () => this.go('foods'),
       goNorm: () => this.setState({screen:'norm', normDraft:{k:String(goalK), p:String(goalP), f:String(goalF), c:String(goalC)}}),
       nK: s.normDraft.k, nP: s.normDraft.p, nF: s.normDraft.f, nC: s.normDraft.c,
@@ -1257,6 +1345,32 @@ class Component extends DCLogic {
         return {label: u, bg: c0.bg, fg: c0.fg, set: () => this.setState(x => ({draft: Object.assign({}, x.draft, {unit: u})}))};
       }),
       valuesCaption: (s.draft.measure || 'portion') === 'portion' ? 'КБЖУ на одну порцию' : 'КБЖУ на 100 г',
+      isCompose: s.draftMode === 'compose',
+      isManualDraft: s.draftMode !== 'compose',
+      modeChips: [['manual','Ввести КБЖУ'],['compose','Собрать из продуктов']].map(([id, label]) => {
+        const c0 = chip(s.draftMode === id);
+        return {label, bg: c0.bg, fg: c0.fg, set: () => this.setState({draftMode: id})};
+      }),
+      draftItems: s.draftItems.map((it, ix) => {
+        const d = this.foodBy(it.name), m = (parseFloat(it.g) || 0) / 100;
+        return {name: it.name, gValue: it.g, kcal: r(d.k * m) + ' ккал',
+          macros: 'Б ' + numRu(Math.round(d.p*m*10)/10) + ' · Ж ' + numRu(Math.round(d.f*m*10)/10) + ' · У ' + numRu(Math.round(d.c*m*10)/10),
+          onG: (ev) => { const v = parseInt(String(ev.target.value).replace(/[^0-9]/g, ''), 10);
+            this.setState(x => ({draftItems: x.draftItems.map((y, j) => j === ix ? {name: y.name, g: isNaN(v) ? 0 : Math.min(5000, v)} : y)})); },
+          del: () => this.setState(x => ({draftItems: x.draftItems.filter((y, j) => j !== ix)}))};
+      }),
+      hasDraftItems: s.draftItems.length > 0,
+      composeG: r(ctot.g), composeK: r(ctot.k),
+      composeMacros: 'Б ' + r(ctot.p) + ' · Ж ' + r(ctot.f) + ' · У ' + r(ctot.c),
+      composePer100: ctot.g ? r(ctot.k / ctot.g * 100) + ' ккал на 100 г' : 'добавьте ингредиенты',
+      goIngredients: () => this.setState({screen: 'ingredient', query: ''}),
+      isIngredient: s.screen === 'ingredient',
+      ingredients: (q ? allBase.concat(s.myFoods).filter(x => x.name.toLowerCase().indexOf(q) >= 0) : allBase.concat(s.myFoods))
+        .filter(x => x.name !== (s.draft.name || '').trim()).map(x => ({
+          name: x.name, sub: (x.brand ? x.brand + ' · ' : '') + r(x.k) + ' ккал / 100 г',
+          add: () => this.setState(y => ({draftItems: y.draftItems.concat([{name: x.name, g: x.def || 100}]), screen: 'create'}))
+        })),
+      backFromIngredient: () => this.setState({screen: 'create', query: ''}),
       scanMiss: !!s.scanMiss,
       scanStatusColor: s.scanMiss ? '#F0B45C' : '#fff',
       sexChips, actChips, numRows,
@@ -1280,10 +1394,15 @@ class Component extends DCLogic {
 
       dayTitle: s.day === 0 ? 'Сегодня' : (s.day === -1 ? 'Вчера' : dateOf(s.day).getDate() + ' ' + MON[dateOf(s.day).getMonth()]),
       daySub: DOWF[dateOf(s.day).getDay()] + ', ' + dateOf(s.day).getDate() + ' ' + MON[dateOf(s.day).getMonth()],
-      streakLabel: s.day === 0 ? '12 дней подряд' : (!this.kcalOf(s.day) ? 'Нет записей' : (this.kcalOf(s.day) > goalK ? 'Превышение' : 'В норме')),
-      streakBg: s.day === 0 || (this.kcalOf(s.day) && this.kcalOf(s.day) <= goalK) ? '#E9F6EE' : (this.kcalOf(s.day) > goalK ? '#FBF2DF' : 'rgba(26,29,27,.05)'),
-      streakFg: s.day === 0 || (this.kcalOf(s.day) && this.kcalOf(s.day) <= goalK) ? '#177F47' : (this.kcalOf(s.day) > goalK ? '#A9761A' : 'rgba(26,29,27,.45)'),
-      weekStrip, calCells,
+      streakLabel: s.day === 0 ? '12 дней подряд' : this.statusOf(this.kcalOf(s.day), goalK).label,
+      streakBg: s.day === 0 ? '#E9F6EE' : this.statusOf(this.kcalOf(s.day), goalK).bg,
+      streakFg: s.day === 0 ? '#177F47' : this.statusOf(this.kcalOf(s.day), goalK).fg,
+      weekStrip, calCells, weekRange,
+      inNormCount: inNorm, weekDaysCount: offs.length,
+      prevWeek: () => this.setState({day: wStart - 7}),
+      nextWeek: () => wStart + 7 <= 0 ? this.setState({day: Math.min(0, wStart + 7)}) : null,
+      nextWeekBg: wStart + 7 <= 0 ? 'rgba(26,29,27,.05)' : 'rgba(26,29,27,.02)',
+      nextWeekFg: wStart + 7 <= 0 ? INK : 'rgba(26,29,27,.25)',
       calDows: ['пн','вт','ср','чт','пт','сб','вс'].map(l => ({l})),
       calOpen: s.calOpen,
       calTitle: MONN[cm] + ' 2026',
@@ -1299,7 +1418,10 @@ class Component extends DCLogic {
       goCreate: () => this.setState({screen: 'create', editName: null, draftTarget: 'my', barcode: '', draft: this.blankDraft()}),
       manualFromScan: () => this.newFromScan(''),
       goMyFood: () => this.setState({screen: 'add', tab: 'my'}),
-      dName: s.draft.name, dG: s.draft.g, dK: s.draft.k, dP: s.draft.p, dF: s.draft.f, dC: s.draft.c,
+      dName: s.draft.name, dBrand: s.draft.brand || '', dG: s.draft.g, dK: s.draft.k, dP: s.draft.p, dF: s.draft.f, dC: s.draft.c,
+      onDBrand: this.setDraft('brand'),
+      brandPlaceholder: 'Например, «Село Зелёное»',
+      showBrandField: s.draftTarget === 'base',
       onDName: this.setDraft('name'), onDG: this.setDraft('g'), onDK: this.setDraft('k'),
       onDP: this.setDraft('p'), onDF: this.setDraft('f'), onDC: this.setDraft('c'),
       draftHint: (s.draft.measure || 'portion') !== 'portion'

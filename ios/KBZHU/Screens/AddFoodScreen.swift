@@ -66,6 +66,10 @@ struct AddFoodScreen: View {
 
     // MARK: - Results
 
+    private var hasQuery: Bool {
+        !nav.query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
     private var pool: [Food] {
         switch nav.addTab {
         case .own: return store.ownFoods
@@ -74,16 +78,15 @@ struct AddFoodScreen: View {
         }
     }
 
+    /// Пока ищут — вкладки не сужают выдачу: ищем сразу по всей еде, и по базе,
+    /// и по своим блюдам. Вкладки остаются способом посмотреть списки без запроса.
     private var results: [Food] {
-        let query = nav.query.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        guard !query.isEmpty else { return pool }
-        return pool.filter { $0.name.lowercased().contains(query) }
+        guard hasQuery else { return pool }
+        return store.searchAllFoods(nav.query)
     }
 
     private var caption: String {
-        if !nav.query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            return "Найдено · \(results.count)"
-        }
+        if hasQuery { return "Найдено · \(results.count)" }
         switch nav.addTab {
         case .own: return "Ваши блюда · \(store.ownFoods.count)"
         case .recent: return "Недавние"
@@ -92,7 +95,7 @@ struct AddFoodScreen: View {
     }
 
     private var emptyStateText: String {
-        if !nav.query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+        if hasQuery {
             return "Ничего не нашлось. Попробуйте другое название или создайте своё блюдо."
         }
         switch nav.addTab {
@@ -104,7 +107,7 @@ struct AddFoodScreen: View {
 
     private var list: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 0) {
+            LazyVStack(alignment: .leading, spacing: 0) {
                 if nav.addTab == .own {
                     createOwnCard
                         .padding(.top, 10)

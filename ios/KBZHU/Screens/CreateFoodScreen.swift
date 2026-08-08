@@ -5,8 +5,8 @@ import SwiftUI
 /// — «Новый продукт» в общую базу (сюда приводит ненайденный штрих-код),
 /// — правка уже существующего продукта.
 ///
-/// Данные вводятся либо на порцию (тогда указывается, как порция называется и сколько весит),
-/// либо на 100 г.
+/// КБЖУ можно ввести руками (на порцию или на 100 г) либо собрать из продуктов:
+/// во втором случае значения суммируются из состава и пересчитываются на 100 г.
 struct CreateFoodScreen: View {
     @EnvironmentObject private var store: AppStore
     @EnvironmentObject private var nav: Nav
@@ -16,6 +16,19 @@ struct CreateFoodScreen: View {
 
     private var kind: FoodFormKind { nav.foodForm }
     private var isPortionMode: Bool { nav.draft.mode == .portion }
+    private var isCompose: Bool { nav.draftMode == .compose }
+
+    /// Сумма по составу — вес и КБЖУ всей порции.
+    private var composeTotals: (grams: Double, nutrition: Nutrition) {
+        var grams: Double = 0
+        var nutrition = Nutrition.zero
+        for item in nav.draftIngredients {
+            guard let food = store.food(item.foodID) else { continue }
+            grams += item.grams
+            nutrition += food.nutrition(grams: item.grams)
+        }
+        return (grams, nutrition)
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -31,68 +44,29 @@ struct CreateFoodScreen: View {
                         .padding(.bottom, 22)
 
                     fieldLabel("Название")
-                    TextField(namePlaceholder, text: $nav.draft.name)
-                        .golos(500, 15)
-                        .foregroundStyle(Theme.ink)
-                        .textFieldStyle(.plain)
-                        .padding(.horizontal, 16)
-                        .frame(height: 52)
-                        .background(Theme.softCard, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                    textField(placeholder: namePlaceholder, text: $nav.draft.name)
                         .padding(.bottom, 18)
 
                     if showsManufacturer {
                         fieldLabel("Производитель")
-                        TextField("Например, Простоквашино", text: $nav.draft.manufacturer)
-                            .golos(500, 15)
-                            .foregroundStyle(Theme.ink)
-                            .textFieldStyle(.plain)
-                            .padding(.horizontal, 16)
-                            .frame(height: 52)
-                            .background(Theme.softCard, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                        textField(placeholder: "Например, «Село Зелёное»", text: $nav.draft.manufacturer)
                             .padding(.bottom, 18)
                     }
 
-                    fieldLabel("Как вводите данные")
+                    fieldLabel("Откуда взять КБЖУ")
                     HStack(spacing: 6) {
-                        Chip(title: "На порцию", isOn: isPortionMode, height: 44,
-                             horizontalPadding: 8, cornerRadius: 13, fontSize: 13, fillsWidth: true) {
-                            nav.draft.mode = .portion
+                        Chip(title: "Ввести КБЖУ", isOn: !isCompose, height: 44,
+                             horizontalPadding: 8, cornerRadius: 13, fillsWidth: true) {
+                            nav.draftMode = .manual
                         }
-                        Chip(title: "На 100 г", isOn: !isPortionMode, height: 44,
-                             horizontalPadding: 8, cornerRadius: 13, fontSize: 13, fillsWidth: true) {
-                            nav.draft.mode = .grams
+                        Chip(title: "Собрать из продуктов", isOn: isCompose, height: 44,
+                             horizontalPadding: 8, cornerRadius: 13, fillsWidth: true) {
+                            nav.draftMode = .compose
                         }
                     }
                     .padding(.bottom, 18)
 
-                    if isPortionMode { portionCard.padding(.bottom, 18) }
-
-                    fieldLabel(valuesCaption)
-                    LazyVGrid(columns: [GridItem(.flexible(), spacing: 10),
-                                        GridItem(.flexible(), spacing: 10)], spacing: 10) {
-                        macroField(caption: "Калории", placeholder: "254", text: $nav.draft.kcal,
-                                   background: Theme.softCard, captionColor: Theme.ink(0.45),
-                                   valueColor: Theme.ink)
-                        macroField(caption: "Белки, г", placeholder: "19", text: $nav.draft.protein,
-                                   background: Theme.proteinTint, captionColor: Theme.proteinText.opacity(0.75),
-                                   valueColor: Theme.proteinText)
-                        macroField(caption: "Жиры, г", placeholder: "17", text: $nav.draft.fat,
-                                   background: Theme.fatTint, captionColor: Theme.fatText.opacity(0.8),
-                                   valueColor: Theme.fatText)
-                        macroField(caption: "Углеводы, г", placeholder: "7", text: $nav.draft.carbs,
-                                   background: Theme.carbTint, captionColor: Theme.carbText.opacity(0.8),
-                                   valueColor: Theme.carbText)
-                    }
-                    .padding(.bottom, 16)
-
-                    Text(hint)
-                        .golos(400, 12.5, lineHeight: 1.5)
-                        .foregroundStyle(Theme.ink(0.5))
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 14)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(Theme.ink(0.04), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                    if isCompose { composeSection } else { manualSection }
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 6)
@@ -112,14 +86,212 @@ struct CreateFoodScreen: View {
         }
     }
 
-    // MARK: - Порция
+    // MARK: - Состав
+
+    @ViewBuilder
+    private var composeSection: some View {
+        let totals = composeTotals
+
+        VStack(alignment: .leading, spacing: 0) {
+            VStack(spacing: 8) {
+                ForEach(nav.draftIngredients) { item in
+                    ingredientCard(item)
+                }
+            }
+            .padding(.bottom, nav.draftIngredients.isEmpty ? 0 : 12)
+
+            Button {
+                nav.query = ""
+                nav.screen = .ingredientPicker
+            } label: {
+                HStack(spacing: 12) {
+                    Text("+")
+                        .golos(400, 19)
+                        .foregroundStyle(.white)
+                        .frame(width: 32, height: 32)
+                        .background(Theme.green, in: Circle())
+                    Text("Добавить продукт")
+                        .golos(600, 13.5)
+                        .foregroundStyle(Theme.greenDark)
+                    Spacer(minLength: 0)
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 15)
+                .background(Theme.greenTintSoft, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 18, style: .continuous)
+                        .stroke(style: StrokeStyle(lineWidth: 1, dash: [5, 4]))
+                        .foregroundStyle(Theme.green.opacity(0.45))
+                )
+            }
+            .buttonStyle(.plain)
+            .padding(.bottom, 16)
+
+            if !nav.draftIngredients.isEmpty {
+                VStack(alignment: .leading, spacing: 0) {
+                    HStack(alignment: .firstTextBaseline, spacing: 10) {
+                        Text("Порция целиком")
+                            .golos(500, 12.5)
+                            .foregroundStyle(Theme.ink(0.5))
+                        Spacer(minLength: 0)
+                        Text("\(Int(totals.grams.rounded())) г")
+                            .golos(600, 13)
+                            .tabularNumbers()
+                            .foregroundStyle(Theme.ink)
+                    }
+                    .padding(.bottom, 8)
+
+                    HStack(alignment: .firstTextBaseline, spacing: 8) {
+                        Text("\(Int(totals.nutrition.kcal.rounded()))")
+                            .golos(700, 28)
+                            .tabularNumbers()
+                            .foregroundStyle(Theme.ink)
+                        Text("ккал")
+                            .golos(500, 13)
+                            .foregroundStyle(Theme.ink(0.45))
+                    }
+                    .padding(.bottom, 8)
+
+                    Text("\(totals.nutrition.macroLine) · \(per100Line(totals))")
+                        .golos(400, 12.5, lineHeight: 1.4)
+                        .tabularNumbers()
+                        .foregroundStyle(Theme.ink(0.5))
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 18)
+                .background(Theme.softCard, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+            }
+        }
+    }
+
+    private func per100Line(_ totals: (grams: Double, nutrition: Nutrition)) -> String {
+        guard totals.grams > 0 else { return "добавьте ингредиенты" }
+        return "\(Int((totals.nutrition.kcal / totals.grams * 100).rounded())) ккал на 100 г"
+    }
+
+    private func ingredientCard(_ item: DraftIngredient) -> some View {
+        let food = store.food(item.foodID)
+        let nutrition = food?.nutrition(grams: item.grams) ?? .zero
+
+        return VStack(alignment: .leading, spacing: 0) {
+            HStack(spacing: 10) {
+                Text(food?.name ?? "Продукт удалён")
+                    .golos(500, 14, lineHeight: 1.25)
+                    .foregroundStyle(Theme.ink)
+                Spacer(minLength: 0)
+                Button {
+                    nav.draftIngredients.removeAll { $0.id == item.id }
+                } label: {
+                    Text("×")
+                        .golos(400, 17)
+                        .foregroundStyle(Theme.ink(0.3))
+                        .frame(width: 32, height: 32)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .padding(.trailing, -6)
+                .padding(.vertical, -6)
+            }
+            .padding(.bottom, 10)
+
+            HStack(spacing: 10) {
+                HStack(alignment: .firstTextBaseline, spacing: 5) {
+                    NumericField(
+                        text: Binding(
+                            get: { item.grams > 0 ? String(Int(item.grams)) : "" },
+                            set: { value in
+                                let parsed = min(5000, Double(value.filter(\.isNumber)) ?? 0)
+                                if let index = nav.draftIngredients.firstIndex(where: { $0.id == item.id }) {
+                                    nav.draftIngredients[index].grams = parsed
+                                }
+                            }
+                        ),
+                        weight: 600, size: 14, alignment: .trailing
+                    )
+                    .frame(width: 48)
+                    Text("г")
+                        .golos(500, 12.5)
+                        .foregroundStyle(Theme.ink(0.45))
+                }
+                .padding(.horizontal, 12)
+                .frame(height: 40)
+                .background(Theme.softCard, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+
+                Text("Б \(Ru.number(nutrition.protein)) · Ж \(Ru.number(nutrition.fat)) · У \(Ru.number(nutrition.carbs))")
+                    .golos(400, 11.5, lineHeight: 1.3)
+                    .foregroundStyle(Theme.ink(0.42))
+
+                Spacer(minLength: 0)
+
+                Text("\(Int(nutrition.kcal.rounded())) ккал")
+                    .golos(600, 13)
+                    .tabularNumbers()
+                    .foregroundStyle(Theme.greenDark)
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
+        .overlay(
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .stroke(Theme.hairlineStrong, lineWidth: 1)
+        )
+    }
+
+    // MARK: - Ручной ввод
+
+    @ViewBuilder
+    private var manualSection: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            fieldLabel("Как вводите данные")
+            HStack(spacing: 6) {
+                Chip(title: "На порцию", isOn: isPortionMode, height: 44,
+                     horizontalPadding: 8, cornerRadius: 13, fontSize: 13, fillsWidth: true) {
+                    nav.draft.mode = .portion
+                }
+                Chip(title: "На 100 г", isOn: !isPortionMode, height: 44,
+                     horizontalPadding: 8, cornerRadius: 13, fontSize: 13, fillsWidth: true) {
+                    nav.draft.mode = .grams
+                }
+            }
+            .padding(.bottom, 18)
+
+            if isPortionMode { portionCard.padding(.bottom, 18) }
+
+            fieldLabel(valuesCaption)
+            LazyVGrid(columns: [GridItem(.flexible(), spacing: 10),
+                                GridItem(.flexible(), spacing: 10)], spacing: 10) {
+                macroField(caption: "Калории", placeholder: "254", text: $nav.draft.kcal,
+                           background: Theme.softCard, captionColor: Theme.ink(0.45),
+                           valueColor: Theme.ink)
+                macroField(caption: "Белки, г", placeholder: "19", text: $nav.draft.protein,
+                           background: Theme.proteinTint, captionColor: Theme.proteinText.opacity(0.75),
+                           valueColor: Theme.proteinText)
+                macroField(caption: "Жиры, г", placeholder: "17", text: $nav.draft.fat,
+                           background: Theme.fatTint, captionColor: Theme.fatText.opacity(0.8),
+                           valueColor: Theme.fatText)
+                macroField(caption: "Углеводы, г", placeholder: "7", text: $nav.draft.carbs,
+                           background: Theme.carbTint, captionColor: Theme.carbText.opacity(0.8),
+                           valueColor: Theme.carbText)
+            }
+            .padding(.bottom, 16)
+
+            Text(hint)
+                .golos(400, 12.5, lineHeight: 1.5)
+                .foregroundStyle(Theme.ink(0.5))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 14)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Theme.ink(0.04), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        }
+    }
 
     private var portionCard: some View {
         VStack(alignment: .leading, spacing: 0) {
             fieldLabel("Порция называется")
                 .padding(.bottom, 2)
 
-            // Перенос по строкам, как flex-wrap в макете.
             FlowRow(spacing: 6) {
                 ForEach(Self.unitOptions, id: \.self) { unit in
                     Chip(title: unit.rawValue, isOn: nav.draft.unit == unit,
@@ -219,6 +391,16 @@ struct CreateFoodScreen: View {
             .padding(.bottom, 8)
     }
 
+    private func textField(placeholder: String, text: Binding<String>) -> some View {
+        TextField(placeholder, text: text)
+            .golos(500, 15)
+            .foregroundStyle(Theme.ink)
+            .textFieldStyle(.plain)
+            .padding(.horizontal, 16)
+            .frame(height: 52)
+            .background(Theme.softCard, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+    }
+
     private func macroField(caption: String, placeholder: String, text: Binding<String>,
                             background: Color, captionColor: Color, valueColor: Color) -> some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -244,10 +426,28 @@ struct CreateFoodScreen: View {
         }
     }
 
-    private func values() -> AppStore.FoodValues {
+    private func values() -> AppStore.FoodValues? {
         let draft = nav.draft
+        let name = draft.name.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if isCompose {
+            let totals = composeTotals
+            guard totals.grams > 0 else { return nil }
+            return AppStore.FoodValues(
+                name: name,
+                manufacturer: draft.manufacturer,
+                mode: .portion,
+                portionGrams: totals.grams,
+                kcal: totals.nutrition.kcal,
+                protein: totals.nutrition.protein,
+                fat: totals.nutrition.fat,
+                carbs: totals.nutrition.carbs,
+                unit: .portion
+            )
+        }
+
         return AppStore.FoodValues(
-            name: draft.name.trimmingCharacters(in: .whitespacesAndNewlines),
+            name: name,
             manufacturer: draft.manufacturer,
             mode: draft.mode,
             portionGrams: draft.grams.ruDouble ?? 100,
@@ -260,18 +460,21 @@ struct CreateFoodScreen: View {
     }
 
     private func save() {
-        let payload = values()
+        guard let payload = values() else {
+            nav.flash("Добавьте продукты в состав")
+            return
+        }
 
         switch kind {
         case .edit(let id):
             store.updateFood(id: id, values: payload)
-            nav.draft = .empty
+            nav.resetFoodForm()
             nav.screen = .foods
             nav.flash("«\(payload.name.isEmpty ? "Продукт" : payload.name)» обновлено")
 
         case .ownDish:
             let created = store.createFood(payload, isOwn: true)
-            nav.draft = .empty
+            nav.resetFoodForm()
             nav.query = ""
             nav.addTab = .own
             nav.screen = .add
@@ -279,7 +482,7 @@ struct CreateFoodScreen: View {
 
         case .baseProduct(let barcode):
             let created = store.createFood(payload, isOwn: false, barcode: barcode)
-            nav.draft = .empty
+            nav.resetFoodForm()
             nav.query = ""
             nav.addTab = .search
             // Сразу открываем карточку — продукт заводят, чтобы тут же его съесть.
