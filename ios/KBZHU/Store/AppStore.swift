@@ -365,46 +365,7 @@ final class AppStore: ObservableObject {
     /// каталог его больше не трогает никогда.** На устройстве остаётся то, что человек
     /// записал сам, сколько бы раз позиция ни обновилась в общем каталоге.
     func applyCatalog(_ catalog: CatalogFile, etag: String?) {
-        var foods = data.foods
-        var idsInCatalog = Set<String>()
-
-        for product in catalog.products {
-            idsInCatalog.insert(product.id)
-
-            if let index = foods.firstIndex(where: { $0.catalogID == product.id }) {
-                guard !foods[index].isEdited else { continue }
-                foods[index] = product.applied(to: foods[index])
-                continue
-            }
-
-            // Продукт из старого вшитого набора — привязываем его к каталогу по имени,
-            // чтобы не появилось две копии одного творога.
-            if let index = foods.firstIndex(where: {
-                $0.catalogID == nil && !$0.isOwn
-                    && $0.name.caseInsensitiveCompare(product.name) == .orderedSame
-            }) {
-                if foods[index].isEdited {
-                    foods[index].catalogID = product.id
-                } else {
-                    foods[index] = product.applied(to: foods[index])
-                }
-                continue
-            }
-
-            foods.append(product.makeFood())
-        }
-
-        // Позиции, исчезнувшие из каталога, прячем из списков, но не удаляем:
-        // на них могут ссылаться записи дневника.
-        for index in foods.indices {
-            guard let catalogID = foods[index].catalogID else { continue }
-            let retired = !idsInCatalog.contains(catalogID)
-            if foods[index].isRetired != retired {
-                foods[index].isRetired = retired
-            }
-        }
-
-        data.foods = foods
+        data.foods = CatalogMerge.merge(foods: data.foods, catalog: catalog.products)
         data.catalogRevision = catalog.revision
         data.catalogETag = etag
         data.catalogCheckedAt = Date()
