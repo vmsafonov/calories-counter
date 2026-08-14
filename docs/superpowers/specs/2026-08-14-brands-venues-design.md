@@ -73,7 +73,7 @@
 | `SenSoy` | `Sen Soy` | `...-sensoy` | `...-sen-soy` |
 | `Mixbar` | `Mix Bar` | `...-mixbar` | `...-mix-bar` |
 | `KClassic` | `K-Classic` | `...-kclassic` | `...-k-classic` |
-| `Fruittella` | `Fruit-tella` | `...-fruittella` | `...-fruit-tella` |
+| `Fruit-tella` | `Fruittella` | `...-fruit-tella` | `...-fruittella` |
 
 Для этих пяти товаров прежний `id` прописывается явно в колонку `id`. Механика уже
 предусмотрена в `catalog/README.md` для переименований. В итоге миграция нулевая.
