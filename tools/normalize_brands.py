@@ -189,6 +189,8 @@ def main() -> None:
     parser.add_argument("--apply", action="store_true", help="переписать catalog.csv")
     args = parser.parse_args()
 
+    had_bom = CSV_PATH.read_bytes().startswith(b"\xef\xbb\xbf")
+
     with CSV_PATH.open(encoding="utf-8-sig", newline="") as handle:
         reader = csv.reader(handle)
         header = next(reader)
@@ -208,7 +210,9 @@ def main() -> None:
         print("\nЭто прогон без записи. Применить: python3 tools/normalize_brands.py --apply")
         return
 
-    with CSV_PATH.open("w", encoding="utf-8", newline="") as handle:
+    # Сохраняем BOM, если он был в исходнике: без него Excel не распознаёт кириллицу.
+    write_encoding = "utf-8-sig" if had_bom else "utf-8"
+    with CSV_PATH.open("w", encoding=write_encoding, newline="") as handle:
         writer = csv.writer(handle)
         writer.writerow(header)
         writer.writerows(new_rows)

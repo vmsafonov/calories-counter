@@ -195,6 +195,21 @@ suite("Список производителей") {
           "фильтр отдаёт только товары производителя")
 }
 
+suite("Список производителей: признак заведения и пустой бренд") {
+    let mixed = CatalogMerge.merge(foods: [], catalog: [
+        product(id: "m1", name: "Плов", brand: "Тётя Роза", kind: "ресторан"),
+        product(id: "m2", name: "Самса", brand: "Тётя Роза"),
+    ])
+    let mixedRows = BrandList.rows(foods: mixed)
+    check(mixedRows.count == 1, "один бренд — одна строка, получено \(mixedRows.count)")
+    check(mixedRows[0].isVenue, "isVenue объединяется по ИЛИ: хотя бы один товар — заведение")
+
+    let blank = CatalogMerge.merge(foods: [], catalog: [
+        product(id: "e1", name: "Хлеб", brand: "   "),
+    ])
+    check(BrandList.rows(foods: blank).isEmpty, "пробельный бренд не даёт строки")
+}
+
 suite("Алфавит и ё в списке производителей") {
     let base = CatalogMerge.merge(foods: [], catalog: [
         product(id: "b1", name: "Хлеб", brand: "Бабаевский"),
