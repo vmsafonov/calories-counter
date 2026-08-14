@@ -39,13 +39,14 @@ struct DraftIngredient: Identifiable, Hashable {
 }
 
 enum AddTab: String, CaseIterable, Hashable {
-    case search, own, recent
+    case search, own, recent, brands
 
     var title: String {
         switch self {
         case .search: return "Поиск"
         case .own: return "Своя еда"
         case .recent: return "Недавние"
+        case .brands: return "Производители"
         }
     }
 }
@@ -153,6 +154,10 @@ final class Nav: ObservableObject {
     @Published var query = ""
     @Published var selection: [SelectedItem] = []
 
+    /// Открытый производитель на вкладке «Производители». nil — показывается список.
+    @Published var selectedBrand: String?
+    @Published var brandQuery = ""
+
     @Published var product: ProductContext?
     @Published var foodForm: FoodFormKind = .ownDish
     @Published var draft: FoodDraft = .empty
@@ -182,6 +187,8 @@ final class Nav: ObservableObject {
         query = ""
         addTab = .search
         selection = []
+        selectedBrand = nil
+        brandQuery = ""
         screen = .add
     }
 

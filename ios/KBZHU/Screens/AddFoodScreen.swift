@@ -75,6 +75,7 @@ struct AddFoodScreen: View {
         case .own: return store.ownFoods
         case .recent: return store.recentFoods()
         case .search: return store.baseFoods
+        case .brands: return store.baseFoods
         }
     }
 
@@ -91,6 +92,7 @@ struct AddFoodScreen: View {
         case .own: return "Ваши блюда · \(store.ownFoods.count)"
         case .recent: return "Недавние"
         case .search: return "Популярное"
+        case .brands: return "Производители"
         }
     }
 
@@ -102,32 +104,37 @@ struct AddFoodScreen: View {
         case .own: return "Здесь появятся ваши блюда — создайте первое."
         case .recent: return "Здесь появится то, что вы уже добавляли в дневник."
         case .search: return "База продуктов пуста."
+        case .brands: return "База продуктов пуста."
         }
     }
 
     private var list: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 0) {
-                if nav.addTab == .own {
-                    createOwnCard
-                        .padding(.top, 10)
-                        .padding(.bottom, 6)
-                }
+                if nav.addTab == .brands && !hasQuery {
+                    brandsSection
+                } else {
+                    if nav.addTab == .own {
+                        createOwnCard
+                            .padding(.top, 10)
+                            .padding(.bottom, 6)
+                    }
 
-                SectionCaption(text: caption)
-                    .padding(.top, 14)
-                    .padding(.bottom, 12)
+                    SectionCaption(text: caption)
+                        .padding(.top, 14)
+                        .padding(.bottom, 12)
 
-                if results.isEmpty {
-                    Text(emptyStateText)
-                        .golos(400, 13, lineHeight: 1.5)
-                        .foregroundStyle(Theme.ink(0.45))
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.vertical, 8)
-                }
+                    if results.isEmpty {
+                        Text(emptyStateText)
+                            .golos(400, 13, lineHeight: 1.5)
+                            .foregroundStyle(Theme.ink(0.45))
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.vertical, 8)
+                    }
 
-                ForEach(results) { food in
-                    resultRow(food)
+                    ForEach(results) { food in
+                        resultRow(food)
+                    }
                 }
             }
             .padding(.horizontal, 20)
@@ -167,6 +174,125 @@ struct AddFoodScreen: View {
             )
         }
         .buttonStyle(.plain)
+    }
+
+    // MARK: - Вкладка «Производители»
+
+    private var brandRows: [BrandRow] {
+        BrandList.filter(BrandList.rows(foods: store.baseFoods), query: nav.brandQuery)
+    }
+
+    @ViewBuilder
+    private var brandsSection: some View {
+        if let brand = nav.selectedBrand {
+            brandFoods(brand)
+        } else {
+            brandListSection
+        }
+    }
+
+    private var brandListSection: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            // Свой поиск: производителей 910, у большинства — один товар.
+            HStack(spacing: 10) {
+                Image(systemName: "magnifyingglass")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(Theme.ink(0.35))
+                TextField("Название производителя", text: $nav.brandQuery)
+                    .golos(500, 14)
+                    .foregroundStyle(Theme.ink)
+                    .textFieldStyle(.plain)
+                    .autocorrectionDisabled()
+            }
+            .padding(.horizontal, 14)
+            .frame(height: 44)
+            .background(Theme.softCard, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+            .padding(.top, 10)
+            .padding(.bottom, 4)
+
+            SectionCaption(text: "Производители · \(brandRows.count)")
+                .padding(.top, 14)
+                .padding(.bottom, 12)
+
+            if brandRows.isEmpty {
+                Text("Никого не нашлось. Попробуйте другое название.")
+                    .golos(400, 13, lineHeight: 1.5)
+                    .foregroundStyle(Theme.ink(0.45))
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.vertical, 8)
+            }
+
+            ForEach(brandRows, id: \.self) { row in
+                brandRow(row)
+            }
+        }
+    }
+
+    private func brandRow(_ row: BrandRow) -> some View {
+        Button {
+            nav.selectedBrand = row.name
+        } label: {
+            VStack(spacing: 0) {
+                HStack(spacing: 10) {
+                    VStack(alignment: .leading, spacing: 3) {
+                        Text(row.name)
+                            .golos(500, 14.5)
+                            .foregroundStyle(Theme.ink)
+                            .multilineTextAlignment(.leading)
+                        Text("\(row.count) \(Ru.plural(row.count, ["товар", "товара", "товаров"]))")
+                            .golos(400, 12)
+                            .foregroundStyle(Theme.ink(0.42))
+                    }
+                    Spacer(minLength: 0)
+                    if row.isVenue {
+                        Text("Заведение")
+                            .golos(600, 10.5)
+                            .foregroundStyle(Theme.greenDark)
+                            .padding(.horizontal, 9)
+                            .padding(.vertical, 5)
+                            .background(Theme.greenTint,
+                                        in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                    }
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundStyle(Theme.ink(0.25))
+                }
+                .padding(.vertical, 13)
+
+                Rectangle().fill(Theme.hairline).frame(height: 1)
+            }
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+    }
+
+    private func brandFoods(_ brand: String) -> some View {
+        let items = BrandList.foods(of: brand, in: store.baseFoods)
+        return VStack(alignment: .leading, spacing: 0) {
+            Button {
+                nav.selectedBrand = nil
+            } label: {
+                HStack(spacing: 6) {
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 12, weight: .semibold))
+                    Text("Производители")
+                        .golos(600, 13)
+                }
+                .foregroundStyle(Theme.greenDark)
+                .padding(.vertical, 10)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .padding(.top, 6)
+
+            SectionCaption(text: "\(brand) · \(items.count)")
+                .padding(.top, 8)
+                .padding(.bottom, 12)
+
+            ForEach(items) { food in
+                resultRow(food)
+            }
+        }
     }
 
     private func resultRow(_ food: Food) -> some View {
