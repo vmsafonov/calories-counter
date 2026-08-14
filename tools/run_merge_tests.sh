@@ -22,6 +22,7 @@ swiftc -O -o "$out/merge_tests" \
     "$app/Models/RussianText.swift" \
     "$app/Models/Catalog.swift" \
     "$app/Store/CatalogMerge.swift" \
+    "$app/Store/BrandList.swift" \
     "$root/ios/Tests/CatalogMergeTests/main.swift"
 
 "$out/merge_tests"

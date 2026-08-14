@@ -166,6 +166,48 @@ suite("Признак заведения") {
     check(!notVenue[0].isVenue, "обычный продукт — не заведение")
 }
 
+suite("Список производителей") {
+    let base = CatalogMerge.merge(foods: [], catalog: [
+        product(id: "t1", name: "Творог", brand: "ВкусВилл"),
+        product(id: "t2", name: "Кефир", brand: "ВкусВилл"),
+        product(id: "t3", name: "Сырники", brand: "ВкусВилл"),
+        product(id: "s1", name: "Молоко", brand: "Самокат"),
+        product(id: "s2", name: "Хлеб", brand: "Самокат"),
+        product(id: "a1", name: "Каша", brand: "Аврора"),
+        product(id: "r1", name: "Шефбургер", brand: "Rostic’s", kind: "ресторан"),
+        product(id: "n1", name: "Домашний суп"),
+    ])
+
+    let rows = BrandList.rows(foods: base)
+    check(rows.count == 4, "продукты без производителя не дают строки")
+    check(rows[0].name == "Rostic’s" && rows[0].isVenue, "заведение поднято наверх")
+    check(rows[1].name == "ВкусВилл" && rows[1].count == 3, "дальше — по числу товаров")
+    check(rows[2].name == "Самокат" && rows[2].count == 2, "сортировка по убыванию количества")
+    check(rows[3].name == "Аврора", "при одном товаре — по алфавиту")
+
+    let found = BrandList.filter(rows, query: "вкусвилл")
+    check(found.map(\.name) == ["ВкусВилл"], "поиск без учёта регистра")
+    check(BrandList.filter(rows, query: "  ").map(\.name) == rows.map(\.name),
+          "пустой запрос не фильтрует")
+
+    let goods = BrandList.foods(of: "Самокат", in: base)
+    check(goods.count == 2 && goods.allSatisfy { $0.brand == "Самокат" },
+          "фильтр отдаёт только товары производителя")
+}
+
+suite("Алфавит и ё в списке производителей") {
+    let base = CatalogMerge.merge(foods: [], catalog: [
+        product(id: "b1", name: "Хлеб", brand: "Бабаевский"),
+        product(id: "v1", name: "Творог", brand: "Вдохновение"),
+        product(id: "z1", name: "Молоко", brand: "Зелёный луг"),
+    ])
+    let rows = BrandList.rows(foods: base)
+    check(rows.map(\.name) == ["Бабаевский", "Вдохновение", "Зелёный луг"],
+          "при равном количестве — русский алфавит")
+    check(BrandList.filter(rows, query: "зеленый").map(\.name) == ["Зелёный луг"],
+          "поиск не различает е и ё")
+}
+
 print("\n=====")
 if failures == 0 {
     print("ВСЁ ЗЕЛЁНОЕ: проверок \(checks), провалов нет")
