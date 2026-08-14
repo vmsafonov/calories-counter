@@ -195,11 +195,25 @@ _TRANSLIT_SOURCES: dict[str, str] = {
     "Frutella": "Fruittella",
     "O Life": "O!LIFE",
     "O LIFE!": "O!LIFE",
+    "Alyonka": "Алёнка",
+    "Indilite": "Индилайт",
+    "Ne moloko": "Немолоко",
+    "Belyov Pastila": "Белёвская пастила",
+    "Ahakom": "Анаком",
+    "Kray Karavay": "Край Каравай",
+}
+
+# Опечатки в написании бренда: карточки в Open Food Facts заводят руками.
+_TYPO_SOURCES: dict[str, str] = {
+    "Snaq fabtiq": "Snaq Fabriq",
+    "Narura selection": "Natura Selection",
+    "Natura selection": "Natura Selection",
 }
 
 ALIASES: dict[str, str] = {normalize_key(source): canon
                            for source, canon in {**_ALIAS_SOURCES,
-                                                 **_TRANSLIT_SOURCES}.items()}
+                                                 **_TRANSLIT_SOURCES,
+                                                 **_TYPO_SOURCES}.items()}
 
 # Группы, где официальное написание — предположение (взято самое частое либо
 # самое аккуратное из вариантов). Показываются в таблице с пометкой.

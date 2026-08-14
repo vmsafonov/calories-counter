@@ -1,6 +1,6 @@
 {
-  "revision": "2a52fa91ff1f",
-  "generatedAt": "2026-08-14T09:47:40+00:00",
+  "revision": "5184b0dae9f2",
+  "generatedAt": "2026-08-14T09:55:53+00:00",
   "products": [
     {
       "id": "ovsyanaya-kasha-na-vode-nordic",
@@ -265,7 +265,7 @@
       "barcode": "10266663"
     },
     {
-      "id": "shokoladnyy-batonchik-snickers-krisper-snickers-krisper",
+      "id": "shokoladnyy-batonchik-snickers-krisper-snickers",
       "name": "Шоколадный батончик SNICKERS® КРИСПЕР",
       "manufacturer": "Snickers",
       "kcal": 480.0,
@@ -694,8 +694,8 @@
       "barcode": "2100100696818"
     },
     {
-      "id": "kids-pure-from-pear-peach-and-mango-vkusvill",
-      "name": "Kids Pure From Pear Peach And Mango",
+      "id": "pyure-detskoe-grusha-persik-mango-vkusvill",
+      "name": "Пюре детское груша-персик-манго",
       "manufacturer": "ВкусВилл",
       "kcal": 46.2,
       "protein": 0.3,
@@ -1563,7 +1563,7 @@
       "barcode": "4011100977952"
     },
     {
-      "id": "mamba-frumeladki-kislye-zvezdochki-august-storck",
+      "id": "mamba-frumeladki-kislye-zvezdochki-storck",
       "name": "мамба фрумеладки кислые звёздочки",
       "manufacturer": "Storck",
       "kcal": 339.0,
@@ -1750,8 +1750,8 @@
       "barcode": "4600416011889"
     },
     {
-      "id": "pastila-vanilla-flavored-sharmel-udarnica",
-      "name": "Pastila \"Vanilla-Flavored\" \"SHARMEL\"",
+      "id": "pastila-sharmel-vanilnaya-udarnica",
+      "name": "Пастила Шармэль ванильная",
       "manufacturer": "Ударница",
       "kcal": 310.0,
       "protein": 0.6,
@@ -1794,8 +1794,8 @@
       "barcode": "4600494661334"
     },
     {
-      "id": "adrenaline-zero-sugar-adrenaline",
-      "name": "Adrenaline Zero sugar",
+      "id": "energetik-adrenaline-zero-bez-sahara-adrenaline",
+      "name": "Энергетик Adrenaline Zero без сахара",
       "manufacturer": "Adrenaline",
       "kcal": 3.1,
       "protein": 0.0,
@@ -1838,7 +1838,7 @@
       "barcode": "4600494694813"
     },
     {
-      "id": "desert-bonjour-souffle-vkus-klubniki-so-slivkami-ao-konti-rus",
+      "id": "desert-bonjour-souffle-vkus-klubniki-so-slivkami-konti-rus",
       "name": "Десерт \"Bonjour Souffle\" вкус клубники со сливками",
       "manufacturer": "Конти-Рус",
       "kcal": 430.0,
@@ -1904,9 +1904,9 @@
       "barcode": "4600528366396"
     },
     {
-      "id": "anakom-ahakom",
-      "name": "anakom",
-      "manufacturer": "Ahakom",
+      "id": "lapsha-anakom-anakom",
+      "name": "Лапша Анаком",
+      "manufacturer": "Анаком",
       "kcal": 63.0,
       "protein": 1.3,
       "fat": 3.0,
@@ -2146,8 +2146,8 @@
       "barcode": "4600605032732"
     },
     {
-      "id": "aktibio-jordbær-aktibio",
-      "name": "Aktibio jordbær",
+      "id": "aktibio-klubnika-aktibio",
+      "name": "АктиБио клубника",
       "manufacturer": "АктиБио",
       "kcal": 73.0,
       "protein": 2.9,
@@ -2245,9 +2245,9 @@
       "barcode": "4600605033258"
     },
     {
-      "id": "actimuno-actimuno",
-      "name": "Actimuno",
-      "manufacturer": "Actimuno",
+      "id": "kislomolochnyy-napitok-aktimuno-aktimuno",
+      "name": "Кисломолочный напиток Актимуно",
+      "manufacturer": "Актимуно",
       "kcal": 69.0,
       "protein": 2.7,
       "fat": 1.5,
@@ -2564,8 +2564,8 @@
       "barcode": "4600680037516"
     },
     {
-      "id": "milk-chocolate-mascha-i-medwedj-masha-i-medved",
-      "name": "Milk Chocolate Mascha i Medwedj",
+      "id": "molochnyy-shokolad-masha-i-medved-masha-i-medved",
+      "name": "Молочный шоколад Маша и Медведь",
       "manufacturer": "Маша и Медведь",
       "kcal": 568.0,
       "protein": 8.0,
@@ -2674,8 +2674,8 @@
       "barcode": "4600699515098"
     },
     {
-      "id": "hoegaarden-hveteøl-4-9-hoegaarden",
-      "name": "Hoegaarden hveteøl, 4,9%",
+      "id": "pivo-hoegaarden-pshenichnoe-4-9-hoegaarden",
+      "name": "Пиво Hoegaarden пшеничное 4,9%",
       "manufacturer": "Hoegaarden",
       "kcal": 44.1,
       "protein": 0.5,
@@ -2773,8 +2773,8 @@
       "barcode": "4600765027340"
     },
     {
-      "id": "isey-skyr-laktis",
-      "name": "isey skyr",
+      "id": "skir-isey-laktis",
+      "name": "Скир Isey",
       "manufacturer": "Лактис",
       "kcal": 72.0,
       "protein": 11.0,
@@ -2806,7 +2806,7 @@
       "barcode": "4600778021014"
     },
     {
-      "id": "nareznoy-pirog-so-vkusom-shokolada-ooo-triumf",
+      "id": "nareznoy-pirog-so-vkusom-shokolada-triumf",
       "name": "Нарезной Пирог Со Вкусом Шоколада",
       "manufacturer": "Триумф",
       "kcal": 380.0,
@@ -2817,8 +2817,8 @@
       "barcode": "4600795058383"
     },
     {
-      "id": "oatmeal-yasno-solnyshko",
-      "name": "Oatmeal",
+      "id": "ovsyanye-hlopya-yasno-solnyshko",
+      "name": "Овсяные хлопья",
       "manufacturer": "Ясно солнышко",
       "kcal": 340.0,
       "protein": 12.0,
@@ -2839,8 +2839,8 @@
       "barcode": "4600819440156"
     },
     {
-      "id": "vdokhnoveniye-chocolate-vdohnovenie",
-      "name": "Vdokhnoveniye Chocolate",
+      "id": "shokolad-vdohnovenie-vdohnovenie",
+      "name": "Шоколад Вдохновение",
       "manufacturer": "Вдохновение",
       "kcal": 550.0,
       "protein": 7.5,
@@ -2850,8 +2850,8 @@
       "barcode": "4600823009059"
     },
     {
-      "id": "vdohnovenie-chocolat-noir-aux-amandes-75-cacao-vdohnovenie",
-      "name": "Vdohnovenie Chocolat noir aux amandes 75% Cacao",
+      "id": "shokolad-vdohnovenie-temnyy-s-mindalem-75-vdohnovenie",
+      "name": "Шоколад Вдохновение тёмный с миндалём 75%",
       "manufacturer": "Вдохновение",
       "kcal": 540.0,
       "protein": 11.0,
@@ -2872,8 +2872,8 @@
       "barcode": "4600823143005"
     },
     {
-      "id": "alenka-krasnyy-oktyabr",
-      "name": "Аленка",
+      "id": "shokolad-alenka-krasnyy-oktyabr",
+      "name": "Шоколад Алёнка",
       "manufacturer": "Красный Октябрь",
       "kcal": 540.0,
       "protein": 5.5,
@@ -2993,8 +2993,8 @@
       "barcode": "4601075393309"
     },
     {
-      "id": "seafood-mix-in-oil-meridian",
-      "name": "Seafood mix in oil",
+      "id": "morskoy-kokteyl-v-masle-meridian",
+      "name": "Морской коктейль в масле",
       "manufacturer": "Меридиан",
       "kcal": 191.0,
       "protein": 8.5,
@@ -3136,7 +3136,7 @@
       "barcode": "4601347013348"
     },
     {
-      "id": "vareniki-s-kartofelem-i-gribami-u-palycha-vsegda-vkusno",
+      "id": "vareniki-s-kartofelem-i-gribami-u-palycha",
       "name": "Вареники С Картофелем И Грибами",
       "manufacturer": "У Палыча",
       "kcal": 150.0,
@@ -3191,8 +3191,8 @@
       "barcode": "4601512005307"
     },
     {
-      "id": "alenka-pao-krasnyy-oktyabr",
-      "name": "АЛЁНКА",
+      "id": "alenka-krasnyy-oktyabr",
+      "name": "Алёнка",
       "manufacturer": "Красный Октябрь",
       "kcal": 410.0,
       "protein": 5.0,
@@ -3202,8 +3202,8 @@
       "barcode": "4601513014018"
     },
     {
-      "id": "100-pompelmo-parmalat",
-      "name": "100% pompelmo",
+      "id": "sok-greypfrutovyy-100-parmalat",
+      "name": "Сок грейпфрутовый 100%",
       "manufacturer": "Parmalat",
       "kcal": 40.0,
       "protein": 0.0,
@@ -3455,8 +3455,8 @@
       "barcode": "4601751027924"
     },
     {
-      "id": "protein-max-molvest",
-      "name": "protein max",
+      "id": "proteinovyy-napitok-protein-max-molvest",
+      "name": "Протеиновый напиток Protein Max",
       "manufacturer": "Молвест",
       "kcal": 62.5,
       "protein": 10.4,
@@ -3499,8 +3499,8 @@
       "barcode": "4601780002565"
     },
     {
-      "id": "makaron-makfa-makfa",
-      "name": "makaron Makfa",
+      "id": "makarony-makfa-makfa",
+      "name": "Макароны Makfa",
       "manufacturer": "Makfa",
       "kcal": 342.0,
       "protein": 12.0,
@@ -3565,8 +3565,8 @@
       "barcode": "4601787011232"
     },
     {
-      "id": "korolevskie-dumplingi-kurica-i-ovoshi-bingo",
-      "name": "korolevskie Dumplingi kurica i ovoshi",
+      "id": "pelmeni-korolevskie-s-kuricey-i-ovoschami-bingo",
+      "name": "Пельмени королевские с курицей и овощами",
       "manufacturer": "Bingo",
       "kcal": 135.0,
       "protein": 9.7,
@@ -3664,8 +3664,8 @@
       "barcode": "4602014010929"
     },
     {
-      "id": "cvetlogorniya-plombir",
-      "name": "cvetlogorniya plombir",
+      "id": "plombir-svetlogorskiy",
+      "name": "Пломбир Светлогорский",
       "manufacturer": "",
       "kcal": 245.0,
       "protein": 3.8,
@@ -3895,8 +3895,8 @@
       "barcode": "4602358003663"
     },
     {
-      "id": "plombir-korovka-korovka-iz-korenovki",
-      "name": "Plombir Korovka",
+      "id": "plombir-korovka-iz-korenovki-korovka-iz-korenovki",
+      "name": "Пломбир Коровка из Кореновки",
       "manufacturer": "Коровка из Кореновки",
       "kcal": 260.0,
       "protein": 4.5,
@@ -3994,8 +3994,8 @@
       "barcode": "4602441025091"
     },
     {
-      "id": "green-milk-almond-green-milk",
-      "name": "Green milk almond",
+      "id": "mindalnoe-moloko-green-milk-green-milk",
+      "name": "Миндальное молоко Green Milk",
       "manufacturer": "Green milk",
       "kcal": 70.0,
       "protein": 0.5,
@@ -4027,7 +4027,7 @@
       "barcode": "4602547001371"
     },
     {
-      "id": "marmelad-zhevatelnyy-zmei-xxl-fruit-tella",
+      "id": "marmelad-zhevatelnyy-zmei-xxl-fruittella",
       "name": "Мармелад жевательный «Змеи XXL»",
       "manufacturer": "Fruittella",
       "kcal": 330.0,
@@ -4049,7 +4049,7 @@
       "barcode": "4602606010924"
     },
     {
-      "id": "fruitella-zveri-miks-frutella",
+      "id": "fruitella-zveri-miks-fruittella",
       "name": "fruitella звери микс",
       "manufacturer": "Fruittella",
       "kcal": 320.0,
@@ -4060,7 +4060,7 @@
       "barcode": "4602606011570"
     },
     {
-      "id": "frutela-krutoy-miks-frutella",
+      "id": "frutela-krutoy-miks-fruittella",
       "name": "фрутела крутой микс",
       "manufacturer": "Fruittella",
       "kcal": 330.0,
@@ -4390,8 +4390,8 @@
       "barcode": "4603934000793"
     },
     {
-      "id": "chocolat-russkiy-shokolad",
-      "name": "Chocolat",
+      "id": "shokolad-russkiy-shokolad",
+      "name": "Шоколад",
       "manufacturer": "Русский шоколад",
       "kcal": 560.0,
       "protein": 0.0,
@@ -4621,8 +4621,8 @@
       "barcode": "4605246003523"
     },
     {
-      "id": "summer-bouquet-greenfield",
-      "name": "Summer Bouquet",
+      "id": "chay-greenfield-summer-bouquet-greenfield",
+      "name": "Чай Greenfield Summer Bouquet",
       "manufacturer": "Greenfield",
       "kcal": 0.0,
       "protein": 0.0,
@@ -4632,9 +4632,9 @@
       "barcode": "4605246004339"
     },
     {
-      "id": "tess-pleasure-black-tea-rosesip-apple",
-      "name": "Tess Pleasure Black Tea, Rosesip, Apple",
-      "manufacturer": "",
+      "id": "chay-tess-pleasure-chernyy-s-shipovnikom-i-yablokom-tess",
+      "name": "Чай Tess Pleasure чёрный с шиповником и яблоком",
+      "manufacturer": "Tess",
       "kcal": 1.0,
       "protein": 0.1,
       "fat": 0.0,
@@ -4654,8 +4654,8 @@
       "barcode": "4605246012952"
     },
     {
-      "id": "babkini-sunflower-seeds-babkiny",
-      "name": "\"Babkini\" Sunflower Seeds",
+      "id": "semechki-podsolnechnye-babkiny-babkiny",
+      "name": "Семечки подсолнечные Бабкины",
       "manufacturer": "Бабкины",
       "kcal": 642.9,
       "protein": 14.3,
@@ -4742,8 +4742,8 @@
       "barcode": "4605496023654"
     },
     {
-      "id": "waffeln-korowka-monolith",
-      "name": "Waffeln\"Korowka\"",
+      "id": "vafli-korovka-monolith",
+      "name": "Вафли Коровка",
       "manufacturer": "Monolith",
       "kcal": 532.0,
       "protein": 7.5,
@@ -5039,7 +5039,7 @@
       "barcode": "4606068176693"
     },
     {
-      "id": "plavlenyy-produkt-s-syrom-slivochnyy-ip-emelin-vladimir-pavlovich",
+      "id": "plavlenyy-produkt-s-syrom-slivochnyy-emelin-vladimir-pavlovich",
       "name": "Плавленый продукт с сыром сливочный",
       "manufacturer": "Емелин Владимир Павлович",
       "kcal": 232.0,
@@ -5116,8 +5116,8 @@
       "barcode": "4606068909314"
     },
     {
-      "id": "nesquick-nestlé",
-      "name": "nesquick",
+      "id": "kakao-napitok-nesquik-nestlé",
+      "name": "Какао-напиток Nesquik",
       "manufacturer": "Nestlé",
       "kcal": 368.0,
       "protein": 8.7,
@@ -5248,8 +5248,8 @@
       "barcode": "4606419026400"
     },
     {
-      "id": "caramel-pudding-ehrmann",
-      "name": "Caramel pudding",
+      "id": "puding-karamelnyy-ehrmann",
+      "name": "Пудинг карамельный",
       "manufacturer": "Ehrmann",
       "kcal": 80.0,
       "protein": 10.0,
@@ -5270,8 +5270,8 @@
       "barcode": "4606779301407"
     },
     {
-      "id": "hight-protein-caffe-latte-cocktail-hyper",
-      "name": "Hight Protein Caffe Latte cocktail",
+      "id": "proteinovyy-kokteyl-kofe-latte-hyper",
+      "name": "Протеиновый коктейль кофе латте",
       "manufacturer": "Hyper",
       "kcal": 55.0,
       "protein": 8.0,
@@ -5358,8 +5358,8 @@
       "barcode": "4606779684005"
     },
     {
-      "id": "grand-dessert-vanille-ehrmann",
-      "name": "Grand Dessert Vanille",
+      "id": "grand-dessert-vanilnyy-ehrmann",
+      "name": "Grand Dessert ванильный",
       "manufacturer": "Ehrmann",
       "kcal": 117.9,
       "protein": 2.6,
@@ -5413,7 +5413,7 @@
       "barcode": "4606779762802"
     },
     {
-      "id": "yogurt-epica-persik-marakuyya",
+      "id": "yogurt-epica",
       "name": "Йогурт",
       "manufacturer": "Epica",
       "kcal": 120.0,
@@ -5623,7 +5623,7 @@
       "barcode": "4607001473848"
     },
     {
-      "id": "cikoriy-rastvorimyy-poroshkoobraznyy-ooo",
+      "id": "cikoriy-rastvorimyy-poroshkoobraznyy",
       "name": "Цикорий растворимый порошкообразный",
       "manufacturer": "",
       "kcal": 312.0,
@@ -5810,8 +5810,8 @@
       "barcode": "4607005400567"
     },
     {
-      "id": "pobeda-36-pobeda",
-      "name": "pobeda 36%",
+      "id": "shokolad-molochnyy-36-pobeda",
+      "name": "Шоколад молочный 36%",
       "manufacturer": "Победа",
       "kcal": 470.0,
       "protein": 11.0,
@@ -5986,9 +5986,9 @@
       "barcode": "4607012350992"
     },
     {
-      "id": "sonnenblumenkerne-ot-martina-geröstet",
-      "name": "Sonnenblumenkerne Ot Martina Geröstet",
-      "manufacturer": "",
+      "id": "semechki-podsolnechnye-zharenye-ot-martina",
+      "name": "Семечки подсолнечные жареные",
+      "manufacturer": "От Мартина",
       "kcal": 654.0,
       "protein": 26.6,
       "fat": 57.5,
@@ -6096,7 +6096,7 @@
       "barcode": "4607015232868"
     },
     {
-      "id": "pechene-sdobnoe-ovsyannoe-ooo-kdv-voronezh",
+      "id": "pechene-sdobnoe-ovsyannoe-kdv-voronezh",
       "name": "Печенье сдобное \"овсянное\"",
       "manufacturer": "КДВ Воронеж",
       "kcal": 450.0,
@@ -6140,17 +6140,6 @@
       "barcode": "4607015235777"
     },
     {
-      "id": "yashkino-yashkino",
-      "name": "яшкино",
-      "manufacturer": "Яшкино",
-      "kcal": 430.0,
-      "protein": 6.5,
-      "fat": 21.0,
-      "carbs": 53.0,
-      "defaultGrams": 100.0,
-      "barcode": "4607015236309"
-    },
-    {
       "id": "bulochka-s-abrikosovoy-nachinkoy-darnica",
       "name": "Булочка с абрикосовой начинкой",
       "manufacturer": "Дарница",
@@ -6162,8 +6151,8 @@
       "barcode": "4607015738971"
     },
     {
-      "id": "buckwheat-uvelka",
-      "name": "Buckwheat",
+      "id": "grechka-uvelka",
+      "name": "Гречка",
       "manufacturer": "Увелка",
       "kcal": 340.0,
       "protein": 13.0,
@@ -6239,9 +6228,9 @@
       "barcode": "4607016245966"
     },
     {
-      "id": "sweet-russian-bagels-kray-karavay",
-      "name": "Sweet Russian bagels Kray Karavay",
-      "manufacturer": "",
+      "id": "sushki-kray-karavay-kray-karavay",
+      "name": "Сушки Край Каравай",
+      "manufacturer": "Край Каравай",
       "kcal": 350.0,
       "protein": 8.5,
       "fat": 8.0,
@@ -6371,7 +6360,7 @@
       "barcode": "4607022663587"
     },
     {
-      "id": "slivochnoe-maslo-tysyacha-ozer-ooo-nevskie-syry",
+      "id": "slivochnoe-maslo-tysyacha-ozer-nevskie-syry",
       "name": "Сливочное масло \"Тысяча Озёр\"",
       "manufacturer": "Невские сыры",
       "kcal": 748.0,
@@ -6382,8 +6371,8 @@
       "barcode": "4607023231204"
     },
     {
-      "id": "cream-milk-20-vilage-house",
-      "name": "Cream Milk 20%",
+      "id": "slivki-20-vilage-house",
+      "name": "Сливки 20%",
       "manufacturer": "Vilage House",
       "kcal": 206.0,
       "protein": 2.6,
@@ -6415,7 +6404,7 @@
       "barcode": "4607030206479"
     },
     {
-      "id": "syrok-tvorozhnyy-glazirovannyy-konditerskoy-glazuryu-s-kroshkoy-pechenya-so-vkusom-greckogo-oreha-i-nachinkoy-konditerskoy-sguschennoy-pingvinenok-pongo-ooo-pk-aysberg-lyuks",
+      "id": "syrok-tvorozhnyy-glazirovannyy-konditerskoy-glazuryu-s-kroshkoy-pechenya-so-vkusom-greckogo-oreha-i-nachinkoy-konditerskoy-sguschennoy-pingvinenok-pongo-aysberg-lyuks",
       "name": "Сырок творожный глазированный кондитерской глазурью с крошкой печенья, со вкусом грецкого ореха и начинкой кондитерской сгущенной \"Пингвинёнок Понго\"",
       "manufacturer": "Айсберг-Люкс",
       "kcal": 390.0,
@@ -6547,7 +6536,7 @@
       "barcode": "4607041137083"
     },
     {
-      "id": "chipsy-nori-sensoy",
+      "id": "chipsy-nori-sen-soy",
       "name": "Чипсы нори",
       "manufacturer": "Sen Soy",
       "kcal": 550.0,
@@ -6580,7 +6569,7 @@
       "barcode": "4607042434877"
     },
     {
-      "id": "sok-dobryy-multifrukt",
+      "id": "sok-dobryy",
       "name": "сок",
       "manufacturer": "Добрый",
       "kcal": 48.0,
@@ -6591,8 +6580,8 @@
       "barcode": "4607042434891"
     },
     {
-      "id": "salad-tuna-pelican",
-      "name": "Salad Tuna",
+      "id": "salat-s-tuncom-pelican",
+      "name": "Салат с тунцом",
       "manufacturer": "Pelican",
       "kcal": 149.0,
       "protein": 19.1,
@@ -6746,7 +6735,7 @@
     },
     {
       "id": "tvorog-9-iskrenne-vash",
-      "name": "Tvorog 9%",
+      "name": "Творог 9%",
       "manufacturer": "Искренне Ваш",
       "kcal": 157.0,
       "protein": 16.0,
@@ -6899,8 +6888,8 @@
       "barcode": "4607065000868"
     },
     {
-      "id": "mars-max-mars",
-      "name": "Mars Max",
+      "id": "batonchik-mars-max-mars",
+      "name": "Батончик Mars Max",
       "manufacturer": "Mars",
       "kcal": 460.0,
       "protein": 3.8,
@@ -6910,9 +6899,9 @@
       "barcode": "4607065001490"
     },
     {
-      "id": "doshirak-boeuf",
-      "name": "Doshirak boeuf",
-      "manufacturer": "",
+      "id": "doshirak-govyadina-doshirak",
+      "name": "Доширак говядина",
+      "manufacturer": "Доширак",
       "kcal": 400.0,
       "protein": 8.0,
       "fat": 17.0,
@@ -7053,8 +7042,8 @@
       "barcode": "4607067935175"
     },
     {
-      "id": "riz-soufflé",
-      "name": "Riz soufflé",
+      "id": "vozdushnyy-ris",
+      "name": "Воздушный рис",
       "manufacturer": "",
       "kcal": 387.0,
       "protein": 6.7,
@@ -7163,8 +7152,8 @@
       "barcode": "4607083550482"
     },
     {
-      "id": "biscuit-choco-boy-orion-45g-corée-orion",
-      "name": "Biscuit Choco Boy Orion 45G Corée",
+      "id": "pechene-choco-boy-orion",
+      "name": "Печенье Choco Boy",
       "manufacturer": "Orion",
       "kcal": 530.0,
       "protein": 8.0,
@@ -7174,8 +7163,8 @@
       "barcode": "4607084351323"
     },
     {
-      "id": "choco-pie-original-orion",
-      "name": "Choco Pie Original",
+      "id": "pirozhnoe-choco-pie-original-orion",
+      "name": "Пирожное Choco Pie Original",
       "manufacturer": "Orion",
       "kcal": 430.0,
       "protein": 4.5,
@@ -7185,8 +7174,8 @@
       "barcode": "4607084351354"
     },
     {
-      "id": "choco-pie-orion",
-      "name": "Choco Pie",
+      "id": "pirozhnoe-choco-pie-orion",
+      "name": "Пирожное Choco Pie",
       "manufacturer": "Orion",
       "kcal": 506.7,
       "protein": 4.5,
@@ -7196,7 +7185,7 @@
       "barcode": "4607084351385"
     },
     {
-      "id": "agusha-yabloko-persik-ooo-lebedinskiy",
+      "id": "agusha-yabloko-persik-lebedinskiy",
       "name": "Агуша яблоко персик",
       "manufacturer": "Лебединский",
       "kcal": 48.0,
@@ -7285,7 +7274,7 @@
       "kind": "ресторан"
     },
     {
-      "id": "hlopya-ovsyanye-gerkules-ooo-bugrovskie-melnicy",
+      "id": "hlopya-ovsyanye-gerkules-bugrovskie-melnicy",
       "name": "Хлопья овсяные Геркулес",
       "manufacturer": "Бугровские мельницы",
       "kcal": 306.0,
@@ -7296,7 +7285,7 @@
       "barcode": "4607106950848"
     },
     {
-      "id": "batonchik-jet-s-dzhets-s-pechenem-i-myagkoy-karamelyu-pokrytoy-glazuryu-ooo-kdv-voronezh-kdv",
+      "id": "batonchik-jet-s-dzhets-s-pechenem-i-myagkoy-karamelyu-pokrytoy-glazuryu-kdv-voronezh",
       "name": "Батончик \"JET'S/ ДЖЕТС\" с печеньем и мягкой карамелью, покрытой глазурью",
       "manufacturer": "КДВ Воронеж",
       "kcal": 480.0,
@@ -7417,9 +7406,9 @@
       "barcode": "4607117890836"
     },
     {
-      "id": "chocolat-noisettes-raisin-100-g-alyonka",
-      "name": "Chocolat noisettes/raisin - 100 G",
-      "manufacturer": "Alyonka",
+      "id": "shokolad-alenka-s-fundukom-i-izyumom-alenka",
+      "name": "Шоколад Алёнка с фундуком и изюмом",
+      "manufacturer": "Алёнка",
       "kcal": 550.0,
       "protein": 7.0,
       "fat": 35.0,
@@ -7670,8 +7659,8 @@
       "barcode": "4607160451039"
     },
     {
-      "id": "coffe-prostokvashino",
-      "name": "Coffe",
+      "id": "kofeynyy-kokteyl-prostokvashino",
+      "name": "Кофейный коктейль",
       "manufacturer": "Простоквашино",
       "kcal": 53.3,
       "protein": 2.9,
@@ -7835,7 +7824,7 @@
       "barcode": "4607958071425"
     },
     {
-      "id": "dymoviya-iz-lopatki-market-perekrestok",
+      "id": "dymoviya-iz-lopatki-perekrestok",
       "name": "Дымовийа Из Лопатки",
       "manufacturer": "Перекрёсток",
       "kcal": 97.0,
@@ -7890,8 +7879,8 @@
       "barcode": "4607959062361"
     },
     {
-      "id": "protein-cookie-o12",
-      "name": "Protein cookie",
+      "id": "proteinovoe-pechene-o12",
+      "name": "Протеиновое печенье",
       "manufacturer": "o12",
       "kcal": 360.0,
       "protein": 15.0,
@@ -7989,7 +7978,7 @@
       "barcode": "4610009000251"
     },
     {
-      "id": "hlopya-ovsyanye-gerkules-ooo-solopttorg",
+      "id": "hlopya-ovsyanye-gerkules-solopttorg",
       "name": "Хлопья овсяные Геркулес",
       "manufacturer": "Сольоптторг",
       "kcal": 305.0,
@@ -8000,7 +7989,7 @@
       "barcode": "4610011340079"
     },
     {
-      "id": "krupa-grechnevaya-yadrica-bystrorazvarivayuschayasya-ooo-solopttorg",
+      "id": "krupa-grechnevaya-yadrica-bystrorazvarivayuschayasya-solopttorg",
       "name": "Крупа гречневая ядрица быстроразваривающаяся",
       "manufacturer": "Сольоптторг",
       "kcal": 350.0,
@@ -8308,8 +8297,8 @@
       "barcode": "4610169565164"
     },
     {
-      "id": "chikalayers-peanut-caramel-chikalab",
-      "name": "Chikalayers peanut&caramel",
+      "id": "chikalayers-arahis-karamel-chikalab",
+      "name": "Chikalayers арахис-карамель",
       "manufacturer": "Chikalab",
       "kcal": 333.3,
       "protein": 30.0,
@@ -8374,9 +8363,9 @@
       "barcode": "4610169742787"
     },
     {
-      "id": "cappuccino-caramel-narura-selection",
-      "name": "Cappuccino caramel",
-      "manufacturer": "Narura selection",
+      "id": "kapuchino-karamel-natura-selection",
+      "name": "Капучино карамель",
+      "manufacturer": "Natura Selection",
       "kcal": 60.0,
       "protein": 2.3,
       "fat": 2.6,
@@ -8385,9 +8374,9 @@
       "barcode": "4610172091797"
     },
     {
-      "id": "cappuchino-caramel-natura-selection",
-      "name": "Cappuchino caramel",
-      "manufacturer": "Natura selection",
+      "id": "kapuchino-karamelnyy-natura-selection",
+      "name": "Капучино карамельный",
+      "manufacturer": "Natura Selection",
       "kcal": 60.0,
       "protein": 2.3,
       "fat": 2.6,
@@ -8616,7 +8605,7 @@
       "barcode": "4620004251220"
     },
     {
-      "id": "marmelad-zhevatelnvy-figurnyy-kislyy-mixbar",
+      "id": "marmelad-zhevatelnvy-figurnyy-kislyy-mix-bar",
       "name": "Мармелад Жевательнвй Фигурный Кислый",
       "manufacturer": "Mix Bar",
       "kcal": 320.0,
@@ -8770,8 +8759,8 @@
       "barcode": "4620017453130"
     },
     {
-      "id": "krut-frut",
-      "name": "krut frut",
+      "id": "krutfrut",
+      "name": "Крутфрут",
       "manufacturer": "",
       "kcal": 310.0,
       "protein": 5.5,
@@ -8781,7 +8770,7 @@
       "barcode": "4620017454052"
     },
     {
-      "id": "yashkino-mini-pay-gollandskiy-s-malinovoy-nachinkoy-ooo-kdv-voronezh",
+      "id": "yashkino-mini-pay-gollandskiy-s-malinovoy-nachinkoy-kdv-voronezh",
       "name": "Яшкино Мини-пай голландский с малиновой начинкой",
       "manufacturer": "КДВ Воронеж",
       "kcal": 390.0,
@@ -8792,8 +8781,8 @@
       "barcode": "4620017457992"
     },
     {
-      "id": "choco-pie-banana-tondi",
-      "name": "Choco Pie Banana",
+      "id": "pirozhnoe-choco-pie-bananovoe-tondi",
+      "name": "Пирожное Choco Pie банановое",
       "manufacturer": "Tondi",
       "kcal": 430.0,
       "protein": 4.5,
@@ -8814,7 +8803,7 @@
       "barcode": "4620021192995"
     },
     {
-      "id": "morozhenoe-oreo-s-kusochkami-pechenya-ooo-froneri-rus",
+      "id": "morozhenoe-oreo-s-kusochkami-pechenya-froneri-rus",
       "name": "Мороженое OREO с кусочками печенья",
       "manufacturer": "Фронери рус",
       "kcal": 300.0,
@@ -8825,7 +8814,7 @@
       "barcode": "4620021193114"
     },
     {
-      "id": "bon-pari-fruktovyy-led-so-vzryvnoy-karamelyu-ooo-froneri-rus",
+      "id": "bon-pari-fruktovyy-led-so-vzryvnoy-karamelyu-froneri-rus",
       "name": "Бон Пари фруктовый лёд со взрывной карамелью",
       "manufacturer": "Фронери рус",
       "kcal": 117.0,
@@ -9068,8 +9057,8 @@
       "barcode": "4620265310919"
     },
     {
-      "id": "raspberry-in-dark-chocolate-frambini",
-      "name": "Raspberry In Dark Chocolate",
+      "id": "malina-v-temnom-shokolade-frambini",
+      "name": "Малина в тёмном шоколаде",
       "manufacturer": "Frambini",
       "kcal": 370.0,
       "protein": 4.4,
@@ -9255,9 +9244,9 @@
       "barcode": "4630012984072"
     },
     {
-      "id": "zephyr-antonovka-apple-belyov-pastila",
-      "name": "Zephyr Antonovka Apple",
-      "manufacturer": "Belyov Pastila",
+      "id": "zefir-yablochnyy-antonovka-belevskaya-pastila",
+      "name": "Зефир яблочный Антоновка",
+      "manufacturer": "Белёвская пастила",
       "kcal": 320.0,
       "protein": 1.0,
       "fat": 0.0,
@@ -9387,7 +9376,7 @@
       "barcode": "4630076204802"
     },
     {
-      "id": "chizkeyk-lavka-yandeks",
+      "id": "chizkeyk-yandeks-lavka",
       "name": "Чизкейк",
       "manufacturer": "Яндекс Лавка",
       "kcal": 332.5,
@@ -9464,8 +9453,8 @@
       "barcode": "4630257677838"
     },
     {
-      "id": "protein-let-s-go",
-      "name": "Protein",
+      "id": "proteinovyy-napitok-let-s-go",
+      "name": "Протеиновый напиток",
       "manufacturer": "Let's Go",
       "kcal": 45.0,
       "protein": 6.0,
@@ -9563,8 +9552,8 @@
       "barcode": "4630568880026"
     },
     {
-      "id": "high-protein-bar-crunchy-coconut-cookies-bootybar",
-      "name": "High Protein Bar, Crunchy, Coconut Cookies",
+      "id": "proteinovyy-batonchik-kokosovoe-pechene-bootybar",
+      "name": "Протеиновый батончик кокосовое печенье",
       "manufacturer": "BootyBar",
       "kcal": 330.0,
       "protein": 30.0,
@@ -9640,8 +9629,8 @@
       "barcode": "4640001733253"
     },
     {
-      "id": "viola-lactose-free-viola",
-      "name": "Viola Lactose Free",
+      "id": "viola-bezlaktoznyy-viola",
+      "name": "Viola безлактозный",
       "manufacturer": "Viola",
       "kcal": 74.0,
       "protein": 4.6,
@@ -9695,8 +9684,8 @@
       "barcode": "4640001734274"
     },
     {
-      "id": "yogurt-laplandia-blueberry-muffin-viola",
-      "name": "Yogurt Laplandia Blueberry Muffin",
+      "id": "yogurt-laplandiya-chernichnyy-maffin-viola",
+      "name": "Йогурт Лапландия черничный маффин",
       "manufacturer": "Viola",
       "kcal": 137.0,
       "protein": 3.7,
@@ -9838,8 +9827,8 @@
       "barcode": "4640033667199"
     },
     {
-      "id": "parmesan-crispy-crinkles",
-      "name": "Parmesan Crispy",
+      "id": "syrnye-chipsy-parmezan-crinkles",
+      "name": "Сырные чипсы Пармезан",
       "manufacturer": "Crinkles",
       "kcal": 550.0,
       "protein": 41.5,
@@ -9849,7 +9838,7 @@
       "barcode": "4640047040995"
     },
     {
-      "id": "yogurt-grecheskiy-feyhoa-ooo-il-mio-morozhenko",
+      "id": "yogurt-grecheskiy-feyhoa-il-mio-morozhenko",
       "name": "Йогурт \"греческий фейхоа\"",
       "manufacturer": "ИЛЬ МИО МОРОЖЕНКО",
       "kcal": 109.4,
@@ -9959,9 +9948,9 @@
       "barcode": "4640167407906"
     },
     {
-      "id": "sabroso-monte-indilite",
-      "name": "Sabroso Monte",
-      "manufacturer": "Indilite",
+      "id": "kolbasa-sabroso-monte-indilayt",
+      "name": "Колбаса Сабросо Монте",
+      "manufacturer": "Индилайт",
       "kcal": 190.0,
       "protein": 28.0,
       "fat": 8.0,
@@ -10124,7 +10113,7 @@
       "barcode": "4640343493679"
     },
     {
-      "id": "blinchiki-pshenichnye-samokat-vkusvill-ana-rayz",
+      "id": "blinchiki-pshenichnye-vkusvill",
       "name": "Блинчики Пшеничные",
       "manufacturer": "ВкусВилл",
       "kcal": 294.4,
@@ -10157,8 +10146,8 @@
       "barcode": "4650062592805"
     },
     {
-      "id": "snack-peanut-praline-champ",
-      "name": "Snack peanut praline",
+      "id": "snek-arahis-v-praline-champ",
+      "name": "Снек арахис в пралине",
       "manufacturer": "Champ",
       "kcal": 380.0,
       "protein": 20.0,
@@ -10179,7 +10168,7 @@
       "barcode": "4650075424599"
     },
     {
-      "id": "dobryy-kola-0-5-smotka-ooo-multon-partners",
+      "id": "dobryy-kola-0-5-smotka-multon-partners",
       "name": "добрый кола 0,5 смотка",
       "manufacturer": "мултон партнерс",
       "kcal": 0.3,
@@ -10245,8 +10234,8 @@
       "barcode": "4650231932203"
     },
     {
-      "id": "gorilla-energy-mango-coconut-gorilla",
-      "name": "Gorilla energy mango coconut",
+      "id": "energetik-gorilla-mango-kokos-gorilla",
+      "name": "Энергетик Gorilla манго-кокос",
       "manufacturer": "Gorilla",
       "kcal": 20.0,
       "protein": 0.0,
@@ -10410,8 +10399,8 @@
       "barcode": "4650556721285"
     },
     {
-      "id": "sunflower-halva-fabrika-sladostey-kirilla-kozlova",
-      "name": "Sunflower halva",
+      "id": "halva-podsolnechnaya-fabrika-sladostey-kirilla-kozlova",
+      "name": "Халва подсолнечная",
       "manufacturer": "Фабрика сладостей Кирилла Козлова",
       "kcal": 494.9,
       "protein": 13.2,
@@ -10432,8 +10421,8 @@
       "barcode": "4660013941224"
     },
     {
-      "id": "100-charged-extra-dark-chocolate-pobeda",
-      "name": "100% CHARGED Extra dark chocolate",
+      "id": "shokolad-gorkiy-extra-dark-pobeda",
+      "name": "Шоколад горький Extra Dark",
       "manufacturer": "Победа",
       "kcal": 510.0,
       "protein": 10.0,
@@ -10531,7 +10520,7 @@
       "barcode": "4660020262145"
     },
     {
-      "id": "konfety-petrovskiy-fort-ooo-nevskiy-konditer-belinskiy",
+      "id": "konfety-petrovskiy-fort-nevskiy-konditer-belinskiy",
       "name": "Конфеты Петровский Форт",
       "manufacturer": "Невский кондитер Белинский",
       "kcal": 490.0,
@@ -10663,8 +10652,8 @@
       "barcode": "4660085513800"
     },
     {
-      "id": "snickers-super-snickers",
-      "name": "SNICKERS SUPER",
+      "id": "batonchik-snickers-super-snickers",
+      "name": "Батончик Snickers Super",
       "manufacturer": "Snickers",
       "kcal": 494.0,
       "protein": 8.1,
@@ -10685,7 +10674,7 @@
       "barcode": "4660085515842"
     },
     {
-      "id": "twix-xtra-solenaya-karamel-ooo-mars",
+      "id": "twix-xtra-solenaya-karamel-mars",
       "name": "Twix Xtra солёная карамель",
       "manufacturer": "Mars",
       "kcal": 491.0,
@@ -10696,7 +10685,7 @@
       "barcode": "4660085519758"
     },
     {
-      "id": "yogurt-osobaya-kollekciya-lesnoy-oreh-ooo-maslozavod-druzhba",
+      "id": "yogurt-osobaya-kollekciya-lesnoy-oreh-maslozavod-druzhba",
       "name": "Йогурт особая коллекция(лесной орех)",
       "manufacturer": "Маслозавод «Дружба»",
       "kcal": 80.0,
@@ -10751,8 +10740,8 @@
       "barcode": "4660228730538"
     },
     {
-      "id": "bombbar-tropic-mix-cake-bombbar",
-      "name": "Bombbar tropic mix cake",
+      "id": "keks-tropicheskiy-miks-bombbar",
+      "name": "Кекс тропический микс",
       "manufacturer": "Bombbar",
       "kcal": 303.0,
       "protein": 25.0,
@@ -10762,8 +10751,8 @@
       "barcode": "4660298500796"
     },
     {
-      "id": "snaqer-peanuts-pistachio-kunafa-bombbar",
-      "name": "Snaqer Peanuts & Pistachio & Kunafa",
+      "id": "snaqer-arahis-fistashka-kunafa-bombbar",
+      "name": "Snaqer арахис-фисташка-кунафа",
       "manufacturer": "Bombbar",
       "kcal": 460.0,
       "protein": 15.0,
@@ -10773,8 +10762,8 @@
       "barcode": "4660298501533"
     },
     {
-      "id": "qwikler-pistachios-snaq-fabriq",
-      "name": "Qwikler pistachios",
+      "id": "qwikler-fistashka-snaq-fabriq",
+      "name": "Qwikler фисташка",
       "manufacturer": "Snaq Fabriq",
       "kcal": 496.0,
       "protein": 8.3,
@@ -10784,8 +10773,8 @@
       "barcode": "4660298501656"
     },
     {
-      "id": "pro-chips-protein-bombbar",
-      "name": "Pro Chips Protein",
+      "id": "proteinovye-chipsy-pro-chips-bombbar",
+      "name": "Протеиновые чипсы Pro Chips",
       "manufacturer": "Bombbar",
       "kcal": 341.0,
       "protein": 40.0,
@@ -10795,8 +10784,8 @@
       "barcode": "4660298503025"
     },
     {
-      "id": "extra-protein-chips-bombbar",
-      "name": "extra Protein Chips",
+      "id": "proteinovye-chipsy-extra-bombbar",
+      "name": "Протеиновые чипсы Extra",
       "manufacturer": "Bombbar",
       "kcal": 346.7,
       "protein": 40.0,
@@ -10806,9 +10795,9 @@
       "barcode": "4660298503032"
     },
     {
-      "id": "candy-milky-dubai-trend-snaq-fabtiq",
-      "name": "Candy milky Dubai trend",
-      "manufacturer": "Snaq fabtiq",
+      "id": "konfeta-molochnaya-dubai-snaq-fabriq",
+      "name": "Конфета молочная Dubai",
+      "manufacturer": "Snaq Fabriq",
       "kcal": 495.0,
       "protein": 12.0,
       "fat": 36.0,
@@ -10817,8 +10806,8 @@
       "barcode": "4660298503131"
     },
     {
-      "id": "protein-shake-bombbar",
-      "name": "Protein Shake",
+      "id": "proteinovyy-kokteyl-bombbar",
+      "name": "Протеиновый коктейль",
       "manufacturer": "Bombbar",
       "kcal": 48.3,
       "protein": 6.9,
@@ -11006,7 +10995,7 @@
     },
     {
       "id": "protein-pervyy-russkiy-protein",
-      "name": "protein",
+      "name": "Протеин",
       "manufacturer": "первый русский протеин",
       "kcal": 430.0,
       "protein": 80.0,
@@ -11159,8 +11148,8 @@
       "barcode": "4670149302622"
     },
     {
-      "id": "almond-protein-bar-solvie",
-      "name": "Almond Protein Bar",
+      "id": "proteinovyy-batonchik-mindalnyy-solvie",
+      "name": "Протеиновый батончик миндальный",
       "manufacturer": "Solvie",
       "kcal": 288.0,
       "protein": 32.0,
@@ -11181,8 +11170,8 @@
       "barcode": "4673760167007"
     },
     {
-      "id": "greek-yogurt-plain-g-balance",
-      "name": "Greek yogurt plain",
+      "id": "grecheskiy-yogurt-bez-dobavok-g-balance",
+      "name": "Греческий йогурт без добавок",
       "manufacturer": "G-Balance",
       "kcal": 80.0,
       "protein": 8.6,
@@ -11335,9 +11324,9 @@
       "barcode": "4680017922326"
     },
     {
-      "id": "oat-drink-extra-light-ne-moloko",
-      "name": "Oat Drink Extra light",
-      "manufacturer": "Ne moloko",
+      "id": "ovsyanoe-moloko-extra-light-nemoloko",
+      "name": "Овсяное молоко Extra Light",
+      "manufacturer": "Немолоко",
       "kcal": 35.0,
       "protein": 1.0,
       "fat": 0.5,
@@ -11346,8 +11335,8 @@
       "barcode": "4680019561981"
     },
     {
-      "id": "carrot-apple-juice-sady-pridonya",
-      "name": "Carrot-apple juice",
+      "id": "sok-morkovno-yablochnyy-sady-pridonya",
+      "name": "Сок морковно-яблочный",
       "manufacturer": "Сады Придонья",
       "kcal": 40.0,
       "protein": 0.0,
@@ -11357,9 +11346,9 @@
       "barcode": "4680019562919"
     },
     {
-      "id": "ovsyanyy-yo-gurt-mango-marakuyya-ne-moloko",
+      "id": "ovsyanyy-yo-gurt-mango-marakuyya-nemoloko",
       "name": "Овсяный yo'gurt манго-маракуйя",
-      "manufacturer": "Ne moloko",
+      "manufacturer": "Немолоко",
       "kcal": 125.0,
       "protein": 5.0,
       "fat": 5.0,
@@ -11421,17 +11410,6 @@
       "carbs": 77.0,
       "defaultGrams": 100.0,
       "barcode": "4680021880483"
-    },
-    {
-      "id": "jaskino-yashkino",
-      "name": "jaskino",
-      "manufacturer": "Яшкино",
-      "kcal": 470.0,
-      "protein": 5.5,
-      "fat": 23.0,
-      "carbs": 61.0,
-      "defaultGrams": 100.0,
-      "barcode": "4680021880490"
     },
     {
       "id": "myagkie-vafli-s-vishnevym-dzhemom-yashkino",
@@ -11522,8 +11500,8 @@
       "barcode": "4680046720221"
     },
     {
-      "id": "bombbar-bombbar",
-      "name": "Bombbar",
+      "id": "batonchik-bombbar-bombbar",
+      "name": "Батончик Bombbar",
       "manufacturer": "Bombbar",
       "kcal": 352.0,
       "protein": 25.0,
@@ -11566,8 +11544,8 @@
       "barcode": "4680059281597"
     },
     {
-      "id": "fitness-shock-protein-white-brownie-pistachio-fitness-shock",
-      "name": "Fitness shock protein white brownie pistachio",
+      "id": "proteinovyy-brauni-belyy-s-fistashkoy-fitness-shock",
+      "name": "Протеиновый брауни белый с фисташкой",
       "manufacturer": "Fitness Shock",
       "kcal": 466.0,
       "protein": 15.0,
@@ -12073,7 +12051,7 @@
       "barcode": "4690228101663"
     },
     {
-      "id": "chudo-yogur-vkus-zemlyanika-klubnika-ao",
+      "id": "chudo-yogur-vkus-zemlyanika-klubnika",
       "name": "Чудо йогур вкус земляника-клубника",
       "manufacturer": "",
       "kcal": 84.0,
@@ -12084,7 +12062,7 @@
       "barcode": "4690228106835"
     },
     {
-      "id": "yogurt-chudo-persik-mango-dynya-ao-vbd",
+      "id": "yogurt-chudo-persik-mango-dynya-vbd",
       "name": "Йогурт \"Чудо\" персик-манго-дыня",
       "manufacturer": "ВБД",
       "kcal": 84.0,
@@ -12139,7 +12117,7 @@
       "barcode": "4690228108327"
     },
     {
-      "id": "frugurt-persik-marakuyya-ao-vbd",
+      "id": "frugurt-persik-marakuyya-vbd",
       "name": "Фругурт персик-маракуйя",
       "manufacturer": "ВБД",
       "kcal": 96.0,
@@ -12161,7 +12139,7 @@
       "barcode": "4690228108365"
     },
     {
-      "id": "chudo-yogurt-grusha-v-karameli-s-plombirom-ao-vbd",
+      "id": "chudo-yogurt-grusha-v-karameli-s-plombirom-vbd",
       "name": "Чудо йогурт груша в карамели с пломбиром",
       "manufacturer": "ВБД",
       "kcal": 85.0,
@@ -12480,7 +12458,7 @@
       "barcode": "4690388111250"
     },
     {
-      "id": "leys-krab-smotka-bolshie-lays",
+      "id": "leys-krab-smotka-bolshie-lay-s",
       "name": "лейс краб смотка большие",
       "manufacturer": "Lay's",
       "kcal": 520.0,
@@ -12810,7 +12788,7 @@
       "barcode": "4810223041331"
     },
     {
-      "id": "grecheskiy-yogurt-oao-babushkina-krynka",
+      "id": "grecheskiy-yogurt-babushkina-krynka",
       "name": "Греческий Йогурт",
       "manufacturer": "Бабушкина крынка",
       "kcal": 65.0,
@@ -13008,7 +12986,7 @@
       "barcode": "4810268043710"
     },
     {
-      "id": "syr-myagkiy-feta-nezhnaya-ooo-savushkin-orsha",
+      "id": "syr-myagkiy-feta-nezhnaya-savushkin-orsha",
       "name": "Сыр мягкий \"Фета нежная\"",
       "manufacturer": "Савушкин-Орша",
       "kcal": 187.6,
@@ -13052,8 +13030,8 @@
       "barcode": "4810268045905"
     },
     {
-      "id": "brest-litovsk-light-cheese-brest-litovsk",
-      "name": "Brest-Litovsk Light Cheese",
+      "id": "syr-brest-litovsk-legkiy-brest-litovsk",
+      "name": "Сыр Брест-Литовск лёгкий",
       "manufacturer": "Брест-Литовск",
       "kcal": 288.6,
       "protein": 31.2,
@@ -13074,8 +13052,8 @@
       "barcode": "4810268060700"
     },
     {
-      "id": "mega-chips-mega-chips",
-      "name": "Mega chips",
+      "id": "chipsy-mega-chips-mega-chips",
+      "name": "Чипсы Mega Chips",
       "manufacturer": "Mega Chips",
       "kcal": 510.0,
       "protein": 7.0,
@@ -13096,8 +13074,8 @@
       "barcode": "4810279004236"
     },
     {
-      "id": "chips-piper-thailandez-bulba",
-      "name": "Chips piper thailandez",
+      "id": "chipsy-tayskiy-perec-bulba",
+      "name": "Чипсы тайский перец",
       "manufacturer": "Бульба",
       "kcal": 520.0,
       "protein": 3.9,
@@ -13107,9 +13085,9 @@
       "barcode": "4810279006117"
     },
     {
-      "id": "kvas-lidskyi-khlebniy",
-      "name": "Kvas Lidskyi Khlebniy",
-      "manufacturer": "",
+      "id": "kvas-lidskiy-hlebnyy-lidskiy",
+      "name": "Квас Лидский хлебный",
+      "manufacturer": "Лидский",
       "kcal": 26.0,
       "protein": 0.4,
       "fat": 0.0,
@@ -13162,8 +13140,8 @@
       "barcode": "4810410036430"
     },
     {
-      "id": "milk-chocolate-bar-belovezhskaya-pushch-with-blueberry-puree-kommunarka",
-      "name": "Milk chocolate bar belovezhskaya pushch with blueberry puree",
+      "id": "shokolad-molochnyy-belovezhskaya-puscha-s-chernikoy-kommunarka",
+      "name": "Шоколад молочный Беловежская пуща с черникой",
       "manufacturer": "Коммунарка",
       "kcal": 474.0,
       "protein": 2.5,
@@ -13195,8 +13173,8 @@
       "barcode": "4810738008478"
     },
     {
-      "id": "ricotta-light-bonfesto",
-      "name": "Ricotta Light",
+      "id": "rikotta-legkaya-bonfesto",
+      "name": "Рикотта лёгкая",
       "manufacturer": "Bonfesto",
       "kcal": 140.0,
       "protein": 8.4,
@@ -13228,7 +13206,7 @@
       "barcode": "4811106007758"
     },
     {
-      "id": "baton-dlya-vashey-semi-oao-sluckiy-hlebozavod",
+      "id": "baton-dlya-vashey-semi-sluckiy-hlebozavod",
       "name": "Батон Для Вашей Семьи",
       "manufacturer": "Слуцкий Хлебозавод",
       "kcal": 267.0,
@@ -13371,7 +13349,7 @@
       "barcode": "4811485041756"
     },
     {
-      "id": "syr-slivochnyy-oao-molochnyy-mir",
+      "id": "syr-slivochnyy-molochnyy-mir",
       "name": "Сыр сливочный",
       "manufacturer": "Молочный мир",
       "kcal": 350.0,
@@ -13437,8 +13415,8 @@
       "barcode": "4813445003590"
     },
     {
-      "id": "fruit-balls-tutti",
-      "name": "Fruit balls",
+      "id": "fruktovye-shariki-tutti",
+      "name": "Фруктовые шарики",
       "manufacturer": "Tutti",
       "kcal": 441.8,
       "protein": 6.3,
@@ -13448,8 +13426,8 @@
       "barcode": "4813780000445"
     },
     {
-      "id": "just-brutal-potsto-chips-ooo-azbuka-snekov",
-      "name": "Just Brutal potsto chips",
+      "id": "kartofelnye-chipsy-just-brutal-azbuka-snekov",
+      "name": "Картофельные чипсы Just Brutal",
       "manufacturer": "азбука снеков",
       "kcal": 450.0,
       "protein": 5.5,
@@ -14020,8 +13998,8 @@
       "barcode": "7622210357915"
     },
     {
-      "id": "yubileynoe-yubileynoe",
-      "name": "юбилейное",
+      "id": "pechene-yubileynoe-yubileynoe",
+      "name": "Печенье Юбилейное",
       "manufacturer": "Юбилейное",
       "kcal": 480.0,
       "protein": 7.0,
@@ -14317,7 +14295,7 @@
       "barcode": "8887290102001"
     },
     {
-      "id": "ekstrudirovannyy-marmelad-chupa-chups-strayps-s-fruktovym-vkusom-ooo-perfetti-van-melle",
+      "id": "ekstrudirovannyy-marmelad-chupa-chups-strayps-s-fruktovym-vkusom-perfetti-van-melle",
       "name": "Экструдированный мармелад \"Чупа чупс\" \"Страйпс\" с фруктовым вкусом",
       "manufacturer": "Перфетти ван мелле",
       "kcal": 370.0,
