@@ -1,6 +1,6 @@
 {
-  "revision": "dbd2417e9356",
-  "generatedAt": "2026-08-13T20:28:53+00:00",
+  "revision": "b6fa94932cb0",
+  "generatedAt": "2026-08-14T06:14:28+00:00",
   "products": [
     {
       "id": "ovsyanaya-kasha-na-vode-nordic",
@@ -201,7 +201,7 @@
     {
       "id": "english-breakfeast-ahmad-tea",
       "name": "English breakfeast",
-      "manufacturer": "Ahmad tea",
+      "manufacturer": "Ahmad Tea",
       "kcal": 2.0,
       "protein": 0.0,
       "fat": 0.0,
@@ -212,7 +212,7 @@
     {
       "id": "london-nights-ahmad-tea",
       "name": "LONDON nights",
-      "manufacturer": "Ahmad tea",
+      "manufacturer": "Ahmad Tea",
       "kcal": 1.0,
       "protein": 0.1,
       "fat": 0.0,
@@ -377,7 +377,7 @@
     {
       "id": "polba-agro-alyans",
       "name": "Полба",
-      "manufacturer": "Агро-альянс",
+      "manufacturer": "Агро-Альянс",
       "kcal": 350.0,
       "protein": 12.0,
       "fat": 2.0,
@@ -476,7 +476,7 @@
     {
       "id": "morozhenoe-eskimo-svetaevo-s-arahisom-i-karamelyu-svetaevo",
       "name": "Мороженое Эскимо Светаево с арахисом и карамелью",
-      "manufacturer": "СВЕТАЕВО",
+      "manufacturer": "Светаево",
       "kcal": 346.0,
       "protein": 40.0,
       "fat": 24.5,
@@ -817,7 +817,7 @@
     {
       "id": "ayran-2-vkusvill",
       "name": "Айран 2%",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 32.4,
       "protein": 1.4,
       "fat": 2.0,
@@ -828,7 +828,7 @@
     {
       "id": "moloko-3-2-bezlaktoznoe-vkusvill",
       "name": "Молоко 3.2% Безлактозное",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 58.8,
       "protein": 3.0,
       "fat": 3.2,
@@ -850,7 +850,7 @@
     {
       "id": "yogurt-chernika-2-5-vkusvill",
       "name": "Йогурт черника 2,5%",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 61.3,
       "protein": 3.0,
       "fat": 2.5,
@@ -861,7 +861,7 @@
     {
       "id": "kotlety-kurinye-s-mocarelloy-s-bulgurom-kinoa-i-ovoschami-vkusvill",
       "name": "Котлеты куриные с моцареллой с булгуром, киноа и овощами",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 154.5,
       "protein": 10.2,
       "fat": 8.5,
@@ -883,7 +883,7 @@
     {
       "id": "govyadina-filey-vkusvill",
       "name": "Говядина филей",
-      "manufacturer": "Vkusvill",
+      "manufacturer": "VkusVill",
       "kcal": 136.0,
       "protein": 16.0,
       "fat": 8.0,
@@ -894,7 +894,7 @@
     {
       "id": "keks-domashniy-s-kakao-vkusvill",
       "name": "Кекс Домашний С Какао",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 387.5,
       "protein": 6.0,
       "fat": 21.5,
@@ -905,7 +905,7 @@
     {
       "id": "tiramisu-vkusvill",
       "name": "Тирамису",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 332.5,
       "protein": 4.8,
       "fat": 26.9,
@@ -927,7 +927,7 @@
     {
       "id": "syrniki-klassicheskie-zamorozhennye-vkusvill",
       "name": "Сырники классические замороженные",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 222.7,
       "protein": 14.7,
       "fat": 10.3,
@@ -938,7 +938,7 @@
     {
       "id": "arahisovyy-batonchik-s-solenoy-karamelyu-s-vkusom-irisa-vkusvill",
       "name": "Арахисовый Батончик С Соленой Карамелью С Вкусом Ириса",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 521.6,
       "protein": 11.4,
       "fat": 28.0,
@@ -949,7 +949,7 @@
     {
       "id": "amarantovye-hlebcy-vkusvill",
       "name": "Амарантовые Хлебцы",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 388.0,
       "protein": 11.6,
       "fat": 7.3,
@@ -960,7 +960,7 @@
     {
       "id": "chipsy-risovye-tomat-s-zelenyu-vkusvill",
       "name": "Чипсы Рисовые Томат С Зеленью",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 336.9,
       "protein": 6.7,
       "fat": 1.7,
@@ -971,7 +971,7 @@
     {
       "id": "pelmeni-s-mramornoy-govyadinoy-i-cyplenkom-vkusvill",
       "name": "Пельмени с мраморной говядиной и цыплёнком",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 211.6,
       "protein": 12.6,
       "fat": 8.4,
@@ -993,7 +993,7 @@
     {
       "id": "ryabina-chernoplodnaya-bystrozamorozhennaya-vkusvill",
       "name": "Рябина Черноплодная Быстрозамороженная",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 51.0,
       "protein": 1.5,
       "fat": 0.2,
@@ -1004,7 +1004,7 @@
     {
       "id": "onigiri-krab-spayki-vkusvill",
       "name": "Онигири Краб Спайки",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 232.6,
       "protein": 3.8,
       "fat": 7.4,
@@ -1026,7 +1026,7 @@
     {
       "id": "bitochki-iz-myasa-kuricy-s-syrom-vkusvill",
       "name": "Биточки Из Мяса Курицы С Сыром",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 165.8,
       "protein": 16.6,
       "fat": 10.6,
@@ -1037,7 +1037,7 @@
     {
       "id": "vafli-gollandskie-s-molochnoy-karamelyu-vkusvill",
       "name": "Вафли Голландские С Молочной Карамелью",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 393.0,
       "protein": 4.5,
       "fat": 15.0,
@@ -1048,7 +1048,7 @@
     {
       "id": "pirog-smetannik-s-chernikoy-vkusvill",
       "name": "Пирог \"Сметанник\" с черникой",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 299.4,
       "protein": 5.1,
       "fat": 19.8,
@@ -1059,7 +1059,7 @@
     {
       "id": "sosiski-s-syrom-vkusvill",
       "name": "Сосиски С Сыром",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 341.3,
       "protein": 14.8,
       "fat": 30.5,
@@ -1070,7 +1070,7 @@
     {
       "id": "hlebcy-iz-zelenoy-grechki-vkusvill",
       "name": "Хлебцы Из Зеленой Гречки",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 365.0,
       "protein": 15.3,
       "fat": 1.4,
@@ -1081,7 +1081,7 @@
     {
       "id": "tort-blinnyy-shokoladnyy-vkusvill",
       "name": "Торт Блинный Шоколадный",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 312.6,
       "protein": 6.5,
       "fat": 19.0,
@@ -1092,7 +1092,7 @@
     {
       "id": "fettuchine-s-yaycom-i-shpinatom-vkusvill",
       "name": "Феттучине С Яйцом И Шпинатом",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 282.7,
       "protein": 10.6,
       "fat": 1.9,
@@ -1114,7 +1114,7 @@
     {
       "id": "chipsy-barbekyu-vkusvill",
       "name": "Чипсы Барбекю",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 508.2,
       "protein": 5.5,
       "fat": 25.8,
@@ -1125,7 +1125,7 @@
     {
       "id": "pastila-yablochnaya-assorti-fruktovo-yagodnoe-vkusvill",
       "name": "Пастила яблочная ассорти \"Фруктово-ягодное\"",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 182.9,
       "protein": 1.5,
       "fat": 0.1,
@@ -1136,7 +1136,7 @@
     {
       "id": "shokolad-na-medu-gorkiy-vkusvill",
       "name": "Шоколад на меду (Горький)",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 578.2,
       "protein": 8.1,
       "fat": 43.0,
@@ -1158,7 +1158,7 @@
     {
       "id": "batonchik-karamelnyy-vkusvill",
       "name": "Батончик карамельный",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 532.4,
       "protein": 9.4,
       "fat": 35.2,
@@ -1169,7 +1169,7 @@
     {
       "id": "yayco-s0-kurinoe-vkusvill",
       "name": "Яйцо С0 Куриное",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 157.0,
       "protein": 12.7,
       "fat": 11.5,
@@ -1191,7 +1191,7 @@
     {
       "id": "baton-bez-dobavleniya-sahara-vkusvill",
       "name": "Батон без добавления сахара",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 246.9,
       "protein": 8.2,
       "fat": 2.5,
@@ -1213,7 +1213,7 @@
     {
       "id": "mini-chiabatta-s-indeykoy-syrom-gauda-i-sousom-pesto-vkusvill",
       "name": "Мини-чиабатта С Индейкой, Сыром Гауда И Соусом песто",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 247.0,
       "protein": 8.6,
       "fat": 12.7,
@@ -1235,7 +1235,7 @@
     {
       "id": "bliny-s-myasom-po-gruzinski-vkusvill",
       "name": "Блины с мясом по-грузински",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 224.5,
       "protein": 8.8,
       "fat": 10.9,
@@ -1246,7 +1246,7 @@
     {
       "id": "zavitok-s-koricey-vkusvill",
       "name": "Завиток С Корицей",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 418.0,
       "protein": 7.0,
       "fat": 26.5,
@@ -1257,7 +1257,7 @@
     {
       "id": "kesadilya-s-kuricey-shpinatom-i-mocarelloy-vkusvill",
       "name": "Кесадилья с курицей, шпинатом и моцареллой",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 274.1,
       "protein": 14.4,
       "fat": 14.9,
@@ -1334,7 +1334,7 @@
     {
       "id": "yogurt-pitevoy-mango-mdzh-3-0-4-4-sami-gotovim",
       "name": "Йогурт питьевой \"Манго\" МДж 3,0-4,4%",
-      "manufacturer": "Сами готовим",
+      "manufacturer": "Сами Готовим",
       "kcal": 86.2,
       "protein": 2.6,
       "fat": 3.0,
@@ -1378,7 +1378,7 @@
     {
       "id": "kantuchchi-pyaterochka",
       "name": "Кантуччи",
-      "manufacturer": "Пятерочка",
+      "manufacturer": "Пятёрочка",
       "kcal": 378.0,
       "protein": 6.5,
       "fat": 7.5,
@@ -1444,7 +1444,7 @@
     {
       "id": "pirozhnoe-kolechko-s-tvorogom-spar",
       "name": "Пирожное Колечко С Творогом",
-      "manufacturer": "Spar",
+      "manufacturer": "SPAR",
       "kcal": 240.0,
       "protein": 4.0,
       "fat": 12.5,
@@ -1455,7 +1455,7 @@
     {
       "id": "ulitka-s-tvorozhnym-kremom-i-koricey-spar",
       "name": "Улитка с Творожным Кремом и Корицей",
-      "manufacturer": "Spar",
+      "manufacturer": "SPAR",
       "kcal": 357.0,
       "protein": 2.4,
       "fat": 16.5,
@@ -1587,7 +1587,7 @@
     {
       "id": "pechene-dvoynoy-shokolad-perekrestok",
       "name": "Печенье двойной шоколад",
-      "manufacturer": "Перекресток",
+      "manufacturer": "Перекрёсток",
       "kcal": 410.0,
       "protein": 6.5,
       "fat": 14.0,
@@ -1598,7 +1598,7 @@
     {
       "id": "pirozhok-s-yablokom-perekrestok",
       "name": "Пирожок с яблоком",
-      "manufacturer": "Перекресток",
+      "manufacturer": "Перекрёсток",
       "kcal": 320.0,
       "protein": 6.0,
       "fat": 5.3,
@@ -1609,7 +1609,7 @@
     {
       "id": "bulochka-perekrestok",
       "name": "Булочка",
-      "manufacturer": "Перекресток",
+      "manufacturer": "Перекрёсток",
       "kcal": 265.0,
       "protein": 7.5,
       "fat": 3.1,
@@ -1664,7 +1664,7 @@
     {
       "id": "lukum-sbivnoy-vanilnyy-vkusvill",
       "name": "Лукум Сбивной Ванильный",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 320.0,
       "protein": 0.4,
       "fat": 0.3,
@@ -1675,7 +1675,7 @@
     {
       "id": "sardelki-s-telyatinoy-vkusvill",
       "name": "Сардельки С Телятиной",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 221.4,
       "protein": 12.9,
       "fat": 18.2,
@@ -2863,7 +2863,7 @@
     {
       "id": "vermishel-bystrogo-prigotovleniya-s-kurinym-bulonom-krasnaya-cena",
       "name": "Вермишель быстрого приготовления с куриным бульоном",
-      "manufacturer": "Красная Цена",
+      "manufacturer": "Красная цена",
       "kcal": 410.0,
       "protein": 7.5,
       "fat": 20.0,
@@ -2995,7 +2995,7 @@
     {
       "id": "naturalnyy-bioyogurt-s-chernikoy-i-5-zlakami-danone",
       "name": "натуральный биойогурт, с черникой и 5 злаками",
-      "manufacturer": "DANONE",
+      "manufacturer": "Danone",
       "kcal": 95.0,
       "protein": 4.1,
       "fat": 2.9,
@@ -3017,7 +3017,7 @@
     {
       "id": "bioyogurt-chernika-zlaki-bio-balans",
       "name": "Биойогурт черника-злаки",
-      "manufacturer": "Bio баланс",
+      "manufacturer": "Bio Баланс",
       "kcal": 63.0,
       "protein": 3.3,
       "fat": 1.0,
@@ -3160,7 +3160,7 @@
     {
       "id": "bioyogurt-malina-granat-aktibio",
       "name": "Биойогурт Малина Гранат",
-      "manufacturer": "Актибио",
+      "manufacturer": "АктиБио",
       "kcal": 74.0,
       "protein": 2.9,
       "fat": 1.5,
@@ -3193,7 +3193,7 @@
     {
       "id": "mindal-planto-planto",
       "name": "миндаль планто",
-      "manufacturer": "planto",
+      "manufacturer": "Planto",
       "kcal": 25.0,
       "protein": 0.4,
       "fat": 1.2,
@@ -3248,7 +3248,7 @@
     {
       "id": "bioyogurt-mango-papayya-bez-sahara-aktibio",
       "name": "Биойогурт. Манго, папайя без сахара",
-      "manufacturer": "Актибио",
+      "manufacturer": "АктиБио",
       "kcal": 56.0,
       "protein": 3.0,
       "fat": 1.5,
@@ -3259,7 +3259,7 @@
     {
       "id": "bioyogurt-persik-malina-bez-sahara-aktibio-aktibio",
       "name": "Биойогурт Персик-малина без сахара АктиБио",
-      "manufacturer": "Актибио",
+      "manufacturer": "АктиБио",
       "kcal": 52.0,
       "protein": 3.0,
       "fat": 1.5,
@@ -3270,7 +3270,7 @@
     {
       "id": "bioyogurt-aktibio-persik-malina-aktibio",
       "name": "Биойогурт Актибио Персик Малина",
-      "manufacturer": "Актибио",
+      "manufacturer": "АктиБио",
       "kcal": 76.0,
       "protein": 3.9,
       "fat": 3.0,
@@ -3281,7 +3281,7 @@
     {
       "id": "bioyogurt-aktibio-chernika-klubnika-aktibio",
       "name": "Биойогурт Актибио Черника Клубника",
-      "manufacturer": "Актибио",
+      "manufacturer": "АктиБио",
       "kcal": 80.0,
       "protein": 3.9,
       "fat": 3.0,
@@ -3358,7 +3358,7 @@
     {
       "id": "puding-shokoladnyy-selo-zelenoe",
       "name": "Пудинг шоколадный",
-      "manufacturer": "Село зеленое",
+      "manufacturer": "Село Зелёное",
       "kcal": 125.0,
       "protein": 4.1,
       "fat": 3.0,
@@ -3523,7 +3523,7 @@
     {
       "id": "shokoladnyy-batonchik-goodmix-malinovyy-rassvet-goodmix",
       "name": "Шоколадный батончик GoodMiX Малиновый рассвет",
-      "manufacturer": "GOODMiX",
+      "manufacturer": "Goodmix",
       "kcal": 527.0,
       "protein": 6.1,
       "fat": 28.0,
@@ -3688,7 +3688,7 @@
     {
       "id": "irlandskiy-skir-vkusvill",
       "name": "Ирландский Скир",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 90.8,
       "protein": 9.3,
       "fat": 1.2,
@@ -3699,7 +3699,7 @@
     {
       "id": "islandskiy-skir-1-5-vkus-i-polza",
       "name": "Исландский Скир 1.5%",
-      "manufacturer": "Вкус И Польза",
+      "manufacturer": "Вкус и польза",
       "kcal": 72.0,
       "protein": 11.0,
       "fat": 1.5,
@@ -3710,7 +3710,7 @@
     {
       "id": "skir-zel-lin-chernika-malina-zelenaya-liniya",
       "name": "Скир Зел.лин черника малина",
-      "manufacturer": "Зелёная Линия",
+      "manufacturer": "Зелёная линия",
       "kcal": 91.0,
       "protein": 9.3,
       "fat": 1.2,
@@ -3721,7 +3721,7 @@
     {
       "id": "tvorog-vysokobelkovyy-myagkiy-morkovnyy-pirog-vkusvill",
       "name": "Творог Высокобелковый Мягкий «Морковный Пирог»",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 94.8,
       "protein": 9.3,
       "fat": 1.2,
@@ -3798,7 +3798,7 @@
     {
       "id": "oatmeal-yasno-solnyshko",
       "name": "Oatmeal",
-      "manufacturer": "ясно-солнышко",
+      "manufacturer": "Ясно солнышко",
       "kcal": 340.0,
       "protein": 12.0,
       "fat": 6.0,
@@ -3831,7 +3831,7 @@
     {
       "id": "vdohnovenie-chocolat-noir-aux-amandes-75-cacao-vdohnovenie",
       "name": "Vdohnovenie Chocolat noir aux amandes 75% Cacao",
-      "manufacturer": "вдохновение",
+      "manufacturer": "Вдохновение",
       "kcal": 540.0,
       "protein": 11.0,
       "fat": 38.0,
@@ -3853,7 +3853,7 @@
     {
       "id": "alenka-krasnyy-oktyabr",
       "name": "Аленка",
-      "manufacturer": "Красный октябрь",
+      "manufacturer": "Красный Октябрь",
       "kcal": 540.0,
       "protein": 5.5,
       "fat": 31.0,
@@ -3864,7 +3864,7 @@
     {
       "id": "temnyy-shokolad-s-keshyu-i-fundukom-babaevskiy",
       "name": "Тёмный шоколад с кешью и фундуком",
-      "manufacturer": "бабаевский",
+      "manufacturer": "Бабаевский",
       "kcal": 550.0,
       "protein": 9.0,
       "fat": 37.0,
@@ -3963,7 +3963,7 @@
     {
       "id": "karela-yogurt-slivochnyy-chernichnyy-maffin-svezhee-zavtra",
       "name": "Карела- йогурт сливочный «черничный маффин»",
-      "manufacturer": "Свежее завтра",
+      "manufacturer": "Свежее Завтра",
       "kcal": 138.0,
       "protein": 3.7,
       "fat": 7.0,
@@ -4150,7 +4150,7 @@
     {
       "id": "rzhanik-brusnika-schelkovo-hleb",
       "name": "Ржаник Брусника",
-      "manufacturer": "Щёлково Хлеб",
+      "manufacturer": "Щёлково хлеб",
       "kcal": 260.0,
       "protein": 5.5,
       "fat": 3.5,
@@ -4282,7 +4282,7 @@
     {
       "id": "ostryy-ketchup-heinz",
       "name": "острый кетчуп",
-      "manufacturer": "HEINZ",
+      "manufacturer": "Heinz",
       "kcal": 110.0,
       "protein": 1.0,
       "fat": 0.1,
@@ -4348,7 +4348,7 @@
     {
       "id": "zvezdnoe-testo-sloenoe-drozhzhevoe-hlebnyy-dom",
       "name": "Звёздное тесто слоёное дрожжевое",
-      "manufacturer": "Хлебный дом",
+      "manufacturer": "Хлебный Дом",
       "kcal": 360.0,
       "protein": 7.0,
       "fat": 19.0,
@@ -4524,7 +4524,7 @@
     {
       "id": "celnozernovye-makarony-iz-celnogo-zerna-s-zarodyshem-i-kletchatkoy-makfa",
       "name": "Цельнозерновые макароны из цельного зерна с зародышем и клетчаткой",
-      "manufacturer": "makfa",
+      "manufacturer": "Makfa",
       "kcal": 365.0,
       "protein": 15.5,
       "fat": 1.4,
@@ -4535,7 +4535,7 @@
     {
       "id": "kruassan-s-karamelnoy-nachinkoy-cheremushki-cheremushki",
       "name": "Круассан с карамельной начинкой Черемушки",
-      "manufacturer": "Черемушки",
+      "manufacturer": "Черёмушки",
       "kcal": 380.0,
       "protein": 6.5,
       "fat": 22.0,
@@ -4546,7 +4546,7 @@
     {
       "id": "clitka-s-kremom-i-izyumom-cheremushki",
       "name": "Цлитка с кремом и изюмом",
-      "manufacturer": "Черемушки",
+      "manufacturer": "Черёмушки",
       "kcal": 320.0,
       "protein": 6.5,
       "fat": 10.0,
@@ -4733,7 +4733,7 @@
     {
       "id": "tvorog-obezzhirennyy-spar",
       "name": "Творог обезжиренный",
-      "manufacturer": "Spar",
+      "manufacturer": "SPAR",
       "kcal": 101.0,
       "protein": 18.0,
       "fat": 1.8,
@@ -4755,7 +4755,7 @@
     {
       "id": "slivki-20-vkusvill",
       "name": "Сливки 20%",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 205.2,
       "protein": 2.5,
       "fat": 20.0,
@@ -4821,7 +4821,7 @@
     {
       "id": "chipsy-belye-griby-v-slivochnom-souse-moskovskiy-kartofel",
       "name": "Чипсы Белые Грибы В Сливочном Соусе",
-      "manufacturer": "Московский Картофель",
+      "manufacturer": "Московский картофель",
       "kcal": 570.0,
       "protein": 5.5,
       "fat": 40.0,
@@ -5041,7 +5041,7 @@
     {
       "id": "marmelad-zhevatelnyy-zmei-xxl-fruit-tella",
       "name": "Мармелад жевательный «Змеи XXL»",
-      "manufacturer": "Fruit-tella",
+      "manufacturer": "Fruittella",
       "kcal": 330.0,
       "protein": 5.0,
       "fat": 0.1,
@@ -5294,7 +5294,7 @@
     {
       "id": "morozhenoe-shokoladnyy-nyu-york-vkusvill",
       "name": "Мороженое \"Шоколадный Нью-Йорк\"",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 267.3,
       "protein": 3.6,
       "fat": 17.7,
@@ -5349,7 +5349,7 @@
     {
       "id": "naturalnyy-yogurt-1-5-samokat",
       "name": "Натуральный йогурт 1,5%",
-      "manufacturer": "САМОКАТ",
+      "manufacturer": "Самокат",
       "kcal": 44.0,
       "protein": 3.2,
       "fat": 1.5,
@@ -5591,7 +5591,7 @@
     {
       "id": "kusochki-bedra-indeyki-v-marinade-pava-pava",
       "name": "Кусочки Бедра Индейки В Маринаде",
-      "manufacturer": "Пава Пава",
+      "manufacturer": "Пава-Пава",
       "kcal": 130.0,
       "protein": 19.0,
       "fat": 6.0,
@@ -5789,7 +5789,7 @@
     {
       "id": "salatnye-krabovye-palochki-russkoe-more",
       "name": "Салатные крабовые палочки",
-      "manufacturer": "Русское Море",
+      "manufacturer": "Русское море",
       "kcal": 91.0,
       "protein": 5.6,
       "fat": 1.3,
@@ -6240,7 +6240,7 @@
     {
       "id": "syr-tvorozhnyy-ekomilk",
       "name": "сыр творожный",
-      "manufacturer": "экомилк",
+      "manufacturer": "Экомилк",
       "kcal": 240.0,
       "protein": 6.2,
       "fat": 22.0,
@@ -6427,7 +6427,7 @@
     {
       "id": "yogurt-s-ananasom-epica",
       "name": "Йогурт с ананасом",
-      "manufacturer": "EPICA",
+      "manufacturer": "Epica",
       "kcal": 120.0,
       "protein": 5.7,
       "fat": 4.8,
@@ -6438,7 +6438,7 @@
     {
       "id": "yogurt-mango-semena-chia-epica",
       "name": "Йогурт манго семена чиа",
-      "manufacturer": "EPICA",
+      "manufacturer": "Epica",
       "kcal": 120.0,
       "protein": 5.8,
       "fat": 5.0,
@@ -6460,7 +6460,7 @@
     {
       "id": "4606779763908-epica",
       "name": "4606779763908",
-      "manufacturer": "EPICA",
+      "manufacturer": "Epica",
       "kcal": 180.0,
       "protein": 6.6,
       "fat": 8.6,
@@ -6482,7 +6482,7 @@
     {
       "id": "yogurt-s-kivi-i-feyhoa-epica-epica",
       "name": "Йогурт с киви и фейхоа \"EPICA\"",
-      "manufacturer": "EPICA",
+      "manufacturer": "Epica",
       "kcal": 120.0,
       "protein": 5.7,
       "fat": 4.8,
@@ -6526,7 +6526,7 @@
     {
       "id": "klubnika-marakuyya-epica",
       "name": "Клубника, маракуйя",
-      "manufacturer": "EPICA",
+      "manufacturer": "Epica",
       "kcal": 32.7,
       "protein": 3.4,
       "fat": 2.5,
@@ -6537,7 +6537,7 @@
     {
       "id": "yogurt-marakuyya-mangostin-epica",
       "name": "йогурт маракуйя мангостин",
-      "manufacturer": "epica",
+      "manufacturer": "Epica",
       "kcal": 30.8,
       "protein": 1.3,
       "fat": 1.0,
@@ -6548,7 +6548,7 @@
     {
       "id": "yogurt-naturalnyy-sostav-mango-epica",
       "name": "йогурт натуральный состав манго",
-      "manufacturer": "EPICA",
+      "manufacturer": "Epica",
       "kcal": 85.0,
       "protein": 4.0,
       "fat": 2.5,
@@ -6570,7 +6570,7 @@
     {
       "id": "yogurt-naturalnyy-sostav-malina-bazilik-epica",
       "name": "йогурт натуральный состав малина-базилик",
-      "manufacturer": "EPICA",
+      "manufacturer": "Epica",
       "kcal": 85.0,
       "protein": 4.0,
       "fat": 2.5,
@@ -6801,7 +6801,7 @@
     {
       "id": "massa-tvorozhnaya-s-solenoy-karamelyu-i-arahisom-vkusvill",
       "name": "Масса Творожная С Соленой Карамелью И Арахисом",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 212.4,
       "protein": 8.0,
       "fat": 12.0,
@@ -6889,7 +6889,7 @@
     {
       "id": "morozhenoe-tvorozhnoe-vkusvill",
       "name": "Мороженое Творожное",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 308.6,
       "protein": 5.7,
       "fat": 20.6,
@@ -6922,7 +6922,7 @@
     {
       "id": "kirieshki-vetchina-s-syrom-kirieshki",
       "name": "Кириешки «ветчина с сыром»",
-      "manufacturer": "КИРИЕШКИ",
+      "manufacturer": "Кириешки",
       "kcal": 390.0,
       "protein": 10.5,
       "fat": 10.0,
@@ -6944,7 +6944,7 @@
     {
       "id": "kirieshki-holodec-s-hrenom-kirieshki",
       "name": "Кириешки «холодец с хреном»",
-      "manufacturer": "КИРИЕШКИ",
+      "manufacturer": "Кириешки",
       "kcal": 380.0,
       "protein": 10.0,
       "fat": 10.0,
@@ -6955,7 +6955,7 @@
     {
       "id": "kirieshki-max-ohotnichi-kolbaski-kirieshki",
       "name": "Кириешки Max «охотничьи колбаски»",
-      "manufacturer": "КИРИЕШКИ",
+      "manufacturer": "Кириешки",
       "kcal": 410.0,
       "protein": 11.0,
       "fat": 8.5,
@@ -7142,7 +7142,7 @@
     {
       "id": "glazirovannye-vafli-yashkino",
       "name": "глазированные вафли",
-      "manufacturer": "яшкино",
+      "manufacturer": "Яшкино",
       "kcal": 530.0,
       "protein": 5.0,
       "fat": 31.0,
@@ -7395,7 +7395,7 @@
     {
       "id": "plombir-v-rozhke-klubnika-vkusvill",
       "name": "Пломбир В Рожке «клубника»",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 278.1,
       "protein": 4.2,
       "fat": 14.5,
@@ -7604,7 +7604,7 @@
     {
       "id": "chipsy-nori-sensoy",
       "name": "Чипсы нори",
-      "manufacturer": "SenSoy",
+      "manufacturer": "Sen Soy",
       "kcal": 550.0,
       "protein": 14.7,
       "fat": 44.5,
@@ -7769,7 +7769,7 @@
     {
       "id": "syr-myagkiy-kremchiz-bez-laktozy-vkusvill",
       "name": "Сыр Мягкий Кремчиз Без Лактозы",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 260.0,
       "protein": 5.3,
       "fat": 25.2,
@@ -7868,7 +7868,7 @@
     {
       "id": "morozhenoe-plombir-vkusvill",
       "name": "Мороженое Пломбир",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 235.0,
       "protein": 4.1,
       "fat": 15.0,
@@ -7912,7 +7912,7 @@
     {
       "id": "syrok-tvorozhnyy-so-sguschennym-molokom-v-molochnom-shokolade-vkusvill",
       "name": "Сырок творожный со сгущённым молоком в молочном шоколаде",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 295.0,
       "protein": 16.3,
       "fat": 11.0,
@@ -7956,7 +7956,7 @@
     {
       "id": "4607064313143-selo-zelenoe",
       "name": "4607064313143",
-      "manufacturer": "Село Зеленое",
+      "manufacturer": "Село Зелёное",
       "kcal": 104.0,
       "protein": 11.2,
       "fat": 5.0,
@@ -8154,7 +8154,7 @@
     {
       "id": "kuybysheva-75-chitos-syr-85-cheetos",
       "name": "Куйбышева 75 Читос сыр 85",
-      "manufacturer": "cheetos",
+      "manufacturer": "Cheetos",
       "kcal": 490.0,
       "protein": 7.5,
       "fat": 22.0,
@@ -8264,7 +8264,7 @@
     {
       "id": "choco-pie-original-orion",
       "name": "Choco Pie Original",
-      "manufacturer": "ORION",
+      "manufacturer": "Orion",
       "kcal": 430.0,
       "protein": 4.5,
       "fat": 18.0,
@@ -8418,7 +8418,7 @@
     {
       "id": "chebupicca-kurochka-po-itallyanski-goryachaya-shtuchka",
       "name": "чебупицца курочка по-италлянски",
-      "manufacturer": "горячая штучка",
+      "manufacturer": "Горячая Штучка",
       "kcal": 270.0,
       "protein": 8.0,
       "fat": 13.0,
@@ -8429,7 +8429,7 @@
     {
       "id": "hrustyaschie-krylyshki-ostrye-k-pivu-goryachaya-shtuchka",
       "name": "Хрустящие крылышки острые к пиву",
-      "manufacturer": "Горячая штучка",
+      "manufacturer": "Горячая Штучка",
       "kcal": 270.0,
       "protein": 12.0,
       "fat": 13.0,
@@ -8473,7 +8473,7 @@
     {
       "id": "kapusta-marinovannaya-diet-feg",
       "name": "Капуста маринованная diet",
-      "manufacturer": "Фэг",
+      "manufacturer": "ФЭГ",
       "kcal": 15.0,
       "protein": 1.0,
       "fat": 0.1,
@@ -8605,7 +8605,7 @@
     {
       "id": "napitok-bezalkogolnyy-limonad-iz-lavki-s-sokom-mango-i-marakuyi-silnogazirovannyy-pasterizovannyy-yandeks-lavka",
       "name": "Напиток безалкогольный \"лимонад \"из лавки\" с соком манго и маракуйи сильногазированный пастеризованный",
-      "manufacturer": "Яндекс лавка",
+      "manufacturer": "Яндекс Лавка",
       "kcal": 31.0,
       "protein": 0.0,
       "fat": 0.0,
@@ -8671,7 +8671,7 @@
     {
       "id": "kotlety-fileynye-iz-ryby-v-panirovke-ozon-fresh",
       "name": "Котлеты \"Филейные\" Из Рыбы В Панировке",
-      "manufacturer": "Ozon Fresh",
+      "manufacturer": "Ozon fresh",
       "kcal": 110.0,
       "protein": 11.0,
       "fat": 1.4,
@@ -8682,7 +8682,7 @@
     {
       "id": "kotlety-iz-gorbushi-i-mintaya-ozon-fresh",
       "name": "Котлеты Из Горбуши И Минтая",
-      "manufacturer": "Ozon Fresh",
+      "manufacturer": "Ozon fresh",
       "kcal": 120.0,
       "protein": 10.2,
       "fat": 3.0,
@@ -8715,7 +8715,7 @@
     {
       "id": "popkorn-sladaaya-karamel-vkusvill",
       "name": "Попкорн сладаая карамель",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 447.5,
       "protein": 4.4,
       "fat": 11.9,
@@ -8858,7 +8858,7 @@
     {
       "id": "sok-pryamogo-otzhima-neosvetvlennyy-pasterizovannyy-fruktovyy-apelsinovyy-s-myakotyu-vkusvill",
       "name": "Сок прямого отжима неосветвленный, пастеризованный, фруктовый: апельсиновый с мякотью",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 47.7,
       "protein": 0.3,
       "fat": 0.1,
@@ -8935,7 +8935,7 @@
     {
       "id": "sochnye-papa-mozhet",
       "name": "Сочные",
-      "manufacturer": "Папа Может",
+      "manufacturer": "Папа может",
       "kcal": 164.0,
       "protein": 11.0,
       "fat": 12.0,
@@ -8957,7 +8957,7 @@
     {
       "id": "shpikachki-papa-mozhet",
       "name": "шпикачки",
-      "manufacturer": "Папа Может",
+      "manufacturer": "Папа может",
       "kcal": 232.0,
       "protein": 10.0,
       "fat": 20.0,
@@ -9111,7 +9111,7 @@
     {
       "id": "dobryy-kola-ledyanoy-limon-dobryy",
       "name": "добрый кола ледяной лимон",
-      "manufacturer": "добрый",
+      "manufacturer": "Добрый",
       "kcal": 18.0,
       "protein": 0.0,
       "fat": 0.0,
@@ -9144,7 +9144,7 @@
     {
       "id": "moloko-bezlaktoznoe-1-5-vkusvill",
       "name": "Молоко безлактозное 1.5%",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 43.5,
       "protein": 2.8,
       "fat": 1.5,
@@ -9309,7 +9309,7 @@
     {
       "id": "hi-pro-protein-cocktail-klubnika-let-s-go",
       "name": "Hi-Pro Protein Cocktail, Клубника",
-      "manufacturer": "Let’s Go",
+      "manufacturer": "Let's Go",
       "kcal": 45.3,
       "protein": 6.3,
       "fat": 0.0,
@@ -9342,7 +9342,7 @@
     {
       "id": "zel-lin-tvorog-9-vkusvill",
       "name": "Зел.лин творог 9%",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 157.0,
       "protein": 16.0,
       "fat": 9.0,
@@ -9529,7 +9529,7 @@
     {
       "id": "puding-molochnyy-shokoladnyy-vkusvill",
       "name": "Пудинг молочный шоколадный",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 111.2,
       "protein": 3.3,
       "fat": 3.0,
@@ -9639,7 +9639,7 @@
     {
       "id": "yogurt-pitevoy-bez-sahara-zelenyy-lug",
       "name": "Йогурт питьевой без сахара",
-      "manufacturer": "Зеленый луг",
+      "manufacturer": "Зелёный луг",
       "kcal": 53.0,
       "protein": 3.2,
       "fat": 2.5,
@@ -9705,7 +9705,7 @@
     {
       "id": "marmelad-zhevatelnvy-figurnyy-kislyy-mixbar",
       "name": "Мармелад Жевательнвй Фигурный Кислый",
-      "manufacturer": "Mixbar",
+      "manufacturer": "Mix Bar",
       "kcal": 320.0,
       "protein": 5.0,
       "fat": 0.0,
@@ -9980,7 +9980,7 @@
     {
       "id": "morozhenoe-svetaevo-eskimo-s-arahisom-i-karamelyu-svetaevo",
       "name": "Мороженое СВЕТАЕВО Эскимо с арахисом и карамелью",
-      "manufacturer": "СВЕТАЕВО",
+      "manufacturer": "Светаево",
       "kcal": 345.0,
       "protein": 4.0,
       "fat": 24.5,
@@ -10046,7 +10046,7 @@
     {
       "id": "sorbet-malina-lichi-vkusvill",
       "name": "Сорбет малина-личи",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 129.1,
       "protein": 0.4,
       "fat": 0.3,
@@ -10189,7 +10189,7 @@
     {
       "id": "sendvich-na-ugolnom-hlebe-s-indeykoy-perekrestok-select",
       "name": "Сендвич На Угольном Хлебе С Индейкой",
-      "manufacturer": "Перекресток Select",
+      "manufacturer": "Перекрёсток Select",
       "kcal": 216.7,
       "protein": 12.2,
       "fat": 8.3,
@@ -10200,7 +10200,7 @@
     {
       "id": "rozovyy-boul-s-krevetkami-i-forelyu-creative-kitchen",
       "name": "Розовый боул с креветками и форелью",
-      "manufacturer": "Creative kitchen",
+      "manufacturer": "Creative Kitchen",
       "kcal": 166.1,
       "protein": 2.1,
       "fat": 12.1,
@@ -10398,7 +10398,7 @@
     {
       "id": "karpachcho-iz-kuricy-syrokopchenoe-ozon-fresh",
       "name": "Карпаччо Из Курицы Сырокопченое",
-      "manufacturer": "Ozon Fresh",
+      "manufacturer": "Ozon fresh",
       "kcal": 107.0,
       "protein": 17.0,
       "fat": 3.0,
@@ -10442,7 +10442,7 @@
     {
       "id": "kutaby-s-syrom-i-zelenyu-cook-chart",
       "name": "Кутабы с сыром и зеленью",
-      "manufacturer": "Cook chart",
+      "manufacturer": "Cook Chart",
       "kcal": 240.2,
       "protein": 7.7,
       "fat": 9.4,
@@ -10563,7 +10563,7 @@
     {
       "id": "protein-let-s-go",
       "name": "Protein",
-      "manufacturer": "Let's go",
+      "manufacturer": "Let's Go",
       "kcal": 45.0,
       "protein": 6.0,
       "fat": 0.0,
@@ -10629,7 +10629,7 @@
     {
       "id": "pirog-loranskiy-s-lososem-i-shpinatom-vkusteh",
       "name": "Пирог Лоранский с лососем и шпинатом",
-      "manufacturer": "ВКУСТЕХ",
+      "manufacturer": "Вкустех",
       "kcal": 185.6,
       "protein": 8.9,
       "fat": 11.3,
@@ -10706,7 +10706,7 @@
     {
       "id": "hachapuri-po-megrelski-ramonti-payz",
       "name": "Хачапури по-мегрельски",
-      "manufacturer": "Рамонти пайз",
+      "manufacturer": "Рамонти Пайз",
       "kcal": 274.4,
       "protein": 12.1,
       "fat": 12.0,
@@ -10860,7 +10860,7 @@
     {
       "id": "hleb-darnickiy-pervym-delom",
       "name": "Хлеб Дарницкий",
-      "manufacturer": "Первым Делом",
+      "manufacturer": "Первым делом",
       "kcal": 200.0,
       "protein": 6.6,
       "fat": 1.1,
@@ -10882,7 +10882,7 @@
     {
       "id": "napitok-syv-selo-zelenoe-selo-zelenoe",
       "name": "напиток сыв. Село зелёное",
-      "manufacturer": "Село Зеленое",
+      "manufacturer": "Село Зелёное",
       "kcal": 44.0,
       "protein": 0.4,
       "fat": 0.0,
@@ -10893,7 +10893,7 @@
     {
       "id": "hlebcy-pshenichnye-s-zelenyu-vkusvill",
       "name": "Хлебцы Пшеничные С Зеленью",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 333.5,
       "protein": 11.0,
       "fat": 1.5,
@@ -10915,7 +10915,7 @@
     {
       "id": "tofu-klassicheskiy-ozon-fresh",
       "name": "Тофу Классический",
-      "manufacturer": "OZON fresh",
+      "manufacturer": "Ozon fresh",
       "kcal": 70.0,
       "protein": 8.0,
       "fat": 4.0,
@@ -10926,7 +10926,7 @@
     {
       "id": "sendvich-roll-s-indeykoy-perekrestok",
       "name": "Сэндвич Ролл С Индейкой",
-      "manufacturer": "Перекресток",
+      "manufacturer": "Перекрёсток",
       "kcal": 189.0,
       "protein": 7.4,
       "fat": 6.8,
@@ -10959,7 +10959,7 @@
     {
       "id": "morozhenoe-karamelnoe-bez-dobavleniya-sahara-vkusvill",
       "name": "Мороженое Карамельное без добавления сахара",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 121.2,
       "protein": 4.4,
       "fat": 7.6,
@@ -11014,7 +11014,7 @@
     {
       "id": "zlakovyy-batonchik-kerlli-s-klyukvoy-v-molochnom-shokolade-kerlli",
       "name": "Злаковый батончик Kerlli с клюквой в молочном шоколаде",
-      "manufacturer": "KERLLI",
+      "manufacturer": "Kerlli",
       "kcal": 430.0,
       "protein": 5.5,
       "fat": 15.0,
@@ -11047,7 +11047,7 @@
     {
       "id": "kolbasa-sabroso-roso-indilayt",
       "name": "Колбаса Сабросо Росо",
-      "manufacturer": "ИНДИлайт",
+      "manufacturer": "Индилайт",
       "kcal": 190.0,
       "protein": 28.0,
       "fat": 8.0,
@@ -11124,7 +11124,7 @@
     {
       "id": "udon-s-kuricey-i-ovoschami-perekrestok",
       "name": "Удон С Курицей И Овощами",
-      "manufacturer": "Перекресток",
+      "manufacturer": "Перекрёсток",
       "kcal": 454.0,
       "protein": 19.8,
       "fat": 21.1,
@@ -11146,7 +11146,7 @@
     {
       "id": "eklery-fistashkovye-yandeks-lavka",
       "name": "Эклеры фисташковые",
-      "manufacturer": "Яндекс лавка",
+      "manufacturer": "Яндекс Лавка",
       "kcal": 288.0,
       "protein": 6.6,
       "fat": 18.5,
@@ -11333,7 +11333,7 @@
     {
       "id": "myaso-bedra-beskostnogo-cyplyat-broylerov-v-marinade-sladkiy-chili-vkusvill",
       "name": "Мясо бедра бескостного цыплят-бройлеров в маринаде \"Сладкий чили\"",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 108.7,
       "protein": 16.9,
       "fat": 3.1,
@@ -11729,7 +11729,7 @@
     {
       "id": "massa-tvorozhnaya-s-izyumom-vkusvill",
       "name": "Масса Творожная С Изюмом",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 275.0,
       "protein": 10.0,
       "fat": 11.4,
@@ -11762,7 +11762,7 @@
     {
       "id": "snickers-super-snickers",
       "name": "SNICKERS SUPER",
-      "manufacturer": "SNICKERS",
+      "manufacturer": "Snickers",
       "kcal": 494.0,
       "protein": 8.1,
       "fat": 25.0,
@@ -11773,7 +11773,7 @@
     {
       "id": "m-m-s-s-molochnym-shokoladom-m-m-s",
       "name": "M&M's с молочным шоколадом",
-      "manufacturer": "M&M's",
+      "manufacturer": "M&M'S",
       "kcal": 477.0,
       "protein": 5.4,
       "fat": 18.1,
@@ -11872,7 +11872,7 @@
     {
       "id": "qwikler-pistachios-snaq-fabriq",
       "name": "Qwikler pistachios",
-      "manufacturer": "Snaq fabriq",
+      "manufacturer": "Snaq Fabriq",
       "kcal": 496.0,
       "protein": 8.3,
       "fat": 34.0,
@@ -12004,7 +12004,7 @@
     {
       "id": "sendvich-s-tuncom-pyaterochka-kafe",
       "name": "Сэндвич С Тунцом",
-      "manufacturer": "Пятерочка Кафе",
+      "manufacturer": "Пятёрочка Кафе",
       "kcal": 233.0,
       "protein": 9.1,
       "fat": 13.4,
@@ -12290,7 +12290,7 @@
     {
       "id": "greek-yogurt-plain-g-balance",
       "name": "Greek yogurt plain",
-      "manufacturer": "G-balance",
+      "manufacturer": "G-Balance",
       "kcal": 80.0,
       "protein": 8.6,
       "fat": 4.0,
@@ -12389,7 +12389,7 @@
     {
       "id": "acidofilin-vkusvill",
       "name": "Ацидофилин",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 68.5,
       "protein": 3.0,
       "fat": 4.5,
@@ -12488,7 +12488,7 @@
     {
       "id": "ovsyanyy-yogurt-chernika-nemoloko-sady-pridonya",
       "name": "Овсяный йогурт черника nemoloko",
-      "manufacturer": "Сады придонья",
+      "manufacturer": "Сады Придонья",
       "kcal": 140.0,
       "protein": 5.0,
       "fat": 5.0,
@@ -12499,7 +12499,7 @@
     {
       "id": "nemoloko-ovsyanyy-yogurt-grusha-sady-pridonya",
       "name": "Nemoloko овсяный йогурт груша",
-      "manufacturer": "Сады придонья",
+      "manufacturer": "Сады Придонья",
       "kcal": 130.0,
       "protein": 5.0,
       "fat": 5.0,
@@ -12521,7 +12521,7 @@
     {
       "id": "humus-s-sacebeli-ozon-fresh",
       "name": "Хумус С Сацебели",
-      "manufacturer": "OZON fresh",
+      "manufacturer": "Ozon fresh",
       "kcal": 159.0,
       "protein": 7.0,
       "fat": 11.0,
@@ -12730,7 +12730,7 @@
     {
       "id": "hi-protein-chernichnyy-dessert-fitness-shock",
       "name": "Hi Protein «Черничный Дессерт»",
-      "manufacturer": "fitness SHOCK",
+      "manufacturer": "Fitness Shock",
       "kcal": 345.0,
       "protein": 30.0,
       "fat": 12.9,
@@ -12851,7 +12851,7 @@
     {
       "id": "panini-s-kuricey-pyaterochka-kafe",
       "name": "Панини С Курицей",
-      "manufacturer": "Пятерочка Кафе",
+      "manufacturer": "Пятёрочка Кафе",
       "kcal": 290.0,
       "protein": 12.0,
       "fat": 12.0,
@@ -12862,7 +12862,7 @@
     {
       "id": "blinchiki-s-makovoy-nachinkoy-perekrestok",
       "name": "Блинчики С Маковой Начинкой",
-      "manufacturer": "Перекресток",
+      "manufacturer": "Перекрёсток",
       "kcal": 318.0,
       "protein": 10.0,
       "fat": 18.0,
@@ -13126,7 +13126,7 @@
     {
       "id": "blinchik-cezar-creative-kitchen",
       "name": "Блинчик Цезарь",
-      "manufacturer": "Creative kitchen",
+      "manufacturer": "Creative Kitchen",
       "kcal": 176.0,
       "protein": 7.1,
       "fat": 12.0,
@@ -13357,7 +13357,7 @@
     {
       "id": "moloko-3-2-domik-v-derevne",
       "name": "молоко 3.2%",
-      "manufacturer": "домик в деревне",
+      "manufacturer": "Домик в деревне",
       "kcal": 60.0,
       "protein": 3.0,
       "fat": 3.2,
@@ -13379,7 +13379,7 @@
     {
       "id": "tvorog-myagkiy-s-massovoy-doley-zhira-2-domik-v-derevne",
       "name": "Творог \"Мягкий\" С Массовой Долей Жира 2%",
-      "manufacturer": "Домик В Деревне",
+      "manufacturer": "Домик в деревне",
       "kcal": 67.0,
       "protein": 8.5,
       "fat": 2.0,
@@ -13632,7 +13632,7 @@
     {
       "id": "leys-krab-smotka-bolshie-lays",
       "name": "лейс краб смотка большие",
-      "manufacturer": "Lays",
+      "manufacturer": "Lay's",
       "kcal": 520.0,
       "protein": 6.0,
       "fat": 32.0,
@@ -13731,7 +13731,7 @@
     {
       "id": "chipsy-iz-pechi-muss-iz-lososya-i-avokado-smotka-lay-s",
       "name": "Чипсы «Из Печи. Мусс из лосося и авокадо» смотка",
-      "manufacturer": "Lay’s",
+      "manufacturer": "Lay's",
       "kcal": 450.0,
       "protein": 6.0,
       "fat": 16.0,
@@ -14523,7 +14523,7 @@
     {
       "id": "high-pro-chernika-zemlyanika-exponenta",
       "name": "High-pro черника-земляника",
-      "manufacturer": "EXPONENTA",
+      "manufacturer": "Exponenta",
       "kcal": 60.0,
       "protein": 12.0,
       "fat": 0.0,
@@ -14556,7 +14556,7 @@
     {
       "id": "tvorog-bezlaktoznyy-5-vkusvill",
       "name": "Творог безлактозный 5%",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 111.0,
       "protein": 15.0,
       "fat": 5.0,
@@ -14600,7 +14600,7 @@
     {
       "id": "ekspo-exponenta",
       "name": "экспо",
-      "manufacturer": "EXPONENTA",
+      "manufacturer": "Exponenta",
       "kcal": 60.0,
       "protein": 12.0,
       "fat": 0.0,
@@ -14886,7 +14886,7 @@
     {
       "id": "adzhika-ostraya-vkusvill",
       "name": "Аджика Острая",
-      "manufacturer": "Вкусвилл",
+      "manufacturer": "ВкусВилл",
       "kcal": 95.0,
       "protein": 2.5,
       "fat": 3.0,
@@ -14919,7 +14919,7 @@
     {
       "id": "smetana-15-prezident-president",
       "name": "Сметана 15% PREZIDENT",
-      "manufacturer": "PRESIDENT",
+      "manufacturer": "President",
       "kcal": 160.0,
       "protein": 2.2,
       "fat": 15.0,
@@ -15161,7 +15161,7 @@
     {
       "id": "alpro-vanilla-flavour-lapte-vegetal-alpro",
       "name": "Alpro vanilla flavour lapte vegetal",
-      "manufacturer": "alpro",
+      "manufacturer": "Alpro",
       "kcal": 57.0,
       "protein": 3.0,
       "fat": 1.8,
@@ -15183,7 +15183,7 @@
     {
       "id": "kokosnussdrink-mit-soja-barista-alpro",
       "name": "Kokosnussdrink mit Soja, Barista",
-      "manufacturer": "alpro",
+      "manufacturer": "Alpro",
       "kcal": 33.0,
       "protein": 1.5,
       "fat": 1.4,
@@ -15194,7 +15194,7 @@
     {
       "id": "soya-alpro",
       "name": "Soya",
-      "manufacturer": "alpro",
+      "manufacturer": "Alpro",
       "kcal": 39.0,
       "protein": 3.0,
       "fat": 1.7,
@@ -16107,7 +16107,7 @@
     {
       "id": "kakao-s-yogurtovoy-nachinkoy-utrennee-belvita",
       "name": "Какао с йогуртовой начинкой. Утреннее",
-      "manufacturer": "Belvita",
+      "manufacturer": "belVita",
       "kcal": 464.0,
       "protein": 7.1,
       "fat": 18.0,
@@ -16118,7 +16118,7 @@
     {
       "id": "pechene-utrennee-s-yogurtovoy-nachinkoy-belvita",
       "name": "Печенье Утреннее С Йогуртовой Начинкой",
-      "manufacturer": "Belvita",
+      "manufacturer": "belVita",
       "kcal": 467.0,
       "protein": 7.0,
       "fat": 18.0,
@@ -16129,7 +16129,7 @@
     {
       "id": "słodzik-stołowy-na-bazie-cyklaminianu-sodu-i-sacharynianu-kclassic",
       "name": "Słodzik stołowy na bazie cyklaminianu sodu i sacharynianu",
-      "manufacturer": "KClassic",
+      "manufacturer": "K-Classic",
       "kcal": 25.0,
       "protein": 0.0,
       "fat": 0.0,
@@ -16734,7 +16734,7 @@
     {
       "id": "kislomolochnyy-napitok-ezhevika-malina-zelenaya-liniya",
       "name": "Кисломолочный напиток ежевика-малина",
-      "manufacturer": "Зеленая линия",
+      "manufacturer": "Зелёная линия",
       "kcal": 73.3,
       "protein": 12.0,
       "fat": 0.5,
