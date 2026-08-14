@@ -25,7 +25,7 @@ def row(name, brand, product_id=""):
 class NormalizeKeyTests(unittest.TestCase):
     def test_variants_collapse_to_one_key(self):
         self.assertEqual(normalize_key("Lay's"), normalize_key("Lays"))
-        self.assertEqual(normalize_key("Lay's"), normalize_key("Lay's"))
+        self.assertEqual(normalize_key("Lay's"), normalize_key("Lay’s"))
         self.assertEqual(normalize_key("Зелёная линия"), normalize_key("Зеленая Линия"))
         self.assertEqual(normalize_key("Sen Soy"), normalize_key("SenSoy"))
         self.assertEqual(normalize_key("Агро-Альянс"), normalize_key("агро альянс"))
