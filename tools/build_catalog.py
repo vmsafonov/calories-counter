@@ -155,6 +155,16 @@ def build() -> dict:
             errors.append(f"строка {line}: пустое название")
             continue
 
+        # При импорте из Open Food Facts в название иногда попадал штрихкод
+        # («4606779971303») или вес («140 g»). Найти такой продукт в поиске нельзя.
+        # Двух букв хватает с запасом: самое короткое настоящее название — «сок».
+        if sum(1 for ch in name if ch.isalpha()) < 2:
+            errors.append(
+                f"строка {line}: название «{name}» без букв — похоже, в него попал "
+                "штрихкод или вес. Впишите настоящее название или удалите строку"
+            )
+            continue
+
         unit = (row.get("unit") or "").strip().lower()
         if unit and unit not in UNITS:
             errors.append(f"строка {line}: единица «{unit}» неизвестна, допустимы: {', '.join(sorted(UNITS))}")

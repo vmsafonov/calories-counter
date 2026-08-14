@@ -168,6 +168,30 @@ class DuplicateSpellingGuardTests(unittest.TestCase):
         self.assertEqual(len(catalog["products"]), 2)
 
 
+class NameHasLettersTests(unittest.TestCase):
+    def test_barcode_as_name_fails_build(self):
+        # Из Open Food Facts прилетали строки, где в названии стоял штрихкод.
+        csv_text = CSV_HEAD + "4606779971303,Epica,150,5,8,12,,,,4606779971303,\n"
+        with self.assertRaises(SystemExit):
+            run_build_on(csv_text)
+
+    def test_weight_as_name_fails_build(self):
+        csv_text = CSV_HEAD + "140 g,,100,1,2,3,,,,,\n"
+        with self.assertRaises(SystemExit):
+            run_build_on(csv_text)
+
+    def test_short_real_name_passes(self):
+        # Самое короткое настоящее название в таблице — «сок», порог его не задевает.
+        csv_text = CSV_HEAD + "сок,Добрый,46,0.5,0,11,,,,,\n"
+        catalog = run_build_on(csv_text)
+        self.assertEqual(len(catalog["products"]), 1)
+
+    def test_digits_in_real_name_are_fine(self):
+        csv_text = CSV_HEAD + "Кефир 3.2%,Самокат,53,3,3.2,4,,,,,\n"
+        catalog = run_build_on(csv_text)
+        self.assertEqual(len(catalog["products"]), 1)
+
+
 CSV_HEAD_KIND = (
     "название,производитель,ккал_100г,белки_100г,жиры_100г,углеводы_100г,единица,"
     "вес_единицы_г,порция_по_умолчанию_г,штрихкод,id,тип\n"
