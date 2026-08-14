@@ -25,12 +25,47 @@ CSV_PATH = ROOT / "catalog" / "catalog.csv"
 
 # Написания считаются одним производителем, если совпадают после нижнего регистра,
 # замены ё на е и удаления пробелов, кавычек, апострофов, дефисов, подчёркиваний,
-# точек и запятых.
-_STRIP = re.compile(r"[\s\"'" + chr(0x2018) + chr(0x2019) + chr(0x201C) + chr(0x201D) + r"«»„\-–—_.,]")
+# точек, запятых и значков ®/™/©.
+_STRIP = re.compile(r"[\s\"'" + chr(0x2018) + chr(0x2019) + chr(0x201C) + chr(0x201D)
+                    + r"«»„\-–—_.,®™©]")
+
+# Кавычки, которыми обрамляют название после юрформы.
+_QUOTES = "\"'" + chr(0x2018) + chr(0x2019) + chr(0x201C) + chr(0x201D) + "«»„"
+
+# Организационно-правовые формы: в поле «производитель» они мусор, бренд — то, что дальше.
+# «ООО "Марс"» и «Марс» — один производитель, а «АО "» — вовсе не производитель.
+_LEGAL = re.compile(r"^(ооо|оао|зао|пао|ао|ип|тд|пк)\b\.?\s*", re.IGNORECASE)
 
 
 def normalize_key(brand: str) -> str:
     return _STRIP.sub("", brand.lower().replace("ё", "е"))
+
+
+def strip_noise(brand: str) -> str:
+    """Убирает юрформу, обрамляющие кавычки и значки ®/™/© — то, что не бренд.
+
+    «ПАО "Красный Октябрь"» → «Красный Октябрь», «SNICKERS®» → «SNICKERS»,
+    «АО "» → «» (пустая строка: производитель неизвестен).
+    """
+    text = brand.replace("®", "").replace("™", "").replace("©", "")
+    text = re.sub(r"\s+", " ", text).strip()
+    # Юрформ может быть несколько подряд: «ООО ПК "Айсберг-Люкс"».
+    while True:
+        stripped = _LEGAL.sub("", text, count=1).strip()
+        if stripped == text:
+            break
+        text = stripped
+    # Кавычки снимаем только парные снаружи: иначе «Россия» — щедрая душа! теряет
+    # открывающую и остаётся с висящей закрывающей.
+    # Внутренние кавычки означают, что строка закавычена криво («"Винзавод "Дионис"»);
+    # такую не трогаем, иначе потеряется закрывающая.
+    while (len(text) >= 2 and text[0] in _QUOTES and text[-1] in _QUOTES
+           and not any(ch in _QUOTES for ch in text[1:-1])):
+        text = text[1:-1].strip()
+    # От «АО "» после юрформы остаются одни кавычки — это не производитель.
+    if not any(ch.isalnum() for ch in text):
+        return ""
+    return text
 
 
 # Канон — официальное написание бренда, а не самое частое: «Вкусвилл» встречается
@@ -67,6 +102,7 @@ CANON: dict[str, str] = {
     "snaqfabriq": "Snaq Fabriq",
     "snickers": "Snickers",
     "spar": "SPAR",
+    "storck": "Storck",
     "vkusvill": "VkusVill",
     "агроальянс": "Агро-Альянс",
     "актибио": "АктиБио",
@@ -110,6 +146,30 @@ CANON: dict[str, str] = {
     "яшкино": "Яшкино",
 }
 
+# Склейки из Open Food Facts: там поле brands — список через запятую, при импорте
+# он слился в одну строку («Самокат Вкусвилл Ана Райз»), либо к бренду прилип вкус
+# или слоган («Добрый Мультифрукт», «У Палыча Всегда Вкусно»). Ключ — исходное
+# написание, значение — бренд, к которому строка относится.
+#
+# Сюда попадает только то, что разобрано глазами. Настоящие суб-бренды —
+# «Пятёрочка Кафе», «Перекрёсток Select», «Яндекс Лавка» — остаются отдельными.
+_ALIAS_SOURCES: dict[str, str] = {
+    "Самокат Вкусвилл Ана Райз": "ВкусВилл",
+    "Лавка Яндекс": "Яндекс Лавка",
+    "Маркет Перекрёсток": "Перекрёсток",
+    "EPICA персик-маракуйя": "Epica",
+    "Epica Flavorite": "Epica",
+    "Добрый Мультифрукт": "Добрый",
+    "Snickers Криспер": "Snickers",
+    "Pringles Alexa": "Pringles",
+    "У Палыча Всегда Вкусно": "У Палыча",
+    "August Storck": "Storck",
+    "ООО \"КДВ Воронеж\" (KDV)": "КДВ Воронеж",
+}
+
+ALIASES: dict[str, str] = {normalize_key(source): canon
+                           for source, canon in _ALIAS_SOURCES.items()}
+
 # Группы, где официальное написание — предположение (взято самое частое либо
 # самое аккуратное из вариантов). Показываются в таблице с пометкой.
 GUESSED: set[str] = {
@@ -119,6 +179,20 @@ GUESSED: set[str] = {
     "павапава", "первымделом", "рамонтипайз", "самиготовим", "свежеезавтра",
     "фэг", "щелковохлеб", "ясносолнышко",
 }
+
+
+def canonical_brand(brand: str) -> str:
+    """Итоговое написание производителя: без юрформы, по словарю склеек и канонов.
+
+    Пустая строка означает, что производителя в этой ячейке не было («АО "»).
+    """
+    cleaned = strip_noise(brand)
+    if not cleaned:
+        return ""
+    alias = ALIASES.get(normalize_key(brand)) or ALIASES.get(normalize_key(cleaned))
+    if alias:
+        return alias
+    return CANON.get(normalize_key(cleaned), cleaned)
 
 
 def _column(header: list[str], name: str) -> int:
@@ -140,11 +214,14 @@ def apply_canon(header: list[str], rows: list[list[str]]) -> tuple[list[list[str
     brand_col = _column(header, "производитель")
     id_col = _column(header, "id")
 
+    # Группируем по написанию, уже очищенному от юрформы: «ООО "Марс"» и «Марс» —
+    # один производитель, и канон для них нужен один.
     spellings: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
     for line in rows:
         brand = (line[brand_col] or "").strip() if len(line) > brand_col else ""
-        if brand:
-            spellings[normalize_key(brand)][brand] += 1
+        cleaned = strip_noise(brand)
+        if cleaned and normalize_key(brand) not in ALIASES:
+            spellings[normalize_key(cleaned)][cleaned] += 1
 
     uncovered = [variants for key, variants in spellings.items()
                  if len(variants) > 1 and key not in CANON]
@@ -154,22 +231,16 @@ def apply_canon(header: list[str], rows: list[list[str]]) -> tuple[list[list[str
             print("  • " + " | ".join(sorted(variants)), file=sys.stderr)
         raise SystemExit(1)
 
-    table: list[str] = []
-    for key, variants in sorted(spellings.items()):
-        canon = CANON.get(key)
-        if canon is None or set(variants) == {canon}:
-            continue
-        mark = "  (предположение)" if key in GUESSED else ""
-        listed = " | ".join(f"{spelling} ({count})" for spelling, count
-                            in sorted(variants.items(), key=lambda item: -item[1]))
-        table.append(f"{listed}  →  {canon}{mark}")
+    # Таблица для вычитки собирается по фактическим заменам: что было → что стало.
+    moves: dict[tuple[str, str], int] = defaultdict(int)
 
     new_rows: list[list[str]] = []
     for line in rows:
         line = list(line)
         brand = (line[brand_col] or "").strip() if len(line) > brand_col else ""
-        canon = CANON.get(normalize_key(brand)) if brand else None
-        if canon and brand != canon:
+        canon = canonical_brand(brand) if brand else ""
+        if brand and canon != brand:
+            moves[(brand, canon)] += 1
             name = (line[name_col] or "").strip()
             current_id = (line[id_col] or "").strip() if len(line) > id_col else ""
             old_slug = current_id or slugify(f"{name}-{brand}")
@@ -180,6 +251,13 @@ def apply_canon(header: list[str], rows: list[list[str]]) -> tuple[list[list[str
                 line[id_col] = old_slug  # прежний id, чтобы товар не «переехал»
             line[brand_col] = canon
         new_rows.append(line)
+
+    table: list[str] = []
+    for (before, after), count in sorted(moves.items(), key=lambda item: (item[0][1].lower(),
+                                                                         -item[1])):
+        mark = "  (предположение)" if normalize_key(after) in GUESSED else ""
+        shown = after if after else "— (производитель убран)"
+        table.append(f"{before} ({count})  →  {shown}{mark}")
 
     return new_rows, table
 

@@ -1,6 +1,6 @@
 {
-  "revision": "9d3548743893",
-  "generatedAt": "2026-08-14T06:22:42+00:00",
+  "revision": "15fe191c485e",
+  "generatedAt": "2026-08-14T09:32:24+00:00",
   "products": [
     {
       "id": "ovsyanaya-kasha-na-vode-nordic",
@@ -399,7 +399,7 @@
     {
       "id": "shokoladnyy-batonchik-snickers-krisper-snickers-krisper",
       "name": "Шоколадный батончик SNICKERS® КРИСПЕР",
-      "manufacturer": "Snickers Криспер",
+      "manufacturer": "Snickers",
       "kcal": 480.0,
       "protein": 6.8,
       "fat": 22.0,
@@ -2368,7 +2368,7 @@
     {
       "id": "toffifee-15er-storck",
       "name": "Toffifee 15er",
-      "manufacturer": "STORCK",
+      "manufacturer": "Storck",
       "kcal": 521.0,
       "protein": 6.0,
       "fat": 29.0,
@@ -2390,7 +2390,7 @@
     {
       "id": "mamba-frumeladki-kislye-zvezdochki-august-storck",
       "name": "мамба фрумеладки кислые звёздочки",
-      "manufacturer": "August Storck",
+      "manufacturer": "Storck",
       "kcal": 339.0,
       "protein": 0.0,
       "fat": 0.0,
@@ -2786,7 +2786,7 @@
     {
       "id": "desert-bonjour-souffle-vkus-klubniki-so-slivkami-ao-konti-rus",
       "name": "Десерт \"Bonjour Souffle\" вкус клубники со сливками",
-      "manufacturer": "АО \"Конти-Рус\"",
+      "manufacturer": "Конти-Рус",
       "kcal": 430.0,
       "protein": 3.0,
       "fat": 16.0,
@@ -3787,7 +3787,7 @@
     {
       "id": "nareznoy-pirog-so-vkusom-shokolada-ooo-triumf",
       "name": "Нарезной Пирог Со Вкусом Шоколада",
-      "manufacturer": "ООО Триумф",
+      "manufacturer": "Триумф",
       "kcal": 380.0,
       "protein": 6.0,
       "fat": 18.0,
@@ -4128,7 +4128,7 @@
     {
       "id": "vareniki-s-kartofelem-i-gribami-u-palycha-vsegda-vkusno",
       "name": "Вареники С Картофелем И Грибами",
-      "manufacturer": "У Палыча Всегда Вкусно",
+      "manufacturer": "У Палыча",
       "kcal": 150.0,
       "protein": 4.5,
       "fat": 4.0,
@@ -4183,7 +4183,7 @@
     {
       "id": "alenka-pao-krasnyy-oktyabr",
       "name": "АЛЁНКА",
-      "manufacturer": "ПАО \"Красный Октябрь\"",
+      "manufacturer": "Красный Октябрь",
       "kcal": 410.0,
       "protein": 5.0,
       "fat": 18.0,
@@ -5822,7 +5822,7 @@
     {
       "id": "yogurt-fruttis-klubnika-stakan-5-fruttis",
       "name": "йогурт фруттис клубника стакан 5%",
-      "manufacturer": "\"Fruttis\"",
+      "manufacturer": "Fruttis",
       "kcal": 120.0,
       "protein": 2.2,
       "fat": 5.0,
@@ -6053,7 +6053,7 @@
     {
       "id": "plavlenyy-produkt-s-syrom-slivochnyy-ip-emelin-vladimir-pavlovich",
       "name": "Плавленый продукт с сыром сливочный",
-      "manufacturer": "ИП Емелин Владимир Павлович",
+      "manufacturer": "Емелин Владимир Павлович",
       "kcal": 232.0,
       "protein": 1.5,
       "fat": 14.0,
@@ -6449,7 +6449,7 @@
     {
       "id": "yogurt-epica-persik-marakuyya",
       "name": "Йогурт",
-      "manufacturer": "EPICA персик-маракуйя",
+      "manufacturer": "Epica",
       "kcal": 120.0,
       "protein": 5.7,
       "fat": 4.8,
@@ -6614,7 +6614,7 @@
     {
       "id": "4606779971303-epica-flavorite",
       "name": "4606779971303",
-      "manufacturer": "Epica Flavorite",
+      "manufacturer": "Epica",
       "kcal": 150.0,
       "protein": 5.6,
       "fat": 7.7,
@@ -6681,7 +6681,7 @@
     {
       "id": "cikoriy-rastvorimyy-poroshkoobraznyy-ooo",
       "name": "Цикорий растворимый порошкообразный",
-      "manufacturer": "ООО \"",
+      "manufacturer": "",
       "kcal": 312.0,
       "protein": 4.0,
       "fat": 0.2,
@@ -7154,7 +7154,7 @@
     {
       "id": "pechene-sdobnoe-ovsyannoe-ooo-kdv-voronezh",
       "name": "Печенье сдобное \"овсянное\"",
-      "manufacturer": "ООО \"КДВ Воронеж\"",
+      "manufacturer": "КДВ Воронеж",
       "kcal": 450.0,
       "protein": 5.5,
       "fat": 18.0,
@@ -7429,7 +7429,7 @@
     {
       "id": "slivochnoe-maslo-tysyacha-ozer-ooo-nevskie-syry",
       "name": "Сливочное масло \"Тысяча Озёр\"",
-      "manufacturer": "ООО \"Невские сыры\"",
+      "manufacturer": "Невские сыры",
       "kcal": 748.0,
       "protein": 0.6,
       "fat": 82.5,
@@ -7473,7 +7473,7 @@
     {
       "id": "syrok-tvorozhnyy-glazirovannyy-konditerskoy-glazuryu-s-kroshkoy-pechenya-so-vkusom-greckogo-oreha-i-nachinkoy-konditerskoy-sguschennoy-pingvinenok-pongo-ooo-pk-aysberg-lyuks",
       "name": "Сырок творожный глазированный кондитерской глазурью с крошкой печенья, со вкусом грецкого ореха и начинкой кондитерской сгущенной \"Пингвинёнок Понго\"",
-      "manufacturer": "ООО ПК \"Айсберг-Люкс\"",
+      "manufacturer": "Айсберг-Люкс",
       "kcal": 390.0,
       "protein": 7.6,
       "fat": 23.0,
@@ -7638,7 +7638,7 @@
     {
       "id": "sok-dobryy-multifrukt",
       "name": "сок",
-      "manufacturer": "Добрый Мультифрукт",
+      "manufacturer": "Добрый",
       "kcal": 48.0,
       "protein": 0.0,
       "fat": 0.0,
@@ -8111,7 +8111,7 @@
     {
       "id": "snickers-krisper-snickers",
       "name": "SNICKERS КРИСПЕР",
-      "manufacturer": "SNICKERS®",
+      "manufacturer": "Snickers",
       "kcal": 480.0,
       "protein": 6.8,
       "fat": 22.0,
@@ -8287,7 +8287,7 @@
     {
       "id": "agusha-yabloko-persik-ooo-lebedinskiy",
       "name": "Агуша яблоко персик",
-      "manufacturer": "ООО Лебединский",
+      "manufacturer": "Лебединский",
       "kcal": 48.0,
       "protein": 0.0,
       "fat": 0.0,
@@ -8376,7 +8376,7 @@
     {
       "id": "hlopya-ovsyanye-gerkules-ooo-bugrovskie-melnicy",
       "name": "Хлопья овсяные Геркулес",
-      "manufacturer": "ООО Бугровские мельницы",
+      "manufacturer": "Бугровские мельницы",
       "kcal": 306.0,
       "protein": 11.0,
       "fat": 6.0,
@@ -8387,7 +8387,7 @@
     {
       "id": "batonchik-jet-s-dzhets-s-pechenem-i-myagkoy-karamelyu-pokrytoy-glazuryu-ooo-kdv-voronezh-kdv",
       "name": "Батончик \"JET'S/ ДЖЕТС\" с печеньем и мягкой карамелью, покрытой глазурью",
-      "manufacturer": "ООО \"КДВ Воронеж\" (KDV)",
+      "manufacturer": "КДВ Воронеж",
       "kcal": 480.0,
       "protein": 2.5,
       "fat": 23.0,
@@ -8926,7 +8926,7 @@
     {
       "id": "dymoviya-iz-lopatki-market-perekrestok",
       "name": "Дымовийа Из Лопатки",
-      "manufacturer": "Маркет Перекрёсток",
+      "manufacturer": "Перекрёсток",
       "kcal": 97.0,
       "protein": 13.0,
       "fat": 5.0,
@@ -9080,7 +9080,7 @@
     {
       "id": "hlopya-ovsyanye-gerkules-ooo-solopttorg",
       "name": "Хлопья овсяные Геркулес",
-      "manufacturer": "ООО Сольоптторг",
+      "manufacturer": "Сольоптторг",
       "kcal": 305.0,
       "protein": 11.0,
       "fat": 6.2,
@@ -9091,7 +9091,7 @@
     {
       "id": "krupa-grechnevaya-yadrica-bystrorazvarivayuschayasya-ooo-solopttorg",
       "name": "Крупа гречневая ядрица быстроразваривающаяся",
-      "manufacturer": "ООО Сольоптторг",
+      "manufacturer": "Сольоптторг",
       "kcal": 350.0,
       "protein": 13.0,
       "fat": 2.5,
@@ -9872,7 +9872,7 @@
     {
       "id": "yashkino-mini-pay-gollandskiy-s-malinovoy-nachinkoy-ooo-kdv-voronezh",
       "name": "Яшкино Мини-пай голландский с малиновой начинкой",
-      "manufacturer": "ООО \"КДВ Воронеж\"",
+      "manufacturer": "КДВ Воронеж",
       "kcal": 390.0,
       "protein": 3.5,
       "fat": 14.0,
@@ -9905,7 +9905,7 @@
     {
       "id": "morozhenoe-oreo-s-kusochkami-pechenya-ooo-froneri-rus",
       "name": "Мороженое OREO с кусочками печенья",
-      "manufacturer": "ООО Фронери рус",
+      "manufacturer": "Фронери рус",
       "kcal": 300.0,
       "protein": 4.5,
       "fat": 11.0,
@@ -9916,7 +9916,7 @@
     {
       "id": "bon-pari-fruktovyy-led-so-vzryvnoy-karamelyu-ooo-froneri-rus",
       "name": "Бон Пари фруктовый лёд со взрывной карамелью",
-      "manufacturer": "ООО Фронери рус",
+      "manufacturer": "Фронери рус",
       "kcal": 117.0,
       "protein": 0.1,
       "fat": 2.9,
@@ -10478,7 +10478,7 @@
     {
       "id": "chizkeyk-lavka-yandeks",
       "name": "Чизкейк",
-      "manufacturer": "Лавка Яндекс",
+      "manufacturer": "Яндекс Лавка",
       "kcal": 332.5,
       "protein": 6.0,
       "fat": 22.0,
@@ -10951,7 +10951,7 @@
     {
       "id": "yogurt-grecheskiy-feyhoa-ooo-il-mio-morozhenko",
       "name": "Йогурт \"греческий фейхоа\"",
-      "manufacturer": "ООО \"ИЛЬ МИО МОРОЖЕНКО\"",
+      "manufacturer": "ИЛЬ МИО МОРОЖЕНКО",
       "kcal": 109.4,
       "protein": 6.0,
       "fat": 3.0,
@@ -11226,7 +11226,7 @@
     {
       "id": "blinchiki-pshenichnye-samokat-vkusvill-ana-rayz",
       "name": "Блинчики Пшеничные",
-      "manufacturer": "Самокат Вкусвилл Ана Райз",
+      "manufacturer": "ВкусВилл",
       "kcal": 294.4,
       "protein": 15.4,
       "fat": 10.4,
@@ -11281,7 +11281,7 @@
     {
       "id": "dobryy-kola-0-5-smotka-ooo-multon-partners",
       "name": "добрый кола 0,5 смотка",
-      "manufacturer": "ООО мултон партнерс",
+      "manufacturer": "мултон партнерс",
       "kcal": 0.3,
       "protein": 0.0,
       "fat": 0.0,
@@ -11633,7 +11633,7 @@
     {
       "id": "konfety-petrovskiy-fort-ooo-nevskiy-konditer-belinskiy",
       "name": "Конфеты Петровский Форт",
-      "manufacturer": "ООО \"Невский кондитер Белинский\"",
+      "manufacturer": "Невский кондитер Белинский",
       "kcal": 490.0,
       "protein": 5.5,
       "fat": 23.0,
@@ -11787,7 +11787,7 @@
     {
       "id": "twix-xtra-solenaya-karamel-ooo-mars",
       "name": "Twix Xtra солёная карамель",
-      "manufacturer": "ООО \"Марс\"",
+      "manufacturer": "Марс",
       "kcal": 491.0,
       "protein": 4.3,
       "fat": 23.9,
@@ -11798,7 +11798,7 @@
     {
       "id": "yogurt-osobaya-kollekciya-lesnoy-oreh-ooo-maslozavod-druzhba",
       "name": "Йогурт особая коллекция(лесной орех)",
-      "manufacturer": "ООО Маслозавод «Дружба»",
+      "manufacturer": "Маслозавод «Дружба»",
       "kcal": 80.0,
       "protein": 3.1,
       "fat": 1.5,
@@ -13230,7 +13230,7 @@
     {
       "id": "chudo-yogur-vkus-zemlyanika-klubnika-ao",
       "name": "Чудо йогур вкус земляника-клубника",
-      "manufacturer": "АО \"",
+      "manufacturer": "",
       "kcal": 84.0,
       "protein": 2.8,
       "fat": 1.9,
@@ -13241,7 +13241,7 @@
     {
       "id": "yogurt-chudo-persik-mango-dynya-ao-vbd",
       "name": "Йогурт \"Чудо\" персик-манго-дыня",
-      "manufacturer": "АО \"ВБД\"",
+      "manufacturer": "ВБД",
       "kcal": 84.0,
       "protein": 2.8,
       "fat": 1.9,
@@ -13296,7 +13296,7 @@
     {
       "id": "frugurt-persik-marakuyya-ao-vbd",
       "name": "Фругурт персик-маракуйя",
-      "manufacturer": "АО \"ВБД\"",
+      "manufacturer": "ВБД",
       "kcal": 96.0,
       "protein": 3.0,
       "fat": 2.0,
@@ -13318,7 +13318,7 @@
     {
       "id": "chudo-yogurt-grusha-v-karameli-s-plombirom-ao-vbd",
       "name": "Чудо йогурт груша в карамели с пломбиром",
-      "manufacturer": "АО \"ВБД\"",
+      "manufacturer": "ВБД",
       "kcal": 85.0,
       "protein": 2.8,
       "fat": 1.9,
@@ -14077,7 +14077,7 @@
     {
       "id": "grecheskiy-yogurt-oao-babushkina-krynka",
       "name": "Греческий Йогурт",
-      "manufacturer": "ОАО «Бабушкина крынка»",
+      "manufacturer": "Бабушкина крынка",
       "kcal": 65.0,
       "protein": 8.5,
       "fat": 2.0,
@@ -14275,7 +14275,7 @@
     {
       "id": "syr-myagkiy-feta-nezhnaya-ooo-savushkin-orsha",
       "name": "Сыр мягкий \"Фета нежная\"",
-      "manufacturer": "ООО \"Савушкин-Орша\"",
+      "manufacturer": "Савушкин-Орша",
       "kcal": 187.6,
       "protein": 11.5,
       "fat": 14.8,
@@ -14506,7 +14506,7 @@
     {
       "id": "baton-dlya-vashey-semi-oao-sluckiy-hlebozavod",
       "name": "Батон Для Вашей Семьи",
-      "manufacturer": "ОАО Слуцкий Хлебозавод",
+      "manufacturer": "Слуцкий Хлебозавод",
       "kcal": 267.0,
       "protein": 7.7,
       "fat": 2.2,
@@ -14649,7 +14649,7 @@
     {
       "id": "syr-slivochnyy-oao-molochnyy-mir",
       "name": "Сыр сливочный",
-      "manufacturer": "ОАО Молочный мир",
+      "manufacturer": "Молочный мир",
       "kcal": 350.0,
       "protein": 24.5,
       "fat": 28.0,
@@ -14737,7 +14737,7 @@
     {
       "id": "just-brutal-potsto-chips-ooo-azbuka-snekov",
       "name": "Just Brutal potsto chips",
-      "manufacturer": "ООО азбука снеков",
+      "manufacturer": "азбука снеков",
       "kcal": 450.0,
       "protein": 5.5,
       "fat": 23.0,
@@ -15056,7 +15056,7 @@
     {
       "id": "pringles-org-original-pringles-alexa",
       "name": "Pringles ORG Original",
-      "manufacturer": "Pringles Alexa",
+      "manufacturer": "Pringles",
       "kcal": 540.0,
       "protein": 4.3,
       "fat": 33.0,
@@ -17047,7 +17047,7 @@
     {
       "id": "ekstrudirovannyy-marmelad-chupa-chups-strayps-s-fruktovym-vkusom-ooo-perfetti-van-melle",
       "name": "Экструдированный мармелад \"Чупа чупс\" \"Страйпс\" с фруктовым вкусом",
-      "manufacturer": "ООО \"Перфетти ван мелле\"",
+      "manufacturer": "Перфетти ван мелле",
       "kcal": 370.0,
       "protein": 2.0,
       "fat": 2.5,

@@ -58,6 +58,13 @@ struct AddFoodScreen: View {
                     }
                 }
             }
+
+            // Возврат к списку производителей закреплён в шапке: в прокрутке он уезжал
+            // наверх вместе с содержимым, и из бренда было не выйти.
+            if nav.addTab == .brands, nav.selectedBrand != nil, !hasQuery {
+                backToBrands
+                    .padding(.top, 12)
+            }
         }
         .padding(.horizontal, 20)
         .padding(.top, 6)
@@ -86,8 +93,8 @@ struct AddFoodScreen: View {
         return store.searchAllFoods(nav.query)
     }
 
-    private var caption: String {
-        if hasQuery { return "Найдено · \(results.count)" }
+    private func caption(count: Int) -> String {
+        if hasQuery { return "Найдено · \(count)" }
         switch nav.addTab {
         case .own: return "Ваши блюда · \(store.ownFoods.count)"
         case .recent: return "Недавние"
@@ -108,33 +115,34 @@ struct AddFoodScreen: View {
         }
     }
 
+    /// Якорь для сброса прокрутки при смене вкладки и входе в бренд.
+    private static let topAnchor = "add-list-top"
+
     private var list: some View {
+        ScrollViewReader { proxy in
+            scrollBody
+                // Список производителей длинный. Без сброса прокрутки открытый бренд
+                // показывался пустой полосой: содержимое короткое, а офсет остался внизу.
+                .onChange(of: nav.selectedBrand) { _, _ in
+                    proxy.scrollTo(Self.topAnchor, anchor: .top)
+                }
+                .onChange(of: nav.addTab) { _, _ in
+                    proxy.scrollTo(Self.topAnchor, anchor: .top)
+                }
+        }
+    }
+
+    private var scrollBody: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 0) {
+                Color.clear
+                    .frame(height: 0)
+                    .id(Self.topAnchor)
+
                 if nav.addTab == .brands && !hasQuery {
                     brandsSection
                 } else {
-                    if nav.addTab == .own {
-                        createOwnCard
-                            .padding(.top, 10)
-                            .padding(.bottom, 6)
-                    }
-
-                    SectionCaption(text: caption)
-                        .padding(.top, 14)
-                        .padding(.bottom, 12)
-
-                    if results.isEmpty {
-                        Text(emptyStateText)
-                            .golos(400, 13, lineHeight: 1.5)
-                            .foregroundStyle(Theme.ink(0.45))
-                            .fixedSize(horizontal: false, vertical: true)
-                            .padding(.vertical, 8)
-                    }
-
-                    ForEach(results) { food in
-                        resultRow(food)
-                    }
+                    resultsSection
                 }
             }
             .padding(.horizontal, 20)
@@ -142,6 +150,36 @@ struct AddFoodScreen: View {
             .padding(.bottom, 110)
         }
         .scrollDismissesKeyboard(.interactively)
+    }
+
+    // Внутри LazyVStack секции собираются @ViewBuilder'ом, а не VStack: обёртка в VStack
+    // для ленивого стека — один непрозрачный элемент, и он строит все строки сразу.
+    @ViewBuilder
+    private var resultsSection: some View {
+        // Считаем один раз за отрисовку: подпись, пустое состояние и список — по нему.
+        let items = results
+
+        if nav.addTab == .own {
+            createOwnCard
+                .padding(.top, 10)
+                .padding(.bottom, 6)
+        }
+
+        SectionCaption(text: caption(count: items.count))
+            .padding(.top, 14)
+            .padding(.bottom, 12)
+
+        if items.isEmpty {
+            Text(emptyStateText)
+                .golos(400, 13, lineHeight: 1.5)
+                .foregroundStyle(Theme.ink(0.45))
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.vertical, 8)
+        }
+
+        ForEach(items) { food in
+            resultRow(food)
+        }
     }
 
     private var createOwnCard: some View {
@@ -178,8 +216,28 @@ struct AddFoodScreen: View {
 
     // MARK: - Вкладка «Производители»
 
+    /// Готовый список из стора, здесь остаётся только фильтр по строке поиска.
     private var brandRows: [BrandRow] {
-        BrandList.filter(BrandList.rows(foods: store.baseFoods), query: nav.brandQuery)
+        BrandList.filter(store.brandRows, query: nav.brandQuery)
+    }
+
+    private var backToBrands: some View {
+        Button {
+            nav.selectedBrand = nil
+        } label: {
+            HStack(spacing: 6) {
+                Image(systemName: "chevron.left")
+                    .font(.system(size: 12, weight: .semibold))
+                Text("Все производители")
+                    .golos(600, 13)
+            }
+            .foregroundStyle(Theme.greenDark)
+            .padding(.vertical, 8)
+            .padding(.horizontal, 12)
+            .background(Theme.greenTint, in: RoundedRectangle(cornerRadius: 11, style: .continuous))
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
     }
 
     @ViewBuilder
@@ -191,9 +249,13 @@ struct AddFoodScreen: View {
         }
     }
 
+    @ViewBuilder
     private var brandListSection: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            // Свой поиск: производителей 910, у большинства — один товар.
+        // Считаем один раз за отрисовку: и подпись, и сам список берут этот результат.
+        let rows = brandRows
+
+        Group {
+            // Свой поиск: производителей 800+, у большинства — один товар.
             HStack(spacing: 10) {
                 Image(systemName: "magnifyingglass")
                     .font(.system(size: 13, weight: .semibold))
@@ -210,11 +272,11 @@ struct AddFoodScreen: View {
             .padding(.top, 10)
             .padding(.bottom, 4)
 
-            SectionCaption(text: "Производители · \(brandRows.count)")
+            SectionCaption(text: "Производители · \(rows.count)")
                 .padding(.top, 14)
                 .padding(.bottom, 12)
 
-            if brandRows.isEmpty {
+            if rows.isEmpty {
                 Text("Никого не нашлось. Попробуйте другое название.")
                     .golos(400, 13, lineHeight: 1.5)
                     .foregroundStyle(Theme.ink(0.45))
@@ -222,7 +284,7 @@ struct AddFoodScreen: View {
                     .padding(.vertical, 8)
             }
 
-            ForEach(brandRows, id: \.self) { row in
+            ForEach(rows, id: \.self) { row in
                 brandRow(row)
             }
         }
@@ -266,28 +328,22 @@ struct AddFoodScreen: View {
         .buttonStyle(.plain)
     }
 
+    @ViewBuilder
     private func brandFoods(_ brand: String) -> some View {
         let items = BrandList.foods(of: brand, in: store.baseFoods)
-        return VStack(alignment: .leading, spacing: 0) {
-            Button {
-                nav.selectedBrand = nil
-            } label: {
-                HStack(spacing: 6) {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 12, weight: .semibold))
-                    Text("Производители")
-                        .golos(600, 13)
-                }
-                .foregroundStyle(Theme.greenDark)
-                .padding(.vertical, 10)
-                .contentShape(Rectangle())
-            }
-            .buttonStyle(.plain)
-            .padding(.top, 6)
 
+        Group {
             SectionCaption(text: "\(brand) · \(items.count)")
-                .padding(.top, 8)
+                .padding(.top, 14)
                 .padding(.bottom, 12)
+
+            if items.isEmpty {
+                Text("У этого производителя пока нет товаров.")
+                    .golos(400, 13, lineHeight: 1.5)
+                    .foregroundStyle(Theme.ink(0.45))
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.vertical, 8)
+            }
 
             ForEach(items) { food in
                 resultRow(food)

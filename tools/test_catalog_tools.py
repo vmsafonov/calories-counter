@@ -46,6 +46,60 @@ class CanonTests(unittest.TestCase):
             self.assertEqual(key, normalize_key(key), f"ключ не нормализован: {key!r}")
 
 
+class StripNoiseTests(unittest.TestCase):
+    def test_legal_form_removed(self):
+        for raw, expected in [
+            ('ООО "Марс"', "Марс"),
+            ('ПАО "Красный Октябрь"', "Красный Октябрь"),
+            ("ОАО Молочный мир", "Молочный мир"),
+            ("ИП Емелин Владимир Павлович", "Емелин Владимир Павлович"),
+            ('ООО ПК "Айсберг-Люкс"', "Айсберг-Люкс"),
+        ]:
+            self.assertEqual(normalize_brands.strip_noise(raw), expected)
+
+    def test_trademark_signs_removed(self):
+        self.assertEqual(normalize_brands.strip_noise("SNICKERS®"), "SNICKERS")
+
+    def test_leftover_without_letters_is_empty(self):
+        # «АО "» — не производитель, а обрывок строки.
+        self.assertEqual(normalize_brands.strip_noise('АО "'), "")
+        self.assertEqual(normalize_brands.strip_noise('ООО "'), "")
+
+    def test_inner_quotes_survive(self):
+        # Кавычки внутри названия снимать нельзя: потеряется закрывающая.
+        self.assertEqual(normalize_brands.strip_noise("«Россия» — щедрая душа!"),
+                         "«Россия» — щедрая душа!")
+        self.assertEqual(normalize_brands.strip_noise("ООО Маслозавод «Дружба»"),
+                         "Маслозавод «Дружба»")
+
+    def test_plain_brand_untouched(self):
+        self.assertEqual(normalize_brands.strip_noise("Lay's"), "Lay's")
+        self.assertEqual(normalize_brands.strip_noise("ВкусВилл"), "ВкусВилл")
+
+
+class CanonicalBrandTests(unittest.TestCase):
+    def test_alias_collapses_glued_brands(self):
+        # В Open Food Facts brands — список через запятую; при импорте он слипся.
+        self.assertEqual(normalize_brands.canonical_brand("Самокат Вкусвилл Ана Райз"),
+                         "ВкусВилл")
+        self.assertEqual(normalize_brands.canonical_brand("Лавка Яндекс"), "Яндекс Лавка")
+        self.assertEqual(normalize_brands.canonical_brand("Добрый Мультифрукт"), "Добрый")
+
+    def test_legal_form_reaches_canon(self):
+        self.assertEqual(normalize_brands.canonical_brand('ПАО "Красный Октябрь"'),
+                         "Красный Октябрь")
+
+    def test_real_subbrands_kept_apart(self):
+        for brand in ["Пятёрочка Кафе", "Перекрёсток Select", "Яндекс Лавка"]:
+            self.assertEqual(normalize_brands.canonical_brand(brand), brand)
+
+    def test_alias_targets_are_canonical(self):
+        # Псевдоним обязан указывать на итоговое написание, иначе сборка упадёт.
+        for source, canon in normalize_brands._ALIAS_SOURCES.items():
+            self.assertEqual(normalize_brands.canonical_brand(canon), canon,
+                             f"псевдоним {source!r} ведёт на неканоничное {canon!r}")
+
+
 class ApplyCanonTests(unittest.TestCase):
     def test_variant_replaced_with_canon(self):
         rows = [row("Творог", "Вкусвилл"), row("Кефир", "ВкусВилл")]
