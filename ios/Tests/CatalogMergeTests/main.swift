@@ -22,11 +22,12 @@ func suite(_ name: String, _ body: () -> Void) {
 
 func product(id: String, name: String, brand: String = "", kcal: Double = 100,
              protein: Double = 1, fat: Double = 2, carbs: Double = 3,
-             barcode: String? = nil) -> CatalogProduct {
+             barcode: String? = nil, kind: String? = nil) -> CatalogProduct {
     let json = """
     {"id":"\(id)","name":"\(name)","manufacturer":"\(brand)","kcal":\(kcal),
      "protein":\(protein),"fat":\(fat),"carbs":\(carbs)\
-    \(barcode.map { ",\"barcode\":\"\($0)\"" } ?? "")}
+    \(barcode.map { ",\"barcode\":\"\($0)\"" } ?? "")\
+    \(kind.map { ",\"kind\":\"\($0)\"" } ?? "")}
     """
     return try! JSONDecoder().decode(CatalogProduct.self, from: Data(json.utf8))
 }
@@ -146,6 +147,23 @@ suite("большой каталог сливается без квадрати�
     let elapsed2 = Date().timeIntervalSince(again)
     check(elapsed2 < 3.0, String(format: "повторное слияние заняло %.2f с", elapsed2))
     print(String(format: "  (повторное слияние: %.3f с)", elapsed2))
+}
+
+suite("Признак заведения") {
+    let venue = product(id: "shefburger", name: "Шефбургер", brand: "Rostic’s", kind: "ресторан")
+    let merged = CatalogMerge.merge(foods: [], catalog: [venue])
+    check(merged[0].isVenue, "новый продукт заведения получает isVenue")
+
+    let again = CatalogMerge.merge(foods: merged, catalog: [venue])
+    check(again[0].isVenue, "признак переживает повторное слияние")
+
+    let becamePackaged = product(id: "shefburger", name: "Шефбургер", brand: "Rostic’s")
+    let updated = CatalogMerge.merge(foods: merged, catalog: [becamePackaged])
+    check(!updated[0].isVenue, "обновление без kind снимает признак")
+
+    let plain = product(id: "tvorog", name: "Творог")
+    let notVenue = CatalogMerge.merge(foods: [], catalog: [plain])
+    check(!notVenue[0].isVenue, "обычный продукт — не заведение")
 }
 
 print("\n=====")

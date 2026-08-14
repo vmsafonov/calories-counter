@@ -70,6 +70,8 @@ struct Food: Codable, Identifiable, Hashable {
     /// Продукт пропал из каталога: в списках не показывается, но старые записи
     /// дневника продолжают на него ссылаться.
     var isRetired: Bool = false
+    /// Блюдо сети питания — на вкладке производителей помечается «Заведение».
+    var isVenue: Bool = false
     /// Из чего собрано блюдо. Пусто — КБЖУ задавали руками.
     var parts: [FoodPart] = []
 
@@ -101,6 +103,7 @@ struct Food: Codable, Identifiable, Hashable {
         barcode = try box.decodeIfPresent(String.self, forKey: .barcode)
         catalogID = try box.decodeIfPresent(String.self, forKey: .catalogID)
         isRetired = try box.decodeIfPresent(Bool.self, forKey: .isRetired) ?? false
+        isVenue = try box.decodeIfPresent(Bool.self, forKey: .isVenue) ?? false
         parts = try box.decodeIfPresent([FoodPart].self, forKey: .parts) ?? []
     }
 
@@ -108,7 +111,7 @@ struct Food: Codable, Identifiable, Hashable {
          fat: Double, carbs: Double, defaultGrams: Double, unit: FoodUnit? = nil,
          unitWeight: Double? = nil, isOwn: Bool = false, isEdited: Bool = false,
          barcode: String? = nil, catalogID: String? = nil, isRetired: Bool = false,
-         parts: [FoodPart] = []) {
+         isVenue: Bool = false, parts: [FoodPart] = []) {
         self.id = id
         self.name = name
         self.brand = brand
@@ -124,6 +127,7 @@ struct Food: Codable, Identifiable, Hashable {
         self.barcode = barcode
         self.catalogID = catalogID
         self.isRetired = isRetired
+        self.isVenue = isVenue
         self.parts = parts
     }
 

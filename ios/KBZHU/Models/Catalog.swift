@@ -28,6 +28,10 @@ struct CatalogProduct: Decodable {
     var unit: String?
     var unitGrams: Double?
     var barcode: String?
+    /// «ресторан» — блюдо сети питания. Пусто — обычная упаковка.
+    var kind: String?
+
+    var isVenue: Bool { kind == "ресторан" }
 
     var foodUnit: FoodUnit? {
         guard let unit, !unit.isEmpty else { return nil }
@@ -52,7 +56,8 @@ struct CatalogProduct: Decodable {
              isEdited: false,
              barcode: barcode,
              catalogID: id,
-             isRetired: false)
+             isRetired: false,
+             isVenue: isVenue)
     }
 
     /// Обновление существующего продукта. Локальный идентификатор и флаги сохраняются,
@@ -71,6 +76,7 @@ struct CatalogProduct: Decodable {
         updated.barcode = barcode
         updated.catalogID = id
         updated.isRetired = false
+        updated.isVenue = isVenue
         return updated
     }
 }
