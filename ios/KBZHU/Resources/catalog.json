@@ -1,6 +1,6 @@
 {
-  "revision": "c2c4d950e4d4",
-  "generatedAt": "2026-08-14T09:41:05+00:00",
+  "revision": "2a52fa91ff1f",
+  "generatedAt": "2026-08-14T09:47:40+00:00",
   "products": [
     {
       "id": "ovsyanaya-kasha-na-vode-nordic",
@@ -166,17 +166,6 @@
       "barcode": "0002497233760"
     },
     {
-      "id": "coconut-milk-aroy-d",
-      "name": "Coconut Milk",
-      "manufacturer": "Aroy-D",
-      "kcal": 180.7,
-      "protein": 1.2,
-      "fat": 18.1,
-      "carbs": 2.4,
-      "defaultGrams": 100.0,
-      "barcode": "0016229001711"
-    },
-    {
       "id": "organicheskaya-kokosovaya-voda-foco",
       "name": "Органическая кокосовая вода",
       "manufacturer": "Foco",
@@ -197,61 +186,6 @@
       "carbs": 2.8,
       "defaultGrams": 100.0,
       "barcode": "00232968"
-    },
-    {
-      "id": "english-breakfeast-ahmad-tea",
-      "name": "English breakfeast",
-      "manufacturer": "Ahmad Tea",
-      "kcal": 2.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 0.0,
-      "defaultGrams": 100.0,
-      "barcode": "0054881005906"
-    },
-    {
-      "id": "london-nights-ahmad-tea",
-      "name": "LONDON nights",
-      "manufacturer": "Ahmad Tea",
-      "kcal": 1.0,
-      "protein": 0.1,
-      "fat": 0.0,
-      "carbs": 0.2,
-      "defaultGrams": 100.0,
-      "barcode": "0054881013338"
-    },
-    {
-      "id": "earl-grey-ahmad-tea",
-      "name": "Earl Grey",
-      "manufacturer": "Ahmad Tea",
-      "kcal": 1.0,
-      "protein": 1.0,
-      "fat": 1.0,
-      "carbs": 1.0,
-      "defaultGrams": 100.0,
-      "barcode": "0054881013345"
-    },
-    {
-      "id": "ramen-noodle-soup-samyang",
-      "name": "Ramen Noodle Soup",
-      "manufacturer": "Samyang",
-      "kcal": 425.0,
-      "protein": 8.3,
-      "fat": 14.2,
-      "carbs": 65.0,
-      "defaultGrams": 100.0,
-      "barcode": "0074603005212"
-    },
-    {
-      "id": "diet-orange-soda-sunkist",
-      "name": "Diet orange soda",
-      "manufacturer": "Sunkist",
-      "kcal": 0.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 0.0,
-      "defaultGrams": 100.0,
-      "barcode": "0078000122404"
     },
     {
       "id": "neo-imunele-natural",
@@ -309,72 +243,6 @@
       "barcode": "0612710010097"
     },
     {
-      "id": "bubbly-and-serrano-chilli-potato-crisps-savoursmiths",
-      "name": "Bubbly and Serrano chilli potato crisps",
-      "manufacturer": "Savoursmiths",
-      "kcal": 499.0,
-      "protein": 7.0,
-      "fat": 28.0,
-      "carbs": 53.0,
-      "defaultGrams": 100.0,
-      "barcode": "0643131485508"
-    },
-    {
-      "id": "shock-brand-protein-bar",
-      "name": "Shock brand protein bar",
-      "manufacturer": "",
-      "kcal": 233.0,
-      "protein": 7.5,
-      "fat": 17.0,
-      "carbs": 10.0,
-      "defaultGrams": 100.0,
-      "barcode": "0662002989136"
-    },
-    {
-      "id": "oyster-souce-pearl-river-bridge",
-      "name": "Oyster Souce",
-      "manufacturer": "Pearl River Bridge",
-      "kcal": 124.0,
-      "protein": 1.9,
-      "fat": 0.0,
-      "carbs": 28.6,
-      "defaultGrams": 100.0,
-      "barcode": "0845603000091"
-    },
-    {
-      "id": "stir-fry-cheesy-ramen-cheddar-and-mascarpone-otoki",
-      "name": "Stir Fry Cheesy Ramen - Cheddar and mascarpone",
-      "manufacturer": "Otoki",
-      "kcal": 436.4,
-      "protein": 7.3,
-      "fat": 14.5,
-      "carbs": 68.2,
-      "defaultGrams": 100.0,
-      "barcode": "0850069667122"
-    },
-    {
-      "id": "organic-coconut-chunks-genuine-coconut",
-      "name": "Organic coconut chunks",
-      "manufacturer": "Genuine Coconut",
-      "kcal": 357.1,
-      "protein": 3.6,
-      "fat": 33.9,
-      "carbs": 10.7,
-      "defaultGrams": 100.0,
-      "barcode": "0856048008108"
-    },
-    {
-      "id": "ice-coffee-salted-caramel-hell-ice-coffee",
-      "name": "Ice coffee salted caramel",
-      "manufacturer": "Hell ice coffee",
-      "kcal": 52.0,
-      "protein": 2.4,
-      "fat": 0.7,
-      "carbs": 8.8,
-      "defaultGrams": 100.0,
-      "barcode": "0922512050611"
-    },
-    {
       "id": "polba-agro-alyans",
       "name": "Полба",
       "manufacturer": "Агро-Альянс",
@@ -406,17 +274,6 @@
       "carbs": 61.1,
       "defaultGrams": 100.0,
       "barcode": "11434795"
-    },
-    {
-      "id": "sypká-směs-z-obilovin-se-sušenými-hříbky-kořeněná-ikea",
-      "name": "Sypká směs z obilovin se sušenými hříbky, kořeněná",
-      "manufacturer": "IKEA",
-      "kcal": 346.0,
-      "protein": 10.0,
-      "fat": 3.4,
-      "carbs": 64.0,
-      "defaultGrams": 100.0,
-      "barcode": "1204577910000"
     },
     {
       "id": "morkov-po-koreyski",
@@ -496,17 +353,6 @@
       "barcode": "1662363245512"
     },
     {
-      "id": "dried-apricot-mirsan",
-      "name": "dried apricot",
-      "manufacturer": "Mirsan",
-      "kcal": 241.0,
-      "protein": 3.4,
-      "fat": 0.0,
-      "carbs": 63.0,
-      "defaultGrams": 100.0,
-      "barcode": "2000000114730"
-    },
-    {
       "id": "puding-chia-lage",
       "name": "Пудинг чиа",
       "manufacturer": "LAGE",
@@ -529,17 +375,6 @@
       "barcode": "2000036323805"
     },
     {
-      "id": "liesa-varškė-farmmilk",
-      "name": "Liesa varškė",
-      "manufacturer": "FarmMilk",
-      "kcal": 86.0,
-      "protein": 17.0,
-      "fat": 0.5,
-      "carbs": 3.3,
-      "defaultGrams": 100.0,
-      "barcode": "2000323313502"
-    },
-    {
       "id": "lunnyy-pryanik-kitay",
       "name": "Лунный пряник",
       "manufacturer": "Китай",
@@ -549,50 +384,6 @@
       "carbs": 55.8,
       "defaultGrams": 100.0,
       "barcode": "2010008017014"
-    },
-    {
-      "id": "chouriço-corrente-fumadinho",
-      "name": "Chouriço Corrente",
-      "manufacturer": "Fumadinho",
-      "kcal": 431.0,
-      "protein": 18.0,
-      "fat": 38.0,
-      "carbs": 4.0,
-      "defaultGrams": 100.0,
-      "barcode": "20158156"
-    },
-    {
-      "id": "sweet-chilli-sauce-vitasia-700ml-kania",
-      "name": "Sweet Chilli sauce - Vitasia - 700ml",
-      "manufacturer": "Kania",
-      "kcal": 155.0,
-      "protein": 0.4,
-      "fat": 0.1,
-      "carbs": 38.1,
-      "defaultGrams": 100.0,
-      "barcode": "20170196"
-    },
-    {
-      "id": "orange-juice-solevita",
-      "name": "Orange juice",
-      "manufacturer": "Solevita",
-      "kcal": 44.0,
-      "protein": 0.7,
-      "fat": 0.2,
-      "carbs": 9.1,
-      "defaultGrams": 100.0,
-      "barcode": "20254155"
-    },
-    {
-      "id": "agua-mineral-natural-naturis",
-      "name": "Agua mineral natural",
-      "manufacturer": "Naturis",
-      "kcal": 0.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 0.0,
-      "defaultGrams": 100.0,
-      "barcode": "20264970"
     },
     {
       "id": "sdoba-s-mindalnoy-nachinkoy-ashan",
@@ -606,17 +397,6 @@
       "barcode": "2050539000017"
     },
     {
-      "id": "lübecker-edel-marzipan-eier-carstens",
-      "name": "Lübecker Edel-Marzipan Eier",
-      "manufacturer": "Carstens",
-      "kcal": 482.0,
-      "protein": 9.6,
-      "fat": 27.7,
-      "carbs": 43.8,
-      "defaultGrams": 100.0,
-      "barcode": "20758776"
-    },
-    {
       "id": "kartofelnoe-pyure-yandeks-lavka",
       "name": "Картофельное Пюре",
       "manufacturer": "Яндекс Лавка",
@@ -626,17 +406,6 @@
       "carbs": 13.0,
       "defaultGrams": 100.0,
       "barcode": "2090006041297"
-    },
-    {
-      "id": "pineapple-apple-kiwi-smoothie-all-day",
-      "name": "Pineapple Apple Kiwi Smoothie",
-      "manufacturer": "All day",
-      "kcal": 50.3,
-      "protein": 0.4,
-      "fat": 0.2,
-      "carbs": 11.6,
-      "defaultGrams": 100.0,
-      "barcode": "2090006045288"
     },
     {
       "id": "omlet-s-hashbraunami-est-goryachee",
@@ -681,61 +450,6 @@
       "carbs": 28.0,
       "defaultGrams": 100.0,
       "barcode": "2090006126994"
-    },
-    {
-      "id": "rudieji-ryžiai-well-done-well-done",
-      "name": "Rudieji ryžiai Well-done",
-      "manufacturer": "Well Done",
-      "kcal": 370.0,
-      "protein": 7.1,
-      "fat": 1.9,
-      "carbs": 77.0,
-      "defaultGrams": 100.0,
-      "barcode": "2098765867271"
-    },
-    {
-      "id": "žemes-riešutai-well-done",
-      "name": "žemes riešutai",
-      "manufacturer": "Well Done",
-      "kcal": 588.0,
-      "protein": 25.0,
-      "fat": 49.0,
-      "carbs": 7.4,
-      "defaultGrams": 100.0,
-      "barcode": "2098765868568"
-    },
-    {
-      "id": "alyv-aliejus-extra-line",
-      "name": "alyv.aliejus",
-      "manufacturer": "Extra Line",
-      "kcal": 821.0,
-      "protein": 0.0,
-      "fat": 91.0,
-      "carbs": 0.0,
-      "defaultGrams": 100.0,
-      "barcode": "2098765908349"
-    },
-    {
-      "id": "halva-mio-rio",
-      "name": "Halva",
-      "manufacturer": "Mio & Rio",
-      "kcal": 579.0,
-      "protein": 12.0,
-      "fat": 39.0,
-      "carbs": 45.0,
-      "defaultGrams": 100.0,
-      "barcode": "2098765932528"
-    },
-    {
-      "id": "sultys-wd-well-done",
-      "name": "Sultys WD",
-      "manufacturer": "Well Done",
-      "kcal": 43.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 10.0,
-      "defaultGrams": 100.0,
-      "barcode": "2098766091583"
     },
     {
       "id": "lapsha-grechnevaya-soba-domshim",
@@ -883,7 +597,7 @@
     {
       "id": "govyadina-filey-vkusvill",
       "name": "Говядина филей",
-      "manufacturer": "VkusVill",
+      "manufacturer": "ВкусВилл",
       "kcal": 136.0,
       "protein": 16.0,
       "fat": 8.0,
@@ -982,7 +696,7 @@
     {
       "id": "kids-pure-from-pear-peach-and-mango-vkusvill",
       "name": "Kids Pure From Pear Peach And Mango",
-      "manufacturer": "VkusVill",
+      "manufacturer": "ВкусВилл",
       "kcal": 46.2,
       "protein": 0.3,
       "fat": 0.0,
@@ -1398,17 +1112,6 @@
       "barcode": "2319865002509"
     },
     {
-      "id": "granapadano-zanetti",
-      "name": "Granapadano",
-      "manufacturer": "Zanetti",
-      "kcal": 398.0,
-      "protein": 33.0,
-      "fat": 29.0,
-      "carbs": 0.0,
-      "defaultGrams": 100.0,
-      "barcode": "2350008003168"
-    },
-    {
       "id": "pechene-ovsyanoe-carskoe-sokrovische-ashan",
       "name": "Печенье овсяное царское сокровище",
       "manufacturer": "Ашан",
@@ -1684,94 +1387,6 @@
       "barcode": "3022843003724"
     },
     {
-      "id": "excellence-85-cacao-rich-dark-lindt",
-      "name": "Excellence 85% Cacao Rich Dark",
-      "manufacturer": "Lindt",
-      "kcal": 584.0,
-      "protein": 12.5,
-      "fat": 46.0,
-      "carbs": 22.0,
-      "defaultGrams": 100.0,
-      "barcode": "3046920028363"
-    },
-    {
-      "id": "mon-pain-multi-cereales-francine",
-      "name": "Mon pain multi cereales",
-      "manufacturer": "Francine",
-      "kcal": 381.0,
-      "protein": 13.6,
-      "fat": 9.0,
-      "carbs": 58.4,
-      "defaultGrams": 100.0,
-      "barcode": "3068111450005"
-    },
-    {
-      "id": "evian-33cl-pet-evian",
-      "name": "Evian 33cl PET",
-      "manufacturer": "Evian",
-      "kcal": 0.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 0.0,
-      "defaultGrams": 100.0,
-      "barcode": "3068320063003"
-    },
-    {
-      "id": "pitted-ripe-olives-crespo",
-      "name": "Pitted Ripe Olives",
-      "manufacturer": "Crespo",
-      "kcal": 134.0,
-      "protein": 0.5,
-      "fat": 14.0,
-      "carbs": 0.0,
-      "defaultGrams": 100.0,
-      "barcode": "3076820002064"
-    },
-    {
-      "id": "csemegekukorica-bonduelle",
-      "name": "csemegekukorica",
-      "manufacturer": "Bonduelle",
-      "kcal": 78.6,
-      "protein": 3.0,
-      "fat": 1.3,
-      "carbs": 20.5,
-      "defaultGrams": 100.0,
-      "barcode": "3083680002875"
-    },
-    {
-      "id": "maïs-sweet-corn-bonduelle",
-      "name": "Maïs / Sweet Corn",
-      "manufacturer": "Bonduelle",
-      "kcal": 72.0,
-      "protein": 2.7,
-      "fat": 1.4,
-      "carbs": 11.0,
-      "defaultGrams": 100.0,
-      "barcode": "3083680015394"
-    },
-    {
-      "id": "mazare-mica-bonduelle",
-      "name": "MAZARE MICA",
-      "manufacturer": "Bonduelle",
-      "kcal": 74.0,
-      "protein": 5.5,
-      "fat": 0.7,
-      "carbs": 7.4,
-      "defaultGrams": 100.0,
-      "barcode": "3083680538404"
-    },
-    {
-      "id": "poêlée-campagnarde-minute-bonduelle",
-      "name": "Poêlée campagnarde Minute®",
-      "manufacturer": "Bonduelle",
-      "kcal": 69.0,
-      "protein": 1.3,
-      "fat": 4.3,
-      "carbs": 4.6,
-      "defaultGrams": 100.0,
-      "barcode": "3083681050158"
-    },
-    {
       "id": "kukuruza-molodaya-bonduelle",
       "name": "Кукуруза молодая",
       "manufacturer": "Bonduelle",
@@ -1781,127 +1396,6 @@
       "carbs": 11.0,
       "defaultGrams": 100.0,
       "barcode": "3083681083361"
-    },
-    {
-      "id": "emmental-râpé-meule-d-or",
-      "name": "Emmental râpé",
-      "manufacturer": "Meule d'Or",
-      "kcal": 369.0,
-      "protein": 27.0,
-      "fat": 29.0,
-      "carbs": 0.5,
-      "defaultGrams": 100.0,
-      "barcode": "3123936132007"
-    },
-    {
-      "id": "choco-nuts-dipa-sas",
-      "name": "Choco nuts",
-      "manufacturer": "DIPA SAS",
-      "kcal": 570.0,
-      "protein": 9.7,
-      "fat": 39.0,
-      "carbs": 43.0,
-      "defaultGrams": 100.0,
-      "barcode": "3173283219760"
-    },
-    {
-      "id": "tablette-chocolat-et-amande-dipa-sas",
-      "name": "Tablette chocolat et amande",
-      "manufacturer": "DIPA SAS",
-      "kcal": 566.0,
-      "protein": 11.8,
-      "fat": 38.0,
-      "carbs": 42.0,
-      "defaultGrams": 100.0,
-      "barcode": "3173283231472"
-    },
-    {
-      "id": "pizza-3-fromages-grand-jury",
-      "name": "Pizza 3 Fromages",
-      "manufacturer": "Grand Jury",
-      "kcal": 233.0,
-      "protein": 13.0,
-      "fat": 7.7,
-      "carbs": 27.0,
-      "defaultGrams": 100.0,
-      "barcode": "3245390130730"
-    },
-    {
-      "id": "look-tropical-zero-light-2-l-litre-2l-pet-look",
-      "name": "LOOK TROPICAL ZERO / LIGHT , 2 l (litre) 2L, PET",
-      "manufacturer": "Look",
-      "kcal": 6.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 1.0,
-      "defaultGrams": 100.0,
-      "barcode": "3250392342814"
-    },
-    {
-      "id": "pâtes-spaghetti-qualité-supérieure-paquet-cello-de-500g-u",
-      "name": "Pâtes Spaghetti qualité supérieure, paquet cello de 500g",
-      "manufacturer": "U",
-      "kcal": 354.0,
-      "protein": 12.0,
-      "fat": 1.2,
-      "carbs": 72.0,
-      "defaultGrams": 100.0,
-      "barcode": "3256221111774"
-    },
-    {
-      "id": "croûtons-ronds-frits-pour-soupe-saveur-fromage-2x90g-180g-u",
-      "name": "Croûtons ronds frits pour soupe saveur fromage 2x90g - 180g",
-      "manufacturer": "U",
-      "kcal": 528.0,
-      "protein": 7.8,
-      "fat": 30.0,
-      "carbs": 55.0,
-      "defaultGrams": 100.0,
-      "barcode": "3256221659290"
-    },
-    {
-      "id": "haricots-blancs-préparés-boîte-250g-u",
-      "name": "Haricots blancs préparés - Boîte 250g",
-      "manufacturer": "U",
-      "kcal": 87.0,
-      "protein": 6.6,
-      "fat": 0.5,
-      "carbs": 11.0,
-      "defaultGrams": 100.0,
-      "barcode": "3256225042067"
-    },
-    {
-      "id": "cristaline-eau-de-source-0-5l-cristaline",
-      "name": "CRISTALINE Eau De Source 0.5L",
-      "manufacturer": "Cristaline",
-      "kcal": 0.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 0.0,
-      "defaultGrams": 100.0,
-      "barcode": "3268840001008"
-    },
-    {
-      "id": "tartelettes-au-citron-la-petite-épicerie",
-      "name": "Tartelettes au citron",
-      "manufacturer": "La petite épicerie",
-      "kcal": 427.0,
-      "protein": 4.8,
-      "fat": 13.0,
-      "carbs": 73.0,
-      "defaultGrams": 100.0,
-      "barcode": "3270160855551"
-    },
-    {
-      "id": "blanc-de-poulet-100-filet-fleury-michon",
-      "name": "Blanc de poulet 100% filet",
-      "manufacturer": "Fleury Michon",
-      "kcal": 116.7,
-      "protein": 21.0,
-      "fat": 1.6,
-      "carbs": 0.5,
-      "defaultGrams": 100.0,
-      "barcode": "3302740058660"
     },
     {
       "id": "vafli-los-marselino-stanem-druzyami",
@@ -1915,28 +1409,6 @@
       "barcode": "3614674002009"
     },
     {
-      "id": "palmiers",
-      "name": "Palmiers",
-      "manufacturer": "",
-      "kcal": 546.0,
-      "protein": 5.8,
-      "fat": 30.0,
-      "carbs": 61.8,
-      "defaultGrams": 100.0,
-      "barcode": "3700867000065"
-    },
-    {
-      "id": "fine-cognac-vsop-veuve-pasquinet",
-      "name": "Fine Cognac VSOP",
-      "manufacturer": "Veuve Pasquinet",
-      "kcal": 660.1,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 0.0,
-      "defaultGrams": 100.0,
-      "barcode": "3760004341819"
-    },
-    {
       "id": "greno-sok-sinya-sliva-yablka-1085-greno",
       "name": "грено сок синя слива ябълка 1085",
       "manufacturer": "Greno",
@@ -1946,17 +1418,6 @@
       "carbs": 12.4,
       "defaultGrams": 100.0,
       "barcode": "3800014281085"
-    },
-    {
-      "id": "kitkat-chunky-white-kitkat",
-      "name": "KitKat chunky white",
-      "manufacturer": "KitKat",
-      "kcal": 521.0,
-      "protein": 6.2,
-      "fat": 27.0,
-      "carbs": 63.0,
-      "defaultGrams": 100.0,
-      "barcode": "3800020493915"
     },
     {
       "id": "orehite-sushenica-slays-2886-orehite",
@@ -2091,301 +1552,15 @@
       "barcode": "3800779048527"
     },
     {
-      "id": "schogetten-ciocolată-cu-lapte-cu-bucățele-de-biscuiți-cu-ovăz-schogetten",
-      "name": "Schogetten Ciocolată cu lapte cu bucățele de biscuiți cu ovăz",
-      "manufacturer": "Schogetten",
-      "kcal": 556.0,
-      "protein": 5.5,
-      "fat": 34.0,
-      "carbs": 56.0,
-      "defaultGrams": 100.0,
-      "barcode": "4000415007706"
-    },
-    {
-      "id": "chocolat-trilogia-strawberry-schogetten",
-      "name": "Chocolat trilogia strawberry",
-      "manufacturer": "Schogetten",
-      "kcal": 552.0,
-      "protein": 5.4,
-      "fat": 33.0,
-      "carbs": 58.0,
-      "defaultGrams": 100.0,
-      "barcode": "4000415028701"
-    },
-    {
-      "id": "schogetten-black-white-ludwig-schokolade",
-      "name": "Schogetten Black & White",
-      "manufacturer": "Ludwig Schokolade",
-      "kcal": 555.0,
-      "protein": 5.4,
-      "fat": 34.0,
-      "carbs": 56.0,
-      "defaultGrams": 100.0,
-      "barcode": "4000415039707"
-    },
-    {
-      "id": "biała-czekolada-mauxion",
-      "name": "Biała czekolada",
-      "manufacturer": "Mauxion",
-      "kcal": 539.0,
-      "protein": 4.9,
-      "fat": 31.0,
-      "carbs": 60.0,
-      "defaultGrams": 100.0,
-      "barcode": "4000415097707"
-    },
-    {
-      "id": "valge-šokolaad-krõbedate-sarapuupähklitega-schogetten",
-      "name": "Valge šokolaad krõbedate sarapuupähklitega",
-      "manufacturer": "Schogetten",
-      "kcal": 541.0,
-      "protein": 6.3,
-      "fat": 32.0,
-      "carbs": 56.0,
-      "defaultGrams": 100.0,
-      "barcode": "4000415143800"
-    },
-    {
-      "id": "ritter-sport-marzapane-chocolate-alfred-griiner-gmbh-co-kg",
-      "name": "Ritter Sport Marzapane chocolate",
-      "manufacturer": "Alfred Griiner GmbH & Co. KG",
-      "kcal": 496.0,
-      "protein": 6.5,
-      "fat": 25.8,
-      "carbs": 61.3,
-      "defaultGrams": 100.0,
-      "barcode": "4000417025005"
-    },
-    {
-      "id": "ritter-sport-brombeer-joghurt-ritter-sport",
-      "name": "Ritter Sport Brombeer Joghurt",
-      "manufacturer": "Ritter Sport",
-      "kcal": 566.2,
-      "protein": 5.3,
-      "fat": 37.0,
-      "carbs": 53.0,
-      "defaultGrams": 100.0,
-      "barcode": "4000417236005"
-    },
-    {
-      "id": "chocolat-noir-extra-fin-ritter-sport",
-      "name": "Chocolat noir extra fin",
-      "manufacturer": "Ritter Sport",
-      "kcal": 603.0,
-      "protein": 8.7,
-      "fat": 49.0,
-      "carbs": 25.0,
-      "defaultGrams": 100.0,
-      "barcode": "4000417260000"
-    },
-    {
-      "id": "dark-whole-hazelnuts-ritter-sport",
-      "name": "DARK WHOLE HAZELNUTS",
-      "manufacturer": "Ritter Sport",
-      "kcal": 577.0,
-      "protein": 8.4,
-      "fat": 41.0,
-      "carbs": 39.0,
-      "defaultGrams": 100.0,
-      "barcode": "4000417702005"
-    },
-    {
-      "id": "knusper-nuss-schoko-hafer-müsli-kölln",
-      "name": "Knusper Nuss & Schoko Hafer-Müsli",
-      "manufacturer": "Kölln",
-      "kcal": 479.0,
-      "protein": 10.0,
-      "fat": 21.0,
-      "carbs": 59.0,
-      "defaultGrams": 100.0,
-      "barcode": "4000540003154"
-    },
-    {
-      "id": "kruger-czekolada-shogetten-kids-schogetten",
-      "name": "Kruger Czekolada Shogetten-kids",
-      "manufacturer": "Schogetten",
-      "kcal": 550.0,
-      "protein": 5.2,
-      "fat": 34.0,
-      "carbs": 55.0,
-      "defaultGrams": 100.0,
-      "barcode": "4000607854606"
-    },
-    {
-      "id": "spód-do-pizzy-donatello",
-      "name": "Spód do pizzy",
-      "manufacturer": "Donatello",
-      "kcal": 267.0,
-      "protein": 6.6,
-      "fat": 5.4,
-      "carbs": 45.0,
-      "defaultGrams": 100.0,
-      "barcode": "4001163109223"
-    },
-    {
-      "id": "ristorante-pizza-mozzarella-dr-oetker",
-      "name": "Ristorante Pizza Mozzarella",
-      "manufacturer": "Dr. Oetker",
-      "kcal": 256.0,
-      "protein": 9.8,
-      "fat": 13.0,
-      "carbs": 25.0,
-      "defaultGrams": 100.0,
-      "barcode": "4001724819806"
-    },
-    {
-      "id": "marzipan-kartoffeln-zentis",
-      "name": "Marzipan Kartoffeln",
-      "manufacturer": "Zentis",
-      "kcal": 427.0,
-      "protein": 6.2,
-      "fat": 14.0,
-      "carbs": 68.0,
-      "defaultGrams": 100.0,
-      "barcode": "4002575563887"
-    },
-    {
-      "id": "gewalzte-bandnudeln-gourmetnudeln-gmbh",
-      "name": "Gewalzte Bandnudeln",
-      "manufacturer": "Gourmetnudeln GmbH",
-      "kcal": 366.0,
-      "protein": 15.1,
-      "fat": 3.3,
-      "carbs": 67.6,
-      "defaultGrams": 100.0,
-      "barcode": "4002861135705"
-    },
-    {
-      "id": "grand-dessert-double-nut-ehrmann",
-      "name": "Grand Dessert Double Nut",
-      "manufacturer": "Ehrmann",
-      "kcal": 122.9,
-      "protein": 2.7,
-      "fat": 4.9,
-      "carbs": 17.0,
-      "defaultGrams": 100.0,
-      "barcode": "4002971228601"
-    },
-    {
-      "id": "grand-dessert-double-choc-ehrmann",
-      "name": "Grand dessert double choc",
-      "manufacturer": "Ehrmann",
-      "kcal": 125.0,
-      "protein": 2.8,
-      "fat": 4.6,
-      "carbs": 18.0,
-      "defaultGrams": 100.0,
-      "barcode": "4002971234602"
-    },
-    {
-      "id": "jalapeño-rings-hengstenberg",
-      "name": "Jalapeño Rings",
-      "manufacturer": "Hengstenberg",
-      "kcal": 18.0,
-      "protein": 0.5,
-      "fat": 0.5,
-      "carbs": 1.4,
-      "defaultGrams": 100.0,
-      "barcode": "4008100178601"
-    },
-    {
-      "id": "kinderriegel-kinder",
-      "name": "Kinderriegel",
-      "manufacturer": "Kinder",
-      "kcal": 568.0,
-      "protein": 8.7,
-      "fat": 35.0,
-      "carbs": 53.5,
-      "defaultGrams": 100.0,
-      "barcode": "40084701"
-    },
-    {
-      "id": "milchschnitte-einzelpackung-kinder",
-      "name": "Milchschnitte Einzelpackung",
-      "manufacturer": "Kinder",
-      "kcal": 421.4,
-      "protein": 7.9,
-      "fat": 27.9,
-      "carbs": 33.9,
-      "defaultGrams": 100.0,
-      "barcode": "40084725"
-    },
-    {
-      "id": "baguette-k-classic",
-      "name": "Baguette",
-      "manufacturer": "K-Classic",
-      "kcal": 249.0,
-      "protein": 8.7,
-      "fat": 1.0,
-      "carbs": 50.0,
-      "defaultGrams": 100.0,
-      "barcode": "4009097020089"
-    },
-    {
       "id": "tviks-mars",
       "name": "Твикс",
-      "manufacturer": "Марс",
+      "manufacturer": "Mars",
       "kcal": 494.0,
       "protein": 4.4,
       "fat": 24.0,
       "carbs": 64.4,
       "defaultGrams": 100.0,
       "barcode": "4011100977952"
-    },
-    {
-      "id": "sauce-caramel-schwartau",
-      "name": "Sauce Caramel",
-      "manufacturer": "Schwartau",
-      "kcal": 405.0,
-      "protein": 3.6,
-      "fat": 8.1,
-      "carbs": 79.1,
-      "defaultGrams": 100.0,
-      "barcode": "4011800049010"
-    },
-    {
-      "id": "himbeermarmelade-schwartau",
-      "name": "Himbeermarmelade",
-      "manufacturer": "Schwartau",
-      "kcal": 231.0,
-      "protein": 0.7,
-      "fat": 0.2,
-      "carbs": 54.2,
-      "defaultGrams": 100.0,
-      "barcode": "4011800104313"
-    },
-    {
-      "id": "italian-dressing-kuhne",
-      "name": "ITALIAN DRESSING",
-      "manufacturer": "Kuhne",
-      "kcal": 62.0,
-      "protein": 0.2,
-      "fat": 5.0,
-      "carbs": 2.8,
-      "defaultGrams": 100.0,
-      "barcode": "40122373"
-    },
-    {
-      "id": "toffifee-15er-storck",
-      "name": "Toffifee 15er",
-      "manufacturer": "Storck",
-      "kcal": 521.0,
-      "protein": 6.0,
-      "fat": 29.0,
-      "carbs": 58.9,
-      "defaultGrams": 100.0,
-      "barcode": "4014400400007"
-    },
-    {
-      "id": "merci-milk-selection-merci",
-      "name": "Merci Milk Selection",
-      "manufacturer": "Merci",
-      "kcal": 579.0,
-      "protein": 8.1,
-      "fat": 37.8,
-      "carbs": 50.1,
-      "defaultGrams": 100.0,
-      "barcode": "4014400901405"
     },
     {
       "id": "mamba-frumeladki-kislye-zvezdochki-august-storck",
@@ -2443,28 +1618,6 @@
       "barcode": "4030957761620"
     },
     {
-      "id": "schwarzbrotcroutons-zhigulevskie",
-      "name": "Schwarzbrotcroutons",
-      "manufacturer": "Жигулёвские",
-      "kcal": 456.0,
-      "protein": 10.0,
-      "fat": 18.0,
-      "carbs": 60.0,
-      "defaultGrams": 100.0,
-      "barcode": "4030957761651"
-    },
-    {
-      "id": "hematogenas-hematogenas",
-      "name": "Hematogenas",
-      "manufacturer": "Hematogenas",
-      "kcal": 410.0,
-      "protein": 7.3,
-      "fat": 7.6,
-      "carbs": 78.0,
-      "defaultGrams": 100.0,
-      "barcode": "4030957871015"
-    },
-    {
       "id": "bumuka-sladkaya-strana",
       "name": "Бумука",
       "manufacturer": "Сладкая страна",
@@ -2474,105 +1627,6 @@
       "carbs": 66.0,
       "defaultGrams": 100.0,
       "barcode": "4033443792337"
-    },
-    {
-      "id": "eine-kleinigkeit-für-dich-ritter-sport",
-      "name": "eine kleinigkeit für dich",
-      "manufacturer": "Ritter Sport",
-      "kcal": 555.2,
-      "protein": 6.8,
-      "fat": 36.0,
-      "carbs": 51.0,
-      "defaultGrams": 100.0,
-      "barcode": "42094074"
-    },
-    {
-      "id": "ritter-sport-haselnuss-ritter-sport",
-      "name": "Ritter Sport Haselnuss",
-      "manufacturer": "Ritter Sport",
-      "kcal": 558.0,
-      "protein": 7.7,
-      "fat": 35.0,
-      "carbs": 51.0,
-      "defaultGrams": 100.0,
-      "barcode": "42208525"
-    },
-    {
-      "id": "ritter-sport-marzipan-ritter-sport",
-      "name": "Ritter Sport Marzipan",
-      "manufacturer": "Ritter Sport",
-      "kcal": 487.6,
-      "protein": 6.9,
-      "fat": 28.0,
-      "carbs": 52.0,
-      "defaultGrams": 100.0,
-      "barcode": "42208549"
-    },
-    {
-      "id": "ritter-sport-knusperflakes-ritter-sport",
-      "name": "Ritter Sport Knusperflakes",
-      "manufacturer": "Ritter Sport",
-      "kcal": 520.0,
-      "protein": 6.6,
-      "fat": 28.0,
-      "carbs": 59.0,
-      "defaultGrams": 100.0,
-      "barcode": "42208570"
-    },
-    {
-      "id": "knusperkeks-ritter-sport",
-      "name": "Knusperkeks",
-      "manufacturer": "Ritter Sport",
-      "kcal": 523.6,
-      "protein": 6.4,
-      "fat": 30.0,
-      "carbs": 57.0,
-      "defaultGrams": 100.0,
-      "barcode": "42208587"
-    },
-    {
-      "id": "boyens-bbq-grillspray-für-endverbraucher-boyens-backservice",
-      "name": "Boyens-BBQ-Grillspray für Endverbraucher",
-      "manufacturer": "Boyens Backservice",
-      "kcal": 900.0,
-      "protein": 0.0,
-      "fat": 99.9,
-      "carbs": 0.1,
-      "defaultGrams": 100.0,
-      "barcode": "4250235188264"
-    },
-    {
-      "id": "coconut-milk-for-drinking-dr-antonio-martins",
-      "name": "Coconut milk for drinking",
-      "manufacturer": "Dr. Antonio Martins",
-      "kcal": 25.0,
-      "protein": 0.0,
-      "fat": 2.1,
-      "carbs": 1.1,
-      "defaultGrams": 100.0,
-      "barcode": "4260183211976"
-    },
-    {
-      "id": "triple-chocolate-cookies-edeka",
-      "name": "Triple Chocolate cookies",
-      "manufacturer": "Edeka",
-      "kcal": 496.0,
-      "protein": 6.0,
-      "fat": 26.0,
-      "carbs": 58.0,
-      "defaultGrams": 100.0,
-      "barcode": "4311501766699"
-    },
-    {
-      "id": "austernsauce-lee-kum-kee",
-      "name": "Austernsauce",
-      "manufacturer": "LEE KUM KEE",
-      "kcal": 113.0,
-      "protein": 1.2,
-      "fat": 0.5,
-      "carbs": 27.0,
-      "defaultGrams": 100.0,
-      "barcode": "4316734091693"
     },
     {
       "id": "carevichen-tortila-chips-lyut-metro-chef",
@@ -3094,7 +2148,7 @@
     {
       "id": "aktibio-jordbær-aktibio",
       "name": "Aktibio jordbær",
-      "manufacturer": "Aktibio",
+      "manufacturer": "АктиБио",
       "kcal": 73.0,
       "protein": 2.9,
       "fat": 1.5,
@@ -3171,7 +2225,7 @@
     {
       "id": "bioyogurt-aktibio-aktibio",
       "name": "Биойогурт АктиБио",
-      "manufacturer": "АКTИБИО",
+      "manufacturer": "АктиБио",
       "kcal": 79.0,
       "protein": 4.8,
       "fat": 3.5,
@@ -3611,7 +2665,7 @@
     {
       "id": "bioyogurt-sloboda-s-grushey-i-zlakami-sloboda",
       "name": "Биойогурт \"Слобода\" с грушей и злаками",
-      "manufacturer": "Sloboda",
+      "manufacturer": "Слобода",
       "kcal": 75.0,
       "protein": 2.8,
       "fat": 2.0,
@@ -4403,7 +3457,7 @@
     {
       "id": "protein-max-molvest",
       "name": "protein max",
-      "manufacturer": "molvest",
+      "manufacturer": "Молвест",
       "kcal": 62.5,
       "protein": 10.4,
       "fat": 0.8,
@@ -4436,7 +3490,7 @@
     {
       "id": "muka-pshenichnaya-hlebopekarnaya-vysshiy-sort-makfa",
       "name": "Мука пшеничная хлебопекарная высший сорт",
-      "manufacturer": "Макфа",
+      "manufacturer": "Makfa",
       "kcal": 340.0,
       "protein": 12.0,
       "fat": 1.1,
@@ -4854,7 +3908,7 @@
     {
       "id": "zdorovyy-rozhok-klub-korovka",
       "name": "ЗДОРОВЫЙ РОЖОК КЛУБ.",
-      "manufacturer": "КОРОВКА",
+      "manufacturer": "Коровка",
       "kcal": 320.8,
       "protein": 3.3,
       "fat": 14.2,
@@ -4997,7 +4051,7 @@
     {
       "id": "fruitella-zveri-miks-frutella",
       "name": "fruitella звери микс",
-      "manufacturer": "Frutella",
+      "manufacturer": "Fruittella",
       "kcal": 320.0,
       "protein": 6.0,
       "fat": 0.1,
@@ -5008,7 +4062,7 @@
     {
       "id": "frutela-krutoy-miks-frutella",
       "name": "фрутела крутой микс",
-      "manufacturer": "Фрутелла",
+      "manufacturer": "Fruittella",
       "kcal": 330.0,
       "protein": 7.5,
       "fat": 0.2,
@@ -5767,7 +4821,7 @@
     {
       "id": "yogurt-persik-stakan-5-fruttis",
       "name": "Йогурт персик стакан 5%",
-      "manufacturer": "Фруттис",
+      "manufacturer": "Fruttis",
       "kcal": 98.9,
       "protein": 5.0,
       "fat": 2.1,
@@ -6526,7 +5580,7 @@
     {
       "id": "stripsy-zamorozhennye-burger-king",
       "name": "Стрипсы Замороженные",
-      "manufacturer": "Burger King",
+      "manufacturer": "Бургер Кинг",
       "kcal": 165.9,
       "protein": 13.8,
       "fat": 4.7,
@@ -7418,7 +6472,7 @@
     {
       "id": "vafelnye-ruletiki-yashkino-so-vkusom-sguschennogo-moloka-yashkino",
       "name": "Вафельные рулетики \"Яшкино\" со вкусом сгущённого молока",
-      "manufacturer": "Yashkino",
+      "manufacturer": "Яшкино",
       "kcal": 510.0,
       "protein": 5.0,
       "fat": 25.0,
@@ -7693,7 +6747,7 @@
     {
       "id": "tvorog-9-iskrenne-vash",
       "name": "Tvorog 9%",
-      "manufacturer": "Iskrenne Vash",
+      "manufacturer": "Искренне Ваш",
       "kcal": 157.0,
       "protein": 16.0,
       "fat": 9.0,
@@ -7891,7 +6945,7 @@
     {
       "id": "kartofelnoe-pyure-bystrogo-prigotovleniya-doshirak-so-vkusom-gribov-doshirak",
       "name": "Картофельное пюре быстрого приготовления «Доширак» со вкусом грибов",
-      "manufacturer": "Doshirak",
+      "manufacturer": "Доширак",
       "kcal": 385.0,
       "protein": 5.1,
       "fat": 5.3,
@@ -7902,7 +6956,7 @@
     {
       "id": "cheese-ramen-doshirak",
       "name": "Cheese Рамен",
-      "manufacturer": "Doshirak",
+      "manufacturer": "Доширак",
       "kcal": 418.0,
       "protein": 9.5,
       "fat": 12.0,
@@ -8497,7 +7551,7 @@
     {
       "id": "korovka-korovka",
       "name": "Коровка",
-      "manufacturer": "Korovka",
+      "manufacturer": "Коровка",
       "kcal": 460.0,
       "protein": 7.7,
       "fat": 16.7,
@@ -9080,7 +8134,7 @@
     {
       "id": "shokolad-molochnyy-s-fundukom-pobeda",
       "name": "Шоколад молочный с фундуком",
-      "manufacturer": "Pobeda",
+      "manufacturer": "Победа",
       "kcal": 590.0,
       "protein": 0.0,
       "fat": 44.0,
@@ -11380,7 +10434,7 @@
     {
       "id": "100-charged-extra-dark-chocolate-pobeda",
       "name": "100% CHARGED Extra dark chocolate",
-      "manufacturer": "Pobeda",
+      "manufacturer": "Победа",
       "kcal": 510.0,
       "protein": 10.0,
       "fat": 36.0,
@@ -11633,7 +10687,7 @@
     {
       "id": "twix-xtra-solenaya-karamel-ooo-mars",
       "name": "Twix Xtra солёная карамель",
-      "manufacturer": "Марс",
+      "manufacturer": "Mars",
       "kcal": 491.0,
       "protein": 4.3,
       "fat": 23.9,
@@ -12746,7 +11800,7 @@
     {
       "id": "nutovye-chipsy-o-life",
       "name": "Нутовые Чипсы",
-      "manufacturer": "O Life",
+      "manufacturer": "O!LIFE",
       "kcal": 400.0,
       "protein": 12.0,
       "fat": 9.0,
@@ -12779,7 +11833,7 @@
     {
       "id": "bioyogurt-tropicheskiy-miks-bez-sahara-o-life-o-life",
       "name": "Биойогурт тропический микс без сахара O Life!",
-      "manufacturer": "O LIFE!",
+      "manufacturer": "O!LIFE",
       "kcal": 45.0,
       "protein": 2.8,
       "fat": 1.5,
@@ -13591,17 +12645,6 @@
       "barcode": "4690502002303"
     },
     {
-      "id": "piens-2-5-tere",
-      "name": "Piens 2,5%",
-      "manufacturer": "Tere",
-      "kcal": 55.0,
-      "protein": 3.3,
-      "fat": 2.5,
-      "carbs": 4.8,
-      "defaultGrams": 100.0,
-      "barcode": "4740036014652"
-    },
-    {
       "id": "pastet-ot-gshi-cheren-drob-nòo",
       "name": "Пастет от гьши черен дроб",
       "manufacturer": "Nòo",
@@ -13613,31 +12656,9 @@
       "barcode": "4740574091320"
     },
     {
-      "id": "bulviu-kise-saltibarsciu-sun-yan",
-      "name": "bulviu kise saltibarsciu",
-      "manufacturer": "Sun Yan",
-      "kcal": 68.0,
-      "protein": 2.0,
-      "fat": 1.0,
-      "carbs": 12.0,
-      "defaultGrams": 100.0,
-      "barcode": "4770107259477"
-    },
-    {
-      "id": "zefyras-vanilinis-pergalė",
-      "name": "Zefyras vanilinis",
-      "manufacturer": "Pergalė",
-      "kcal": 333.0,
-      "protein": 0.5,
-      "fat": 0.0,
-      "carbs": 83.0,
-      "defaultGrams": 100.0,
-      "barcode": "4770179991848"
-    },
-    {
       "id": "tvorog-15-svalya",
       "name": "творог 15%",
-      "manufacturer": "svalya",
+      "manufacturer": "Сваля",
       "kcal": 205.0,
       "protein": 14.0,
       "fat": 15.0,
@@ -13657,61 +12678,6 @@
       "barcode": "4770275047739"
     },
     {
-      "id": "volfas-engelman-white-pint-volfas-engelman",
-      "name": "VOLFAS ENGELMAN - WHITE PINT",
-      "manufacturer": "VOLFAS ENGELMAN",
-      "kcal": 48.0,
-      "protein": 0.6,
-      "fat": 0.0,
-      "carbs": 3.2,
-      "defaultGrams": 100.0,
-      "barcode": "4770301229139"
-    },
-    {
-      "id": "utenos-utenos-alus",
-      "name": "Utenos",
-      "manufacturer": "Utenos Alus",
-      "kcal": 31.0,
-      "protein": 0.2,
-      "fat": 0.0,
-      "carbs": 7.2,
-      "defaultGrams": 100.0,
-      "barcode": "4770349233211"
-    },
-    {
-      "id": "utenos-radler-mangu-utenos",
-      "name": "Utenos radler mangu",
-      "manufacturer": "Utenos",
-      "kcal": 34.0,
-      "protein": 0.2,
-      "fat": 0.0,
-      "carbs": 7.9,
-      "defaultGrams": 100.0,
-      "barcode": "4770349233235"
-    },
-    {
-      "id": "estrella-potato-sticks-estrella",
-      "name": "Estrella Potato sticks",
-      "manufacturer": "Estrella",
-      "kcal": 517.4,
-      "protein": 5.9,
-      "fat": 31.0,
-      "carbs": 51.0,
-      "defaultGrams": 100.0,
-      "barcode": "4779028347461"
-    },
-    {
-      "id": "bon-star-krember",
-      "name": "bon star",
-      "manufacturer": "Krember",
-      "kcal": 465.0,
-      "protein": 8.0,
-      "fat": 20.0,
-      "carbs": 65.0,
-      "defaultGrams": 100.0,
-      "barcode": "4780021281157"
-    },
-    {
       "id": "bruni-keks-glazirovannyy-s-kakao-nachinkoy-xrember",
       "name": "Bruni кекс глазированный с какао начинкой",
       "manufacturer": "XRember",
@@ -13721,28 +12687,6 @@
       "carbs": 51.5,
       "defaultGrams": 100.0,
       "barcode": "4780030391656"
-    },
-    {
-      "id": "ceylon-black-tea-mahmood-tea",
-      "name": "Ceylon Black Tea",
-      "manufacturer": "Mahmood Tea",
-      "kcal": 1.3,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 0.3,
-      "defaultGrams": 100.0,
-      "barcode": "4796000550626"
-    },
-    {
-      "id": "dried-mangoes-7d",
-      "name": "Dried Mangoes",
-      "manufacturer": "7D",
-      "kcal": 333.3,
-      "protein": 2.4,
-      "fat": 0.0,
-      "carbs": 83.3,
-      "defaultGrams": 100.0,
-      "barcode": "4809010272027"
     },
     {
       "id": "pechene-sdobnoe-s-kusochkami-shokolada-chaykofskiy",
@@ -13824,7 +12768,7 @@
     {
       "id": "pasta-s-antarkticheskim-krilem-antarktik-kril-podkopchenyy-santa-bremor",
       "name": "Паста с антарктическим крилем «Антарктик-криль подкопченый»",
-      "manufacturer": "Santa Bremor",
+      "manufacturer": "Санта Бремор",
       "kcal": 412.0,
       "protein": 5.2,
       "fat": 41.1,
@@ -14220,7 +13164,7 @@
     {
       "id": "milk-chocolate-bar-belovezhskaya-pushch-with-blueberry-puree-kommunarka",
       "name": "Milk chocolate bar belovezhskaya pushch with blueberry puree",
-      "manufacturer": "Kommunarka",
+      "manufacturer": "Коммунарка",
       "kcal": 474.0,
       "protein": 2.5,
       "fat": 25.2,
@@ -14515,17 +13459,6 @@
       "barcode": "4815101002343"
     },
     {
-      "id": "waffers-artek",
-      "name": "Waffers",
-      "manufacturer": "Артек",
-      "kcal": 536.0,
-      "protein": 4.2,
-      "fat": 29.8,
-      "carbs": 62.7,
-      "defaultGrams": 100.0,
-      "barcode": "4820002300306"
-    },
-    {
       "id": "kozinak-sonyashnikoviy-zolotoy-vek",
       "name": "Козинак соняшниковий",
       "manufacturer": "Золотой век",
@@ -14583,7 +13516,7 @@
     {
       "id": "ferma-sirok-zі-smakom-vanіlі-ferma",
       "name": "Ферма сирок зі смаком ванілі",
-      "manufacturer": "Ferma",
+      "manufacturer": "Ферма",
       "kcal": 401.0,
       "protein": 11.7,
       "fat": 26.1,
@@ -14669,17 +13602,6 @@
       "barcode": "4850040810451"
     },
     {
-      "id": "borjomi",
-      "name": "Borjomi",
-      "manufacturer": "",
-      "kcal": 3.3,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 0.0,
-      "defaultGrams": 100.0,
-      "barcode": "4860019002077"
-    },
-    {
       "id": "gruzinskiy-limonad-limonati-tarhun-borjomi",
       "name": "Грузинский лимонад Limonati тархун",
       "manufacturer": "Borjomi",
@@ -14735,28 +13657,6 @@
       "barcode": "4870244250679"
     },
     {
-      "id": "curry-udon-daikoku",
-      "name": "Curry Udon",
-      "manufacturer": "Daikoku",
-      "kcal": 444.8,
-      "protein": 8.9,
-      "fat": 17.9,
-      "carbs": 62.1,
-      "defaultGrams": 100.0,
-      "barcode": "4904511004334"
-    },
-    {
-      "id": "bounty-trio-bounty",
-      "name": "Bounty Trio",
-      "manufacturer": "Bounty",
-      "kcal": 484.0,
-      "protein": 3.7,
-      "fat": 25.4,
-      "carbs": 58.7,
-      "defaultGrams": 100.0,
-      "barcode": "5000159381178"
-    },
-    {
       "id": "tviks-ekstra-twix",
       "name": "твикс экстра",
       "manufacturer": "Twix",
@@ -14770,7 +13670,7 @@
     {
       "id": "milkiuey1-1-mars",
       "name": "Милкиуэй1+1",
-      "manufacturer": "Марс",
+      "manufacturer": "Mars",
       "kcal": 451.0,
       "protein": 3.1,
       "fat": 16.5,
@@ -14781,101 +13681,13 @@
     {
       "id": "lesnoy-oreh-snikers-mars",
       "name": "лесной орех 🌰 сникерс",
-      "manufacturer": "Марс",
+      "manufacturer": "Mars",
       "kcal": 506.2,
       "protein": 10.6,
       "fat": 27.9,
       "carbs": 47.7,
       "defaultGrams": 100.0,
       "barcode": "5000159439480"
-    },
-    {
-      "id": "bounty-ice-cream-bounty",
-      "name": "Bounty Ice Cream",
-      "manufacturer": "Bounty",
-      "kcal": 346.2,
-      "protein": 4.1,
-      "fat": 21.3,
-      "carbs": 33.3,
-      "defaultGrams": 100.0,
-      "barcode": "5000159483025"
-    },
-    {
-      "id": "twix-xtra-twix",
-      "name": "Twix Xtra",
-      "manufacturer": "Twix",
-      "kcal": 493.3,
-      "protein": 4.5,
-      "fat": 23.7,
-      "carbs": 64.0,
-      "defaultGrams": 100.0,
-      "barcode": "5000159558013"
-    },
-    {
-      "id": "jameson-whiskey-jameson",
-      "name": "Jameson Whiskey",
-      "manufacturer": "Jameson",
-      "kcal": 221.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 0.0,
-      "defaultGrams": 100.0,
-      "barcode": "5011007003227"
-    },
-    {
-      "id": "pringles-org-original-pringles-alexa",
-      "name": "Pringles ORG Original",
-      "manufacturer": "Pringles",
-      "kcal": 540.0,
-      "protein": 4.3,
-      "fat": 33.0,
-      "carbs": 55.0,
-      "defaultGrams": 100.0,
-      "barcode": "5050083943645"
-    },
-    {
-      "id": "pringles-sco-sour-cream-onion-130-belvoir-fruit-farms",
-      "name": "Pringles SCO Sour Cream & Onion 130",
-      "manufacturer": "Belvoir Fruit Farms",
-      "kcal": 536.0,
-      "protein": 4.6,
-      "fat": 32.0,
-      "carbs": 56.0,
-      "defaultGrams": 100.0,
-      "barcode": "5050083943652"
-    },
-    {
-      "id": "pringles-sare-pringles",
-      "name": "Pringles Sare",
-      "manufacturer": "Pringles",
-      "kcal": 503.3,
-      "protein": 6.1,
-      "fat": 31.0,
-      "carbs": 55.0,
-      "defaultGrams": 100.0,
-      "barcode": "5053990101573"
-    },
-    {
-      "id": "pringles-cașcaval-pringles",
-      "name": "Pringles Cașcaval",
-      "manufacturer": "Pringles",
-      "kcal": 520.0,
-      "protein": 6.4,
-      "fat": 29.0,
-      "carbs": 55.0,
-      "defaultGrams": 100.0,
-      "barcode": "5053990106981"
-    },
-    {
-      "id": "pringles-crab-pringles",
-      "name": "Pringles Crab",
-      "manufacturer": "Pringles",
-      "kcal": 519.0,
-      "protein": 6.7,
-      "fat": 29.0,
-      "carbs": 56.0,
-      "defaultGrams": 100.0,
-      "barcode": "5053990113057"
     },
     {
       "id": "kartofelnye-chipsy-so-vkusom-syra-pringles",
@@ -14887,28 +13699,6 @@
       "carbs": 51.0,
       "defaultGrams": 100.0,
       "barcode": "5053990113149"
-    },
-    {
-      "id": "impact-whey-protein-unflavored-myprotein",
-      "name": "Impact Whey Protein Unflavored",
-      "manufacturer": "Myprotein",
-      "kcal": 381.0,
-      "protein": 75.0,
-      "fat": 6.3,
-      "carbs": 5.9,
-      "defaultGrams": 100.0,
-      "barcode": "5055534302910"
-    },
-    {
-      "id": "burn-apple-qiwi-mulon-partners",
-      "name": "Burn apple qiwi",
-      "manufacturer": "Мулон Партнерс",
-      "kcal": 50.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 12.0,
-      "defaultGrams": 100.0,
-      "barcode": "5060608742110"
     },
     {
       "id": "milfey-u-palycha",
@@ -14933,105 +13723,6 @@
       "barcode": "5201360553457"
     },
     {
-      "id": "alpro-vanilla-flavour-lapte-vegetal-alpro",
-      "name": "Alpro vanilla flavour lapte vegetal",
-      "manufacturer": "Alpro",
-      "kcal": 57.0,
-      "protein": 3.0,
-      "fat": 1.8,
-      "carbs": 6.7,
-      "defaultGrams": 100.0,
-      "barcode": "5411188081852"
-    },
-    {
-      "id": "yaourt-alpro",
-      "name": "Yaourt",
-      "manufacturer": "Alpro",
-      "kcal": 49.0,
-      "protein": 4.0,
-      "fat": 2.3,
-      "carbs": 2.2,
-      "defaultGrams": 100.0,
-      "barcode": "5411188114895"
-    },
-    {
-      "id": "kokosnussdrink-mit-soja-barista-alpro",
-      "name": "Kokosnussdrink mit Soja, Barista",
-      "manufacturer": "Alpro",
-      "kcal": 33.0,
-      "protein": 1.5,
-      "fat": 1.4,
-      "carbs": 3.3,
-      "defaultGrams": 100.0,
-      "barcode": "5411188119753"
-    },
-    {
-      "id": "soya-alpro",
-      "name": "Soya",
-      "manufacturer": "Alpro",
-      "kcal": 39.0,
-      "protein": 3.0,
-      "fat": 1.7,
-      "carbs": 2.5,
-      "defaultGrams": 100.0,
-      "barcode": "5411188543381"
-    },
-    {
-      "id": "alpro-unsweetened-soya-alpro",
-      "name": "Alpro unsweetened soya",
-      "manufacturer": "Alpro",
-      "kcal": 33.0,
-      "protein": 3.3,
-      "fat": 1.8,
-      "carbs": 0.5,
-      "defaultGrams": 100.0,
-      "barcode": "5411188543398"
-    },
-    {
-      "id": "cocacola-original-500-coca-cola",
-      "name": "Cocacola original 500",
-      "manufacturer": "Coca-Cola",
-      "kcal": 42.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 10.6,
-      "defaultGrams": 100.0,
-      "barcode": "5449000054227"
-    },
-    {
-      "id": "coca-cola-zero-coca-cola",
-      "name": "Coca Cola zero",
-      "manufacturer": "Coca-Cola",
-      "kcal": 0.7,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 0.0,
-      "defaultGrams": 100.0,
-      "barcode": "5449000231659"
-    },
-    {
-      "id": "boisson-pour-le-sport-powerade",
-      "name": "Boisson pour le sport",
-      "manufacturer": "Powerade",
-      "kcal": 18.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 4.1,
-      "defaultGrams": 100.0,
-      "barcode": "54492653"
-    },
-    {
-      "id": "cozinha-velha-agulha-cozinha-velha",
-      "name": "cozinha velha agulha",
-      "manufacturer": "Cozinha Velha",
-      "kcal": 349.0,
-      "protein": 7.9,
-      "fat": 1.3,
-      "carbs": 76.0,
-      "defaultGrams": 100.0,
-      "barcode": "5601537332418"
-    },
-    {
       "id": "duet-orehovoe-po-korolevski-u-palycha",
       "name": "Дуэт ореховое по королевски",
       "manufacturer": "У Палыча",
@@ -15041,127 +13732,6 @@
       "carbs": 49.4,
       "defaultGrams": 100.0,
       "barcode": "58022070920138"
-    },
-    {
-      "id": "cini-minis-scorțișoară-nestle",
-      "name": "Cini Minis Scorțișoară",
-      "manufacturer": "Nestle",
-      "kcal": 410.0,
-      "protein": 5.8,
-      "fat": 9.3,
-      "carbs": 72.6,
-      "defaultGrams": 100.0,
-      "barcode": "5900020002730"
-    },
-    {
-      "id": "fitness-strawberry-nestlé",
-      "name": "Fitness Strawberry",
-      "manufacturer": "Nestlé",
-      "kcal": 362.0,
-      "protein": 6.2,
-      "fat": 4.8,
-      "carbs": 71.7,
-      "defaultGrams": 100.0,
-      "barcode": "5900020023322"
-    },
-    {
-      "id": "czekolada-mleczna-z-rodzynkami-i-orzeszkami-arachidowymi-wawel",
-      "name": "Czekolada mleczna z rodzynkami i orzeszkami arachidowymi",
-      "manufacturer": "Wawel",
-      "kcal": 539.0,
-      "protein": 7.0,
-      "fat": 33.0,
-      "carbs": 52.0,
-      "defaultGrams": 100.0,
-      "barcode": "5900102022212"
-    },
-    {
-      "id": "jogurt-polski-mlekovita",
-      "name": "Jogurt Polski",
-      "manufacturer": "Mlekovita",
-      "kcal": 94.0,
-      "protein": 2.8,
-      "fat": 2.5,
-      "carbs": 15.0,
-      "defaultGrams": 100.0,
-      "barcode": "5900512350110"
-    },
-    {
-      "id": "śliwka-kujawska-w-czekoladzie-atlanta-polska",
-      "name": "Śliwka Kujawska w czekoladzie",
-      "manufacturer": "Atlanta Polska",
-      "kcal": 369.0,
-      "protein": 4.0,
-      "fat": 12.0,
-      "carbs": 56.0,
-      "defaultGrams": 100.0,
-      "barcode": "5900587028259"
-    },
-    {
-      "id": "ser-topiony-w-plastrach-z-szynką-pilos",
-      "name": "Ser topiony w plastrach z szynką",
-      "manufacturer": "Pilos",
-      "kcal": 255.0,
-      "protein": 20.0,
-      "fat": 17.0,
-      "carbs": 5.6,
-      "defaultGrams": 100.0,
-      "barcode": "5901126014122"
-    },
-    {
-      "id": "makaron-nadarzyński-sulma",
-      "name": "Makaron Nadarzyński",
-      "manufacturer": "Sulma",
-      "kcal": 353.0,
-      "protein": 11.0,
-      "fat": 0.5,
-      "carbs": 75.0,
-      "defaultGrams": 100.0,
-      "barcode": "5901367001172"
-    },
-    {
-      "id": "makaron-nadarzyński-rurka-sulma",
-      "name": "Makaron Nadarzyński rurka",
-      "manufacturer": "Sulma",
-      "kcal": 353.0,
-      "protein": 11.0,
-      "fat": 0.5,
-      "carbs": 75.0,
-      "defaultGrams": 100.0,
-      "barcode": "5901367001240"
-    },
-    {
-      "id": "pizza-głęboko-mrożona-z-szynką-i-pieczarkami-maxtop-sławków",
-      "name": "Pizza głęboko mrożona z szynką i pieczarkami.",
-      "manufacturer": "MaxTop Sławków",
-      "kcal": 240.0,
-      "protein": 8.0,
-      "fat": 8.0,
-      "carbs": 34.0,
-      "defaultGrams": 100.0,
-      "barcode": "5901537003142"
-    },
-    {
-      "id": "pomidory-krojone-z-czosnkiem-dawtona",
-      "name": "Pomidory krojone z czosnkiem",
-      "manufacturer": "Dawtona",
-      "kcal": 23.0,
-      "protein": 1.3,
-      "fat": 0.0,
-      "carbs": 4.0,
-      "defaultGrams": 100.0,
-      "barcode": "5901713000057"
-    },
-    {
-      "id": "pizza-z-szynką-wieprzową-na-podpieczonym-spodzie-iglotex",
-      "name": "Pizza z szynką wieprzową, na podpieczonym spodzie.",
-      "manufacturer": "Iglotex",
-      "kcal": 170.0,
-      "protein": 7.7,
-      "fat": 3.3,
-      "carbs": 26.0,
-      "defaultGrams": 100.0,
-      "barcode": "5902162113336"
     },
     {
       "id": "pusheni-shproti-v-rapichno-maslo-seko-seko",
@@ -15175,39 +13745,6 @@
       "barcode": "5902353023352"
     },
     {
-      "id": "vegan-majo-develey",
-      "name": "Vegan Majo",
-      "manufacturer": "Develey",
-      "kcal": 650.0,
-      "protein": 0.5,
-      "fat": 70.0,
-      "carbs": 5.0,
-      "defaultGrams": 100.0,
-      "barcode": "5906425150649"
-    },
-    {
-      "id": "tartalette-dr-gerard",
-      "name": "Tartalette",
-      "manufacturer": "Dr Gerard",
-      "kcal": 526.0,
-      "protein": 6.0,
-      "fat": 30.0,
-      "carbs": 58.0,
-      "defaultGrams": 100.0,
-      "barcode": "5907471419544"
-    },
-    {
-      "id": "tygryski-maisstangen-nasze-tygryski",
-      "name": "Tygryski Maisstangen",
-      "manufacturer": "Nasze tygryski",
-      "kcal": 374.0,
-      "protein": 7.3,
-      "fat": 1.2,
-      "carbs": 83.0,
-      "defaultGrams": 100.0,
-      "barcode": "5908221101030"
-    },
-    {
       "id": "kartofen-chips-s-vkus-na-kashkaval-lay-s",
       "name": "Картофен чипс с вкус на кашкавал",
       "manufacturer": "Lay's",
@@ -15217,50 +13754,6 @@
       "carbs": 54.0,
       "defaultGrams": 100.0,
       "barcode": "5941000025615"
-    },
-    {
-      "id": "dark-intense-heidi",
-      "name": "Dark Intense",
-      "manufacturer": "Heidi",
-      "kcal": 591.0,
-      "protein": 7.8,
-      "fat": 48.0,
-      "carbs": 25.0,
-      "defaultGrams": 100.0,
-      "barcode": "5941021001261"
-    },
-    {
-      "id": "grand-or-walnuts-heidi",
-      "name": "Grand'or Walnuts",
-      "manufacturer": "Heidi",
-      "kcal": 537.0,
-      "protein": 7.4,
-      "fat": 37.0,
-      "carbs": 50.0,
-      "defaultGrams": 100.0,
-      "barcode": "5941021005832"
-    },
-    {
-      "id": "iaurt-natur-k-classic",
-      "name": "Iaurt Natur",
-      "manufacturer": "K-Classic",
-      "kcal": 63.0,
-      "protein": 3.4,
-      "fat": 3.5,
-      "carbs": 4.5,
-      "defaultGrams": 100.0,
-      "barcode": "5941312001833"
-    },
-    {
-      "id": "pom-băr-pufuleți-cașcaval-chio",
-      "name": "Pom-băr Pufuleți Cașcaval",
-      "manufacturer": "Chio",
-      "kcal": 521.0,
-      "protein": 5.8,
-      "fat": 28.0,
-      "carbs": 59.0,
-      "defaultGrams": 100.0,
-      "barcode": "5941445677332"
     },
     {
       "id": "goroshek-zelenyy-globus",
@@ -15285,17 +13778,6 @@
       "barcode": "5998304241111"
     },
     {
-      "id": "hell-energy-drink-hell-energy",
-      "name": "Hell Energy Drink",
-      "manufacturer": "HELL ENERGY",
-      "kcal": 46.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 10.9,
-      "defaultGrams": 100.0,
-      "barcode": "5999884034650"
-    },
-    {
       "id": "snickers-lesnoy-oreh-snickers",
       "name": "Snickers лесной орех",
       "manufacturer": "Snickers",
@@ -15305,50 +13787,6 @@
       "carbs": 56.0,
       "defaultGrams": 100.0,
       "barcode": "6000752439480"
-    },
-    {
-      "id": "cheddar-cheese-kraft",
-      "name": "Cheddar Cheese",
-      "manufacturer": "Kraft",
-      "kcal": 224.0,
-      "protein": 18.8,
-      "fat": 15.2,
-      "carbs": 3.2,
-      "defaultGrams": 100.0,
-      "barcode": "6084012090475"
-    },
-    {
-      "id": "dattes-layanna",
-      "name": "Dattes",
-      "manufacturer": "Layanna",
-      "kcal": 282.0,
-      "protein": 2.5,
-      "fat": 0.3,
-      "carbs": 75.0,
-      "defaultGrams": 100.0,
-      "barcode": "6132529380586"
-    },
-    {
-      "id": "thai-coffee-natura-selection",
-      "name": "Thai coffee",
-      "manufacturer": "Natura selection",
-      "kcal": 80.0,
-      "protein": 2.1,
-      "fat": 4.7,
-      "carbs": 4.5,
-      "defaultGrams": 100.0,
-      "barcode": "62017091"
-    },
-    {
-      "id": "cappuccino-natura-selection",
-      "name": "Cappuccino",
-      "manufacturer": "Natura selection",
-      "kcal": 55.0,
-      "protein": 2.0,
-      "fat": 2.3,
-      "carbs": 6.3,
-      "defaultGrams": 100.0,
-      "barcode": "62019187"
     },
     {
       "id": "ovsyanoe-pechene-s-kusochkami-shokolada-hlebnyy-spas",
@@ -15362,17 +13800,6 @@
       "barcode": "62111829"
     },
     {
-      "id": "cookie-filled-with-coconut-naderi",
-      "name": "Cookie Filled with Coconut",
-      "manufacturer": "Naderi",
-      "kcal": 426.0,
-      "protein": 7.1,
-      "fat": 16.3,
-      "carbs": 62.7,
-      "defaultGrams": 100.0,
-      "barcode": "6260098400395"
-    },
-    {
       "id": "finiki-chocodate",
       "name": "Финики",
       "manufacturer": "Chocodate",
@@ -15382,94 +13809,6 @@
       "carbs": 68.0,
       "defaultGrams": 100.0,
       "barcode": "6291011057952"
-    },
-    {
-      "id": "finn-crisp-finn-crisp",
-      "name": "Finn Crisp",
-      "manufacturer": "Finn Crisp",
-      "kcal": 350.0,
-      "protein": 10.0,
-      "fat": 2.6,
-      "carbs": 61.0,
-      "defaultGrams": 100.0,
-      "barcode": "6410500090014"
-    },
-    {
-      "id": "karl-fazer-rusina-hasselpähkinä-fazer",
-      "name": "Karl Fazer Rusina & Hasselpähkinä",
-      "manufacturer": "Fazer",
-      "kcal": 524.0,
-      "protein": 11.0,
-      "fat": 32.0,
-      "carbs": 48.0,
-      "defaultGrams": 100.0,
-      "barcode": "6411401015144"
-    },
-    {
-      "id": "kokonainen-hasselpähkina-fazer",
-      "name": "Kokonainen Hasselpähkina",
-      "manufacturer": "Fazer",
-      "kcal": 555.0,
-      "protein": 11.0,
-      "fat": 38.0,
-      "carbs": 44.0,
-      "defaultGrams": 100.0,
-      "barcode": "6411401015151"
-    },
-    {
-      "id": "paksu-pepe-xxl-original-panda",
-      "name": "Paksu Pepe XXL Original",
-      "manufacturer": "Panda",
-      "kcal": 328.0,
-      "protein": 3.5,
-      "fat": 0.4,
-      "carbs": 76.0,
-      "defaultGrams": 100.0,
-      "barcode": "6412500070188"
-    },
-    {
-      "id": "hartwell-original-hartwall",
-      "name": "Hartwell Original",
-      "manufacturer": "Hartwall",
-      "kcal": 27.0,
-      "protein": 0.3,
-      "fat": 0.0,
-      "carbs": 6.3,
-      "defaultGrams": 100.0,
-      "barcode": "6413600207689"
-    },
-    {
-      "id": "evelina-rainbow",
-      "name": "Evelina",
-      "manufacturer": "Rainbow",
-      "kcal": 502.0,
-      "protein": 6.6,
-      "fat": 25.0,
-      "carbs": 61.0,
-      "defaultGrams": 100.0,
-      "barcode": "6415712702113"
-    },
-    {
-      "id": "pitkäjyväinen-riisi-rainbow",
-      "name": "Pitkäjyväinen riisi",
-      "manufacturer": "Rainbow",
-      "kcal": 363.0,
-      "protein": 7.9,
-      "fat": 1.4,
-      "carbs": 79.0,
-      "defaultGrams": 100.0,
-      "barcode": "6415717409000"
-    },
-    {
-      "id": "chocolate-creams-fazer",
-      "name": "Chocolate creams",
-      "manufacturer": "Fazer",
-      "kcal": 550.0,
-      "protein": 10.0,
-      "fat": 34.0,
-      "carbs": 48.0,
-      "defaultGrams": 100.0,
-      "barcode": "6416453554719"
     },
     {
       "id": "ris-kuban-belyy-kruglozernyy-mistral",
@@ -15560,50 +13899,6 @@
       "barcode": "6971105770577"
     },
     {
-      "id": "מיץ-תפוזים-וגזר-פרימור",
-      "name": "מיץ תפוזים וגזר",
-      "manufacturer": "פרימור",
-      "kcal": 45.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 9.8,
-      "defaultGrams": 100.0,
-      "barcode": "7290018925881"
-    },
-    {
-      "id": "שוקו-טרה",
-      "name": "שוקו",
-      "manufacturer": "טרה",
-      "kcal": 46.0,
-      "protein": 3.3,
-      "fat": 1.5,
-      "carbs": 4.7,
-      "defaultGrams": 100.0,
-      "barcode": "7290102398560"
-    },
-    {
-      "id": "dip-nacho-cheese-style-santa-maria",
-      "name": "Dip Nacho Cheese Style",
-      "manufacturer": "Santa Maria",
-      "kcal": 130.0,
-      "protein": 2.5,
-      "fat": 9.9,
-      "carbs": 7.7,
-      "defaultGrams": 100.0,
-      "barcode": "7311310038397"
-    },
-    {
-      "id": "x-tra-cornflakes-coop",
-      "name": "X-tra Cornflakes",
-      "manufacturer": "Coop",
-      "kcal": 380.0,
-      "protein": 8.0,
-      "fat": 1.0,
-      "carbs": 83.0,
-      "defaultGrams": 100.0,
-      "barcode": "7340011342434"
-    },
-    {
       "id": "protein-izolyat-oreh-nutriversum",
       "name": "Протеин изолят орех",
       "manufacturer": "Nutriversum",
@@ -15615,28 +13910,6 @@
       "barcode": "7603720035777"
     },
     {
-      "id": "nan-optipro-nestle",
-      "name": "NAN optipro",
-      "manufacturer": "Nestle",
-      "kcal": 67.0,
-      "protein": 1.2,
-      "fat": 3.6,
-      "carbs": 7.5,
-      "defaultGrams": 100.0,
-      "barcode": "7613032405700"
-    },
-    {
-      "id": "perrier-slim-can-perrier",
-      "name": "Perrier Slim Can",
-      "manufacturer": "Perrier",
-      "kcal": 0.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 0.0,
-      "defaultGrams": 100.0,
-      "barcode": "7613033666445"
-    },
-    {
       "id": "belyy-shokolad-mindal-i-kokos-alpen-hilda",
       "name": "Белый Шоколад Миндаль И Кокос",
       "manufacturer": "Alpen Hilda",
@@ -15646,28 +13919,6 @@
       "carbs": 59.4,
       "defaultGrams": 100.0,
       "barcode": "7622201696344"
-    },
-    {
-      "id": "alpen-gold-alpen-gold",
-      "name": "ALPEN GOLD",
-      "manufacturer": "Alpen Gold",
-      "kcal": 538.0,
-      "protein": 4.4,
-      "fat": 30.0,
-      "carbs": 61.0,
-      "defaultGrams": 100.0,
-      "barcode": "7622201700645"
-    },
-    {
-      "id": "heroes-cadbury",
-      "name": "Heroes",
-      "manufacturer": "Cadbury",
-      "kcal": 485.0,
-      "protein": 4.8,
-      "fat": 22.0,
-      "carbs": 65.0,
-      "defaultGrams": 100.0,
-      "barcode": "7622201734848"
     },
     {
       "id": "klassicheskiy-tobleron",
@@ -15747,17 +13998,6 @@
       "barcode": "7622202204319"
     },
     {
-      "id": "choco-cookie-milka",
-      "name": "Choco cookie",
-      "manufacturer": "Milka",
-      "kcal": 496.0,
-      "protein": 6.9,
-      "fat": 24.0,
-      "carbs": 63.0,
-      "defaultGrams": 100.0,
-      "barcode": "7622202209994"
-    },
-    {
       "id": "milka-max-arahis-i-karamel-milka",
       "name": "Milka Max Арахис и Карамель",
       "manufacturer": "Milka",
@@ -15769,17 +14009,6 @@
       "barcode": "7622202215919"
     },
     {
-      "id": "milka-mmmax-oreo-milka",
-      "name": "Milka Mmmax Oreo",
-      "manufacturer": "Milka",
-      "kcal": 558.0,
-      "protein": 4.4,
-      "fat": 34.0,
-      "carbs": 57.0,
-      "defaultGrams": 100.0,
-      "barcode": "7622202254666"
-    },
-    {
       "id": "batonchik-big-picnic-alpen-gold",
       "name": "Батончик «Big Picnic»",
       "manufacturer": "Alpen Gold",
@@ -15789,17 +14018,6 @@
       "carbs": 57.0,
       "defaultGrams": 100.0,
       "barcode": "7622210357915"
-    },
-    {
-      "id": "milka-alpine-milk-chocolate-with-salted-tuc-cracker-milka",
-      "name": "Milka Alpine Milk Chocolate with Salted TUC Cracker",
-      "manufacturer": "Milka",
-      "kcal": 517.2,
-      "protein": 6.3,
-      "fat": 28.0,
-      "carbs": 59.5,
-      "defaultGrams": 100.0,
-      "barcode": "7622210451224"
     },
     {
       "id": "yubileynoe-yubileynoe",
@@ -15833,28 +14051,6 @@
       "carbs": 67.0,
       "defaultGrams": 100.0,
       "barcode": "7622210457745"
-    },
-    {
-      "id": "tuc-pizza-tuc",
-      "name": "TUC pizza",
-      "manufacturer": "TUC",
-      "kcal": 482.0,
-      "protein": 8.4,
-      "fat": 22.0,
-      "carbs": 69.0,
-      "defaultGrams": 100.0,
-      "barcode": "7622210504227"
-    },
-    {
-      "id": "oreo-goût-fraise-oreo",
-      "name": "Oreo goût fraise",
-      "manufacturer": "oreo",
-      "kcal": 483.0,
-      "protein": 5.2,
-      "fat": 21.0,
-      "carbs": 68.0,
-      "defaultGrams": 100.0,
-      "barcode": "7622210700391"
     },
     {
       "id": "belvita-utrennee-pechene-belvita",
@@ -15901,28 +14097,6 @@
       "barcode": "7622210742025"
     },
     {
-      "id": "słodzik-stołowy-na-bazie-cyklaminianu-sodu-i-sacharynianu-kclassic",
-      "name": "Słodzik stołowy na bazie cyklaminianu sodu i sacharynianu",
-      "manufacturer": "K-Classic",
-      "kcal": 25.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 0.0,
-      "defaultGrams": 100.0,
-      "barcode": "7640122997654"
-    },
-    {
-      "id": "tornado-energy-iceberry-tornado",
-      "name": "Tornado Energy Iceberry",
-      "manufacturer": "Tornado",
-      "kcal": 45.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 11.0,
-      "defaultGrams": 100.0,
-      "barcode": "7640157157344"
-    },
-    {
       "id": "kurinaya-kotleta-s-risom-laboratoriya-edy",
       "name": "Куриная Котлета С Рисом",
       "manufacturer": "Лаборатория Еды",
@@ -15932,138 +14106,6 @@
       "carbs": 16.6,
       "defaultGrams": 100.0,
       "barcode": "7930081900025"
-    },
-    {
-      "id": "tales-of-napoli-lavazza",
-      "name": "Tales of Napoli",
-      "manufacturer": "Lavazza",
-      "kcal": 396.6,
-      "protein": 14.4,
-      "fat": 15.4,
-      "carbs": 40.2,
-      "defaultGrams": 100.0,
-      "barcode": "8000070072534"
-    },
-    {
-      "id": "raffaello-wafer-com-recheio-cremoso-e-amêndoa-coberto-com-coco-ferrero",
-      "name": "Raffaello - Wafer com recheio cremoso e amêndoa coberto com coco",
-      "manufacturer": "Ferrero",
-      "kcal": 627.0,
-      "protein": 7.4,
-      "fat": 48.3,
-      "carbs": 38.6,
-      "defaultGrams": 100.0,
-      "barcode": "8000500232057"
-    },
-    {
-      "id": "confettura-extra-di-frutti-di-bosco-despar",
-      "name": "Confettura extra di frutti di bosco",
-      "manufacturer": "Despar",
-      "kcal": 216.0,
-      "protein": 0.6,
-      "fat": 0.0,
-      "carbs": 52.0,
-      "defaultGrams": 100.0,
-      "barcode": "8001300303497"
-    },
-    {
-      "id": "marmellata-di-arance-despar",
-      "name": "Marmellata di arance",
-      "manufacturer": "Despar",
-      "kcal": 254.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 63.0,
-      "defaultGrams": 100.0,
-      "barcode": "8001300303503"
-    },
-    {
-      "id": "italian-sparkling-water-san-pellegrino",
-      "name": "Italian sparkling water",
-      "manufacturer": "San Pellegrino",
-      "kcal": 37.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 8.4,
-      "defaultGrams": 100.0,
-      "barcode": "8002270556852"
-    },
-    {
-      "id": "sanpellegrino-lemon-soda-limonata-san-pellegrino",
-      "name": "Sanpellegrino Lemon Soda - Limonata",
-      "manufacturer": "San Pellegrino",
-      "kcal": 34.5,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 8.0,
-      "defaultGrams": 100.0,
-      "barcode": "80022725"
-    },
-    {
-      "id": "passata-di-pomodoro-pomì",
-      "name": "Passata di pomodoro",
-      "manufacturer": "Pomì",
-      "kcal": 26.0,
-      "protein": 1.3,
-      "fat": 0.2,
-      "carbs": 4.0,
-      "defaultGrams": 100.0,
-      "barcode": "8002580425909"
-    },
-    {
-      "id": "fregola-sarda-san-giuliano",
-      "name": "Fregola Sarda",
-      "manufacturer": "San Giuliano",
-      "kcal": 350.0,
-      "protein": 13.0,
-      "fat": 1.2,
-      "carbs": 72.0,
-      "defaultGrams": 100.0,
-      "barcode": "8003710603440"
-    },
-    {
-      "id": "ace-jus-de-fruits-et-légumes-zuegg",
-      "name": "ACE jus de fruits et légumes",
-      "manufacturer": "Zuegg",
-      "kcal": 43.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 10.0,
-      "defaultGrams": 100.0,
-      "barcode": "80043294"
-    },
-    {
-      "id": "irish-cream-cakes-choco-baileys",
-      "name": "Irish cream cakes choco",
-      "manufacturer": "Baileys",
-      "kcal": 438.0,
-      "protein": 5.6,
-      "fat": 25.0,
-      "carbs": 46.8,
-      "defaultGrams": 100.0,
-      "barcode": "8005380010818"
-    },
-    {
-      "id": "tortiglioni-donnavera",
-      "name": "Tortiglioni",
-      "manufacturer": "DonnaVera",
-      "kcal": 354.0,
-      "protein": 11.0,
-      "fat": 1.3,
-      "carbs": 73.2,
-      "defaultGrams": 100.0,
-      "barcode": "8005709880832"
-    },
-    {
-      "id": "gelato-sandwich-vegansk-8stk-320-g-valsoia",
-      "name": "Gelato Sandwich Vegansk, 8stk, 320 g",
-      "manufacturer": "Valsoia",
-      "kcal": 286.0,
-      "protein": 4.7,
-      "fat": 7.6,
-      "carbs": 49.0,
-      "defaultGrams": 100.0,
-      "barcode": "8006040133625"
     },
     {
       "id": "praline-zhelt-sorini",
@@ -16077,94 +14119,6 @@
       "barcode": "8006423301139"
     },
     {
-      "id": "mezzi-rigatoni-delverde",
-      "name": "mezzi rigatoni",
-      "manufacturer": "Delverde",
-      "kcal": 354.0,
-      "protein": 11.5,
-      "fat": 2.0,
-      "carbs": 64.0,
-      "defaultGrams": 100.0,
-      "barcode": "8006680051204"
-    },
-    {
-      "id": "knusperbrot-fettarm-schär",
-      "name": "Knusperbrot Fettarm",
-      "manufacturer": "Schär",
-      "kcal": 380.0,
-      "protein": 6.0,
-      "fat": 1.7,
-      "carbs": 84.0,
-      "defaultGrams": 100.0,
-      "barcode": "8008698007303"
-    },
-    {
-      "id": "nutella-ferrero",
-      "name": "nutella",
-      "manufacturer": "Ferrero",
-      "kcal": 539.0,
-      "protein": 6.3,
-      "fat": 30.9,
-      "carbs": 57.5,
-      "defaultGrams": 100.0,
-      "barcode": "80177173"
-    },
-    {
-      "id": "almond-isola-bio",
-      "name": "Almond",
-      "manufacturer": "Isola Bio",
-      "kcal": 39.0,
-      "protein": 0.8,
-      "fat": 2.5,
-      "carbs": 3.0,
-      "defaultGrams": 100.0,
-      "barcode": "8023678162360"
-    },
-    {
-      "id": "mango-tropicale-zuegg",
-      "name": "Mango tropicale",
-      "manufacturer": "Zuegg",
-      "kcal": 50.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 12.0,
-      "defaultGrams": 100.0,
-      "barcode": "80242154"
-    },
-    {
-      "id": "salse-per-formaggi-cereal-terra",
-      "name": "Salse per formaggi",
-      "manufacturer": "Cereal terra",
-      "kcal": 138.0,
-      "protein": 1.5,
-      "fat": 2.5,
-      "carbs": 27.0,
-      "defaultGrams": 100.0,
-      "barcode": "8024336009034"
-    },
-    {
-      "id": "williamsbirnen-fruchtaufstrich-zuegg",
-      "name": "Williamsbirnen-Fruchtaufstrich",
-      "manufacturer": "Zuegg",
-      "kcal": 196.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 48.0,
-      "defaultGrams": 100.0,
-      "barcode": "80298311"
-    },
-    {
-      "id": "confettura-ciliegie-zuegg",
-      "name": "Confettura Ciliegie",
-      "manufacturer": "Zuegg",
-      "kcal": 190.0,
-      "protein": 0.6,
-      "fat": 0.0,
-      "carbs": 46.0,
-      "defaultGrams": 100.0,
-      "barcode": "80298335"
-    },
-    {
       "id": "tomaty-vyalenye-berni",
       "name": "Томаты вяленые",
       "manufacturer": "Berni",
@@ -16174,39 +14128,6 @@
       "carbs": 12.0,
       "defaultGrams": 100.0,
       "barcode": "80599685"
-    },
-    {
-      "id": "spaghetti-n-5-barilla",
-      "name": "Spaghetti N°5",
-      "manufacturer": "Barilla",
-      "kcal": 359.0,
-      "protein": 13.0,
-      "fat": 2.0,
-      "carbs": 71.0,
-      "defaultGrams": 100.0,
-      "barcode": "8076800195057"
-    },
-    {
-      "id": "tarallucci-mb-350g-int-eu-mulino-bianco",
-      "name": "Tarallucci mb 350g int. eu",
-      "manufacturer": "Mulino Bianco",
-      "kcal": 467.0,
-      "protein": 7.0,
-      "fat": 17.0,
-      "carbs": 70.0,
-      "defaultGrams": 100.0,
-      "barcode": "8076809572828"
-    },
-    {
-      "id": "capellini-n-1-barilla",
-      "name": "Capellini n.1",
-      "manufacturer": "Barilla",
-      "kcal": 359.0,
-      "protein": 14.0,
-      "fat": 2.0,
-      "carbs": 69.7,
-      "defaultGrams": 100.0,
-      "barcode": "8076809575959"
     },
     {
       "id": "tortiglion-kruglye-makarony-barilla",
@@ -16242,28 +14163,6 @@
       "barcode": "80895237"
     },
     {
-      "id": "muesli-crunchy-hacendado",
-      "name": "Muesli Crunchy",
-      "manufacturer": "HACENDADO",
-      "kcal": 401.0,
-      "protein": 8.8,
-      "fat": 12.0,
-      "carbs": 52.0,
-      "defaultGrams": 100.0,
-      "barcode": "8402001010873"
-    },
-    {
-      "id": "mayonesa-sabor-casero-ybarra",
-      "name": "Mayonesa sabor casero",
-      "manufacturer": "Ybarra",
-      "kcal": 660.0,
-      "protein": 0.8,
-      "fat": 71.0,
-      "carbs": 3.3,
-      "defaultGrams": 100.0,
-      "barcode": "8410086315035"
-    },
-    {
       "id": "olivki-farshirovannye-pastoy-iz-tryufelya-la-explanada-gourmet",
       "name": "Оливки, фаршированные пастой из трюфеля",
       "manufacturer": "La Explanada gourmet",
@@ -16273,72 +14172,6 @@
       "carbs": 0.0,
       "defaultGrams": 100.0,
       "barcode": "8410791095390"
-    },
-    {
-      "id": "bebida-de-almendras-0-azúcares-nectina",
-      "name": "Bebida de almendras 0% azúcares",
-      "manufacturer": "Nectina",
-      "kcal": 41.0,
-      "protein": 1.4,
-      "fat": 3.7,
-      "carbs": 0.1,
-      "defaultGrams": 100.0,
-      "barcode": "8412737001922"
-    },
-    {
-      "id": "chocolate-con-leche-simon-coll",
-      "name": "Chocolate con leche",
-      "manufacturer": "Simon Coll",
-      "kcal": 568.0,
-      "protein": 4.3,
-      "fat": 33.8,
-      "carbs": 55.5,
-      "defaultGrams": 100.0,
-      "barcode": "8413907238605"
-    },
-    {
-      "id": "gaseosa-sin-azúcares-condis",
-      "name": "Gaseosa sin azúcares",
-      "manufacturer": "Condis",
-      "kcal": 2.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 0.0,
-      "defaultGrams": 100.0,
-      "barcode": "8426765140218"
-    },
-    {
-      "id": "bífidus-desnatado-carrefour",
-      "name": "Bífidus desnatado",
-      "manufacturer": "Carrefour",
-      "kcal": 40.0,
-      "protein": 4.2,
-      "fat": 0.5,
-      "carbs": 5.5,
-      "defaultGrams": 100.0,
-      "barcode": "8431876010930"
-    },
-    {
-      "id": "dr-pepper-dr-pepper",
-      "name": "Dr Pepper",
-      "manufacturer": "Dr Pepper",
-      "kcal": 17.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 4.3,
-      "defaultGrams": 100.0,
-      "barcode": "8435185944009"
-    },
-    {
-      "id": "green-olives-pitted-maestro-de-oliva",
-      "name": "Green olives, pitted",
-      "manufacturer": "Maestro de oliva",
-      "kcal": 148.0,
-      "protein": 0.9,
-      "fat": 15.0,
-      "carbs": 0.0,
-      "defaultGrams": 100.0,
-      "barcode": "8436024290028"
     },
     {
       "id": "kartofelnye-chipsy-so-vkusom-chili-i-laym-el-valle",
@@ -16352,94 +14185,6 @@
       "barcode": "8437001221103"
     },
     {
-      "id": "salsa-boloñesa-eroski",
-      "name": "Salsa boloñesa",
-      "manufacturer": "Eroski",
-      "kcal": 108.0,
-      "protein": 3.9,
-      "fat": 5.7,
-      "carbs": 10.0,
-      "defaultGrams": 100.0,
-      "barcode": "8480010181944"
-    },
-    {
-      "id": "judías-verdes-redondas-de-navarra-eroski",
-      "name": "Judías verdes redondas de Navarra",
-      "manufacturer": "Eroski",
-      "kcal": 44.0,
-      "protein": 1.8,
-      "fat": 0.2,
-      "carbs": 7.5,
-      "defaultGrams": 100.0,
-      "barcode": "8480010184891"
-    },
-    {
-      "id": "musli-v-jogurte-jahodová-tekmar",
-      "name": "Musli v jogurte Jahodová",
-      "manufacturer": "Tekmar",
-      "kcal": 442.4,
-      "protein": 4.5,
-      "fat": 16.8,
-      "carbs": 70.7,
-      "defaultGrams": 100.0,
-      "barcode": "8585004500432"
-    },
-    {
-      "id": "rybi-salát-v-majonéze-albert",
-      "name": "Rybi salát v majonéze",
-      "manufacturer": "Albert",
-      "kcal": 253.0,
-      "protein": 4.7,
-      "fat": 23.0,
-      "carbs": 6.1,
-      "defaultGrams": 100.0,
-      "barcode": "8590421056165"
-    },
-    {
-      "id": "svačinka-48-g-hamé",
-      "name": "Svačinka 48 g",
-      "manufacturer": "Hamé",
-      "kcal": 254.0,
-      "protein": 8.3,
-      "fat": 23.1,
-      "carbs": 3.0,
-      "defaultGrams": 100.0,
-      "barcode": "85915695"
-    },
-    {
-      "id": "activia-borůvka",
-      "name": "Activia borůvka",
-      "manufacturer": "",
-      "kcal": 86.0,
-      "protein": 3.8,
-      "fat": 2.8,
-      "carbs": 11.1,
-      "defaultGrams": 100.0,
-      "barcode": "8595002100527"
-    },
-    {
-      "id": "meruňkové-knedlíky-don-pepe",
-      "name": "Meruňkové knedlíky",
-      "manufacturer": "Don Pepe",
-      "kcal": 192.0,
-      "protein": 5.8,
-      "fat": 2.7,
-      "carbs": 35.0,
-      "defaultGrams": 100.0,
-      "barcode": "8595607202732"
-    },
-    {
-      "id": "krupave-stripsy-nowaco",
-      "name": "Krupave Stripsy",
-      "manufacturer": "Nowaco",
-      "kcal": 193.0,
-      "protein": 18.0,
-      "fat": 8.2,
-      "carbs": 11.0,
-      "defaultGrams": 100.0,
-      "barcode": "8595624797198"
-    },
-    {
       "id": "goodmix-malinovyy-rassvet-goodmix",
       "name": "Goodmix Малиновый рассвет",
       "manufacturer": "Goodmix",
@@ -16451,17 +14196,6 @@
       "barcode": "8600084037576"
     },
     {
-      "id": "tunjevina-komadici-maxi",
-      "name": "Tunjevina komadici",
-      "manufacturer": "MAXI",
-      "kcal": 205.0,
-      "protein": 19.8,
-      "fat": 13.6,
-      "carbs": 0.9,
-      "defaultGrams": 100.0,
-      "barcode": "8600197254808"
-    },
-    {
       "id": "chechevica-zelenaya-agro-alyans",
       "name": "Чечевица зеленая",
       "manufacturer": "Агро-Альянс",
@@ -16471,28 +14205,6 @@
       "carbs": 58.0,
       "defaultGrams": 100.0,
       "barcode": "8601670710262"
-    },
-    {
-      "id": "honey-heart-pionir",
-      "name": "Honey heart",
-      "manufacturer": "Pionir",
-      "kcal": 370.0,
-      "protein": 5.7,
-      "fat": 8.5,
-      "carbs": 66.1,
-      "defaultGrams": 100.0,
-      "barcode": "8602300236022"
-    },
-    {
-      "id": "take-it-easy-mix-nutrino-lab",
-      "name": "Take it easy mix",
-      "manufacturer": "Nutrino Lab",
-      "kcal": 58.0,
-      "protein": 0.8,
-      "fat": 0.8,
-      "carbs": 11.0,
-      "defaultGrams": 100.0,
-      "barcode": "8606019653699"
     },
     {
       "id": "serbskaya-brynza-syr-myagkiy-rassolnyy-45-drmilk",
@@ -16539,28 +14251,6 @@
       "barcode": "8682213006301"
     },
     {
-      "id": "caykur-gray-tea-caykur",
-      "name": "Caykur Gray Tea",
-      "manufacturer": "Caykur",
-      "kcal": 0.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 0.0,
-      "defaultGrams": 100.0,
-      "barcode": "8690105000429"
-    },
-    {
-      "id": "albeni-ülker",
-      "name": "Albeni",
-      "manufacturer": "Ülker",
-      "kcal": 506.0,
-      "protein": 5.3,
-      "fat": 26.0,
-      "carbs": 62.0,
-      "defaultGrams": 100.0,
-      "barcode": "8690504034506"
-    },
-    {
       "id": "berrak-svekla-berrak",
       "name": "беррак свекла",
       "manufacturer": "Berrak",
@@ -16570,61 +14260,6 @@
       "carbs": 9.0,
       "defaultGrams": 100.0,
       "barcode": "8690531040723"
-    },
-    {
-      "id": "pismaniye-koska",
-      "name": "Pismaniye",
-      "manufacturer": "Koska",
-      "kcal": 443.0,
-      "protein": 1.5,
-      "fat": 10.2,
-      "carbs": 85.7,
-      "defaultGrams": 100.0,
-      "barcode": "8690710137411"
-    },
-    {
-      "id": "tortilla-wraps-original-spar",
-      "name": "tortilla wraps original",
-      "manufacturer": "SPAR",
-      "kcal": 326.0,
-      "protein": 9.4,
-      "fat": 7.3,
-      "carbs": 57.3,
-      "defaultGrams": 100.0,
-      "barcode": "8710671145598"
-    },
-    {
-      "id": "bavarois-frambozensmaak-1de-beste",
-      "name": "Bavarois Frambozensmaak",
-      "manufacturer": "1de beste",
-      "kcal": 232.0,
-      "protein": 1.6,
-      "fat": 18.2,
-      "carbs": 15.1,
-      "defaultGrams": 100.0,
-      "barcode": "8710871372329"
-    },
-    {
-      "id": "lipton-ice-tea-original-sparkling-lipton",
-      "name": "Lipton Ice Tea Original Sparkling",
-      "manufacturer": "Lipton",
-      "kcal": 20.3,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 4.5,
-      "defaultGrams": 100.0,
-      "barcode": "8711327574557"
-    },
-    {
-      "id": "sos-soia-kikkoman",
-      "name": "SOS SOIA",
-      "manufacturer": "Kikkoman",
-      "kcal": 77.0,
-      "protein": 10.0,
-      "fat": 0.0,
-      "carbs": 3.2,
-      "defaultGrams": 100.0,
-      "barcode": "8715035110205"
     },
     {
       "id": "mayoneza-s-gorchica-heinz",
@@ -16638,50 +14273,6 @@
       "barcode": "8715700127774"
     },
     {
-      "id": "tatarská-omáčka-hellmann-s",
-      "name": "Tatarská omáčka",
-      "manufacturer": "Hellmann's",
-      "kcal": 276.0,
-      "protein": 0.7,
-      "fat": 26.0,
-      "carbs": 8.9,
-      "defaultGrams": 100.0,
-      "barcode": "8720182764034"
-    },
-    {
-      "id": "tatarská-omáčka-340-ml-otevřená-hellmann-s",
-      "name": "Tatarská omáčka 340 ml otevřená",
-      "manufacturer": "Hellmann's",
-      "kcal": 274.0,
-      "protein": 0.7,
-      "fat": 26.0,
-      "carbs": 9.0,
-      "defaultGrams": 100.0,
-      "barcode": "8720182799753"
-    },
-    {
-      "id": "majonéza-hellmann-s",
-      "name": "Majonéza",
-      "manufacturer": "Hellmann's",
-      "kcal": 671.0,
-      "protein": 0.6,
-      "fat": 73.0,
-      "carbs": 2.9,
-      "defaultGrams": 100.0,
-      "barcode": "8720182800169"
-    },
-    {
-      "id": "green-tea-mandarin-orange-lipton",
-      "name": "Green tea Mandarin Orange",
-      "manufacturer": "Lipton",
-      "kcal": 4.0,
-      "protein": 0.5,
-      "fat": 0.0,
-      "carbs": 0.5,
-      "defaultGrams": 100.0,
-      "barcode": "8722700221906"
-    },
-    {
       "id": "hlopya-post-post",
       "name": "хлопья пост",
       "manufacturer": "Post",
@@ -16691,39 +14282,6 @@
       "carbs": 86.7,
       "defaultGrams": 100.0,
       "barcode": "8801037075649"
-    },
-    {
-      "id": "soon-veggie-ramyun-noodle-nongshim",
-      "name": "SOON VEGGIE RAMYUN NOODLE",
-      "manufacturer": "NONGSHIM",
-      "kcal": 430.0,
-      "protein": 9.0,
-      "fat": 14.0,
-      "carbs": 67.0,
-      "defaultGrams": 100.0,
-      "barcode": "8801043022705"
-    },
-    {
-      "id": "sea-salt-let-s-be",
-      "name": "Sea salt",
-      "manufacturer": "Let's Be",
-      "kcal": 48.0,
-      "protein": 1.0,
-      "fat": 0.3,
-      "carbs": 11.0,
-      "defaultGrams": 100.0,
-      "barcode": "8801056167509"
-    },
-    {
-      "id": "let-s-be-lotte",
-      "name": "Let's Be",
-      "manufacturer": "Lotte",
-      "kcal": 42.0,
-      "protein": 1.0,
-      "fat": 0.3,
-      "carbs": 9.0,
-      "defaultGrams": 100.0,
-      "barcode": "8801056238162"
     },
     {
       "id": "eskimo-yagodnyy-miks-credor",
@@ -16737,39 +14295,6 @@
       "barcode": "8801104172059"
     },
     {
-      "id": "coconut-water-chaokohtheppadungporn-coconut-co-ltdtcc",
-      "name": "Coconut Water",
-      "manufacturer": "ChaokohTheppadungporn Coconut Co. LTDTCC",
-      "kcal": 20.0,
-      "protein": 0.1,
-      "fat": 0.0,
-      "carbs": 4.8,
-      "defaultGrams": 100.0,
-      "barcode": "8850367991723"
-    },
-    {
-      "id": "mango-flavoured-drink-with-nata-de-coco-mogu-mogu",
-      "name": "Mango Flavoured Drink with Nata de Coco",
-      "manufacturer": "Mogu Mogu",
-      "kcal": 36.6,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 8.9,
-      "defaultGrams": 100.0,
-      "barcode": "8850389116944"
-    },
-    {
-      "id": "coconut-milk-roi-thai",
-      "name": "Coconut milk",
-      "manufacturer": "Roi Thai",
-      "kcal": 179.0,
-      "protein": 1.4,
-      "fat": 18.0,
-      "carbs": 2.9,
-      "defaultGrams": 100.0,
-      "barcode": "8850813507003"
-    },
-    {
       "id": "organicheskaya-pererabotannaya-myakot-kokosovogo-oreha-foco",
       "name": "Органическая переработанная мякоть кокосового ореха",
       "manufacturer": "Foco",
@@ -16779,28 +14304,6 @@
       "carbs": 1.8,
       "defaultGrams": 100.0,
       "barcode": "8851613003719"
-    },
-    {
-      "id": "marshmallows-with-mango-purè-corniche",
-      "name": "Marshmallows with Mango Purè",
-      "manufacturer": "Corniche",
-      "kcal": 350.0,
-      "protein": 3.3,
-      "fat": 0.0,
-      "carbs": 83.0,
-      "defaultGrams": 100.0,
-      "barcode": "8885014218038"
-    },
-    {
-      "id": "the-original-coffee-mix-maccoffee",
-      "name": "The Original Coffee Mix",
-      "manufacturer": "MacCoffee",
-      "kcal": 424.0,
-      "protein": 2.0,
-      "fat": 7.0,
-      "carbs": 88.1,
-      "defaultGrams": 100.0,
-      "barcode": "8887290101004"
     },
     {
       "id": "goryachiy-shokolad-macchocolate",
@@ -16825,61 +14328,6 @@
       "barcode": "8901393024531"
     },
     {
-      "id": "coconut-milk-thai-coco",
-      "name": "Coconut milk",
-      "manufacturer": "Thai Coco",
-      "kcal": 160.0,
-      "protein": 0.9,
-      "fat": 17.0,
-      "carbs": 3.0,
-      "defaultGrams": 100.0,
-      "barcode": "8938507849513"
-    },
-    {
-      "id": "cukierek-kawowy-kopiko",
-      "name": "Cukierek kawowy",
-      "manufacturer": "Kopiko",
-      "kcal": 449.0,
-      "protein": 0.9,
-      "fat": 11.5,
-      "carbs": 85.4,
-      "defaultGrams": 100.0,
-      "barcode": "8996001320839"
-    },
-    {
-      "id": "strong-rich-coffee-candy-kopiko",
-      "name": "Strong & rich coffee candy",
-      "manufacturer": "Kopiko",
-      "kcal": 436.0,
-      "protein": 0.6,
-      "fat": 9.9,
-      "carbs": 86.2,
-      "defaultGrams": 100.0,
-      "barcode": "8996001320846"
-    },
-    {
-      "id": "schokobanane-casalijosef-manner-comp",
-      "name": "Schokobanane",
-      "manufacturer": "CasaliJosef Manner & comp.",
-      "kcal": 396.0,
-      "protein": 1.8,
-      "fat": 12.0,
-      "carbs": 70.0,
-      "defaultGrams": 100.0,
-      "barcode": "9000331972442"
-    },
-    {
-      "id": "pfeffer-schwarz-mühle-kotányi",
-      "name": "Pfeffer schwarz Mühle",
-      "manufacturer": "Kotányi",
-      "kcal": 330.0,
-      "protein": 13.3,
-      "fat": 7.5,
-      "carbs": 39.5,
-      "defaultGrams": 100.0,
-      "barcode": "9001414041116"
-    },
-    {
       "id": "whey-protein-s-shokoladom-natural-power",
       "name": "Whey protein с шоколадом",
       "manufacturer": "Natural Power",
@@ -16889,50 +14337,6 @@
       "carbs": 7.7,
       "defaultGrams": 100.0,
       "barcode": "9007776014515"
-    },
-    {
-      "id": "kokos-joya",
-      "name": "Kokos",
-      "manufacturer": "Joya",
-      "kcal": 19.0,
-      "protein": 0.1,
-      "fat": 0.9,
-      "carbs": 2.6,
-      "defaultGrams": 100.0,
-      "barcode": "9020200017609"
-    },
-    {
-      "id": "redbull-redbull",
-      "name": "Redbull",
-      "manufacturer": "RedBull",
-      "kcal": 45.9,
-      "protein": 0.0,
-      "fat": 0.0,
-      "carbs": 11.0,
-      "defaultGrams": 100.0,
-      "barcode": "90448065"
-    },
-    {
-      "id": "bakery-d-oro-pandispan-cu-crema-tiramisu-cu-lapte-bakery-d-oro",
-      "name": "Bakery d'Oro Pandispan cu crema tiramisu cu lapte",
-      "manufacturer": "Bakery d'Oro",
-      "kcal": 462.0,
-      "protein": 5.6,
-      "fat": 28.0,
-      "carbs": 46.0,
-      "defaultGrams": 100.0,
-      "barcode": "9120025833726"
-    },
-    {
-      "id": "bakery-d-oro-pandispan-cu-cacao-umplut-cu-crema-de-lapte-si-cappuccino-bakery-d-oro",
-      "name": "Bakery d'Oro Pandispan cu cacao umplut cu crema de lapte si cappuccino",
-      "manufacturer": "Bakery d'Oro",
-      "kcal": 459.0,
-      "protein": 5.2,
-      "fat": 29.0,
-      "carbs": 43.0,
-      "defaultGrams": 100.0,
-      "barcode": "9120025833771"
     },
     {
       "id": "salat-vinegret-proeda",

@@ -167,8 +167,39 @@ _ALIAS_SOURCES: dict[str, str] = {
     "ООО \"КДВ Воронеж\" (KDV)": "КДВ Воронеж",
 }
 
+# Один бренд, записанный кириллицей и латиницей: в Open Food Facts карточки заводят
+# и так, и так, а normalize_key их не сводит — это разные буквы, не разные написания.
+# Для российских марок канон кириллический (он же на упаковке), для международных
+# оставлен латинский — тот, что уже выбран в CANON.
+_TRANSLIT_SOURCES: dict[str, str] = {
+    "VkusVill": "ВкусВилл",
+    "Aktibio": "АктиБио",
+    "АКTИБИО": "АктиБио",          # с латинской T в середине
+    "Pobeda": "Победа",
+    "Yashkino": "Яшкино",
+    "Sloboda": "Слобода",
+    "Kommunarka": "Коммунарка",
+    "Korovka": "Коровка",
+    "КОРОВКА": "Коровка",
+    "Iskrenne Vash": "Искренне Ваш",
+    "molvest": "Молвест",
+    "Santa Bremor": "Санта Бремор",
+    "Ferma": "Ферма",
+    "Doshirak": "Доширак",
+    "svalya": "Сваля",
+    "Burger King": "Бургер Кинг",
+    "Макфа": "Makfa",
+    "Марс": "Mars",
+    "Фруттис": "Fruttis",
+    "Фрутелла": "Fruittella",
+    "Frutella": "Fruittella",
+    "O Life": "O!LIFE",
+    "O LIFE!": "O!LIFE",
+}
+
 ALIASES: dict[str, str] = {normalize_key(source): canon
-                           for source, canon in _ALIAS_SOURCES.items()}
+                           for source, canon in {**_ALIAS_SOURCES,
+                                                 **_TRANSLIT_SOURCES}.items()}
 
 # Группы, где официальное написание — предположение (взято самое частое либо
 # самое аккуратное из вариантов). Показываются в таблице с пометкой.

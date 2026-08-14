@@ -95,7 +95,8 @@ class CanonicalBrandTests(unittest.TestCase):
 
     def test_alias_targets_are_canonical(self):
         # Псевдоним обязан указывать на итоговое написание, иначе сборка упадёт.
-        for source, canon in normalize_brands._ALIAS_SOURCES.items():
+        for source, canon in {**normalize_brands._ALIAS_SOURCES,
+                              **normalize_brands._TRANSLIT_SOURCES}.items():
             self.assertEqual(normalize_brands.canonical_brand(canon), canon,
                              f"псевдоним {source!r} ведёт на неканоничное {canon!r}")
 
@@ -188,6 +189,37 @@ class NameHasLettersTests(unittest.TestCase):
 
     def test_digits_in_real_name_are_fine(self):
         csv_text = CSV_HEAD + "Кефир 3.2%,Самокат,53,3,3.2,4,,,,,\n"
+        catalog = run_build_on(csv_text)
+        self.assertEqual(len(catalog["products"]), 1)
+
+
+class ForeignMarketTests(unittest.TestCase):
+    def test_foreign_barcode_and_latin_name_fails(self):
+        # Румынский Pringles: британский префикс, названия по-русски нет.
+        csv_text = CSV_HEAD + "Pringles Cascaval,Pringles,530,4,34,50,,,,5053990106981,\n"
+        with self.assertRaises(SystemExit):
+            run_build_on(csv_text)
+
+    def test_foreign_barcode_with_russian_name_passes(self):
+        # «Юбилейное» идёт под швейцарским префиксом Mondelez, но продаётся здесь.
+        csv_text = CSV_HEAD + "Печенье Юбилейное,Mondelez,440,7,13,72,,,,7622210457745,\n"
+        catalog = run_build_on(csv_text)
+        self.assertEqual(len(catalog["products"]), 1)
+
+    def test_eaeu_barcode_with_latin_name_passes(self):
+        # Российский штрихкод — товар наш, даже если карточку завели по-английски.
+        csv_text = CSV_HEAD + "Buckwheat,Увелка,343,12.6,3.3,62,,,,4607016240893,\n"
+        catalog = run_build_on(csv_text)
+        self.assertEqual(len(catalog["products"]), 1)
+
+    def test_in_store_barcode_is_not_a_country(self):
+        # 2xx — внутримагазинный код, страну по нему определять нельзя.
+        csv_text = CSV_HEAD + "Kids Pure From Pear,ВкусВилл,60,0.5,0.1,14,,,,2100100703257,\n"
+        catalog = run_build_on(csv_text)
+        self.assertEqual(len(catalog["products"]), 1)
+
+    def test_product_without_barcode_passes(self):
+        csv_text = CSV_HEAD + "Protein bar,Bombbar,380,30,10,40,,,,,\n"
         catalog = run_build_on(csv_text)
         self.assertEqual(len(catalog["products"]), 1)
 
