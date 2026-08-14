@@ -20,6 +20,8 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+from normalize_brands import normalize_key
+
 ROOT = Path(__file__).resolve().parent.parent
 CSV_PATH = ROOT / "catalog" / "catalog.csv"
 XLSX_PATH = ROOT / "catalog" / "catalog.xlsx"
@@ -137,6 +139,7 @@ def build() -> dict:
     products: list[dict] = []
     seen_ids: dict[str, int] = {}
     seen_barcodes: dict[str, int] = {}
+    brand_spellings: dict[str, set[str]] = {}
 
     for index, row in enumerate(rows):
         line = index + 2  # +1 заголовок, +1 нумерация с единицы
@@ -171,6 +174,8 @@ def build() -> dict:
             default_grams = unit_grams if unit_grams else 100.0
 
         manufacturer = (row.get("manufacturer") or "").strip()
+        if manufacturer:
+            brand_spellings.setdefault(normalize_key(manufacturer), set()).add(manufacturer)
         barcode = re.sub(r"\s+", "", row.get("barcode") or "")
         if barcode and not barcode.isdigit():
             errors.append(f"строка {line}: штрихкод должен состоять только из цифр")
@@ -208,6 +213,16 @@ def build() -> dict:
         if barcode:
             product["barcode"] = barcode
         products.append(product)
+
+    # Один производитель — одно написание. Иначе варианты наползут снова
+    # при следующем импорте из Open Food Facts.
+    for spellings in brand_spellings.values():
+        if len(spellings) > 1:
+            listed = "», «".join(sorted(spellings))
+            errors.append(
+                f"производитель записан по-разному: «{listed}». "
+                "Сведите к одному написанию: tools/normalize_brands.py"
+            )
 
     if errors:
         print(f"Каталог не собран, ошибок: {len(errors)}", file=sys.stderr)

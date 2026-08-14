@@ -5,11 +5,13 @@
 """
 
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import build_catalog
 import normalize_brands
 from normalize_brands import CANON, apply_canon, normalize_key
 
@@ -76,6 +78,40 @@ class ApplyCanonTests(unittest.TestCase):
         rows = [row("Хлеб", "Коломенское")]
         new_rows, _ = apply_canon(HEADER, rows)
         self.assertEqual(new_rows[0][1], "Коломенское")
+
+
+def run_build_on(csv_text: str):
+    """Прогоняет build() на временной таблице; возвращает результат build()."""
+    tmp = Path(tempfile.mkdtemp())
+    (tmp / "catalog.csv").write_text(csv_text, encoding="utf-8")
+    old_csv, old_xlsx = build_catalog.CSV_PATH, build_catalog.XLSX_PATH
+    build_catalog.CSV_PATH = tmp / "catalog.csv"
+    build_catalog.XLSX_PATH = tmp / "нет-такого.xlsx"
+    try:
+        return build_catalog.build()
+    finally:
+        build_catalog.CSV_PATH, build_catalog.XLSX_PATH = old_csv, old_xlsx
+
+
+CSV_HEAD = "название,производитель,ккал_100г,белки_100г,жиры_100г,углеводы_100г,единица,вес_единицы_г,порция_по_умолчанию_г,штрихкод,id\n"
+
+
+class DuplicateSpellingGuardTests(unittest.TestCase):
+    def test_two_spellings_of_one_brand_fail_build(self):
+        csv_text = CSV_HEAD + (
+            "Творог,Вкусвилл,100,1,2,3,,,,,\n"
+            "Кефир,ВкусВилл,50,3,2,4,,,,,\n"
+        )
+        with self.assertRaises(SystemExit):
+            run_build_on(csv_text)
+
+    def test_single_spelling_passes(self):
+        csv_text = CSV_HEAD + (
+            "Творог,ВкусВилл,100,1,2,3,,,,,\n"
+            "Кефир,ВкусВилл,50,3,2,4,,,,,\n"
+        )
+        catalog = run_build_on(csv_text)
+        self.assertEqual(len(catalog["products"]), 2)
 
 
 if __name__ == "__main__":
