@@ -30,6 +30,9 @@ OUT_PATH = ROOT / "ios" / "KBZHU" / "Resources" / "catalog.json"
 # Единицы, которые понимает приложение. Пустая — продукт считается в граммах.
 UNITS = {"порция", "шт", "стакан", "пачка", "баночка", "ломтик"}
 
+# Типы позиций. Пусто — обычная упаковка; «ресторан» — блюдо сети питания.
+KINDS = {"ресторан"}
+
 # Заголовки колонок: канон -> допустимые написания.
 COLUMNS = {
     "name": {"название", "наименование", "продукт", "name"},
@@ -43,6 +46,7 @@ COLUMNS = {
     "default_grams": {"порция_по_умолчанию_г", "порция_по_умолчанию", "default_grams"},
     "barcode": {"штрихкод", "штрих-код", "barcode"},
     "id": {"id", "ид"},
+    "kind": {"тип", "kind", "type"},
 }
 
 REQUIRED = ("name", "kcal", "protein", "fat", "carbs")
@@ -156,6 +160,11 @@ def build() -> dict:
             errors.append(f"строка {line}: единица «{unit}» неизвестна, допустимы: {', '.join(sorted(UNITS))}")
             continue
 
+        kind = (row.get("kind") or "").strip().lower()
+        if kind and kind not in KINDS:
+            errors.append(f"строка {line}: тип «{kind}» неизвестен, допустимы: {', '.join(sorted(KINDS))}")
+            continue
+
         macros = {
             field: number(row.get(field, ""), field, line, errors, required=True)
             for field in ("kcal", "protein", "fat", "carbs")
@@ -212,6 +221,8 @@ def build() -> dict:
             product["unitGrams"] = unit_grams
         if barcode:
             product["barcode"] = barcode
+        if kind:
+            product["kind"] = kind
         products.append(product)
 
     # Один производитель — одно написание. Иначе варианты наползут снова

@@ -114,5 +114,33 @@ class DuplicateSpellingGuardTests(unittest.TestCase):
         self.assertEqual(len(catalog["products"]), 2)
 
 
+CSV_HEAD_KIND = (
+    "название,производитель,ккал_100г,белки_100г,жиры_100г,углеводы_100г,единица,"
+    "вес_единицы_г,порция_по_умолчанию_г,штрихкод,id,тип\n"
+)
+
+
+class KindColumnTests(unittest.TestCase):
+    def test_restaurant_kind_lands_in_json(self):
+        csv_text = CSV_HEAD_KIND + "Шефбургер,Rostic’s,211,12.9,6.6,25.1,,,,,,ресторан\n"
+        catalog = run_build_on(csv_text)
+        self.assertEqual(catalog["products"][0]["kind"], "ресторан")
+
+    def test_empty_kind_absent_from_json(self):
+        csv_text = CSV_HEAD_KIND + "Творог,ВкусВилл,100,1,2,3,,,,,,\n"
+        catalog = run_build_on(csv_text)
+        self.assertNotIn("kind", catalog["products"][0])
+
+    def test_unknown_kind_fails_build(self):
+        csv_text = CSV_HEAD_KIND + "Шаурма,Ларёк,250,10,15,20,,,,,,кафе\n"
+        with self.assertRaises(SystemExit):
+            run_build_on(csv_text)
+
+    def test_table_without_kind_column_still_builds(self):
+        csv_text = CSV_HEAD + "Творог,ВкусВилл,100,1,2,3,,,,,\n"
+        catalog = run_build_on(csv_text)
+        self.assertEqual(len(catalog["products"]), 1)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)

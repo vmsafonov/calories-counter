@@ -1,6 +1,6 @@
 {
-  "revision": "b6fa94932cb0",
-  "generatedAt": "2026-08-14T06:14:28+00:00",
+  "revision": "9d3548743893",
+  "generatedAt": "2026-08-14T06:22:42+00:00",
   "products": [
     {
       "id": "ovsyanaya-kasha-na-vode-nordic",
@@ -6653,7 +6653,8 @@
       "fat": 13.0,
       "carbs": 35.2,
       "defaultGrams": 100.0,
-      "barcode": "4606993000742"
+      "barcode": "4606993000742",
+      "kind": "ресторан"
     },
     {
       "id": "tort-tiramisu-baker-house",
@@ -8369,7 +8370,8 @@
       "fat": 13.0,
       "carbs": 10.0,
       "defaultGrams": 100.0,
-      "barcode": "4607105669017"
+      "barcode": "4607105669017",
+      "kind": "ресторан"
     },
     {
       "id": "hlopya-ovsyanye-gerkules-ooo-bugrovskie-melnicy",
@@ -10129,7 +10131,8 @@
       "fat": 6.6,
       "carbs": 25.1,
       "defaultGrams": 100.0,
-      "barcode": "4620233010261"
+      "barcode": "4620233010261",
+      "kind": "ресторан"
     },
     {
       "id": "dampling-s-kuricey-uplemony",
@@ -12010,7 +12013,8 @@
       "fat": 13.4,
       "carbs": 18.1,
       "defaultGrams": 100.0,
-      "barcode": "4660502160174"
+      "barcode": "4660502160174",
+      "kind": "ресторан"
     },
     {
       "id": "sneki-iz-muki-tverdoy-pshenicy-so-vkusom-tomata-spaysi-pasteroni",
@@ -12857,7 +12861,8 @@
       "fat": 12.0,
       "carbs": 32.0,
       "defaultGrams": 100.0,
-      "barcode": "4680161722285"
+      "barcode": "4680161722285",
+      "kind": "ресторан"
     },
     {
       "id": "blinchiki-s-makovoy-nachinkoy-perekrestok",
