@@ -31,6 +31,16 @@ final class AppStore: ObservableObject {
     /// Дни с записями, по возрастанию — для стрика.
     private var daysWithEntries: [Date] = []
 
+    // Еда, разложенная один раз на изменение данных. Экран добавления читает эти списки
+    // на каждой отрисовке — по фильтру на полторы тысячи позиций за кадр набегало заметно.
+    private(set) var baseFoods: [Food] = []
+    private(set) var ownFoods: [Food] = []
+    /// Всё, что доступно для добавления, в порядке базы — основа поиска.
+    private(set) var availableFoods: [Food] = []
+    /// Производители: 800+ строк со сборкой словаря и сортировкой. Считаются лениво —
+    /// нужны одной вкладке, а инвалидируются вместе с остальными индексами.
+    private var brandRowsCache: [BrandRow]?
+
     // MARK: - Lifecycle
 
     init(fileURL: URL? = nil) {
@@ -57,7 +67,20 @@ final class AppStore: ObservableObject {
         for food in data.foods { byID[food.id] = food }
         foodsByID = byID
 
+        var base: [Food] = []
+        var own: [Food] = []
+        var available: [Food] = []
+        available.reserveCapacity(data.foods.count)
+        for food in data.foods where !food.isRetired {
+            available.append(food)
+            if food.isOwn { own.append(food) } else { base.append(food) }
+        }
+        baseFoods = base
+        ownFoods = own
+        availableFoods = available
+
         totalsCache = [:]
+        brandRowsCache = nil
     }
 
     private static func defaultFileURL() -> URL {
@@ -137,8 +160,14 @@ final class AppStore: ObservableObject {
     var didOnboard: Bool { data.didOnboard }
     var showRemaining: Bool { data.showRemaining }
 
-    var ownFoods: [Food] { data.foods.filter { $0.isOwn && !$0.isRetired } }
-    var baseFoods: [Food] { data.foods.filter { !$0.isOwn && !$0.isRetired } }
+    /// Производители общей базы. Первый вызов после изменения данных считает список,
+    /// дальше отдаётся готовый — иначе каждый кадр вкладки пересобирал словарь и сортировку.
+    var brandRows: [BrandRow] {
+        if let brandRowsCache { return brandRowsCache }
+        let rows = BrandList.rows(foods: baseFoods)
+        brandRowsCache = rows
+        return rows
+    }
 
     var catalogETag: String? { data.catalogETag }
     var catalogCheckedAt: Date? { data.catalogCheckedAt }
@@ -151,7 +180,7 @@ final class AppStore: ObservableObject {
     /// Пустой запрос отдаёт всё, что доступно для добавления.
     func searchAllFoods(_ query: String) -> [Food] {
         let needle = query.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        let pool = data.foods.filter { !$0.isRetired }
+        let pool = availableFoods
         guard !needle.isEmpty else { return pool }
         return pool.filter {
             $0.name.lowercased().contains(needle) || $0.brand.lowercased().contains(needle)

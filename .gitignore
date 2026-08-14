@@ -4,3 +4,7 @@ xcuserdata/
 DerivedData/
 build/
 .DS_Store
+
+# Python (инструменты каталога)
+__pycache__/
+*.pyc

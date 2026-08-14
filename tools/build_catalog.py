@@ -73,6 +73,32 @@ def slugify(text: str) -> str:
     return slug or "product"
 
 
+# Префиксы GS1 стран ЕАЭС: 460-469 Россия, 470 Киргизия, 481 Беларусь,
+# 485 Армения, 487 Казахстан. Плюс внутримагазинные коды (02x, 04x, 2xx) —
+# они страну не означают вовсе.
+_EAEU_PREFIXES = set(range(460, 470)) | {470, 481, 485, 487}
+
+
+def _in_store(prefix: int) -> bool:
+    return 200 <= prefix <= 299 or 20 <= prefix <= 29 or 40 <= prefix <= 49
+
+
+def is_foreign_market(name: str, barcode: str) -> bool:
+    """Товар чужого рынка: штрихкод не из ЕАЭС и в названии нет кириллицы.
+
+    Одного признака мало. «Юбилейное» с швейцарским префиксом Mondelez —
+    российское, а «Pringles Cașcaval» с британским — румынское. Товар,
+    который продаётся здесь, по техрегламенту ЕАЭС маркируется по-русски,
+    поэтому кириллица в названии и служит оправданием.
+    """
+    if not barcode or len(barcode) < 8 or not barcode.isdigit():
+        return False
+    if any("Ѐ" <= ch <= "ӿ" for ch in name):
+        return False
+    prefix = int(barcode[:3])
+    return prefix not in _EAEU_PREFIXES and not _in_store(prefix)
+
+
 def normalize_header(raw: str) -> str | None:
     key = (raw or "").strip().lower().replace(" ", "_").lstrip("﻿")
     for canon, aliases in COLUMNS.items():
@@ -155,6 +181,16 @@ def build() -> dict:
             errors.append(f"строка {line}: пустое название")
             continue
 
+        # При импорте из Open Food Facts в название иногда попадал штрихкод
+        # («4606779971303») или вес («140 g»). Найти такой продукт в поиске нельзя.
+        # Двух букв хватает с запасом: самое короткое настоящее название — «сок».
+        if sum(1 for ch in name if ch.isalpha()) < 2:
+            errors.append(
+                f"строка {line}: название «{name}» без букв — похоже, в него попал "
+                "штрихкод или вес. Впишите настоящее название или удалите строку"
+            )
+            continue
+
         unit = (row.get("unit") or "").strip().lower()
         if unit and unit not in UNITS:
             errors.append(f"строка {line}: единица «{unit}» неизвестна, допустимы: {', '.join(sorted(UNITS))}")
@@ -188,6 +224,14 @@ def build() -> dict:
         barcode = re.sub(r"\s+", "", row.get("barcode") or "")
         if barcode and not barcode.isdigit():
             errors.append(f"строка {line}: штрихкод должен состоять только из цифр")
+            continue
+
+        if is_foreign_market(name, barcode):
+            errors.append(
+                f"строка {line}: «{name}» — штрихкод выдан не в ЕАЭС, а в названии нет "
+                "кириллицы. Похоже на товар другого рынка. Если он продаётся здесь — "
+                "напишите название по-русски, как на упаковке"
+            )
             continue
 
         product_id = (row.get("id") or "").strip() or slugify(f"{name}-{manufacturer}")

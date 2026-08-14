@@ -7,7 +7,9 @@ struct FoodsScreen: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 0) {
+            // Ленивый стек: в базе больше полутора тысяч продуктов, и обычный VStack
+            // собирал все строки разом на каждой отрисовке экрана.
+            LazyVStack(alignment: .leading, spacing: 0) {
                 Text("Продукты")
                     .golos(700, 24)
                     .kerning(-0.24)
@@ -64,10 +66,10 @@ struct FoodsScreen: View {
                 SectionCaption(text: "База продуктов")
                     .padding(.bottom, 12)
 
-                VStack(spacing: 0) {
-                    ForEach(store.baseFoods) { food in
-                        baseRow(food)
-                    }
+                // Прямо в ленивом стеке, без обёртки: обёртка сделала бы список
+                // одним элементом, и он снова строился бы целиком.
+                ForEach(store.baseFoods) { food in
+                    baseRow(food)
                 }
             }
             .padding(.horizontal, 20)

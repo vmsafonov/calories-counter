@@ -46,6 +46,61 @@ class CanonTests(unittest.TestCase):
             self.assertEqual(key, normalize_key(key), f"ключ не нормализован: {key!r}")
 
 
+class StripNoiseTests(unittest.TestCase):
+    def test_legal_form_removed(self):
+        for raw, expected in [
+            ('ООО "Марс"', "Марс"),
+            ('ПАО "Красный Октябрь"', "Красный Октябрь"),
+            ("ОАО Молочный мир", "Молочный мир"),
+            ("ИП Емелин Владимир Павлович", "Емелин Владимир Павлович"),
+            ('ООО ПК "Айсберг-Люкс"', "Айсберг-Люкс"),
+        ]:
+            self.assertEqual(normalize_brands.strip_noise(raw), expected)
+
+    def test_trademark_signs_removed(self):
+        self.assertEqual(normalize_brands.strip_noise("SNICKERS®"), "SNICKERS")
+
+    def test_leftover_without_letters_is_empty(self):
+        # «АО "» — не производитель, а обрывок строки.
+        self.assertEqual(normalize_brands.strip_noise('АО "'), "")
+        self.assertEqual(normalize_brands.strip_noise('ООО "'), "")
+
+    def test_inner_quotes_survive(self):
+        # Кавычки внутри названия снимать нельзя: потеряется закрывающая.
+        self.assertEqual(normalize_brands.strip_noise("«Россия» — щедрая душа!"),
+                         "«Россия» — щедрая душа!")
+        self.assertEqual(normalize_brands.strip_noise("ООО Маслозавод «Дружба»"),
+                         "Маслозавод «Дружба»")
+
+    def test_plain_brand_untouched(self):
+        self.assertEqual(normalize_brands.strip_noise("Lay's"), "Lay's")
+        self.assertEqual(normalize_brands.strip_noise("ВкусВилл"), "ВкусВилл")
+
+
+class CanonicalBrandTests(unittest.TestCase):
+    def test_alias_collapses_glued_brands(self):
+        # В Open Food Facts brands — список через запятую; при импорте он слипся.
+        self.assertEqual(normalize_brands.canonical_brand("Самокат Вкусвилл Ана Райз"),
+                         "ВкусВилл")
+        self.assertEqual(normalize_brands.canonical_brand("Лавка Яндекс"), "Яндекс Лавка")
+        self.assertEqual(normalize_brands.canonical_brand("Добрый Мультифрукт"), "Добрый")
+
+    def test_legal_form_reaches_canon(self):
+        self.assertEqual(normalize_brands.canonical_brand('ПАО "Красный Октябрь"'),
+                         "Красный Октябрь")
+
+    def test_real_subbrands_kept_apart(self):
+        for brand in ["Пятёрочка Кафе", "Перекрёсток Select", "Яндекс Лавка"]:
+            self.assertEqual(normalize_brands.canonical_brand(brand), brand)
+
+    def test_alias_targets_are_canonical(self):
+        # Псевдоним обязан указывать на итоговое написание, иначе сборка упадёт.
+        for source, canon in {**normalize_brands._ALIAS_SOURCES,
+                              **normalize_brands._TRANSLIT_SOURCES}.items():
+            self.assertEqual(normalize_brands.canonical_brand(canon), canon,
+                             f"псевдоним {source!r} ведёт на неканоничное {canon!r}")
+
+
 class ApplyCanonTests(unittest.TestCase):
     def test_variant_replaced_with_canon(self):
         rows = [row("Творог", "Вкусвилл"), row("Кефир", "ВкусВилл")]
@@ -112,6 +167,61 @@ class DuplicateSpellingGuardTests(unittest.TestCase):
         )
         catalog = run_build_on(csv_text)
         self.assertEqual(len(catalog["products"]), 2)
+
+
+class NameHasLettersTests(unittest.TestCase):
+    def test_barcode_as_name_fails_build(self):
+        # Из Open Food Facts прилетали строки, где в названии стоял штрихкод.
+        csv_text = CSV_HEAD + "4606779971303,Epica,150,5,8,12,,,,4606779971303,\n"
+        with self.assertRaises(SystemExit):
+            run_build_on(csv_text)
+
+    def test_weight_as_name_fails_build(self):
+        csv_text = CSV_HEAD + "140 g,,100,1,2,3,,,,,\n"
+        with self.assertRaises(SystemExit):
+            run_build_on(csv_text)
+
+    def test_short_real_name_passes(self):
+        # Самое короткое настоящее название в таблице — «сок», порог его не задевает.
+        csv_text = CSV_HEAD + "сок,Добрый,46,0.5,0,11,,,,,\n"
+        catalog = run_build_on(csv_text)
+        self.assertEqual(len(catalog["products"]), 1)
+
+    def test_digits_in_real_name_are_fine(self):
+        csv_text = CSV_HEAD + "Кефир 3.2%,Самокат,53,3,3.2,4,,,,,\n"
+        catalog = run_build_on(csv_text)
+        self.assertEqual(len(catalog["products"]), 1)
+
+
+class ForeignMarketTests(unittest.TestCase):
+    def test_foreign_barcode_and_latin_name_fails(self):
+        # Румынский Pringles: британский префикс, названия по-русски нет.
+        csv_text = CSV_HEAD + "Pringles Cascaval,Pringles,530,4,34,50,,,,5053990106981,\n"
+        with self.assertRaises(SystemExit):
+            run_build_on(csv_text)
+
+    def test_foreign_barcode_with_russian_name_passes(self):
+        # «Юбилейное» идёт под швейцарским префиксом Mondelez, но продаётся здесь.
+        csv_text = CSV_HEAD + "Печенье Юбилейное,Mondelez,440,7,13,72,,,,7622210457745,\n"
+        catalog = run_build_on(csv_text)
+        self.assertEqual(len(catalog["products"]), 1)
+
+    def test_eaeu_barcode_with_latin_name_passes(self):
+        # Российский штрихкод — товар наш, даже если карточку завели по-английски.
+        csv_text = CSV_HEAD + "Buckwheat,Увелка,343,12.6,3.3,62,,,,4607016240893,\n"
+        catalog = run_build_on(csv_text)
+        self.assertEqual(len(catalog["products"]), 1)
+
+    def test_in_store_barcode_is_not_a_country(self):
+        # 2xx — внутримагазинный код, страну по нему определять нельзя.
+        csv_text = CSV_HEAD + "Kids Pure From Pear,ВкусВилл,60,0.5,0.1,14,,,,2100100703257,\n"
+        catalog = run_build_on(csv_text)
+        self.assertEqual(len(catalog["products"]), 1)
+
+    def test_product_without_barcode_passes(self):
+        csv_text = CSV_HEAD + "Protein bar,Bombbar,380,30,10,40,,,,,\n"
+        catalog = run_build_on(csv_text)
+        self.assertEqual(len(catalog["products"]), 1)
 
 
 CSV_HEAD_KIND = (
